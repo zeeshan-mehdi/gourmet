@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
+import '../controllers/home_controller.dart';
 import '../controllers/user_controller.dart';
 import '../elements/BlockButtonWidget.dart';
+import '../elements/HomeSliderWidget.dart';
 import '../helpers/app_config.dart' as config;
 import '../helpers/helper.dart';
 import '../repository/user_repository.dart' as userRepo;
@@ -26,7 +28,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
       Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
     }
   }
-
+  HomeController _conn;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -77,6 +79,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      HomeSliderWidget(slides: _conn.slides),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         onSaved: (input) => _con.user.email = input,
