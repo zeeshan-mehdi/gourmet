@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "444847367722",
+    "project_id": "gourmet-f5c31",
+    "storage_bucket": "gourmet-f5c31.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444847367722:android:0e5ae9c38760f2884cc553",
+        "android_client_info": {
+          "package_name": "com.gourmet.booking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444847367722-a606pats7f3791rus55k4c20o2h1hfhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa-YTI1NG--FNWjaJ8pRdM3SZoHXCaopc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444847367722-a606pats7f3791rus55k4c20o2h1hfhn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "444847367722-nm8htcsej021c5vej4cu71a4os5pegsi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gourmetapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444847367722:android:449bb13b4f5ae5434cc553",
+        "android_client_info": {
+          "package_name": "com.gourmetapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444847367722-a606pats7f3791rus55k4c20o2h1hfhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa-YTI1NG--FNWjaJ8pRdM3SZoHXCaopc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444847367722-a606pats7f3791rus55k4c20o2h1hfhn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "444847367722-nm8htcsej021c5vej4cu71a4os5pegsi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gourmetapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

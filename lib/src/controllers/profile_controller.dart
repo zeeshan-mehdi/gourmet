@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:markets/src/helpers/custom_trace.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+
+import '../../generated/l10n.dart';
+import '../models/order.dart';
+import '../repository/order_repository.dart';
+
+class ProfileController extends ControllerMVC {
+  List<Order> recentOrders = [];
+  GlobalKey<ScaffoldState> scaffoldKey;
+
+  ProfileController() {
+    this.scaffoldKey = new GlobalKey<ScaffoldState>();
+    listenForRecentOrders();
+  }
+
+  void listenForRecentOrders({String message}) async {
+    final Stream<Order> stream = await getRecentOrders();
+    stream.listen((Order _order) {
+      setState(() {
+        recentOrders.add(_order);
+      });
+    }, onError: (a) {
+      //print(a);
+      print(CustomTrace(StackTrace.current, message: a.toString()).toString());
+      // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+      //   content: Text(S.of(state.context).verify_your_internet_connection),
+      // ));
+    }, onDone: () {
+      if (message != null) {
+        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+      }
+    });
+  }
+
+  Future<void> refreshProfile() async {
+    recentOrders.clear();
+    listenForRecentOrders(message: S.of(state.context).orders_refreshed_successfuly);
+  }
+}
