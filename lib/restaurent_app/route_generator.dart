@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/pages/LoginOption.dart';
 
 import 'src/models/route_argument.dart';
 import 'src/pages/chat.dart';
@@ -29,7 +30,7 @@ class RouteGenerator {
       case '/MobileVerification2':
         return MaterialPageRoute(builder: (_) => SignUpWidget());
       case '/Login':
-        return MaterialPageRoute(builder: (_) => LoginWidget());
+        return MaterialPageRoute(builder: (_) => LoginOption());
       case '/ForgetPassword':
         return MaterialPageRoute(builder: (_) => ForgetPasswordWidget());
       case '/Pages':
@@ -50,6 +51,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HelpWidget());
       case '/Settings':
         return MaterialPageRoute(builder: (_) => SettingsWidget());
+      case '/LoginOption':
+        return MaterialPageRoute(builder: (_) => LoginOption());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return MaterialPageRoute(builder: (_) => Scaffold(body: SizedBox(height: 0)));
