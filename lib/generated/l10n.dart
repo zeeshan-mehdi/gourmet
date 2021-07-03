@@ -2613,7 +2613,7 @@ class S {
   /// `Verify Phone Number`
   String get verifyPhoneNumber {
     return Intl.message(
-      'Verify Phone Number',
+      'Phone Verification',
       name: 'verifyPhoneNumber',
       desc: '',
       args: [],
