@@ -19,6 +19,12 @@ class User {
   // used for indicate if client logged in or not
   bool auth;
 
+  int memebership;
+  String trialEnds;
+
+
+
+
 //  String role;
 
   User();
@@ -47,9 +53,11 @@ class User {
       }
       try {
         bio = jsonMap['custom_fields']['bio']['view'];
+        memebership = jsonMap['membership'];
       } catch (e) {
         bio = "";
       }
+
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
     } catch (e) {
       print(e);
@@ -70,6 +78,8 @@ class User {
     map["verifiedPhone"] = verifiedPhone;
     map["address"] = address;
     map["bio"] = bio;
+    map["membership"]= memebership;
+    map['trial_ends_at'] = trialEnds;
     map["media"] = image?.toMap();
     return map;
   }

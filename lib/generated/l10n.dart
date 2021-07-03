@@ -2619,6 +2619,584 @@ class S {
       args: [],
     );
   }
+
+
+  /// `About`
+  String get membership {
+    return Intl.message(
+      'Membership',
+      name: 'membership',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get accept {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Extras`
+  String get extras {
+    return Intl.message(
+      'Extras',
+      name: 'extras',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Auto Accept`
+  String get auto_accept {
+    return Intl.message(
+      'Auto Accept Orders',
+      name: 'auto_accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+  String get field_cannot_be_empty {
+    return Intl.message(
+      'This Field cannot be Empty',
+      name: 'field_cannot_be_empty',
+      desc: '',
+      args: [],
+    );
+  }
+  String get invalid_field {
+    return Intl.message(
+      'Invalid Field',
+      name: 'invalid_field',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Orders`
+  String get orders {
+    return Intl.message(
+      'Orders',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get history {
+    return Intl.message(
+      'History',
+      name: 'history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivered`
+  String get delivered {
+    return Intl.message(
+      'Delivered',
+      name: 'delivered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dismiss`
+  String get dismiss {
+    return Intl.message(
+      'Dismiss',
+      name: 'dismiss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Would you please confirm if you have delivered all meals to client`
+  String get would_you_please_confirm_if_you_have_delivered_all_meals {
+    return Intl.message(
+      'Would you please confirm if you have delivered all meals to client',
+      name: 'would_you_please_confirm_if_you_have_delivered_all_meals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Confirmation`
+  String get delivery_confirmation {
+    return Intl.message(
+      'Delivery Confirmation',
+      name: 'delivery_confirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products Ordered`
+  String get products_ordered {
+    return Intl.message(
+      'Products Ordered',
+      name: 'products_ordered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Details`
+  String get order_details {
+    return Intl.message(
+      'Order Details',
+      name: 'order_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address not provided please call the client`
+  String get address_not_provided_please_call_the_client {
+    return Intl.message(
+      'Address not provided please call the client',
+      name: 'address_not_provided_please_call_the_client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address not provided contact client`
+  String get address_not_provided_contact_client {
+    return Intl.message(
+      'Address not provided contact client',
+      name: 'address_not_provided_contact_client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders History`
+  String get orders_history {
+    return Intl.message(
+      'Orders History',
+      name: 'orders_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+  /// `Order status changed`
+  String get order_satatus_changed {
+    return Intl.message(
+      'Order status changed',
+      name: 'order_satatus_changed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Order from costumer`
+  String get new_order_from_costumer {
+    return Intl.message(
+      'New Order from costumer',
+      name: 'new_order_from_costumer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your have an order assigned to you`
+  String get your_have_an_order_assigned_to_you {
+    return Intl.message(
+      'Your have an order assigned to you',
+      name: 'your_have_an_order_assigned_to_you',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Ordered Products`
+  String get ordered_products {
+    return Intl.message(
+      'Ordered Products',
+      name: 'ordered_products',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `You don't have any order assigned to you!`
+  String get you_dont_have_any_order_assigned_to_you {
+    return Intl.message(
+      'You don\'t have any order assigned to you!',
+      name: 'you_dont_have_any_order_assigned_to_you',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swipe left the notification to delete or read / unread it`
+  String get swip_left_the_notification_to_delete_or_read__unread {
+    return Intl.message(
+      'Swipe left the notification to delete or read / unread it',
+      name: 'swip_left_the_notification_to_delete_or_read__unread',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer`
+  String get customer {
+    return Intl.message(
+      'Customer',
+      name: 'customer',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+  /// `This account not exist`
+  String get thisAccountNotExist {
+    return Intl.message(
+      'This account not exist',
+      name: 'thisAccountNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap back again to leave`
+  String get tapBackAgainToLeave {
+    return Intl.message(
+      'Tap back again to leave',
+      name: 'tapBackAgainToLeave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Address`
+  String get deliveryAddress {
+    return Intl.message(
+      'Delivery Address',
+      name: 'deliveryAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message(
+      'Full Name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Total Earnings`
+  String get totalEarning {
+    return Intl.message(
+      'Total Earnings',
+      name: 'totalEarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Orders`
+  String get totalOrders {
+    return Intl.message(
+      'Total Orders',
+      name: 'totalOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Markets`
+  String get totalMarkets {
+    return Intl.message(
+      'Total Markets',
+      name: 'totalMarkets',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Products`
+  String get totalProducts {
+    return Intl.message(
+      'Total Products',
+      name: 'totalProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Kitchens`
+  String get myMarkets {
+    return Intl.message(
+      'My Kitchens',
+      name: 'myMarkets',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Featured Products`
+  String get featuredProducts {
+    return Intl.message(
+      'Featured Products',
+      name: 'featuredProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What They Say ?`
+  String get whatTheySay {
+    return Intl.message(
+      'What They Say ?',
+      name: 'whatTheySay',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+  /// `Are you sure you want to cancel this order of customer ?`
+  String get areYouSureYouWantToCancelThisOrderOf {
+    return Intl.message(
+      'Are you sure you want to cancel this order of customer ?',
+      name: 'areYouSureYouWantToCancelThisOrderOf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Order`
+  String get editOrder {
+    return Intl.message(
+      'Edit Order',
+      name: 'editOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Status`
+  String get orderStatus {
+    return Intl.message(
+      'Order Status',
+      name: 'orderStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This order updated successfully`
+  String get thisOrderUpdatedSuccessfully {
+    return Intl.message(
+      'This order updated successfully',
+      name: 'thisOrderUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assign Delivery Boy`
+  String get assignDeliveryBoy {
+    return Intl.message(
+      'Assign Delivery Boy',
+      name: 'assignDeliveryBoy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General Information`
+  String get generalInformation {
+    return Intl.message(
+      'General Information',
+      name: 'generalInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hint`
+  String get hint {
+    return Intl.message(
+      'Hint',
+      name: 'hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insert an additional information for this order`
+  String get insertAnAdditionalInformationForThisOrder {
+    return Intl.message(
+      'Insert an additional information for this order',
+      name: 'insertAnAdditionalInformationForThisOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order: #{id} has been canceled`
+  String orderIdHasBeenCanceled(Object id) {
+    return Intl.message(
+      'Order: #$id has been canceled',
+      name: 'orderIdHasBeenCanceled',
+      desc: '',
+      args: [id],
+    );
+  }
+
+  /// `Order: #{id} has been canceled`
+  String orderIdHasBeenAccepted(Object id) {
+    return Intl.message(
+      'Order: #$id has been accepted',
+      name: 'orderIdHasBeenAccepted',
+      desc: '',
+      args: [id],
+    );
+  }
+
+
+
+  /// `This notification has marked as un read`
+  String get thisNotificationHasMarkedAsUnRead {
+    return Intl.message(
+      'This notification has marked as un read',
+      name: 'thisNotificationHasMarkedAsUnRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+  /// `Delivery Address removed successfully`
+  String get deliveryAddressRemovedSuccessfully {
+    return Intl.message(
+      'Delivery Address removed successfully',
+      name: 'deliveryAddressRemovedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Faqs refreshed successfully`
+  String get faqsRefreshedSuccessfully {
+    return Intl.message(
+      'Faqs refreshed successfully',
+      name: 'faqsRefreshedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites refreshed successfully`
+  String get favoritesRefreshedSuccessfully {
+    return Intl.message(
+      'Favorites refreshed successfully',
+      name: 'favoritesRefreshedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Product refreshed successfully`
+  String get productRefreshedSuccessfully {
+    return Intl.message(
+      'Product refreshed successfully',
+      name: 'productRefreshedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have markets, please sign-in using admin panel and open new market`
+  String get youDontHaveMarketsPleaseSigninUsingAdminPanelAnd {
+    return Intl.message(
+      'You don\'t have markets, please sign-in using admin panel and open new market',
+      name: 'youDontHaveMarketsPleaseSigninUsingAdminPanelAnd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have markets, please sign-in using admin panel and open new market`
+  String get youDontHaveProductsPleaseSigninUsingAdminPanelAnd {
+    return Intl.message(
+      'You don\'t have products, please sign-in using admin panel and open new market',
+      name: 'youDontHaveProductsPleaseSigninUsingAdminPanelAnd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go To Home`
+  String get goToHome {
+    return Intl.message(
+      'Go To Home',
+      name: 'goToHome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The conversation with #{name} is dismissed`
+  String theConversationWithIsDismissed(Object name) {
+    return Intl.message(
+      'The conversation with #$name is dismissed',
+      name: 'theConversationWithIsDismissed',
+      desc: '',
+      args: [name],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import  'package:markets/generated/l10n.dart';
+import '../../../../generated/l10n.dart';
 import '../models/address.dart' as model;
 import '../repository/user_repository.dart' as userRepo;
 

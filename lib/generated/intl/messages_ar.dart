@@ -345,5 +345,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "your_have_an_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("لديك أمر معين لك"),
 
 
+
   };
 }
