@@ -55,6 +55,7 @@ dependencies:
   multi_image_picker2: ^5.0.2
   flutter_absolute_path: ^1.0.6
   multiselect_dropdown: ^2.0.0+1
+  font_awesome_flutter: ^9.1.0
 
 
 dev_dependencies:
