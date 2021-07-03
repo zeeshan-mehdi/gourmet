@@ -2631,7 +2631,6 @@ class S {
     );
   }
 
-
   String get accept {
     return Intl.message(
       'Accept',
