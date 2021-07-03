@@ -27,9 +27,9 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
     return widget.marketsList.isEmpty
         ? CardsCarouselLoaderWidget()
         : Container(
-            height: 288,
+            height: 300,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: widget.marketsList.length,
               itemBuilder: (context, index) {
                 return GestureDetector(

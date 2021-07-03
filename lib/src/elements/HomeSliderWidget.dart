@@ -30,14 +30,16 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
         ? HomeSliderLoaderWidget()
         : Stack(
             alignment: _alignmentDirectional ?? Helper.getAlignmentDirectional(widget.slides.elementAt(0).textPosition),
-            fit: StackFit.passthrough,
+           // fit: StackFit.expand,
             children: <Widget>[
               CarouselSlider(
                 options: CarouselOptions(
                   autoPlay: true,
+                  disableCenter: true,
                   autoPlayInterval: Duration(seconds: 5),
-                  height: 180,
-                  viewportFraction: 1.0,
+                  height: 150,
+
+                  viewportFraction: 0.6,
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;
@@ -49,7 +51,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                         height: 140,
                         decoration: BoxDecoration(
                           boxShadow: [

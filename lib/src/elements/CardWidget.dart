@@ -17,86 +17,80 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 292,
-      margin: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 20),
+      height: 100,
+      margin: EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 8),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Colors.transparent,
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 15, offset: Offset(0, 5)),
-        ],
+        // boxShadow: [
+        //   BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 15, offset: Offset(0, 5)),
+        // ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          // Image of the card
-          Stack(
-            fit: StackFit.loose,
-            alignment: AlignmentDirectional.bottomStart,
-            children: <Widget>[
-              Hero(
-                tag: this.heroTag + market.id,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                  child: CachedNetworkImage(
-                    height: 150,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    imageUrl: market.image.url,
-                    placeholder: (context, url) => Image.asset(
-                      'assets/img/loading.gif',
+      child: Padding(
+        padding: EdgeInsets.only(left: 12,right: 12,top: 0,bottom: 0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              // mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // Image of the card
+                SizedBox(height: 20,),
+                Hero(
+                  tag: this.heroTag + market.id,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
+                    child: CachedNetworkImage(
+                      height: 60,
+                      width: 80,
                       fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: 150,
+                      imageUrl: market.image.url,
+                      placeholder: (context, url) => Image.asset(
+                        'assets/img/loading.gif',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 60,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error_outline),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error_outline),
                   ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                    decoration: BoxDecoration(color: market.closed ? Colors.grey : Colors.green, borderRadius: BorderRadius.circular(24)),
-                    child: market.closed
-                        ? Text(
-                            S.of(context).closed,
-                            style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
-                          )
-                        : Text(
-                            S.of(context).open,
-                            style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
-                          ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                    decoration: BoxDecoration(color: Helper.canDelivery(market) ? Colors.green : Colors.orange, borderRadius: BorderRadius.circular(24)),
-                    child: Helper.canDelivery(market)
-                        ? Text(
-                            S.of(context).delivery,
-                            style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
-                          )
-                        : Text(
-                            S.of(context).pickup,
-                            style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
-                          ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  flex: 3,
+                Spacer(),
+                // Row(
+                //   children: <Widget>[
+                //     Container(
+                //       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                //       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                //       decoration: BoxDecoration(color: market.closed ? Colors.grey : Colors.green, borderRadius: BorderRadius.circular(24)),
+                //       child: market.closed
+                //           ? Text(
+                //               S.of(context).closed,
+                //               style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                //             )
+                //           : Text(
+                //               S.of(context).open,
+                //               style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                //             ),
+                //     ),
+                //     Container(
+                //       margin: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                //       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                //       decoration: BoxDecoration(color: Helper.canDelivery(market) ? Colors.green : Colors.orange, borderRadius: BorderRadius.circular(24)),
+                //       child: Helper.canDelivery(market)
+                //           ? Text(
+                //               S.of(context).delivery,
+                //               style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                //             )
+                //           : Text(
+                //               S.of(context).pickup,
+                //               style: Theme.of(context).textTheme.caption.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                //             ),
+                //     ),
+                //   ],
+                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -119,35 +113,16 @@ class CardWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 15),
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      MaterialButton(
-                        elevation: 0,
-                        padding: EdgeInsets.all(0),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '1', param: market));
-                        },
-                        child: Icon(Icons.directions_outlined, color: Theme.of(context).primaryColor),
-                        color: Theme.of(context).accentColor,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                      ),
-                      market.distance > 0
-                          ? Text(
-                              Helper.getDistance(market.distance, Helper.of(context).trans(setting.value.distanceUnit)),
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                              softWrap: false,
-                            )
-                          : SizedBox(height: 0)
-                    ],
-                  ),
-                ),
+                // )
               ],
             ),
-          )
-        ],
+            SizedBox(height: 12,),
+            Divider(color: Colors.black.withOpacity(0.2),
+            indent: 0,endIndent: 0,)
+          ],
+        ),
+
+
       ),
     );
   }
