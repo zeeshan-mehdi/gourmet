@@ -31,10 +31,10 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
     return Scaffold(
       key: _con.scaffoldKey,
       appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
-        ),
+        // leading: new IconButton(
+        //   icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
+        //   onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
+        // ),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
