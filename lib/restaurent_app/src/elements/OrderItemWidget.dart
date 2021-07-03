@@ -127,7 +127,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                     MaterialButton(
                       elevation: 0,
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/OrderDetails', arguments: RouteArgument(id: widget.order.id));
+                        Navigator.of(context).pushNamed('/RestaurantOrderDetails', arguments: RouteArgument(id: widget.order.id));
                       },
                       textColor: Theme.of(context).hintColor,
                       child: Text(S.of(context).view),
@@ -137,7 +137,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                       MaterialButton(
                         elevation: 0,
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/OrderEdit', arguments: RouteArgument(id: widget.order.id));
+                          Navigator.of(context).pushNamed('/RestaurantOrderEdit', arguments: RouteArgument(id: widget.order.id));
                         },
                         textColor: Theme.of(context).hintColor,
                         child: Text(S.of(context).edit),

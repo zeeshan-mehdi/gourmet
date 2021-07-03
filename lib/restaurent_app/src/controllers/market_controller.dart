@@ -10,6 +10,8 @@ import '../repository/gallery_repository.dart';
 import '../repository/market_repository.dart';
 import '../repository/product_repository.dart';
 
+
+
 class MarketController extends ControllerMVC {
   Market market;
   Market kitchen = Market();
@@ -23,6 +25,8 @@ class MarketController extends ControllerMVC {
   GlobalKey<ScaffoldState> scaffoldKey;
   GlobalKey<FormState> formKey;
   GlobalKey<FormState> formKey1;  //for page 1 about kitchen
+
+  bool loadingMakets =true;
 
   MarketController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -49,23 +53,36 @@ class MarketController extends ControllerMVC {
 
 
 
-  void listenForMarkets({String message}) async {
+  void listenForMarkets({String message, shouldLoad}) async {
     final Stream<Market> stream = await getMarkets();
+    loadingMakets  = false;
     stream.listen((Market _market) {
+
+      print('adding market');
       setState(() => markets.add(_market));
     }, onError: (a) {
       print('something went wrong');
+
       print(a);
+
       // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
       //   content: Text(S.of(state.context).verify_your_internet_connection),
       // ));
     }, onDone: () {
+      if(shouldLoad){
+        print('i am loading ');
+        listenForMarket(id: markets.first.id);
+        listenForGalleries( markets.first.id);
+        listenForFeaturedProducts( markets.first.id);
+        listenForMarketReviews(id:  markets.first.id);
+      }
       if (message != null) {
         ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
           content: Text(message),
         ));
       }
     });
+
   }
 
   void listenForMarket({String id, String message}) async {

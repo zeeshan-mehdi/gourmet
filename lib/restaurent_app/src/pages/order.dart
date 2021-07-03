@@ -63,7 +63,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
 
     return Scaffold(
       key: _con.scaffoldKey,
-      drawer: DrawerWidget(),
+     // drawer: DrawerWidget(),
       bottomNavigationBar: _con.order == null
           ? Container(
               height: 193,
@@ -144,7 +144,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                           if (_con.order.canEditOrder())
                             OutlineButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamed('/OrderEdit', arguments: RouteArgument(id: _con.order.id));
+                                Navigator.of(context).pushNamed('/RestaurantOrderEdit', arguments: RouteArgument(id: _con.order.id));
                               },
                               padding: EdgeInsets.symmetric(vertical: 10),
                               textColor: Theme.of(context).accentColor,
@@ -244,17 +244,17 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                 floating: true,
                 automaticallyImplyLeading: false,
                 leading: new IconButton(
-                  icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-                  onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
+                  icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+                  onPressed: () => Navigator.of(context).pushNamed('/Pages',arguments: 5),
                 ),
                 centerTitle: true,
                 title: Text(
                   S.of(context).order_details,
                   style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
                 ),
-                actions: <Widget>[
-                  new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-                ],
+                // actions: <Widget>[
+                //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+                // ],
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 expandedHeight: 230,
                 elevation: 0,
@@ -417,7 +417,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                         .toSet()
                                         .toList();
                                     _users.insert(0, _con.order.user);
-                                    Navigator.of(context).pushNamed('/Chat', arguments: RouteArgument(param: new Conversation(_users, name: _market.name)));
+                                    Navigator.of(context).pushNamed('/RestaurantChat', arguments: RouteArgument(param: new Conversation(_users, name: _market.name)));
                                   },
                                   //onPressed: () {
 //                                    Navigator.of(context).pushNamed('/Profile',

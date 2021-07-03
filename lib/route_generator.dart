@@ -41,6 +41,7 @@ import 'src/pages/tracking.dart';
 import 'restaurent_app/src/pages/details.dart' as restDetails;
 import 'restaurent_app/src/pages/order.dart' as restOrders;
 import 'restaurent_app/src/pages/order_edit.dart' as restOrderEdit;
+import 'restaurent_app/src/pages/chat.dart' as restChat;
 
 
 
@@ -127,6 +128,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => restOrders.OrderWidget(routeArgument: args));
       case '/RestaurantOrderEdit':
         return MaterialPageRoute(builder: (_) => restOrderEdit.OrderEditWidget(routeArgument: args ));
+      case '/RestaurantChat':
+        return MaterialPageRoute(builder: (_) => restChat.ChatWidget(routeArgument: args ));
 
       // case '/RestaurantPages':
       //   return MaterialPageRoute(builder: (_) => MarketsWidget(parentScaffoldKey: args));

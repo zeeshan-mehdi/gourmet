@@ -33,8 +33,8 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
       drawer: DrawerWidget(),
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).primaryColor),
-          onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
+          icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+          onPressed: () => Navigator.of(context).pushNamed('/Pages',arguments: 3),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).accentColor,

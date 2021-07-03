@@ -8,8 +8,8 @@ import '../helpers/helper.dart';
 import '../models/address.dart';
 import '../models/order.dart';
 import '../models/order_status.dart';
-import '../models/user.dart';
-import '../repository/user_repository.dart' as userRepo;
+import '../../../src/models/user.dart';
+import '../../../src/repository/user_repository.dart' as userRepo;
 
 Future<Stream<Order>> getOrders({List<String> statusesIds}) async {
   Uri uri = Helper.getUri('api/orders');
