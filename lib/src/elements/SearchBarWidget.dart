@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../elements/SearchWidget.dart';
 
 class SearchBarWidget extends StatelessWidget {

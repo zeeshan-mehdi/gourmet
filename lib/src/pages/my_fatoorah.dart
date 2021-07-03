@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/payment.dart';
 import 'package:markets/src/models/route_argument.dart';
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import 'package:markets/src/controllers/myfatoorah_controller.dart';
 import 'package:markets/src/elements/CircularLoadingWidget.dart';
 import 'package:markets/src/helpers/helper.dart';

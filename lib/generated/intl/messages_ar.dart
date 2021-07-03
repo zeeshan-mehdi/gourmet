@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m1(productName) => "تمت إزالة ${productName} من سلة التسوق الخاصة بك";
 
+  static m2(id) => "Order: #${id} has been accepted";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "about" : MessageLookupByLibrary.simpleMessage("حول"),
@@ -282,6 +284,66 @@ class MessageLookup extends MessageLookupByLibrary {
     "your_credit_card_not_valid" : MessageLookupByLibrary.simpleMessage("بطاقتك الائتمانية غير صالحة"),
     "your_order_has_been_successfully_submitted" : MessageLookupByLibrary.simpleMessage("تم تقديم طلبك بنجاح!"),
     "your_order_request_has_been_successfully_submitted" : MessageLookupByLibrary.simpleMessage("تم تقديم طلبك بنجاح ، سيتم إخطارك إذا وافق المطبخ أو رفض الطلب"),
-    "your_reset_link_has_been_sent_to_your_email" : MessageLookupByLibrary.simpleMessage("تم إرسال رابط إعادة تعيين إلى البريد الإلكتروني الخاص بك")
+    "your_reset_link_has_been_sent_to_your_email" : MessageLookupByLibrary.simpleMessage("تم إرسال رابط إعادة تعيين إلى البريد الإلكتروني الخاص بك"),
+
+
+    "membership" : MessageLookupByLibrary.simpleMessage("عضوية"),
+    "address_not_provided_contact_client" : MessageLookupByLibrary.simpleMessage("العنوان لم يتم تقديمه لعميل الاتصال"),
+    "address_not_provided_please_call_the_client" : MessageLookupByLibrary.simpleMessage("العنوان غير متوفر يرجى الاتصال بالعميل"),
+    "areYouSureYouWantToCancelThisOrderOf" : MessageLookupByLibrary.simpleMessage("Are you sure you want to cancel this order of customer ?"),
+    "assignDeliveryBoy" : MessageLookupByLibrary.simpleMessage("Assign Delivery Boy"),
+    "invalid_field" : MessageLookupByLibrary.simpleMessage("حقل غير صالح"),
+    "confirm" : MessageLookupByLibrary.simpleMessage("تؤكد"),
+    "customer" : MessageLookupByLibrary.simpleMessage("زبون"),
+    "delivered" : MessageLookupByLibrary.simpleMessage("تم التوصيل"),
+    "deliveryAddress" : MessageLookupByLibrary.simpleMessage("عنوان التوصيل"),
+    "deliveryAddressRemovedSuccessfully" : MessageLookupByLibrary.simpleMessage("Delivery Address removed successfully"),
+    "delivery_confirmation" : MessageLookupByLibrary.simpleMessage("تأكيد التسليم"),
+    "dismiss" : MessageLookupByLibrary.simpleMessage("تجاهل"),
+    "editOrder" : MessageLookupByLibrary.simpleMessage("Edit Order"),
+    "extras" : MessageLookupByLibrary.simpleMessage("إضافات"),
+    "accept" : MessageLookupByLibrary.simpleMessage("قبول"),
+    "faqsRefreshedSuccessfully" : MessageLookupByLibrary.simpleMessage("Faqs refreshed successfully"),
+    "favoritesRefreshedSuccessfully" : MessageLookupByLibrary.simpleMessage("Favorites refreshed successfully"),
+    "featuredProducts" : MessageLookupByLibrary.simpleMessage("Featured Products"),
+    "fullName" : MessageLookupByLibrary.simpleMessage("الإسم الكامل"),
+    "generalInformation" : MessageLookupByLibrary.simpleMessage("General Information"),
+    "goToHome" : MessageLookupByLibrary.simpleMessage("Go To Home"),
+    "auto_accept" : MessageLookupByLibrary.simpleMessage("أوامر قبول السيارات"),
+    "hint" : MessageLookupByLibrary.simpleMessage("Hint"),
+    "history" : MessageLookupByLibrary.simpleMessage("التاريخ"),
+    "insertAnAdditionalInformationForThisOrder" : MessageLookupByLibrary.simpleMessage("Insert an additional information for this order"),
+    "myMarkets" : MessageLookupByLibrary.simpleMessage("مطابخي"),
+    "new_order_from_costumer" : MessageLookupByLibrary.simpleMessage("طلب جديد من العملاء"),
+    "field_cannot_be_empty" : MessageLookupByLibrary.simpleMessage("هذا الحقل لا يمكن أن يكون فارغًا"),
+    "orderIdHasBeenCanceled" : m0,
+    "orderIdHasBeenAccepted" : m2,
+    "orderStatus" : MessageLookupByLibrary.simpleMessage("Order Status"),
+    "order_details" : MessageLookupByLibrary.simpleMessage("تفاصيل الطلب"),
+    "order_satatus_changed" : MessageLookupByLibrary.simpleMessage("تغيرت حالة الطلب"),
+    "ordered_products" : MessageLookupByLibrary.simpleMessage("الأطعمة المطلوبة"),
+    "orders" : MessageLookupByLibrary.simpleMessage("الطلبات"),
+    "orders_history" : MessageLookupByLibrary.simpleMessage("تاريخ الطلبات"),
+    "productRefreshedSuccessfully" : MessageLookupByLibrary.simpleMessage("Product refreshed successfully"),
+    "products_ordered" : MessageLookupByLibrary.simpleMessage("طلب الأطعمة"),
+    "saveChanges" : MessageLookupByLibrary.simpleMessage("Save Changes"),
+    "swip_left_the_notification_to_delete_or_read__unread" : MessageLookupByLibrary.simpleMessage("اسحب إلى اليسار للإعلام لحذفه أو قراءته"),
+    "tapBackAgainToLeave" : MessageLookupByLibrary.simpleMessage("إضغط مرة أخرى للخروج"),
+    "theConversationWithIsDismissed" : m1,
+    "thisAccountNotExist" : MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
+    "thisNotificationHasMarkedAsUnRead" : MessageLookupByLibrary.simpleMessage("This notification has marked as un read"),
+    "thisOrderUpdatedSuccessfully" : MessageLookupByLibrary.simpleMessage("This order updated successfully"),
+    "totalEarning" : MessageLookupByLibrary.simpleMessage("مجموع الأرباح"),
+    "totalMarkets" : MessageLookupByLibrary.simpleMessage("مجموع المطابخ"),
+    "totalOrders" : MessageLookupByLibrary.simpleMessage("إجمالي الطلبات"),
+    "totalProducts" : MessageLookupByLibrary.simpleMessage("إجمالي المنتجات"),
+    "whatTheySay" : MessageLookupByLibrary.simpleMessage("What They Say ?"),
+    "would_you_please_confirm_if_you_have_delivered_all_meals" : MessageLookupByLibrary.simpleMessage("هل تسمح من فضلك بتأكيد ما إذا كنت قد سلمت جميع الوجبات إلى العميل"),
+    "youDontHaveMarketsPleaseSigninUsingAdminPanelAnd" : MessageLookupByLibrary.simpleMessage("You don\'t have kitchens, please open new kitchen"),
+    "youDontHaveProductsPleaseSigninUsingAdminPanelAnd" : MessageLookupByLibrary.simpleMessage("You don\'t have products, please add new product"),
+    "you_dont_have_any_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("ليست لديك أي طلبيات حاليا!"),
+    "your_have_an_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("لديك أمر معين لك"),
+
+
   };
 }

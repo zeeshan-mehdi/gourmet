@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:markets/src/pages/LoginOption.dart';
+import 'package:markets/restaurent_app/src/pages/markets.dart';
+import 'package:markets/restaurent_app/src/pages/order_edit.dart';
+import 'package:markets/restaurent_app/src/pages/pages.dart';
 import 'package:markets/src/pages/kitchen_profile.dart';
 import 'package:markets/src/pages/my_fatoorah.dart';
 import 'package:markets/src/pages/qr_code_scanner.dart';
@@ -32,6 +34,15 @@ import 'src/pages/settings.dart';
 import 'src/pages/signup.dart';
 import 'src/pages/splash_screen.dart';
 import 'src/pages/tracking.dart';
+
+// restaurent app imports
+
+import 'restaurent_app/src/pages/details.dart' as restDetails;
+import 'restaurent_app/src/pages/order.dart' as restOrders;
+import 'restaurent_app/src/pages/order_edit.dart' as restOrderEdit;
+
+
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -104,8 +115,20 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HelpWidget());
       case '/Settings':
         return MaterialPageRoute(builder: (_) => SettingsWidget());
-      case '/LoginOption':
-        return MaterialPageRoute(builder: (_) => LoginOption());
+
+      //***************************************Restaurent App Routes ***********************************************//
+
+
+      case '/RestaurantDetails':
+        return MaterialPageRoute(builder: (_) => restDetails.DetailsWidget(routeArgument: args));
+      case '/RestaurantOrderDetails':
+        return MaterialPageRoute(builder: (_) => restOrders.OrderWidget(routeArgument: args));
+      case '/RestaurantOrderEdit':
+        return MaterialPageRoute(builder: (_) => restOrderEdit.OrderEditWidget(routeArgument: args ));
+
+      // case '/RestaurantPages':
+      //   return MaterialPageRoute(builder: (_) => MarketsWidget(parentScaffoldKey: args));
+
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return MaterialPageRoute(builder: (_) => Scaffold(body: SafeArea(child: Text('Route Error'))));
