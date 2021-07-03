@@ -5,8 +5,10 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
+import '../models/slide.dart';
 import '../models/user.dart' as model;
 import '../pages/mobile_verification_2.dart';
+import '../repository/slider_repository.dart';
 import '../repository/user_repository.dart' as repository;
 
 class UserController extends ControllerMVC {
@@ -17,18 +19,26 @@ class UserController extends ControllerMVC {
   GlobalKey<ScaffoldState> scaffoldKey;
   FirebaseMessaging _firebaseMessaging;
   OverlayEntry loader;
-
+  List<Slide> slides = <Slide>[];
   UserController() {
     loginFormKey = new GlobalKey<FormState>();
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     _firebaseMessaging = FirebaseMessaging();
+    listenForSlides();
     _firebaseMessaging.getToken().then((String _deviceToken) {
       user.deviceToken = _deviceToken;
     }).catchError((e) {
       print('Notification not configured');
     });
   }
-
+  Future<void> listenForSlides() async {
+    final Stream<Slide> stream = await getSlides();
+    stream.listen((Slide _slide) {
+      setState(() => slides.add(_slide));
+    }, onError: (a) {
+      print(a);
+    }, onDone: () {});
+  }
   void login() async {
     loader = Helper.overlayLoader(state.context);
     FocusScope.of(state.context).unfocus();

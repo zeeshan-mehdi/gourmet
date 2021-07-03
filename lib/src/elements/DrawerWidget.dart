@@ -96,7 +96,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                             MaterialButton(
                               elevation: 0,
                               onPressed: () {
-                                Navigator.of(context).pushNamed('/Login');
+                                Navigator.of(context).pushNamed('/LoginOption');
                               },
                               color: Theme.of(context).accentColor,
                               height: 40,
