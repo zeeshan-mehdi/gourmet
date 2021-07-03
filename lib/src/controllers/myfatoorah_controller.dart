@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_fatoorah/my_fatoorah.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../models/cart.dart';
 import '../models/coupon.dart';
 import '../models/credit_card.dart';

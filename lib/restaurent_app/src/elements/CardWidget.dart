@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:markets/restaurent_app/src/models/product.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/market.dart';
 import '../repository/settings_repository.dart' as settingRepo;

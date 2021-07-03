@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../models/credit_card.dart';
 
 // ignore: must_be_immutable

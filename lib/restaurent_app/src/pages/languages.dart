@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../models/language.dart';
 import '../repository/settings_repository.dart' as settingRepo;

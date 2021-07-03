@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:markets/src/helpers/custom_trace.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
 

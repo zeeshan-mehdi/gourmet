@@ -4,7 +4,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:my_fatoorah/my_fatoorah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../models/credit_card.dart';
 import '../models/user.dart';
 import '../repository/user_repository.dart' as repository;

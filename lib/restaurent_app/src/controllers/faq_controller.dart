@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_map_location_picker/generated/l10n.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../../generated/l10n.dart';
+//import  'package:markets/restaurent_app/';
 import '../models/faq_category.dart';
 import '../repository/faq_repository.dart';
 

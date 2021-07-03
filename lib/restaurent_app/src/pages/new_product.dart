@@ -10,7 +10,7 @@ import 'package:markets/restaurent_app/src/models/market.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:multiselect_dropdown/multiple_select.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 

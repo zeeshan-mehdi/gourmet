@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/restaurent_app/src/pages/products.dart';
 
-import '../../../generated/l10n.dart';
+import  'package:markets/generated/l10n.dart';
 import '../elements/DrawerWidget.dart';
 import '../models/route_argument.dart';
 import '../pages/markets.dart';
