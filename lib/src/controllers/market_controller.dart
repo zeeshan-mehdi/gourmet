@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:markets/src/helpers/custom_trace.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../models/category.dart';
 import '../models/gallery.dart';
 import '../models/market.dart';

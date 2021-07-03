@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../helpers/checkbox_form_field.dart';
 import '../models/address.dart';
 

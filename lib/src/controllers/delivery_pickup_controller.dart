@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/route_argument.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../models/address.dart' as model;
 import '../models/payment_method.dart';
 import '../repository/settings_repository.dart' as settingRepo;

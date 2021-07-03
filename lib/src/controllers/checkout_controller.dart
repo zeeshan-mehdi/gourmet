@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:markets/src/models/conversation.dart';
 import 'package:markets/src/models/route_argument.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../models/cart.dart';
 import '../models/coupon.dart';
 import '../models/credit_card.dart';

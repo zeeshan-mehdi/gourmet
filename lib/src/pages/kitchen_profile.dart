@@ -4,68 +4,70 @@ import 'package:markets/src/elements/ProfileKitchenSection.dart';
 
 import '../repository/settings_repository.dart';
 import '../repository/user_repository.dart';
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 class KitchenProfile extends StatefulWidget {
   @override
   _KitchenProfileState createState() => _KitchenProfileState();
 }
 
 class _KitchenProfileState extends State<KitchenProfile> {
+  final GlobalKey<ScaffoldState> parentScaffoldKey  = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: parentScaffoldKey ,
       body: Container(
+        color: Colors.white,
         child: Column(
           children: [
              currentUser.value.apiToken != null
-                ? UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).hintColor.withOpacity(0.1),
-              ),
-              accountName: Text(
-                currentUser.value.name,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              accountEmail: Text(
-                currentUser.value.email,
-                style: Theme.of(context).textTheme.caption,
-              ),
-              currentAccountPicture: Stack(
-                children: [
-                  SizedBox(
-                    width: 80,
-                    height: 80,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(80)),
-                      child: CachedNetworkImage(
-                        height: 80,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        imageUrl: currentUser.value.image.thumb,
-                        placeholder: (context, url) => Image.asset(
-                          'assets/img/loading.gif',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: 80,
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: currentUser.value.verifiedPhone ?? false
-                        ? Icon(
-                      Icons.check_circle,
-                      color: Theme.of(context).accentColor,
-                      size: 24,
-                    )
-                        : SizedBox(),
-                  )
-                ],
-              ),
-            )
+                ? Container(
+               height: 200,
+               padding: EdgeInsets.all(20),
+               color: Color(0xFFF7F8FA),
+
+               child: Row(
+                 children: [
+                   CircleAvatar(
+
+                     backgroundImage: NetworkImage(currentUser.value.image.url),
+                     radius: 50,
+                   ),
+
+                   SizedBox(width: 10,),
+                   Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                     Row(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(left:18.0),
+                           child: Text(currentUser.value.name.toUpperCase(),style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 26,fontWeight: FontWeight.bold),),
+                         ),
+                         InkWell(child: Icon(Icons.arrow_forward_ios_outlined,size: 15,color:Colors.black.withOpacity(0.3)), onTap: (){})
+
+                       ],
+                     ),
+
+                       SizedBox(height: 5,),
+                       Container(
+
+
+                         child: Padding(
+                           padding: const EdgeInsets.only(left:16,right:16,top:3.0,bottom: 3),
+                           child: Text('VIP KITCHEN',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 12,color: Colors.white),),
+                         ),
+                         decoration: BoxDecoration(
+                             border: Border.all(color: Color(0xFFFF2E55)),
+                             borderRadius: BorderRadius.all(Radius.circular(3)),
+                             color: Color(0xFFFF2E55)
+                         ),
+                       ),
+                   ],)
+                 ],
+               ),
+
+             )
                 : Container(
               padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
               decoration: BoxDecoration(
@@ -130,11 +132,11 @@ class _KitchenProfileState extends State<KitchenProfile> {
             ),
 
 
-            ProfileKitchenSection(),
+            ProfileKitchenSection(parentScaffoldKey:parentScaffoldKey),
 
-            SizedBox(height: 100,),
+            SizedBox(height: 50,),
 
-            ProfileKitchenSection(),
+            UserProfileSection(),
 
           ],
         ),

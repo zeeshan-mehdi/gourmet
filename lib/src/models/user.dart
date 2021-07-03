@@ -16,6 +16,9 @@ class User {
   String bio;
   Media image;
 
+  int memebership;
+  String trialEnds;
+
   // used for indicate if client logged in or not
   bool auth;
 
@@ -50,6 +53,7 @@ class User {
       } catch (e) {
         bio = "";
       }
+      memebership = jsonMap['membership'];
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
     } catch (e) {
       print(e);
@@ -69,6 +73,8 @@ class User {
     map["phone"] = phone;
     map["verifiedPhone"] = verifiedPhone;
     map["address"] = address;
+    map["membership"]= memebership;
+    map['trial_ends_at'] = trialEnds;
     map["bio"] = bio;
     map["media"] = image?.toMap();
     return map;

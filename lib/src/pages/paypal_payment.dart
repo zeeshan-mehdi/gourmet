@@ -3,7 +3,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../controllers/paypal_controller.dart';
 import '../models/route_argument.dart';
 

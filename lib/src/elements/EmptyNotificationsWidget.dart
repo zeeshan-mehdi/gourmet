@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../helpers/app_config.dart' as config;
 
 class EmptyNotificationsWidget extends StatefulWidget {

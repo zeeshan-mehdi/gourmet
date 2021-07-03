@@ -3,7 +3,7 @@ import 'package:google_map_location_picker/google_map_location_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../controllers/delivery_addresses_controller.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../elements/DeliveryAddressDialog.dart';

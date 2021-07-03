@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m1(productName) => "The ${productName} was removed from your cart";
 
+  static m2(id) => "Order: #${id} has been accepted";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "about" : MessageLookupByLibrary.simpleMessage("About"),
@@ -282,6 +284,67 @@ class MessageLookup extends MessageLookupByLibrary {
     "your_credit_card_not_valid" : MessageLookupByLibrary.simpleMessage("Your credit card not valid"),
     "your_order_has_been_successfully_submitted" : MessageLookupByLibrary.simpleMessage("Your order has been successfully submitted!"),
     "your_order_request_has_been_successfully_submitted" : MessageLookupByLibrary.simpleMessage("Your order Request has been successfully submitted, you will be notified if kitchen accepts or declines order!"),
-    "your_reset_link_has_been_sent_to_your_email" : MessageLookupByLibrary.simpleMessage("Your reset link has been sent to your email")
+    "your_reset_link_has_been_sent_to_your_email" : MessageLookupByLibrary.simpleMessage("Your reset link has been sent to your email"),
+
+    //restaurant app
+
+    "membership" : MessageLookupByLibrary.simpleMessage("Membership"),
+    "address_not_provided_contact_client" : MessageLookupByLibrary.simpleMessage("Address not provided contact client"),
+    "address_not_provided_please_call_the_client" : MessageLookupByLibrary.simpleMessage("Address not provided please call the client"),
+    "areYouSureYouWantToCancelThisOrderOf" : MessageLookupByLibrary.simpleMessage("Are you sure you want to cancel this order of customer ?"),
+    "assignDeliveryBoy" : MessageLookupByLibrary.simpleMessage("Assign Delivery Boy"),
+    "invalid_field" : MessageLookupByLibrary.simpleMessage("Invalid Field"),
+    "confirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
+    "customer" : MessageLookupByLibrary.simpleMessage("Customer"),
+    "delivered" : MessageLookupByLibrary.simpleMessage("Delivered"),
+    "deliveryAddress" : MessageLookupByLibrary.simpleMessage("Delivery Address"),
+    "deliveryAddressRemovedSuccessfully" : MessageLookupByLibrary.simpleMessage("Delivery Address removed successfully"),
+    "delivery_confirmation" : MessageLookupByLibrary.simpleMessage("Delivery Confirmation"),
+    "dismiss" : MessageLookupByLibrary.simpleMessage("Dismiss"),
+    "editOrder" : MessageLookupByLibrary.simpleMessage("Edit Order"),
+    "extras" : MessageLookupByLibrary.simpleMessage("Extras"),
+    "faqsRefreshedSuccessfully" : MessageLookupByLibrary.simpleMessage("Faqs refreshed successfully"),
+    "favoritesRefreshedSuccessfully" : MessageLookupByLibrary.simpleMessage("Favorites refreshed successfully"),
+    "featuredProducts" : MessageLookupByLibrary.simpleMessage("Featured Products"),
+    "fullName" : MessageLookupByLibrary.simpleMessage("Full Name"),
+    "generalInformation" : MessageLookupByLibrary.simpleMessage("General Information"),
+    "goToHome" : MessageLookupByLibrary.simpleMessage("Go To Home"),
+    "Auto Accept Orders" : MessageLookupByLibrary.simpleMessage("Auto Accept Orders"),
+    "hint" : MessageLookupByLibrary.simpleMessage("Hint"),
+    "history" : MessageLookupByLibrary.simpleMessage("History"),
+    "insertAnAdditionalInformationForThisOrder" : MessageLookupByLibrary.simpleMessage("Insert an additional information for this order"),
+    "accept" : MessageLookupByLibrary.simpleMessage("Accept"),
+    "myMarkets" : MessageLookupByLibrary.simpleMessage("My Kitchens"),
+    "new_order_from_costumer" : MessageLookupByLibrary.simpleMessage("New Order from costumer"),
+    "field_cannot_be_empty" : MessageLookupByLibrary.simpleMessage("This field cannot be Empty"),
+    "orderIdHasBeenCanceled" : m0,
+    "orderIdHasBeenAccepted" : m2,
+    "orderStatus" : MessageLookupByLibrary.simpleMessage("Order Status"),
+    "order_details" : MessageLookupByLibrary.simpleMessage("Order Details"),
+    "order_satatus_changed" : MessageLookupByLibrary.simpleMessage("Order status changed"),
+    "ordered_products" : MessageLookupByLibrary.simpleMessage("Ordered Products"),
+    "orders" : MessageLookupByLibrary.simpleMessage("Orders"),
+    "orders_history" : MessageLookupByLibrary.simpleMessage("Orders History"),
+    "productRefreshedSuccessfully" : MessageLookupByLibrary.simpleMessage("Product refreshed successfully"),
+    "products_ordered" : MessageLookupByLibrary.simpleMessage("Products Ordered"),
+    "saveChanges" : MessageLookupByLibrary.simpleMessage("Save Changes"),
+    "swip_left_the_notification_to_delete_or_read__unread" : MessageLookupByLibrary.simpleMessage("Swipe left the notification to delete or read / unread it"),
+    "tapBackAgainToLeave" : MessageLookupByLibrary.simpleMessage("Tap back again to leave"),
+    "theConversationWithIsDismissed" : m1,
+    "thisAccountNotExist" : MessageLookupByLibrary.simpleMessage("This account not exist"),
+    "thisNotificationHasMarkedAsUnRead" : MessageLookupByLibrary.simpleMessage("This notification has marked as un read"),
+    "thisOrderUpdatedSuccessfully" : MessageLookupByLibrary.simpleMessage("This order updated successfully"),
+    "totalEarning" : MessageLookupByLibrary.simpleMessage("Total Earnings"),
+    "totalMarkets" : MessageLookupByLibrary.simpleMessage("Total Kitchens"),
+    "totalOrders" : MessageLookupByLibrary.simpleMessage("Total Orders"),
+    "totalProducts" : MessageLookupByLibrary.simpleMessage("Total Products"),
+    "whatTheySay" : MessageLookupByLibrary.simpleMessage("What They Say ?"),
+    "would_you_please_confirm_if_you_have_delivered_all_meals" : MessageLookupByLibrary.simpleMessage("Would you please confirm if you have delivered all meals to client"),
+    "youDontHaveMarketsPleaseSigninUsingAdminPanelAnd" : MessageLookupByLibrary.simpleMessage("You don\'t have kitchens, please open new kitchens"),
+    "youDontHaveProductsPleaseSigninUsingAdminPanelAnd" : MessageLookupByLibrary.simpleMessage("You don\'t have products, please add new products"),
+    "you_dont_have_any_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("You don\'t have any order assigned to you!"),
+    "your_have_an_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("Your have an order assigned to you"),
+
+
   };
 }

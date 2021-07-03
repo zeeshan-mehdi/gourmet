@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../controllers/profile_controller.dart';
 import '../repository/settings_repository.dart';
 import '../repository/user_repository.dart';
@@ -143,6 +144,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
+              //home page
               Navigator.of(context).pushNamed('/Pages', arguments: 2);
             },
             leading: Icon(
@@ -156,6 +158,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
+              //notifications page
               Navigator.of(context).pushNamed('/Pages', arguments: 0);
             },
             leading: Icon(
@@ -169,10 +172,11 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
+              //orders page
               Navigator.of(context).pushNamed('/Pages', arguments: 3);
             },
             leading: Icon(
-              Icons.local_mall_outlined,
+              FontAwesomeIcons.file,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
@@ -182,6 +186,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
+              //favorites page
               Navigator.of(context).pushNamed('/Pages', arguments: 4);
             },
             leading: Icon(
@@ -195,6 +200,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
           ),
           ListTile(
             onTap: () {
+              //chat page
               Navigator.of(context).pushNamed('/Pages', arguments: 4);
             },
             leading: Icon(

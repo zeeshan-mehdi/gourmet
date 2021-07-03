@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../controllers/delivery_pickup_controller.dart';
 import '../elements/CartBottomDetailsWidget.dart';
 import '../elements/DeliveryAddressDialog.dart';

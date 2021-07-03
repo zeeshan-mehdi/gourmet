@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 import '../controllers/market_controller.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../elements/GalleryCarouselWidget.dart';
