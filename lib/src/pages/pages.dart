@@ -1,4 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:markets/restaurent_app/src/pages/markets.dart';
+import 'package:markets/src/pages/favorites.dart';
+import 'package:markets/src/pages/kitchen_profile.dart';
 
 import '../elements/DrawerWidget.dart';
 import '../elements/FilterWidget.dart';
@@ -53,20 +59,20 @@ class _PagesWidgetState extends State<PagesWidget> {
     setState(() {
       widget.currentTab = tabItem;
       switch (tabItem) {
-        case 0:
-          widget.currentPage = NotificationsWidget(parentScaffoldKey: widget.scaffoldKey);
-          break;
-        case 1:
-          widget.currentPage = MapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
-          break;
-        case 2:
-          widget.currentPage = HomeWidget(parentScaffoldKey: widget.scaffoldKey);
+        case 4:
+          widget.currentPage = MarketsWidget(parentScaffoldKey: widget.scaffoldKey,);
           break;
         case 3:
+          widget.currentPage = KitchenProfile();
+          break;
+        case 0:
+          widget.currentPage = HomeWidget(parentScaffoldKey: widget.scaffoldKey);
+          break;
+        case 1:
           widget.currentPage = OrdersWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
-        case 4:
-          widget.currentPage = MessagesWidget(parentScaffoldKey: widget.scaffoldKey); //FavoritesWidget(parentScaffoldKey: widget.scaffoldKey);
+        case 2:
+          widget.currentPage = FavoritesWidget(); //FavoritesWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
       }
     });
@@ -91,46 +97,57 @@ class _PagesWidgetState extends State<PagesWidget> {
           iconSize: 22,
           elevation: 0,
           backgroundColor: Colors.transparent,
-          selectedIconTheme: IconThemeData(size: 28),
+          selectedIconTheme: IconThemeData(size: 22),
           unselectedItemColor: Theme.of(context).focusColor.withOpacity(1),
-          currentIndex: widget.currentTab,
+          currentIndex: widget.currentTab==4? widget.currentTab-1: widget.currentTab,
           onTap: (int i) {
             this._selectTab(i);
           },
           // this will be set when a new tab is tapped
           items: [
+
             BottomNavigationBarItem(
-              icon: Icon(widget.currentTab == 0 ? Icons.notifications : Icons.notifications_outlined),
+              label: '',
+              icon: Column(
+                children: [
+                  new Icon(FontAwesomeIcons.compass),
+                  SizedBox(height: 3,),
+                  Text('Explore',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12),),
+                ],
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Column(
+                children: [
+                  Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.rotationX(pi),child: new Icon(FontAwesomeIcons.file)),
+                  SizedBox(height: 3,),
+                  Text('Orders',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12),),
+                ],
+              ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(widget.currentTab == 1 ? Icons.location_on : Icons.location_on_outlined),
+              icon: Column(
+                children: [
+                  Icon(FontAwesomeIcons.bookmark),
+                  SizedBox(height: 3,),
+                  Text('Favorite',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12),),
+                ],
+              ),
               label: '',
             ),
+
+
             BottomNavigationBarItem(
-                label: '',
-                icon: Container(
-                  width: 42,
-                  height: 42,
-                  margin: EdgeInsets.only(bottom: 5),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(50),
-                    ),
-                    boxShadow: [
-                      BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 40, offset: Offset(0, 15)),
-                      BoxShadow(color: Theme.of(context).accentColor.withOpacity(0.4), blurRadius: 13, offset: Offset(0, 3))
-                    ],
-                  ),
-                  child: new Icon(widget.currentTab == 2 ? Icons.home : Icons.home_outlined, color: Theme.of(context).primaryColor),
-                )),
-            BottomNavigationBarItem(
-              icon: new Icon(widget.currentTab == 3 ? Icons.local_mall : Icons.local_mall_outlined),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(widget.currentTab == 4 ? Icons.chat : Icons.chat_outlined),
+              icon: Column(
+                children: [
+                  new Icon(FontAwesomeIcons.addressBook),
+                  SizedBox(height: 3,),
+                  Text('Profile',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12),),
+                ],
+              ),
               label: '',
             ),
           ],
