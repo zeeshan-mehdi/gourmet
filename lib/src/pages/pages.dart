@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
 import 'package:markets/restaurent_app/src/pages/details.dart';
+import 'package:markets/restaurent_app/src/pages/open_new_kitchen.dart';
 import 'package:markets/restaurent_app/src/pages/orders.dart' as restOrders;
 import 'package:markets/restaurent_app/src/pages/settings.dart' as restSettings;
 import 'package:markets/restaurent_app/src/pages/markets.dart';
@@ -84,7 +85,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
           break;
         case 5:
-          widget.currentPage =  restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,);
+          widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,);
           break;
 
         case 6:
@@ -92,6 +93,10 @@ class _PagesWidgetState extends State<PagesWidget> {
           break;
         case 7:
           widget.currentPage =  SettingsWidget();
+          break;
+
+        case 8:
+          widget.currentPage =  OpenNewKitchenPage();
           break;
       }
     });

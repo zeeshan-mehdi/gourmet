@@ -223,6 +223,11 @@ class _OpenNewKitchenPageState extends StateMVC<OpenNewKitchenPage> {
             'Add Kitchen'), centerTitle: true,
         elevation: 0,
 
+        automaticallyImplyLeading: false,
+        leading:  new IconButton(
+      icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+      onPressed: () => Navigator.of(context).pushNamed('/Pages',arguments: 3),
+    ),
       ),
       key: _con.scaffoldKey,
       body: Container(

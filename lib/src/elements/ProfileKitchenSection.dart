@@ -107,3 +107,25 @@ class ListItem extends StatelessWidget {
   }
 }
 
+class KitchenLoadingWidget extends StatelessWidget {
+  final double height;
+  final double width;
+
+  const KitchenLoadingWidget({Key key, this.height, this.width}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage('assets/img/loading.gif'),
+              fit: BoxFit.cover
+          )
+      ),
+    ) ;
+  }
+}
+
+

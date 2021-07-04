@@ -35,15 +35,19 @@ class _MobileVerificationBottomSheetWidgetState
   }
 
   verifyPhone() async {
+    print('sending sms to ${widget.user.phone}');
     currentUser.value.verificationId = '';
     smsSent = '';
     final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {};
     final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResent]) {
+      print('code sent');
       currentUser.value.verificationId = verId;
     };
     final PhoneVerificationCompleted _verifiedSuccess =
-        (AuthCredential auth) {};
-    final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {};
+        (AuthCredential auth) { };
+    final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {
+      print('code sending falied $e');
+    };
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.user.phone,
       timeout: const Duration(seconds: 5),

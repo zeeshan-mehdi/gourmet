@@ -38,6 +38,31 @@ class MarketController extends ControllerMVC {
     return isPaidUser();
   }
 
+  getFirstMarket()async{
+    final Stream<Market> stream = await getMarkets();
+    Market firstMarket ;
+    try {
+      throw Exception('no kitchen found');
+      await stream.first.then((Market _market) {
+        print('frst market found market');
+        firstMarket = _market;
+      }, onError: (a) {
+        print('something went wrong');
+
+        print(a);
+
+        // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        //   content: Text(S.of(state.context).verify_your_internet_connection),
+        // ));
+      });
+    }catch(e){
+      print(e);
+      firstMarket = null;
+    }
+
+    return firstMarket;
+  }
+
  Future<String> uploadImage1(var imageFile)async{
    return  await uploadImage(imageFile);
   }
