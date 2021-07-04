@@ -645,98 +645,102 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                       ],
                                     ),
                                     SizedBox(height: 10),
-                                    // Row(
-                                    //   children: <Widget>[
-                                    //     // Expanded(
-                                    //     //   child: _con.favorite?.id != null
-                                    //     //       ? OutlineButton(
-                                    //     //           onPressed: () {
-                                    //     //             _con.removeFromFavorite(_con.favorite);
-                                    //     //           },
-                                    //     //           padding: EdgeInsets.symmetric(vertical: 14),
-                                    //     //           color: Theme.of(context).primaryColor,
-                                    //     //           shape: StadiumBorder(),
-                                    //     //           borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                    //     //           child: Icon(
-                                    //     //             Icons.favorite,
-                                    //     //             color: Theme.of(context).accentColor,
-                                    //     //           ))
-                                    //     //       : MaterialButton(
-                                    //     //           elevation: 0,
-                                    //     //           onPressed: () {
-                                    //     //             if (currentUser.value.apiToken == null) {
-                                    //     //               Navigator.of(context).pushNamed("/Login");
-                                    //     //             } else {
-                                    //     //               _con.addToFavorite(_con.product);
-                                    //     //             }
-                                    //     //           },
-                                    //     //           padding: EdgeInsets.symmetric(vertical: 14),
-                                    //     //           color: Theme.of(context).accentColor,
-                                    //     //           shape: StadiumBorder(),
-                                    //     //           child: Icon(
-                                    //     //             Icons.favorite_outline,
-                                    //     //             color: Theme.of(context).primaryColor,
-                                    //     //           )),
-                                    //     // ),
-                                    //     Spacer(),
-                                    //     SizedBox(width: 10),
-                                    //     Stack(
-                                    //       fit: StackFit.loose,
-                                    //       alignment: AlignmentDirectional.centerEnd,
-                                    //       children: <Widget>[
-                                    //         SizedBox(
-                                    //           width: MediaQuery.of(context).size.width - 110,
-                                    //           child: MaterialButton(
-                                    //             elevation: 0,
-                                    //             onPressed: () {
-                                    //               if (currentUser.value.apiToken == null) {
-                                    //                 Navigator.of(context).pushNamed("/Login");
-                                    //               } else {
-                                    //                 if (_con.isSameMarkets(_con.product)) {
-                                    //                   _con.addToCart(_con.product);
-                                    //                 } else {
-                                    //                   showDialog(
-                                    //                     context: context,
-                                    //                     builder: (BuildContext context) {
-                                    //                       // return object of type Dialog
-                                    //                       return AddToCartAlertDialogWidget(
-                                    //                           oldProduct: _con.carts.elementAt(0)?.product,
-                                    //                           newProduct: _con.product,
-                                    //                           onPressed: (product, {reset: true}) {
-                                    //                             return _con.addToCart(_con.product, reset: true);
-                                    //                           });
-                                    //                     },
-                                    //                   );
-                                    //                 }
-                                    //               }
-                                    //             },
-                                    //             padding: EdgeInsets.symmetric(vertical: 14),
-                                    //             color: Theme.of(context).accentColor,
-                                    //             shape: StadiumBorder(),
-                                    //             child: Container(
-                                    //               width: double.infinity,
-                                    //               padding: const EdgeInsets.symmetric(horizontal: 20),
-                                    //               child: Text(
-                                    //                 S.of(context).add_to_cart,
-                                    //                 textAlign: TextAlign.start,
-                                    //                 style: TextStyle(color: Theme.of(context).primaryColor),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //         ),
-                                    //         Padding(
-                                    //           padding: const EdgeInsets.symmetric(horizontal: 20),
-                                    //           child: Helper.getPrice(
-                                    //             _con.total,
-                                    //             context,
-                                    //             style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).primaryColor)),
-                                    //           ),
-                                    //         )
-                                    //       ],
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                    // SizedBox(height: 10),
+                                    Container(
+
+                                      child:  Row(
+                                        children: <Widget>[
+                                          // Expanded(
+                                          //   child: _con.favorite?.id != null
+                                          //       ? OutlineButton(
+                                          //           onPressed: () {
+                                          //             _con.removeFromFavorite(_con.favorite);
+                                          //           },
+                                          //           padding: EdgeInsets.symmetric(vertical: 14),
+                                          //           color: Theme.of(context).primaryColor,
+                                          //           shape: StadiumBorder(),
+                                          //           borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                          //           child: Icon(
+                                          //             Icons.favorite,
+                                          //             color: Theme.of(context).accentColor,
+                                          //           ))
+                                          //       : MaterialButton(
+                                          //           elevation: 0,
+                                          //           onPressed: () {
+                                          //             if (currentUser.value.apiToken == null) {
+                                          //               Navigator.of(context).pushNamed("/Login");
+                                          //             } else {
+                                          //               _con.addToFavorite(_con.product);
+                                          //             }
+                                          //           },
+                                          //           padding: EdgeInsets.symmetric(vertical: 14),
+                                          //           color: Theme.of(context).accentColor,
+                                          //           shape: StadiumBorder(),
+                                          //           child: Icon(
+                                          //             Icons.favorite_outline,
+                                          //             color: Theme.of(context).primaryColor,
+                                          //           )),
+                                          // ),
+                                          Spacer(),
+                                          SizedBox(width: 2),
+                                          Stack(
+                                            // fit: StackFit.,
+                                            alignment: AlignmentDirectional.centerEnd,
+                                            children: <Widget>[
+                                              SizedBox(
+                                                width: MediaQuery.of(context).size.width - 180,
+                                                child: MaterialButton(
+                                                  elevation: 0,
+                                                  onPressed: () {
+                                                    if (currentUser.value.apiToken == null) {
+                                                      Navigator.of(context).pushNamed("/Login");
+                                                    } else {
+                                                      if (_con.isSameMarkets(_con.product)) {
+                                                        _con.addToCart(_con.product);
+                                                      } else {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext context) {
+                                                            // return object of type Dialog
+                                                            return AddToCartAlertDialogWidget(
+                                                                oldProduct: _con.carts.elementAt(0)?.product,
+                                                                newProduct: _con.product,
+                                                                onPressed: (product, {reset: true}) {
+                                                                  return _con.addToCart(_con.product, reset: true);
+                                                                });
+                                                          },
+                                                        );
+                                                      }
+                                                    }
+                                                  },
+                                                  padding: EdgeInsets.symmetric(vertical: 14),
+                                                  color: Theme.of(context).accentColor,
+                                                  shape: StadiumBorder(),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                                    child: Text(
+                                                      S.of(context).add_to_cart,
+                                                      textAlign: TextAlign.start,
+                                                      style: TextStyle(color: Theme.of(context).primaryColor),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 9),
+                                                child: Helper.getPrice(
+                                                  _con.total,
+                                                  context,
+                                                  style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    SizedBox(height: 10),
                                   ],
                                 ),
                               ],
