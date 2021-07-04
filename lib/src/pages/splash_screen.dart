@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/controllers/home_controller.dart';
 import 'package:markets/src/controllers/user_controller.dart';
+import 'package:markets/src/elements/CircularLoadingWidget.dart';
 import 'package:markets/src/elements/SplashSlider.dart';
+import 'package:markets/src/pages/LoginOption.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import '../controllers/splash_screen_controller.dart';
 import '../helpers/app_config.dart' as config;
 
@@ -27,20 +30,61 @@ class SplashScreenState extends StateMVC<SplashScreen> {
     loadData();
   }
 
-  void loadData() {
-    _con.progress.addListener(() {
+  void loadData()  {
+    _con.progress.addListener(() async {
       double progress = 0;
       _con.progress.value.values.forEach((_progress) {
         progress += _progress;
       });
       if (progress == 100) {
         try {
-          Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+          print("suces");
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          // print( prefs.get("welcome"));
+          prefs.get("welcome");
+          if (prefs.get("welcome") == true){
+            Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
+          }else{
+            Navigator.of(context)
+                .pushReplacementNamed('/SplashForNewUser');
+          }
+          //     .then((value) => setState(() {
+          //   isLoggedIn = value;
+          // }));
+          //check();
         } catch (e) {}
       }
     });
   }
+  bool isLoggedIn = false;
+  check() async {
 
+      // prefs.getBool("isfirstRun").then((value) =>
+      //     setState(() {
+      //       isLoggedIn = value;
+      //     }));
+
+    FutureBuilder<SharedPreferences>(
+      future: SharedPreferences.getInstance(),
+      builder:
+          (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return new LoginOption();
+          default:
+            if (!snapshot.hasError) {
+       // @ToDo("Return a welcome screen")
+        return snapshot.data.getBool("welcome") != null
+        ? Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2)
+            : new CircularLoadingWidget();
+        } else {
+       // return new ErrorScreen(error: snapshot.error);
+        }
+      }
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,55 +112,55 @@ class SplashScreenState extends StateMVC<SplashScreen> {
               //   fit: BoxFit.cover,
               // ),
               SizedBox(
-                height: config.App(context).appHeight(20),),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child:  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // SizedBox(
-                    //   width: config.App(context).appWidth(10),
-                    //
-                    // ),
-                    // MaterialButton(
-                    //   elevation: 0,
-                    //   onPressed: () {
-                    //     //Navigator.of(context).pushReplacementNamed('/SignUp');
-                    //   },
-                    //   textColor:  Colors.grey,
-                    //   child:
-                    // ),
-                    SizedBox(
-                      width: 32,
-                    ),
-                    Text(
-                      "Already using Gourmet?",
-                      style: TextStyle(color: Colors.grey),
-                      //  S.of(context).i_dont_have_an_account
-                    ),
-                    MaterialButton(
-                      padding: EdgeInsets.only(right: 32),
-                      elevation: 0,
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed('/Login');
-                      },
-                      textColor: Theme.of(context).accentColor,
-                      child: Text(
-                        "Sign In",
-
-                        //  S.of(context).i_dont_have_an_account
-                      ),
-                    ),
-                    // Spacer(),
-                  ],
-                ),
-              ),
-            //  SizedBox(height: 50),
-              // CircularProgressIndicator(
-              //   valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).hintColor),
+                height: config.App(context).appHeight(5),),
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child:  Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     children: [
+              //       // SizedBox(
+              //       //   width: config.App(context).appWidth(10),
+              //       //
+              //       // ),
+              //       // MaterialButton(
+              //       //   elevation: 0,
+              //       //   onPressed: () {
+              //       //     //Navigator.of(context).pushReplacementNamed('/SignUp');
+              //       //   },
+              //       //   textColor:  Colors.grey,
+              //       //   child:
+              //       // ),
+              //       SizedBox(
+              //         width: 32,
+              //       ),
+              //       Text(
+              //         "Already using Gourmet?",
+              //         style: TextStyle(color: Colors.grey),
+              //         //  S.of(context).i_dont_have_an_account
+              //       ),
+              //       MaterialButton(
+              //         padding: EdgeInsets.only(right: 32),
+              //         elevation: 0,
+              //         onPressed: () {
+              //           Navigator.of(context)
+              //               .pushReplacementNamed('/Login');
+              //         },
+              //         textColor: Theme.of(context).accentColor,
+              //         child: Text(
+              //           "Sign In",
+              //
+              //           //  S.of(context).i_dont_have_an_account
+              //         ),
+              //       ),
+              //       // Spacer(),
+              //     ],
+              //   ),
               // ),
+              SizedBox(height: 50),
+              CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).hintColor),
+              ),
             ],
           ),
         ),
