@@ -45,11 +45,11 @@ class SplashScreenController extends ControllerMVC {
         progress?.notifyListeners();
       }
     });
-    Timer(Duration(seconds: 20), () {
-      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-        content: Text(S.of(state.context).verify_your_internet_connection),
-      ));
-    });
+    // Timer(Duration(seconds: 20), () {
+    //   ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+    //     content: Text(S.of(state.context).verify_your_internet_connection),
+    //   ));
+    // });
   }
 
   void configureFirebase(FirebaseMessaging _firebaseMessaging) {
