@@ -78,7 +78,12 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
               switch (_homeSection) {
                 case 'slider':
 
-                  return HomeSliderWidget(slides: _con.slides);
+                  return Container(
+                    transform: Matrix4.translationValues(-30.0, 0.0, 0.0),
+                    // width: 400,
+                    child:  HomeSliderWidget(slides: _con.slides),
+                  );
+
                 case 'search':
                   return Column(
                     children: [

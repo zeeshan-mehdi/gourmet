@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/elements/BlockButtonWidget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../generated/l10n.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../elements/BlockButtonWidget.dart';
@@ -17,6 +18,7 @@ class _LoginOptionState extends State<LoginOption> {
   void initState() {
     //  languagesList = new LanguagesList();
     super.initState();
+
   }
 
   @override
@@ -76,8 +78,12 @@ class _LoginOptionState extends State<LoginOption> {
                         style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 16,),
                       ),
                       color: Theme.of(context).accentColor,
-                      onPressed: () {
+                      onPressed: ()  {
                         // _con.login();
+                        //SharedPreferences prefs = await SharedPreferences.getInstance();
+                        // int counter = (prefs.getInt('counter') ?? 0) + 1;
+                       // print('set boolean true.');
+                      //  await prefs.setBool('welcome', true);
                         Navigator.of(context).pushReplacementNamed('/Login');
                       },
                     ),

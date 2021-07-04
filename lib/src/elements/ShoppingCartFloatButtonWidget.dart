@@ -39,41 +39,41 @@ class _ShoppingCartFloatButtonWidgetState extends StateMVC<ShoppingCartFloatButt
     return SizedBox(
       width: 60,
       height: 60,
-      child: MaterialButton(
-        elevation: 0,
-        padding: EdgeInsets.all(0),
-        color: Theme.of(context).accentColor,
-        shape: StadiumBorder(),
-        onPressed: () {
-          if (currentUser.value.apiToken != null) {
-            Navigator.of(context).pushNamed('/Cart', arguments: widget.routeArgument);
-          } else {
-            Navigator.of(context).pushNamed('/Login');
-          }
-        },
-        child: Stack(
-          alignment: AlignmentDirectional.bottomEnd,
-          children: <Widget>[
-            Icon(
-              Icons.shopping_cart_outlined,
-              color: this.widget.iconColor,
-              size: 28,
-            ),
-            Container(
-              child: Text(
-                _con.cartCount.toString(),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.caption.merge(
-                      TextStyle(color: Theme.of(context).primaryColor, fontSize: 10),
-                    ),
-              ),
-              padding: EdgeInsets.all(0),
-              decoration: BoxDecoration(color: this.widget.labelColor, borderRadius: BorderRadius.all(Radius.circular(10))),
-              constraints: BoxConstraints(minWidth: 15, maxWidth: 15, minHeight: 15, maxHeight: 15),
-            ),
-          ],
-        ),
-      ),
+      // child: MaterialButton(
+      //   elevation: 0,
+      //   padding: EdgeInsets.all(0),
+      //   color: Theme.of(context).accentColor,
+      //   shape: StadiumBorder(),
+      //   onPressed: () {
+      //     if (currentUser.value.apiToken != null) {
+      //       Navigator.of(context).pushNamed('/Cart', arguments: widget.routeArgument);
+      //     } else {
+      //       Navigator.of(context).pushNamed('/Login');
+      //     }
+      //   },
+      //   child: Stack(
+      //     alignment: AlignmentDirectional.bottomEnd,
+      //     children: <Widget>[
+      //       // Icon(
+      //       //   Icons.shopping_cart_outlined,
+      //       //   color: this.widget.iconColor,
+      //       //   size: 28,
+      //       // ),
+      //       Container(
+      //         child: Text(
+      //           _con.cartCount.toString(),
+      //           textAlign: TextAlign.center,
+      //           style: Theme.of(context).textTheme.caption.merge(
+      //                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 10),
+      //               ),
+      //         ),
+      //         padding: EdgeInsets.all(0),
+      //         decoration: BoxDecoration(color: this.widget.labelColor, borderRadius: BorderRadius.all(Radius.circular(10))),
+      //         constraints: BoxConstraints(minWidth: 15, maxWidth: 15, minHeight: 15, maxHeight: 15),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
 //    return MaterialButton(elevation:0,
 //      onPressed: () {

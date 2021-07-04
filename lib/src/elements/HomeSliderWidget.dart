@@ -33,13 +33,14 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
            // fit: StackFit.expand,
             children: <Widget>[
               CarouselSlider(
+
                 options: CarouselOptions(
-                  autoPlay: true,
+                  autoPlay: false,
                   disableCenter: true,
+                  enableInfiniteScroll: false,
                   autoPlayInterval: Duration(seconds: 5),
                   height: 150,
-
-                  viewportFraction: 0.6,
+                  viewportFraction: 0.7,
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;
@@ -53,11 +54,13 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                       return Container(
                         margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                         height: 140,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.15), blurRadius: 15, offset: Offset(0, 2)),
-                          ],
-                        ),
+                        width: double.infinity,
+                        //color: Colors.yellow,
+                        // decoration: BoxDecoration(
+                        //   boxShadow: [
+                        //     BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.15), blurRadius: 15, offset: Offset(0, 2)),
+                        //   ],
+                       // ),
                         child: Stack(
                           children: [
                             ClipRRect(
@@ -79,8 +82,9 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                             Container(
                               alignment: Helper.getAlignmentDirectional(slide.textPosition),
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 0),
                               child: Container(
+
                                 width: config.App(context).appWidth(40),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -132,7 +136,7 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
                 }).toList(),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 22, horizontal: 42),
+                margin: EdgeInsets.symmetric(vertical: 22, horizontal: 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: widget.slides.map((Slide slide) {
