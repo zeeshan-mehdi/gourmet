@@ -731,7 +731,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                 child: Helper.getPrice(
                                                   _con.total,
                                                   context,
-                                                  style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                                                  style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 14),
                                                 ),
                                               )
                                             ],
