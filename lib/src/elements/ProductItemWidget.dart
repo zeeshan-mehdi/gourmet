@@ -28,6 +28,7 @@ class ProductItemWidget extends StatelessWidget {
         Navigator.of(context).pushNamed('/Product', arguments: RouteArgument(id: product.id, heroTag: this.heroTag));
       },
       child: Container(
+        width: 100,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor.withOpacity(0.9),
@@ -35,75 +36,78 @@ class ProductItemWidget extends StatelessWidget {
             BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 5, offset: Offset(0, 2)),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Hero(
-              tag: heroTag + product.id,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                child: CachedNetworkImage(
-                  height: 60,
-                  width: 60,
-                  fit: BoxFit.cover,
-                  imageUrl: url,
-                  placeholder: (context, url) => Image.asset(
-                    'assets/img/loading.gif',
+        child: Container(
+          width: 100,
+          // margin: EdgeInsets.all(20),
+          color: Colors.black,
+          child:   Row(
+           // mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              CachedNetworkImage(
+                    height: 140,
+                    width: 160,
                     fit: BoxFit.cover,
-                    height: 60,
-                    width: 60,
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                ),
-              ),
-            ),
-            SizedBox(width: 15),
-            Flexible(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          product.name,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        Row(
-                          children: Helper.getStarsList(product.getRate()),
-                        ),
-                        Text(
-                          product.options.map((e) => e.name).toList().join(', '),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ],
+                    imageUrl: url,
+                    placeholder: (context, url) => Image.asset(
+                      'assets/img/loading.gif',
+                      fit: BoxFit.cover,
+                      height: 140,
+                      width: 160,
                     ),
+                    errorWidget: (context, url, error) => Icon(Icons.error_outline),
                   ),
-                  SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Helper.getPrice(
-                        product.price,
-                        context,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      product.discountPrice > 0
-                          ? Helper.getPrice(product.discountPrice, context,
-                              style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
-                          : SizedBox(height: 0),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+             //   ),
+            //  ),
+              SizedBox(width: 5),
+              // Flexible(
+              //   child: Row(
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     children: <Widget>[
+              //       Expanded(
+              //         child: Column(
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: <Widget>[
+              //             Text(
+              //               product.name,
+              //               overflow: TextOverflow.ellipsis,
+              //               maxLines: 2,
+              //               style: Theme.of(context).textTheme.subtitle1,
+              //             ),
+              //             Row(
+              //               children: Helper.getStarsList(product.getRate()),
+              //             ),
+              //             Text(
+              //               product.options.map((e) => e.name).toList().join(', '),
+              //               overflow: TextOverflow.ellipsis,
+              //               maxLines: 2,
+              //               style: Theme.of(context).textTheme.caption,
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //       SizedBox(width: 8),
+              //       Column(
+              //         crossAxisAlignment: CrossAxisAlignment.end,
+              //         children: <Widget>[
+              //           Helper.getPrice(
+              //             product.price,
+              //             context,
+              //             style: Theme.of(context).textTheme.headline4,
+              //           ),
+              //           product.discountPrice > 0
+              //               ? Helper.getPrice(product.discountPrice, context,
+              //               style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
+              //               : SizedBox(height: 0),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // )
+
+            ],
+          ),
         ),
+
       ),
     );
   }

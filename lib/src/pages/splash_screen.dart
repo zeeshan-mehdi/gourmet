@@ -57,34 +57,34 @@ class SplashScreenState extends StateMVC<SplashScreen> {
     });
   }
   bool isLoggedIn = false;
-  check() async {
-
-      // prefs.getBool("isfirstRun").then((value) =>
-      //     setState(() {
-      //       isLoggedIn = value;
-      //     }));
-
-    FutureBuilder<SharedPreferences>(
-      future: SharedPreferences.getInstance(),
-      builder:
-          (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-            return new LoginOption();
-          default:
-            if (!snapshot.hasError) {
-       // @ToDo("Return a welcome screen")
-        return snapshot.data.getBool("welcome") != null
-        ? Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2)
-            : new CircularLoadingWidget();
-        } else {
-       // return new ErrorScreen(error: snapshot.error);
-        }
-      }
-      },
-    );
-  }
+  // check() async {
+  //
+  //     // prefs.getBool("isfirstRun").then((value) =>
+  //     //     setState(() {
+  //     //       isLoggedIn = value;
+  //     //     }));
+  //
+  //   FutureBuilder<SharedPreferences>(
+  //     future: SharedPreferences.getInstance(),
+  //     builder:
+  //         (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
+  //       switch (snapshot.connectionState) {
+  //         case ConnectionState.none:
+  //         case ConnectionState.waiting:
+  //           return new LoginOption();
+  //         default:
+  //           if (!snapshot.hasError) {
+  //      // @ToDo("Return a welcome screen")
+  //       return snapshot.data.getBool("welcome") != null
+  //       ? Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2)
+  //           : new CircularLoadingWidget();
+  //       } else {
+  //      // return new ErrorScreen(error: snapshot.error);
+  //       }
+  //     }
+  //     },
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
