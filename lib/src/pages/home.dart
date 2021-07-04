@@ -35,10 +35,10 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
-        ),
+        // leading: new IconButton(
+        //   icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
+        //   onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
+        // ),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,

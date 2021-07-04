@@ -43,10 +43,15 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
 
   @override
   void initState() {
-    _con.listenForMarket(id: widget.routeArgument.id);
-    _con.listenForGalleries(widget.routeArgument.id);
-    _con.listenForFeaturedProducts(widget.routeArgument.id);
-    _con.listenForMarketReviews(id: widget.routeArgument.id);
+
+    if(widget.routeArgument==null || widget.routeArgument.param==null){
+      _con.listenForMarkets(shouldLoad: true);
+    }else {
+      _con.listenForMarket(id: widget.routeArgument.id);
+      _con.listenForGalleries(widget.routeArgument.id);
+      _con.listenForFeaturedProducts(widget.routeArgument.id);
+      _con.listenForMarketReviews(id: widget.routeArgument.id);
+    }
     super.initState();
   }
 
@@ -114,6 +119,12 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                   shrinkWrap: false,
                   slivers: <Widget>[
                     SliverAppBar(
+                      automaticallyImplyLeading: false,
+
+                      leading: IconButton(icon: Icon(Icons.arrow_back), onPressed:(){
+                        Navigator.of(context).pushNamed('/Pages',arguments: 3);
+                      }),
+
                       backgroundColor: Theme.of(context).accentColor.withOpacity(0.9),
                       expandedHeight: 300,
                       elevation: 0,
@@ -133,6 +144,7 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                           ),
                         ),
                       ),
+
                     ),
                     SliverToBoxAdapter(
                       child: Wrap(

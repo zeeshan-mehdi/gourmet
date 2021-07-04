@@ -33,8 +33,8 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
         key: _con.scaffoldKey,
         appBar: AppBar(
           leading: new IconButton(
-            icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-            onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
+            icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+            onPressed: () => Navigator.of(context).pushNamed('/Pages',arguments: 3),
           ),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,

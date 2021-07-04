@@ -41,8 +41,8 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
       key: _con.scaffoldKey,
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => widget.parentScaffoldKey.currentState.openDrawer(),
+          icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+          onPressed: () => Navigator.of(context).pushNamed('/Pages',arguments: 3),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
@@ -57,9 +57,9 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
             );
           },
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: RefreshIndicator(
         onRefresh: _con.refreshOrders,

@@ -10,6 +10,8 @@ class ProfileKitchenSection extends StatefulWidget {
 }
 
 class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,9 +23,11 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
             Navigator.of(context).pushNamed('/Pages',arguments: 4 );
           },),
 
-          ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',),
+          ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',onPressed: (){},),
 
-          ListItem(color:Colors.indigo, title: 'Restaurant Orders',),
+          ListItem(color:Colors.indigo, title: 'Restaurant Orders',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: 5 );
+          },),
 
           ListItem(color:Colors.orange , title: 'Help from Gourmet',),
 
@@ -46,13 +50,19 @@ class _UserProfileSectionState extends State<UserProfileSection> {
       child: Column(
         children: [
 
-          ListItem(color:Colors.red , title: 'My Account',),
+          ListItem(color:Colors.red , title: 'My Account',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: 6);
+          },),
 
           ListItem(color:Colors.lightBlue , title: 'My Addresses',),
 
-          ListItem(color:Colors.indigo, title: 'Orders',),
+          ListItem(color:Colors.indigo, title: 'Orders',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: 1);
+          },),
 
-          ListItem(color:Colors.orange , title: 'Settings',),
+          ListItem(color:Colors.orange , title: 'Settings',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: 7);
+          },),
 
         ],
       ),

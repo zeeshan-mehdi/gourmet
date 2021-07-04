@@ -18,54 +18,83 @@ class _KitchenProfileState extends State<KitchenProfile> {
         child: Column(
           children: [
              currentUser.value.apiToken != null
-                ? UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).hintColor.withOpacity(0.1),
-              ),
-              accountName: Text(
-                currentUser.value.name,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              accountEmail: Text(
-                currentUser.value.email,
-                style: Theme.of(context).textTheme.caption,
-              ),
-              currentAccountPicture: Stack(
-                children: [
-                  SizedBox(
-                    width: 80,
-                    height: 80,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(80)),
-                      child: CachedNetworkImage(
-                        height: 80,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        imageUrl: currentUser.value.image.thumb,
-                        placeholder: (context, url) => Image.asset(
-                          'assets/img/loading.gif',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: 80,
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: currentUser.value.verifiedPhone ?? false
-                        ? Icon(
-                      Icons.check_circle,
-                      color: Theme.of(context).accentColor,
-                      size: 24,
-                    )
-                        : SizedBox(),
-                  )
-                ],
-              ),
-            )
+                ? Container(
+               padding: EdgeInsets.only(top: 58,left: 15),
+               height: 200,
+                  color: Color(0xFFF7F8FA),
+                  child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                   Stack(
+                     children: [
+                       SizedBox(
+                         width: 80,
+                         height: 80,
+                         child: ClipRRect(
+                           borderRadius: BorderRadius.all(Radius.circular(80)),
+                           child: CachedNetworkImage(
+                             height: 80,
+                             width: double.infinity,
+                             fit: BoxFit.cover,
+                             imageUrl: currentUser.value.image.thumb,
+                             placeholder: (context, url) => Image.asset(
+                               'assets/img/loading.gif',
+                               fit: BoxFit.cover,
+                               width: double.infinity,
+                               height: 80,
+                             ),
+                             errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                           ),
+                         ),
+                       ),
+                       Positioned(
+                         top: 0,
+                         right: 0,
+                         child: currentUser.value.verifiedPhone ?? false
+                             ? Icon(
+                           Icons.check_circle,
+                           color: Theme.of(context).accentColor,
+                           size: 24,
+                         )
+                             : SizedBox(),
+                       )
+                     ],
+                   ),
+
+                   SizedBox(width: 25,),
+                   Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Text(currentUser.value.name?.toUpperCase()??'',style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.bold)),
+                           SizedBox(width: 5,),
+                           InkWell(child: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black.withOpacity(0.3),),onTap: (){},),
+                         ],
+                       ),
+                       SizedBox(height: 5,),
+                       Container(
+                         height: 25,
+                         margin: EdgeInsets.all(0),
+                         child: Padding(
+                           padding: const EdgeInsets.symmetric(horizontal:12.0,),
+                           child: Center(child: Text('VIP KITCHEN',style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 12,color: Colors.white))),
+                         ),
+                         decoration: BoxDecoration(
+                             border: Border.all(color: const Color(0xFFFF2E55)),
+                             borderRadius: BorderRadius.all(Radius.circular(5)),
+                             color: const Color(0xFFFF2E55)
+                         ),
+                       ),
+                     ],
+                   ),
+
+               ],
+             ),
+                )
                 : Container(
               padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
               decoration: BoxDecoration(
@@ -130,11 +159,21 @@ class _KitchenProfileState extends State<KitchenProfile> {
             ),
 
 
-            ProfileKitchenSection(),
+            Container(
+              height: MediaQuery.of(context).size.height-260,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  ProfileKitchenSection(),
 
-            SizedBox(height: 100,),
+                  SizedBox(height: 30,),
 
-            ProfileKitchenSection(),
+                  UserProfileSection(),
+                ],
+              ),
+            )
+
+
 
           ],
         ),

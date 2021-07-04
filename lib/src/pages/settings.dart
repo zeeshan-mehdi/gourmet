@@ -31,6 +31,12 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
+
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+            onPressed: () => Navigator.of(context).pushNamed('/Pages',arguments: 3),
+          ),
+
           title: Text(
             S.of(context).settings,
             style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
