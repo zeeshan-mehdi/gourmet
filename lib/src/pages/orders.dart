@@ -41,7 +41,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
         centerTitle: true,
         title: Text(
           S.of(context).my_orders,
-          style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+          style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3,color: Colors.black)),
         ),
         actions: <Widget>[
           new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
@@ -60,10 +60,10 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: SearchBarWidget(),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                        //   child: SearchBarWidget(),
+                        // ),
                         SizedBox(height: 20),
                         ListView.separated(
                           scrollDirection: Axis.vertical,
@@ -73,7 +73,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
                           itemBuilder: (context, index) {
                             var _order = _con.orders.elementAt(index);
                             return OrderItemWidget(
-                              expanded: index == 0 ? true : false,
+                              expanded: index == 0 ? false : false,
                               order: _order,
                               onCanceled: (e) {
                                 _con.doCancelOrder(_order);
