@@ -50,7 +50,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                       children: <Widget>[
                         Text('${S.of(context).order_id}: #${widget.order.id}'),
                         Text(
-                          DateFormat('dd-MM-yyyy | HH:mm').format(widget.order.dateTime),
+                          DateFormat('dd-MMM-yyyy | HH:mm').format(widget.order.dateTime),
                           style: Theme.of(context).textTheme.caption,
                         ),
                       ],
