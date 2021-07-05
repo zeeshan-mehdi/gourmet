@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:markets/src/controllers/market_controller.dart';
 import 'package:markets/src/models/market.dart';
+import 'package:markets/src/models/product.dart';
 import 'package:markets/src/pages/cart.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
@@ -46,7 +47,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
     super.initState();
   }
  int selectedIndex = null;
- List<SelectedOrderItem> selecteditems = List<SelectedOrderItem>();
+ // List<Product> products = <Product>[];
+  List<Product> products = List<Product>();
+// List<SelectedOrderItem> selecteditems = List<SelectedOrderItem>();
   @override
   Widget build(BuildContext context) {
 
@@ -434,8 +437,10 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                        print(_con.products[index].name);
                                        setState(() {
                                          selectedIndex = index;
-                                         selecteditems.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
-                                         selecteditems.toSet().toList();
+                                       //  List<Product> products = List<Product>();
+                                         products.add(_con.products[index]);
+                                        // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                                         products.toSet().toList();
                                        });
 
                                       },
@@ -443,12 +448,12 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                   }),
                                 ),
 
-                                selecteditems.isEmpty ?
+                                products.isEmpty ?
                                 SizedBox():
                                 Container(
                                   height: 200,
                                   child: PageView.builder(
-                                      itemCount: selecteditems.length,
+                                      itemCount: products.length,
                                       itemBuilder: (context,index){
                                         return InkWell(
                                           child:  Column(
@@ -464,7 +469,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                   width: 200,
                                                   height: 100,
                                                   fit: BoxFit.cover,
-                                                  imageUrl: selecteditems[index].imageUrl,
+                                                  imageUrl: products[index].image.url,
                                                   placeholder: (context, url) => Image.asset(
                                                     'assets/img/loading.gif',
                                                     fit: BoxFit.cover,
@@ -478,9 +483,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: <Widget>[
                                                   SizedBox(height: 8,),
-                                                  Text(selecteditems[index].name,style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold)),
+                                                  Text(products[index].name,style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold)),
                                                   Helper.getPrice(
-                                                    selecteditems[index].price,
+                                                    products[index].price,
                                                     context,
                                                     style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.5)),
                                                   ),
@@ -494,39 +499,39 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                         // ),
 
                                         Spacer(),
-                                        Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                        IconButton(
-                                        onPressed: () {
-                                         // _con.decrementQuantity();
-                                          print("decr");
-                                          setState(() {
-                                            if (selecteditems.isEmpty) {}
-                                            else {
-                                              selecteditems.removeLast();
-                                            }
-                                          });
-
-                                        },
-                                        iconSize: 30,
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                        icon: Icon(Icons.remove_circle_outline),
-                                        color: Theme.of(context).hintColor,
-                                        ),
-                                        Text(selecteditems.length.toString(), style: Theme.of(context).textTheme.subtitle1),
-                                        IconButton(
-                                        onPressed: () {
-                                          selecteditems.addAll(selecteditems);
-                                        // _con.products.incrementQuantity();
-                                        },
-                                        iconSize: 30,
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                        icon: Icon(Icons.add_circle_outline),
-                                        color: Theme.of(context).hintColor,
-                                        )
-                                        ],
-                                        ),
+                                        // Row(
+                                        // mainAxisSize: MainAxisSize.min,
+                                        // children: <Widget>[
+                                        // IconButton(
+                                        // onPressed: () {
+                                        //  // _con.decrementQuantity();
+                                        //   print("decr");
+                                        //   setState(() {
+                                        //     if (products.isEmpty) {}
+                                        //     else {
+                                        //       products.removeLast();
+                                        //     }
+                                        //   });
+                                        //
+                                        // },
+                                        // iconSize: 30,
+                                        // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                        // icon: Icon(Icons.remove_circle_outline),
+                                        // color: Theme.of(context).hintColor,
+                                        // ),
+                                        // Text(products.length.toString(), style: Theme.of(context).textTheme.subtitle1),
+                                        // IconButton(
+                                        // onPressed: () {
+                                        //   products.addAll(products);
+                                        // // _con.products.incrementQuantity();
+                                        // },
+                                        // iconSize: 30,
+                                        // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                        // icon: Icon(Icons.add_circle_outline),
+                                        // color: Theme.of(context).hintColor,
+                                        // )
+                                        // ],
+                                        // ),
                                         ]
                                                   // _con.product.discountPrice > 0
                                                   //     ? Helper.getPrice(_con.product.discountPrice, context,
