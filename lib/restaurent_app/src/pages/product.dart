@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/restaurent_app/src/pages/new_product.dart';
 import 'package:markets/src/controllers/market_controller.dart';
 import 'package:markets/src/models/market.dart';
 import 'package:markets/src/pages/cart.dart';
@@ -340,7 +341,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                               children: [
 
                                 Text(
-                                  "Favorites" ?? '',
+                                  "Products" ?? '',
                                   overflow: TextOverflow.fade,
                                   softWrap: false,
                                   maxLines: 2,
@@ -813,6 +814,16 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
       //     ),
       //   ),
       // ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).accentColor,
+        onPressed: () async{
+           await Navigator.of(context).pushNamed('/Pages',arguments: 9);
+           _con.listenForProducts(widget.routeArgument.param);
+        },
+      ),
+
     );
   }
 }

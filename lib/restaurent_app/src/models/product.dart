@@ -109,7 +109,7 @@ class Product {
       "package_items_count" : packageItemsCount,
       "market_id": market.id,
       "unit":unit,
-      "category_id":category.id,
+      "category_id":category?.id,
       "deliverable": deliverable,
       "featured":featured,
       "image":uuid

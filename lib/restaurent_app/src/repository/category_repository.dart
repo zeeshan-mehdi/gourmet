@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import 'package:markets/restaurent_app/src/helpers/custom_trace.dart';
-import 'package:markets/restaurent_app/src/models/user.dart';
+import '../../../src/models/user.dart';
 
 import '../helpers/helper.dart';
 import '../models/category.dart';
-import '../repository/user_repository.dart' as userRepo;
+import '../../../src/repository/user_repository.dart' as userRepo;
 
 Future<Stream<Category>> getCategories() async {
   final String url = '${GlobalConfiguration().getValue('api_base_url')}manager/categories';
@@ -39,6 +39,8 @@ Future<List<Category>> getAllCategories() async {
   Uri uri = Uri.parse(url);
   Map<String, dynamic> _queryParams = {};
   User _user = userRepo.currentUser.value;
+  print('user api token');
+  print(_user);
   if (_user.apiToken == null) {
     return [];
   }
@@ -51,6 +53,8 @@ Future<List<Category>> getAllCategories() async {
     final response = await client.get( uri);
 
     var resp = jsonDecode(response.body);
+    print('these categories found');
+    print(resp['data']);
 
     if(resp['success']) {
       resp = resp['data'];
