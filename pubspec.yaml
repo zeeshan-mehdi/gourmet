@@ -57,6 +57,7 @@ dependencies:
   multiselect_dropdown: ^2.0.0+1
   font_awesome_flutter: ^9.1.0
   pin_code_fields: ^6.0.1
+  solid_bottom_sheet: ^0.1.10
 
 
 
@@ -82,6 +83,7 @@ flutter:
   assets:
     - assets/cfg/
     - assets/img/
+    - assets/upload.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

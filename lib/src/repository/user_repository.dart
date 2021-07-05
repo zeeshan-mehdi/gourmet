@@ -17,12 +17,17 @@ ValueNotifier<userModel.User> currentUser = new ValueNotifier(userModel.User());
 Future<userModel.User> login(userModel.User user) async {
   final String url = '${GlobalConfiguration().getValue('api_base_url')}login';
   final client = new http.Client();
+
+  print('user map');
+  print(user.toMap());
+
   final response = await client.post(
     url,
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(user.toMap()),
   );
   if (response.statusCode == 200) {
+    print('response body ${response.body}');
     setCurrentUser(response.body);
     currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   } else {
@@ -32,7 +37,7 @@ Future<userModel.User> login(userModel.User user) async {
 }
 
 Future<userModel.User> register(userModel.User user) async {
-  final String url = '${GlobalConfiguration().getValue('api_base_url')}register';
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}manager/register';
   final client = new http.Client();
   final response = await client.post(
     url,

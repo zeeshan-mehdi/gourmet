@@ -262,7 +262,7 @@ Future<String> uploadImage(File imageFile)async{
 }
 
 Future addMarket( Market market) async {
-  final String url = '${GlobalConfiguration().getValue('api_base_url')}markets';
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}manager/markets';
   final client = new http.Client();
  // review.user = userRepo.currentUser.value;
 

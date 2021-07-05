@@ -857,11 +857,16 @@ class _Page3State extends StateMVC<Page3> {
                print(uuid);
               _con.kitchen.uuid = uuid;
               var resp =  await _con.addNewMarket();
-              if(resp['success']) {
-                Fluttertoast.showToast(msg:resp['message']);
-                Navigator.of(context).pop();
-              }else{
-                Fluttertoast.showToast(msg:resp['message']);
+              try {
+                if (resp['success']) {
+                  Fluttertoast.showToast(msg: resp['message']);
+                  Navigator.of(context).pop();
+                } else {
+                  Fluttertoast.showToast(msg: resp['message']);
+                }
+              }catch(e){
+                print(e);
+                Fluttertoast.showToast(msg: 'somethig went wrong !!');
               }
               loading = false;
               setState(() {});

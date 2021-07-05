@@ -136,7 +136,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Adverstring",
+                        "Advertising",
                         style: Theme.of(context).textTheme.headline4,
                         maxLines: 1,
                         softWrap: false,
@@ -164,7 +164,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                               children: [
                                  Text(
                                   // S.of(context).top_markets,
-                                  "Polular this month",
+                                  "Popular this month",
                                   style: Theme.of(context).textTheme.headline4,
                                   maxLines: 1,
                                   softWrap: false,

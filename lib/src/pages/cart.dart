@@ -13,8 +13,9 @@ import '../repository/settings_repository.dart';
 
 class CartWidget extends StatefulWidget {
   final RouteArgument routeArgument;
+  final bool hideAppBar;
 
-  CartWidget({Key key, this.routeArgument}) : super(key: key);
+  CartWidget({Key key, this.routeArgument,this.hideAppBar = false}) : super(key: key);
 
   @override
   _CartWidgetState createState() => _CartWidgetState();
@@ -40,14 +41,14 @@ class _CartWidgetState extends StateMVC<CartWidget> {
       child: Scaffold(
         key: _con.scaffoldKey,
         bottomNavigationBar: CartBottomDetailsWidget(con: _con),
-        appBar: AppBar(
+        appBar: widget.hideAppBar ? null : AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () {
               if (widget.routeArgument != null) {
                 Navigator.of(context).pushReplacementNamed(widget.routeArgument.param, arguments: RouteArgument(id: widget.routeArgument.id));
               } else {
-                Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+                Navigator.of(context).pushReplacementNamed('/Pages', arguments: 1);
               }
             },
             icon: Icon(Icons.arrow_back),

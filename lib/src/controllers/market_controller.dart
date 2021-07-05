@@ -75,7 +75,15 @@ class MarketController extends ControllerMVC {
     }, onError: (a) {
       print(CustomTrace(StackTrace.current, message: a.toString()).toString());
     }, onDone: () {
-      market..name = products.elementAt(0).market.name;
+      try {
+        market
+          ..name = products
+              .elementAt(0)
+              .market
+              .name;
+      }catch(e){
+        print(e);
+      }
     });
   }
 

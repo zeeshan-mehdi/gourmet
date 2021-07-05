@@ -82,6 +82,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = KitchenProfile();
           break;
         case 4:
+          widget.currentPage =
           widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
           break;
         case 5:
@@ -98,6 +99,8 @@ class _PagesWidgetState extends State<PagesWidget> {
         case 8:
           widget.currentPage =  OpenNewKitchenPage();
           break;
+
+
       }
     });
   }

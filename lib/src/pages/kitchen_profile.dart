@@ -32,6 +32,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
   }
   getFirstMarket()async{
 
+    setState(() {loading=true;});
 
     myMarket = await _marketController.getFirstMarket();
 
@@ -43,6 +44,12 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
 
   @override
   Widget build(BuildContext context) {
+    var url = currentUser.value?.image?.thumb??'';
+
+    if(url!=null && !url.contains("https")){
+      url = url.replaceFirst('http', 'https');
+    }
+
     return Scaffold(
       body: Container(
         child: Column(
@@ -68,7 +75,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                              height: 80,
                              width: double.infinity,
                              fit: BoxFit.cover,
-                             imageUrl: currentUser.value.image.thumb,
+                             imageUrl:url,
                              placeholder: (context, url) => Image.asset(
                                'assets/img/loading.gif',
                                fit: BoxFit.cover,
@@ -206,10 +213,11 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                        SizedBox(height: 20,),
                        MaterialButton(
                          elevation: 0,
-                         onPressed: () {
+                         onPressed: () async{
                            if(currentUser.value.apiToken != null) {
-                             Navigator.of(context).pushNamed(
+                             await Navigator.of(context).pushNamed(
                                  '/Pages', arguments: 8);
+                             getFirstMarket();
                            }else{
                              Navigator.of(context).pushNamed('/Login');
                            }

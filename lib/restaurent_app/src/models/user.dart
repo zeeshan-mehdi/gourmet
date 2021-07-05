@@ -15,7 +15,8 @@ class User {
   Media image;
   int memebership;
   String trialEnds;
-
+  bool verifiedPhone;
+  String verificationId;
   // used for indicate if client logged in or not
   bool auth;
 
@@ -63,6 +64,7 @@ class User {
       map["device_token"] = deviceToken;
     }
     map["phone"] = phone;
+    map["verifiedPhone"] = verifiedPhone;
     map["address"] = address;
     map["bio"] = bio;
     map["membership"]= memebership;

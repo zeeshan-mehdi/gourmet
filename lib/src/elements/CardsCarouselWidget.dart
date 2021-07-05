@@ -37,7 +37,7 @@ class _CardsCarouselWidgetState extends State<CardsCarouselWidget> {
                     print("hello");
                 //  },
 
-                    Navigator.of(context).pushNamed('/Details',
+                    Navigator.of(context).pushNamed('/Product',
                         arguments: RouteArgument(
                           id: '0',
                           param: widget.marketsList.elementAt(index).id,

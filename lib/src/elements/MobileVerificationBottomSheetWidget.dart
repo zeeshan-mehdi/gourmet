@@ -27,6 +27,8 @@ class _MobileVerificationBottomSheetWidgetState
     extends State<MobileVerificationBottomSheetWidget> {
   String smsSent;
   String errorMessage;
+  bool isCodeResend = false;
+  var confirmation;
 
   @override
   void initState() {
@@ -48,6 +50,9 @@ class _MobileVerificationBottomSheetWidgetState
     final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {
       print('code sending falied $e');
     };
+
+
+
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.user.phone,
       timeout: const Duration(seconds: 5),
@@ -128,7 +133,7 @@ class _MobileVerificationBottomSheetWidgetState
                   ),
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 32),
+                          vertical: 8.0, horizontal: 0),
                       child: PinCodeTextField(
                         appContext: context,
 
@@ -136,7 +141,7 @@ class _MobileVerificationBottomSheetWidgetState
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
-                        length: 4,
+                        length: 6,
                         obscureText: false,
                         obscuringCharacter: '*',
 
@@ -180,8 +185,48 @@ class _MobileVerificationBottomSheetWidgetState
                             //blurRadius: 10,
                           )
                         ],
-                        onCompleted: (v) {
+                        onCompleted: (v) async{
                           print("Completed");
+                          if(!isCodeResend) {
+                            User user = FirebaseAuth.instance.currentUser;
+                            print(user.toString());
+                            print(currentUser.value.verificationId);
+                            final AuthCredential credential =
+
+                            PhoneAuthProvider.credential(
+                                verificationId: currentUser.value
+                                    .verificationId,
+                                smsCode: v);
+
+                            await FirebaseAuth.instance
+                                .signInWithCredential(credential)
+                                .then((user) {
+                              currentUser.value.verifiedPhone = true;
+                              widget.user.verifiedPhone = true;
+                              Navigator.of(widget.scaffoldKey.currentContext)
+                                  .pop();
+                            }).catchError((e) {
+                              setState(() {
+                                errorMessage = e
+                                    .toString()
+                                    .split('\]')
+                                    .last;
+                              });
+                              print(e.toString());
+                            });
+                          }else{
+                            UserCredential credential = await confirmation.confirm(v);
+
+                            if(credential !=null &&credential.user!=null){
+                              currentUser.value.verifiedPhone = true;
+                              widget.user.verifiedPhone = true;
+                              Navigator.of(widget.scaffoldKey.currentContext).pop();
+                            }
+
+                            User user = FirebaseAuth.instance.currentUser;
+                            print(user.toString());
+                            print(currentUser.value.verificationId);
+                          }
 
                         },
                         // onTap: () {
@@ -243,27 +288,33 @@ class _MobileVerificationBottomSheetWidgetState
                 Center(
                   child: InkWell(
                     onTap: () async {
-                      User user = FirebaseAuth.instance.currentUser;
-                      print(user.toString());
-                      print(currentUser.value.verificationId);
-                      final AuthCredential credential =
-                      
-                      PhoneAuthProvider.credential(
-                          verificationId: currentUser.value.verificationId,
-                          smsCode: smsSent);
 
-                      await FirebaseAuth.instance
-                          .signInWithCredential(credential)
-                          .then((user) {
-                        currentUser.value.verifiedPhone = true;
-                        widget.user.verifiedPhone = true;
-                        Navigator.of(widget.scaffoldKey.currentContext).pop();
-                      }).catchError((e) {
-                        setState(() {
-                          errorMessage = e.toString().split('\]').last;
-                        });
-                        print(e.toString());
-                      });
+
+                      isCodeResend = true;
+                      confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
+
+
+
+
+
+                      // final AuthCredential credential =
+                      //
+                      // PhoneAuthProvider.credential(
+                      //     verificationId: currentUser.value.verificationId,
+                      //     smsCode: smsSent);
+                      //
+                      // await FirebaseAuth.instance
+                      //     .signInWithCredential(credential)
+                      //     .then((user) {
+                      //   currentUser.value.verifiedPhone = true;
+                      //   widget.user.verifiedPhone = true;
+                      //   Navigator.of(widget.scaffoldKey.currentContext).pop();
+                      // }).catchError((e) {
+                      //   setState(() {
+                      //     errorMessage = e.toString().split('\]').last;
+                      //   });
+                      //   print(e.toString());
+                      // });
                     },
                     //color: Theme.of(context).accentColor,
                     child: Text("Resend a new Code",

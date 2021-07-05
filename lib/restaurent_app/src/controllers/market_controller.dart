@@ -42,7 +42,7 @@ class MarketController extends ControllerMVC {
     final Stream<Market> stream = await getMarkets();
     Market firstMarket ;
     try {
-      throw Exception('no kitchen found');
+     // throw Exception('no kitchen found');
       await stream.first.then((Market _market) {
         print('frst market found market');
         firstMarket = _market;

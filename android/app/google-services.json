@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "444847367722-689j8up1dvte1s541fal0fqfstomep93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gourmet.booking",
+            "certificate_hash": "8e3dc33651b518e19ad59d30b10d92a02de27c58"
+          }
+        },
+        {
           "client_id": "444847367722-a606pats7f3791rus55k4c20o2h1hfhn.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "444847367722-nm8htcsej021c5vej4cu71a4os5pegsi.apps.googleusercontent.com",
+              "client_id": "444847367722-mk38rcif909bfmnkt0ati1fncenh7hon.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.gourmetapp"
+                "bundle_id": "com.gourmet.booking"
               }
             }
           ]
@@ -50,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "444847367722-80v830o9tn2me5rpj71emc6hu6hd8os5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gourmetapp",
+            "certificate_hash": "8e3dc33651b518e19ad59d30b10d92a02de27c58"
+          }
+        },
+        {
           "client_id": "444847367722-a606pats7f3791rus55k4c20o2h1hfhn.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -67,10 +83,10 @@
               "client_type": 3
             },
             {
-              "client_id": "444847367722-nm8htcsej021c5vej4cu71a4os5pegsi.apps.googleusercontent.com",
+              "client_id": "444847367722-mk38rcif909bfmnkt0ati1fncenh7hon.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.gourmetapp"
+                "bundle_id": "com.gourmet.booking"
               }
             }
           ]
