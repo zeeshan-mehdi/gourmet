@@ -101,11 +101,15 @@ class CardWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       Text(
-                        Helper.skipHtml(market?.address??''),
-                        overflow: TextOverflow.fade,
+                        market?.address.length > 25 ? market?.address.substring(0,25)+'...' : market?.address,
+                       // Helper.skipHtml(market?.address??''),
+                        overflow: TextOverflow.ellipsis,
+
+                        //overflow: TextOverflow.fade,
                         softWrap: false,
                         style: Theme.of(context).textTheme.caption,
                       ),
+
                       SizedBox(height: 5),
                       Row(
                         children: Helper.getStarsList(double.parse(market.rate)),

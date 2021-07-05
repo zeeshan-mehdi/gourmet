@@ -499,39 +499,41 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                         // ),
 
                                         Spacer(),
-                                        // Row(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        // children: <Widget>[
-                                        // IconButton(
-                                        // onPressed: () {
-                                        //  // _con.decrementQuantity();
-                                        //   print("decr");
-                                        //   setState(() {
-                                        //     if (products.isEmpty) {}
-                                        //     else {
-                                        //       products.removeLast();
-                                        //     }
-                                        //   });
-                                        //
-                                        // },
-                                        // iconSize: 30,
-                                        // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                        // icon: Icon(Icons.remove_circle_outline),
-                                        // color: Theme.of(context).hintColor,
-                                        // ),
-                                        // Text(products.length.toString(), style: Theme.of(context).textTheme.subtitle1),
-                                        // IconButton(
-                                        // onPressed: () {
-                                        //   products.addAll(products);
-                                        // // _con.products.incrementQuantity();
-                                        // },
-                                        // iconSize: 30,
-                                        // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                        // icon: Icon(Icons.add_circle_outline),
-                                        // color: Theme.of(context).hintColor,
-                                        // )
-                                        // ],
-                                        // ),
+                                        Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                        IconButton(
+                                        onPressed: () {
+                                         // _con.decrementQuantity();
+                                          print("decr");
+                                          setState(() {
+                                            if (products.isEmpty) {}
+                                            else {
+                                              products.removeLast();
+                                            }
+                                          });
+
+                                        },
+                                        iconSize: 30,
+                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                        icon: Icon(Icons.remove_circle_outline),
+                                        color: Theme.of(context).hintColor,
+                                        ),
+                                        Text(products.length.toString(), style: Theme.of(context).textTheme.subtitle1),
+                                        IconButton(
+                                        onPressed: () {
+
+                                          products.add(_con.products[selectedIndex]);
+                                        //  products.addAll(products);
+                                        // _con.products.incrementQuantity();
+                                        },
+                                        iconSize: 30,
+                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                        icon: Icon(Icons.add_circle_outline),
+                                        color: Theme.of(context).hintColor,
+                                        )
+                                        ],
+                                        ),
                                         ]
                                                   // _con.product.discountPrice > 0
                                                   //     ? Helper.getPrice(_con.product.discountPrice, context,
@@ -629,14 +631,10 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                 //Text(Helper.skipHtml(_con.product.description)),
                               //  Text("Menu",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24),),
                                 Container(
-                                  height: 550,
-                                  child: BottomSheet(
-                                      backgroundColor: Colors.black,
-                                      onClosing: (){
-                                  }, builder: (context){
-                                    return CartWidget(hideAppBar: true,);
-                                  }),
-                                 )
+                                  height: 450,
+                                  child: CartWidget(hideAppBar: true,)
+                                  //}),
+                                 ),
                                 // if (_con.product.optionGroups.isNotEmpty)
                                 //   ListTile(
                                 //     dense: true,

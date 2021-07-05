@@ -97,13 +97,13 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                           ),
                         ),
                         ListView.separated(
-                          padding: EdgeInsets.only(top: 15, bottom: 120),
+                          padding: EdgeInsets.only(top: 15, bottom: 0),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           primary: false,
                           itemCount: _con.carts.length,
                           separatorBuilder: (context, index) {
-                            return SizedBox(height: 15);
+                            return SizedBox(height: 0);
                           },
                           itemBuilder: (context, index) {
                             return CartItemWidget(
@@ -124,8 +124,10 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.all(18),
-                      margin: EdgeInsets.only(bottom: 15),
+                      padding: const EdgeInsets.all(0),
+                      margin: EdgeInsets.only(bottom: 0),
+
+                      height: 0,
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.all(Radius.circular(20)),
