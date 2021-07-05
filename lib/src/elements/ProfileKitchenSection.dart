@@ -1,10 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:markets/restaurent_app/src/models/market.dart';
+import 'package:markets/restaurent_app/src/models/route_argument.dart';
 
 class ProfileKitchenSection extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
+  final Market market;
 
-  const ProfileKitchenSection({Key key, this.parentScaffoldKey}) : super(key: key);
+  const ProfileKitchenSection({Key key, this.parentScaffoldKey,this.market}) : super(key: key);
   @override
   _ProfileKitchenSectionState createState() => _ProfileKitchenSectionState();
 }
@@ -20,7 +23,7 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
         children: [
 
           ListItem(color:Colors.red , title: 'Manage Restaurant',onPressed: (){
-            Navigator.of(context).pushNamed('/Pages',arguments: 4 );
+            Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4',param: widget.market.id  ) );
           },),
 
           ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',onPressed: (){},),

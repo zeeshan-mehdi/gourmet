@@ -55,11 +55,11 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
             );
           },
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(
-              iconColor: Theme.of(context).hintColor,
-              labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(
+        //       iconColor: Theme.of(context).hintColor,
+        //       labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: RefreshIndicator(
         onRefresh: _con.refreshHome,

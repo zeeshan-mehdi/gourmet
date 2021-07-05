@@ -56,7 +56,7 @@ class CardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Spacer(),
+                // Spacer(),
                 // Row(
                 //   children: <Widget>[
                 //     Container(
@@ -101,7 +101,7 @@ class CardWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       Text(
-                        Helper.skipHtml(market.description),
+                        Helper.skipHtml(market?.address??''),
                         overflow: TextOverflow.fade,
                         softWrap: false,
                         style: Theme.of(context).textTheme.caption,

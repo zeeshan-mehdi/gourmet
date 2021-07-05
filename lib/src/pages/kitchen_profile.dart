@@ -107,7 +107,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                        Row(
                          mainAxisAlignment: MainAxisAlignment.start,
                          children: [
-                           Text(currentUser.value.name?.toUpperCase()??'',style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.bold)),
+                           Text(myMarket!=null && myMarket.name!=null ? myMarket.name.toUpperCase() :currentUser.value.name?.toUpperCase()??'',style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.bold,fontSize: 20)),
                            SizedBox(width: 5,),
                            InkWell(child: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black.withOpacity(0.3),),onTap: (){},),
                          ],
@@ -118,12 +118,12 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                          margin: EdgeInsets.all(0),
                          child: Padding(
                            padding: const EdgeInsets.symmetric(horizontal:12.0,),
-                           child: Center(child: Text('VIP KITCHEN',style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 12,color: Colors.white))),
+                           child: Center(child: Text( myMarket!=null? myMarket.isPaidKitchen ?  'VIP KITCHEN' : 'FREE KITCHEN'  :'FREE USER', style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 12,color: Colors.white))),
                          ),
                          decoration: BoxDecoration(
-                             border: Border.all(color: const Color(0xFFFF2E55)),
+                             border: Border.all(color:myMarket!=null&&myMarket.isPaidKitchen ?  const Color(0xFFFF2E55):  Theme.of(context).accentColor),
                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                             color: const Color(0xFFFF2E55)
+                             color:myMarket!=null&&myMarket.isPaidKitchen ?  const Color(0xFFFF2E55) :  Theme.of(context).accentColor
                          ),
                        ),
                      ],
@@ -232,7 +232,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                        )
                      ],
                    ),
-                 )    : ProfileKitchenSection(),
+                 )    : ProfileKitchenSection(market: myMarket,),
 
                   SizedBox(height: 30,),
 

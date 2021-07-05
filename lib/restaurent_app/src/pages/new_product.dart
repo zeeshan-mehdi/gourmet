@@ -222,7 +222,11 @@ class _NewProductPageState extends StateMVC<NewProductPage> {
         title: Text(
             'Add Product'), centerTitle: true,
         elevation: 0,
-
+        automaticallyImplyLeading: false,
+        leading: IconButton(icon: Icon(Icons.arrow_back),color: Colors.black.withOpacity(0.7),onPressed: (){
+         //Navigator.of(context).pushNamed('/Pages',arguments: 4);
+          Navigator.of(context).pop();
+        },),
       ),
       key: _con.scaffoldKey,
       body: Container(
@@ -691,13 +695,17 @@ class _Page2State extends StateMVC<Page2> {
 
                   _con.product.uuid = uuids;
 
-                  var resp =  await _con.addNewProduct();
+                  try {
+                    var resp = await _con.addNewProduct();
 
-                  if(resp['success']) {
-                    Fluttertoast.showToast(msg:resp['message']);
-                    Navigator.of(context).pop();
-                  }else{
-                    Fluttertoast.showToast(msg:resp['message']);
+                    if (resp['success']) {
+                      Fluttertoast.showToast(msg: resp['message']);
+                      Navigator.of(context).pop();
+                    } else {
+                      Fluttertoast.showToast(msg: resp['message']);
+                    }
+                  }catch(e){
+                    Fluttertoast.showToast(msg:'Something Went wrong please try again !!');
                   }
                   loading = false;
                   setState(() {});
