@@ -45,7 +45,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
     // _con.listenForFavorite(productId: widget.routeArgument.id);
     super.initState();
   }
-
+ int selectedIndex = null;
+ List<SelectedOrderItem> selecteditems = List<SelectedOrderItem>();
   @override
   Widget build(BuildContext context) {
 
@@ -338,7 +339,6 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                             child: Wrap(
                               runSpacing: 8,
                               children: [
-
                                 Text(
                                   "Favorites" ?? '',
                                   overflow: TextOverflow.fade,
@@ -351,86 +351,234 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                   child: PageView.builder(
                                       itemCount: _con.products.length,
                                       itemBuilder: (context,index){
-                                    return Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(25.0),
-                                            // color: Colors.greenAccent,
-                                          ),
-                                          child :
-                                          CachedNetworkImage(
-                                            width: 200,
-                                            height: 120,
-                                            fit: BoxFit.cover,
-                                            imageUrl: _con.products[index].image.url,
-                                            placeholder: (context, url) => Image.asset(
-                                              'assets/img/loading.gif',
-                                              fit: BoxFit.cover,
+                                    return InkWell(
+                                      child:  Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(25.0),
+                                              // color: Colors.greenAccent,
+                                            ),
+                                            child :
+                                            CachedNetworkImage(
                                               width: 200,
                                               height: 120,
-                                            ),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(Icons.error_outline),
-                                          ),),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            SizedBox(height: 8,),
-                                            Text(_con.products[index].name,style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold)),
-                                            Helper.getPrice(
-                                              _con.products[index].price,
-                                              context,
-                                              style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.5)),
-                                            ),
+                                              fit: BoxFit.cover,
+                                              imageUrl: _con.products[index].image.url,
+                                              placeholder: (context, url) => Image.asset(
+                                                'assets/img/loading.gif',
+                                                fit: BoxFit.cover,
+                                                width: 200,
+                                                height: 120,
+                                              ),
+                                              errorWidget: (context, url, error) =>
+                                                  Icon(Icons.error_outline),
+                                            ),),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              SizedBox(height: 8,),
+                                              Text(_con.products[index].name,style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold)),
+                                              Helper.getPrice(
+                                                _con.products[index].price,
+                                                context,
+                                                style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.5)),
+                                              ),
+                                              // _con.product.discountPrice > 0
+                                              //     ? Helper.getPrice(_con.product.discountPrice, context,
+                                              //     style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
+                                              //     : SizedBox(height: 0),
+                                            ],
+                                          ),
+                                          // Expanded(
+                                          //   flex: 3,
+                                          //   child: Column(
+                                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                                          //     children: <Widget>[
+                                          //       Text(
+                                          //         _con.product?.name ?? '',
+                                          //         overflow: TextOverflow.ellipsis,
+                                          //         maxLines: 2,
+                                          //         style: Theme.of(context).textTheme.headline3,
+                                          //       ),
+                                          //       Text(
+                                          //         _con.product?.market?.name ?? '',
+                                          //         overflow: TextOverflow.ellipsis,
+                                          //         maxLines: 2,
+                                          //         style: Theme.of(context).textTheme.bodyText2,
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
+                                          // Expanded(
+                                          //   flex: 1,
+                                          //   child: Column(
+                                          //     crossAxisAlignment: CrossAxisAlignment.end,
+                                          //     children: <Widget>[
+                                          //       Helper.getPrice(
+                                          //         _con.product.price,
+                                          //         context,
+                                          //         style: Theme.of(context).textTheme.headline2,
+                                          //       ),
+                                          //       _con.product.discountPrice > 0
+                                          //           ? Helper.getPrice(_con.product.discountPrice, context,
+                                          //               style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
+                                          //           : SizedBox(height: 0),
+                                          //     ],
+                                          //   ),
+                                          // ),
+                                        ],
+                                      ),
+                                      onTap: (){
+                                       print(_con.products[index].name);
+                                       setState(() {
+                                         selectedIndex = index;
+                                         selecteditems.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                                         selecteditems.toSet().toList();
+                                       });
 
-                                            // _con.product.discountPrice > 0
-                                            //     ? Helper.getPrice(_con.product.discountPrice, context,
-                                            //     style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
-                                            //     : SizedBox(height: 0),
-                                          ],
-                                        ),
-                                        // Expanded(
-                                        //   flex: 3,
-                                        //   child: Column(
-                                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                                        //     children: <Widget>[
-                                        //       Text(
-                                        //         _con.product?.name ?? '',
-                                        //         overflow: TextOverflow.ellipsis,
-                                        //         maxLines: 2,
-                                        //         style: Theme.of(context).textTheme.headline3,
-                                        //       ),
-                                        //       Text(
-                                        //         _con.product?.market?.name ?? '',
-                                        //         overflow: TextOverflow.ellipsis,
-                                        //         maxLines: 2,
-                                        //         style: Theme.of(context).textTheme.bodyText2,
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        // ),
-                                        // Expanded(
-                                        //   flex: 1,
-                                        //   child: Column(
-                                        //     crossAxisAlignment: CrossAxisAlignment.end,
-                                        //     children: <Widget>[
-                                        //       Helper.getPrice(
-                                        //         _con.product.price,
-                                        //         context,
-                                        //         style: Theme.of(context).textTheme.headline2,
-                                        //       ),
-                                        //       _con.product.discountPrice > 0
-                                        //           ? Helper.getPrice(_con.product.discountPrice, context,
-                                        //               style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
-                                        //           : SizedBox(height: 0),
-                                        //     ],
-                                        //   ),
-                                        // ),
-                                      ],
+                                      },
                                     );
                                   }),
+                                ),
+
+                                selecteditems.isEmpty ?
+                                SizedBox():
+                                Container(
+                                  height: 200,
+                                  child: PageView.builder(
+                                      itemCount: selecteditems.length,
+                                      itemBuilder: (context,index){
+                                        return InkWell(
+                                          child:  Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                               Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(25.0),
+                                                  // color: Colors.greenAccent,
+                                                ),
+                                                child :
+                                                CachedNetworkImage(
+                                                  width: 200,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: selecteditems[index].imageUrl,
+                                                  placeholder: (context, url) => Image.asset(
+                                                    'assets/img/loading.gif',
+                                                    fit: BoxFit.cover,
+                                                    width: 200,
+                                                    height: 100,
+                                                  ),
+                                                  errorWidget: (context, url, error) =>
+                                                      Icon(Icons.error_outline),
+                                                ),),
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  SizedBox(height: 8,),
+                                                  Text(selecteditems[index].name,style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.bold)),
+                                                  Helper.getPrice(
+                                                    selecteditems[index].price,
+                                                    context,
+                                                    style: TextStyle(fontSize: 12,color: Colors.black.withOpacity(0.5)),
+                                                  ),
+                                        Row(
+                                        children: <Widget>[
+                                        // Expanded(
+                                        //   child: Text(
+                                        //     S.of(context).quantity,
+                                        //     style: Theme.of(context).textTheme.subtitle1,
+                                        //   ),
+                                        // ),
+
+                                        Spacer(),
+                                        Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                        IconButton(
+                                        onPressed: () {
+                                         // _con.decrementQuantity();
+                                          print("decr");
+                                          setState(() {
+                                            if (selecteditems.isEmpty) {}
+                                            else {
+                                              selecteditems.removeLast();
+                                            }
+                                          });
+
+                                        },
+                                        iconSize: 30,
+                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                        icon: Icon(Icons.remove_circle_outline),
+                                        color: Theme.of(context).hintColor,
+                                        ),
+                                        Text(selecteditems.length.toString(), style: Theme.of(context).textTheme.subtitle1),
+                                        IconButton(
+                                        onPressed: () {
+                                        // _con.products.incrementQuantity();
+                                        },
+                                        iconSize: 30,
+                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                        icon: Icon(Icons.add_circle_outline),
+                                        color: Theme.of(context).hintColor,
+                                        )
+                                        ],
+                                        ),
+                                        ]
+                                                  // _con.product.discountPrice > 0
+                                                  //     ? Helper.getPrice(_con.product.discountPrice, context,
+                                                  //     style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
+                                                  //     : SizedBox(height: 0),
+                                        )
+                                                ],
+                                              ),
+
+                                              // Expanded(
+                                              //   flex: 3,
+                                              //   child: Column(
+                                              //     crossAxisAlignment: CrossAxisAlignment.start,
+                                              //     children: <Widget>[
+                                              //       Text(
+                                              //         _con.product?.name ?? '',
+                                              //         overflow: TextOverflow.ellipsis,
+                                              //         maxLines: 2,
+                                              //         style: Theme.of(context).textTheme.headline3,
+                                              //       ),
+                                              //       Text(
+                                              //         _con.product?.market?.name ?? '',
+                                              //         overflow: TextOverflow.ellipsis,
+                                              //         maxLines: 2,
+                                              //         style: Theme.of(context).textTheme.bodyText2,
+                                              //       ),
+                                              //     ],
+                                              //   ),
+                                              // ),
+                                              // Expanded(
+                                              //   flex: 1,
+                                              //   child: Column(
+                                              //     crossAxisAlignment: CrossAxisAlignment.end,
+                                              //     children: <Widget>[
+                                              //       Helper.getPrice(
+                                              //         _con.product.price,
+                                              //         context,
+                                              //         style: Theme.of(context).textTheme.headline2,
+                                              //       ),
+                                              //       _con.product.discountPrice > 0
+                                              //           ? Helper.getPrice(_con.product.discountPrice, context,
+                                              //               style: Theme.of(context).textTheme.bodyText2.merge(TextStyle(decoration: TextDecoration.lineThrough)))
+                                              //           : SizedBox(height: 0),
+                                              //     ],
+                                              //   ),
+                                              // ),
+                                            ],
+                                          ),
+                                          onTap: (){
+                                            print(_con.products[index].name);
+                                          },
+                                        );
+                                      }),
                                 ),
 
 
@@ -815,4 +963,12 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
       // ),
     );
   }
+}
+class SelectedOrderItem {
+  String id;
+  String name;
+  double price;
+  String imageUrl;
+  SelectedOrderItem({this.id,this.name,this.price,this.imageUrl});
+
 }

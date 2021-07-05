@@ -143,7 +143,6 @@ class ProductController extends ControllerMVC {
   }
 
 
-
   void calculateTotal() {
     total = product?.price ?? 0;
     product.options.forEach((option) {

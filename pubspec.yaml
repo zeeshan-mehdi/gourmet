@@ -58,6 +58,8 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   pin_code_fields: ^6.0.1
   solid_bottom_sheet: ^0.1.10
+  buttons_tabbar: ^1.3.0
+
 
 
 
