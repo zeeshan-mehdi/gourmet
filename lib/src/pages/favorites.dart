@@ -98,7 +98,10 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                           SingleChildScrollView(
 
                             padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
+                            child: _con.favorites.isEmpty ?  Center(
+                              child: Text("No items is favourite"),
+                            ):
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.max,
@@ -177,7 +180,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     ? CircularLoadingWidget(height: 500)
                                     : Offstage(
                                   offstage: this.layout != 'grid',
-                                  child: GridView.count(
+                                  child:   GridView.count(
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     primary: false,

@@ -517,6 +517,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                         Text(selecteditems.length.toString(), style: Theme.of(context).textTheme.subtitle1),
                                         IconButton(
                                         onPressed: () {
+                                          selecteditems.addAll(selecteditems);
                                         // _con.products.incrementQuantity();
                                         },
                                         iconSize: 30,
@@ -622,16 +623,15 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                 Divider(height: 0),
                                 //Text(Helper.skipHtml(_con.product.description)),
                               //  Text("Menu",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 24),),
-                                // Container(
-                                //   height: 300,
-                                //   child: BottomSheet(
-                                //       backgroundColor: Colors.black,
-                                //       onClosing: (){
-                                //
-                                //   }, builder: (context){
-                                //     return CartWidget(hideAppBar: true,);
-                                //   }),
-                                // )
+                                Container(
+                                  height: 550,
+                                  child: BottomSheet(
+                                      backgroundColor: Colors.black,
+                                      onClosing: (){
+                                  }, builder: (context){
+                                    return CartWidget(hideAppBar: true,);
+                                  }),
+                                 )
                                 // if (_con.product.optionGroups.isNotEmpty)
                                 //   ListTile(
                                 //     dense: true,
@@ -953,7 +953,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
       //       child: Text("Swipe me!"),
       //     ),
       //   ),
-      //   body: Container(
+      //   body:
+      //   Container(
       //     color: Colors.white,
       //     height: 30,
       //     child: Center(

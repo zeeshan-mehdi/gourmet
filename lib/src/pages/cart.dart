@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/pages/product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -14,6 +15,7 @@ import '../repository/settings_repository.dart';
 class CartWidget extends StatefulWidget {
   final RouteArgument routeArgument;
   final bool hideAppBar;
+
 
   CartWidget({Key key, this.routeArgument,this.hideAppBar = false}) : super(key: key);
 
@@ -33,7 +35,7 @@ class _CartWidgetState extends StateMVC<CartWidget> {
     _con.listenForCarts();
     super.initState();
   }
-
+  SelectedOrderItem items;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
