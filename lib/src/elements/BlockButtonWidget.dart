@@ -20,7 +20,7 @@ class BlockButtonWidget extends StatelessWidget {
       child: MaterialButton(
         elevation: 0,
         onPressed: this.onPressed,
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
         color: this.color,
         shape: StadiumBorder(),
         child: this.text,

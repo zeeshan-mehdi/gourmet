@@ -3,6 +3,7 @@ import 'package:markets/restaurent_app/src/pages/markets.dart';
 import 'package:markets/restaurent_app/src/pages/order_edit.dart';
 import 'package:markets/restaurent_app/src/pages/pages.dart';
 import 'package:markets/src/pages/LoginOption.dart';
+import 'package:markets/src/pages/MemberShip.dart';
 import 'package:markets/src/pages/SplashForNewUser.dart';
 import 'package:markets/src/pages/kitchen_profile.dart';
 import 'package:markets/src/pages/my_fatoorah.dart';
@@ -122,6 +123,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginOption());
       case '/SplashForNewUser':
         return MaterialPageRoute(builder: (_) => SplashForNewUserScreen());
+      case '/RestaurantsMemberShip':
+        return MaterialPageRoute(builder: (_) => RestaurantsMemberShip());
+
+
       //***************************************Restaurent App Routes ***********************************************//
 
 

@@ -454,6 +454,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                   height: 200,
                                   child: PageView.builder(
                                       itemCount: products.length,
+
                                       itemBuilder: (context,index){
                                         return InkWell(
                                           child:  Column(
