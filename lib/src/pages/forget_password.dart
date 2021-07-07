@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/pages/GlobalPopup.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -108,6 +109,7 @@ class _ForgetPasswordWidgetState extends StateMVC<ForgetPasswordWidget> {
                           contentPadding: EdgeInsets.only(
                               left: 24, right: 24, top: 12, bottom: 12),
                           hintText: 'Your email',
+                          border: InputBorder.none,
                           hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
                           //   prefixIcon: Icon(Icons.alternate_email, color: Theme.of(context).accentColor),
                           // border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -123,9 +125,48 @@ class _ForgetPasswordWidgetState extends StateMVC<ForgetPasswordWidget> {
                         ),
                         color: Theme.of(context).accentColor,
                         onPressed: () {
-                          _con.resetPassword();
+
+                          if (_con.loginFormKey.currentState.validate()) {
+                            _con.resetPassword();
+                            showDialog(
+                                context: context,
+                                builder: (_) => Container(
+                                    color: Color(0xFF8E9198),
+                                    child: GlobalPopup(
+                                      //for Forgot password case
+                                      title: "Your password has \n been reset",
+                                      subTitle:
+                                      "You'll shortly receive an email with a \n code to setup a new password",
+                                      imageName: "LockIconWithArrow.png",
+                                      popupType: PopupType.forgotPassword,
+                                      btnTitle: "Done",
+                                      bottombtnTitle: "",
+
+                                      //for Enable Location case
+                                      // title: "Enable Your Location",
+                                      // subTitle:
+                                      // "Please allow to use your location to\n show nearby resturant on the map ",
+                                      // imageName: "EnablelocaitonIcon.png",
+                                      // popupType: PopupType.enableLocation,
+                                      // btnTitle: "Enable Location",
+                                      // bottombtnTitle: "",
+
+                                      //for order sucessfull case
+                                      // title: "Your order has \n been Placed!",
+                                      //  subTitle: "You can track the delivery in the \n \"Orders\" section"  ,
+                                      // imageName: "OrderSuceccfullIcon.png",
+                                      // popupType: PopupType.orderSucessfull,
+                                      // btnTitle: "Check on Order",
+                                      // bottombtnTitle: "Go to orders",
+                                    )));
+                          }else {
+                            print("please");
+                          }
+
+
                         },
                       ),
+
                       SizedBox(height: 8,),
                       Text(
                         "Use Your Phone instead?",

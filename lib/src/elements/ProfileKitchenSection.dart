@@ -26,7 +26,12 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
             Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4',param: widget.market.id  ) );
           },),
 
-          ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',onPressed: (){},),
+          ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',onPressed: (){
+            Navigator.of(context).pushNamed('/RestaurantsMemberShip');
+
+
+
+          },),
 
           ListItem(color:Colors.indigo, title: 'Restaurant Orders',onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 5 );

@@ -23,6 +23,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget>{
 
   _LoginWidgetState() : super(UserController()) {
     _con = controller;
+
   }
   // _LoginWidgetState() : super(UserController()) {
   //   _con = controller;
@@ -34,7 +35,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget>{
       Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
     }
   }
-  HomeController _conn;
+ // HomeController _conn;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
