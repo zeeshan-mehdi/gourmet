@@ -168,6 +168,7 @@ class AddToCartAlertDialogWidget extends StatelessWidget {
           elevation: 0,
           child: new Text(S.of(context).close),
           onPressed: () {
+            onPressed(oldProduct, reset: false);
             Navigator.of(context).pop();
           },
         ),

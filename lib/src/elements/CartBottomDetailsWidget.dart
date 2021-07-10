@@ -82,11 +82,13 @@ class CartBottomDetailsWidget extends StatelessWidget {
                           disabledColor: Theme.of(context).focusColor.withOpacity(0.5),
                           padding: EdgeInsets.symmetric(vertical: 14),
                           color: !_con.carts[0].product.market.closed ? Theme.of(context).accentColor : Theme.of(context).focusColor.withOpacity(0.5),
-                          shape: StadiumBorder(),
+                          shape:  RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              ),
                           child: Text(
-                            S.of(context).checkout,
+                            'Start Order',
                             textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.bodyText1.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                            style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).primaryColor)),
                           ),
                         ),
                       ),

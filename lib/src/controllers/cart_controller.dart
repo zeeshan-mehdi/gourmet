@@ -92,6 +92,9 @@ class CartController extends ControllerMVC {
   void calculateSubtotal() async {
     double cartPrice = 0;
     subTotal = 0;
+
+    if(carts==null || carts.length==0) return;
+
     carts.forEach((cart) {
       cartPrice = cart.product.price;
       cart.options.forEach((element) {
@@ -136,6 +139,8 @@ class CartController extends ControllerMVC {
       --cart.quantity;
       updateCart(cart);
       calculateSubtotal();
+    }else{
+      removeFromCart(cart);
     }
   }
 

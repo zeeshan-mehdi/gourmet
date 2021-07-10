@@ -3,16 +3,12 @@ import 'package:markets/src/elements/LoginSlider.dart';
 import 'package:markets/src/elements/ProfileKitchenSection.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../generated/l10n.dart';
-import '../controllers/home_controller.dart';
-import '../controllers/home_controller.dart';
 import '../controllers/user_controller.dart';
 import '../elements/BlockButtonWidget.dart';
 import '../elements/HomeSliderWidget.dart';
 import '../helpers/app_config.dart' as config;
 import '../helpers/helper.dart';
 import '../repository/user_repository.dart' as userRepo;
-import 'package:simple_animations/simple_animations.dart';
 
 class RestaurantsMemberShip extends StatefulWidget {
   @override

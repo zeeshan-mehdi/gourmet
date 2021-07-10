@@ -48,7 +48,8 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                         title: Column(
                           children: <Widget>[
                             //Text('${S.of(context).order_id}: #${widget.order.id}'),
-                            Text('${widget.order.user.name}'),
+                            Text('${widget.order.user.name}',style: Theme.of(context).textTheme.headline4,),
+                            SizedBox(height:7),
                             Text(
                               DateFormat('dd-MM-yyyy | HH:mm').format(widget.order.dateTime),
                               style: Theme.of(context).textTheme.caption,
@@ -63,11 +64,12 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                           children: <Widget>[
                             //Helper.getPrice(Helper.getTotalOrdersPrice(widget.order), context, style: Theme.of(context).textTheme.headline4),
                             Container(
-                              width: 40,
-                              height: 40,
+                              width: 60,
+                              height: 56,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
+
                                     image: NetworkImage('${widget.order.user.image.url}'),
                                     // image: NetworkImage('https://googleflutter.com/sample_image.jpg'),
                                     fit: BoxFit.fill

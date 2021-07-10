@@ -48,9 +48,9 @@ class _CartWidgetState extends StateMVC<CartWidget> {
           leading: IconButton(
             onPressed: () {
               if (widget.routeArgument != null) {
-                Navigator.of(context).pushReplacementNamed(widget.routeArgument.param, arguments: RouteArgument(id: widget.routeArgument.id));
+                Navigator.of(context).pop();
               } else {
-                Navigator.of(context).pushReplacementNamed('/Pages', arguments: 1);
+                Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
               }
             },
             icon: Icon(Icons.arrow_back),
@@ -60,8 +60,8 @@ class _CartWidgetState extends StateMVC<CartWidget> {
           elevation: 0,
           centerTitle: true,
           title: Text(
-            S.of(context).cart,
-            style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+            'My Order',
+            style: Theme.of(context).textTheme.headline3.merge(TextStyle(letterSpacing: 1.3)),
           ),
         ),
         body: RefreshIndicator(
@@ -74,52 +74,70 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                     ListView(
                       primary: true,
                       children: <Widget>[
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 20, right: 10),
+                        //   child: ListTile(
+                        //     contentPadding: EdgeInsets.symmetric(vertical: 0),
+                        //     leading: Icon(
+                        //       Icons.shopping_cart_outlined,
+                        //       color: Theme.of(context).hintColor,
+                        //     ),
+                        //     title: Text(
+                        //       S.of(context).shopping_cart,
+                        //       maxLines: 1,
+                        //       overflow: TextOverflow.ellipsis,
+                        //       style: Theme.of(context).textTheme.headline4,
+                        //     ),
+                        //     subtitle: Text(
+                        //       S.of(context).verify_your_quantity_and_click_checkout,
+                        //       maxLines: 1,
+                        //       overflow: TextOverflow.ellipsis,
+                        //       style: Theme.of(context).textTheme.caption,
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 10),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(vertical: 0),
-                            leading: Icon(
-                              Icons.shopping_cart_outlined,
-                              color: Theme.of(context).hintColor,
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10))
                             ),
-                            title: Text(
-                              S.of(context).shopping_cart,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.headline4,
-                            ),
-                            subtitle: Text(
-                              S.of(context).verify_your_quantity_and_click_checkout,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.caption,
+                            elevation: 5,
+                            child: ListView.separated(
+                              padding: EdgeInsets.only(top: 0, bottom: 0),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount: _con.carts.length+2,
+                              separatorBuilder: (context, index) {
+                                return SizedBox(height: 0);
+                              },
+                              itemBuilder: (context, index) {
+
+
+                                if(index ==0){
+                                  return CartHeader(market: _con.carts[0].product.market.name,marketAddress: _con.carts[0].product.market.address,);
+                                }else if(index == _con.carts.length+1){
+                                  return CartFooter();
+                                }
+
+
+                                return CartItemWidget(
+                                  cart: _con.carts.elementAt(index-1),
+                                  heroTag: 'cart',
+                                  increment: () {
+                                    _con.incrementQuantity(_con.carts.elementAt(index-1));
+                                  },
+                                  decrement: () {
+                                    _con.decrementQuantity(_con.carts.elementAt(index-1));
+                                  },
+                                  onDismissed: () {
+                                    _con.removeFromCart(_con.carts.elementAt(index-1));
+                                  },
+                                );
+                              },
                             ),
                           ),
-                        ),
-                        ListView.separated(
-                          padding: EdgeInsets.only(top: 15, bottom: 0),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          primary: false,
-                          itemCount: _con.carts.length,
-                          separatorBuilder: (context, index) {
-                            return SizedBox(height: 0);
-                          },
-                          itemBuilder: (context, index) {
-                            return CartItemWidget(
-                              cart: _con.carts.elementAt(index),
-                              heroTag: 'cart',
-                              increment: () {
-                                _con.incrementQuantity(_con.carts.elementAt(index));
-                              },
-                              decrement: () {
-                                _con.decrementQuantity(_con.carts.elementAt(index));
-                              },
-                              onDismissed: () {
-                                _con.removeFromCart(_con.carts.elementAt(index));
-                              },
-                            );
-                          },
                         ),
                       ],
                     ),

@@ -27,6 +27,13 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _con.listenForOrders();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _con.scaffoldKey,

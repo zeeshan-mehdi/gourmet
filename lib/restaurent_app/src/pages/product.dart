@@ -349,7 +349,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                 ),
                                 Container(
                                   height: 200,
-                                  child: PageView.builder(
+                                  child: ListView.builder(
+                                      controller: PageController(viewportFraction: 0.5,initialPage: 0),
+                                      scrollDirection: Axis.horizontal,
                                       itemCount: _con.products.length,
                                       itemBuilder: (context,index){
                                     return Column(

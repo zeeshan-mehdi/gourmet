@@ -20,6 +20,8 @@ class ProductController extends ControllerMVC {
   int current = 0;
   GlobalKey<ScaffoldState> scaffoldKey;
 
+  bool loading = false;
+
   ProductController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
@@ -53,17 +55,29 @@ class ProductController extends ControllerMVC {
   }
 
   void listenForCart() async {
+    setState(() {loading = true;});
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
       carts.add(_cart);
+    }, onError: (a) {
+      setState(() {loading = false;});
+      print(CustomTrace(StackTrace.current, message: a.toString()).toString());
+    }, onDone: () {
+      setState(() {loading = false;});
+      //print(CustomTrace(StackTrace.current, message: a.toString()).toString());
     });
   }
 
   bool isSameMarkets(Product product) {
+
     if (carts.isNotEmpty) {
+
+      print('cart product id  ${carts[0].product?.market?.id}');
+      print('product id  ${product.market?.id}');
+
       return carts[0].product?.market?.id == product.market?.id;
     }
-    return true;
+    return false;
   }
 
   void addToCart(Product product, {bool reset = false}) async {

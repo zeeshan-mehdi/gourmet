@@ -50,6 +50,7 @@ class HomeController extends ControllerMVC {
 
   Future<void> listenForTopMarkets() async {
     final Stream<Market> stream = await getNearMarkets(deliveryAddress.value, deliveryAddress.value);
+    //final Stream<Market> stream = await getPopularMarkets(deliveryAddress.value);
     stream.listen((Market _market) {
       setState(() => topMarkets.add(_market));
     }, onError: (a) {}, onDone: () {});

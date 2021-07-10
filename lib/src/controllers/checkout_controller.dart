@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/conversation.dart';
 import 'package:markets/src/models/route_argument.dart';
+import 'package:markets/src/pages/GlobalPopup.dart';
 
 import '../../generated/l10n.dart';
 import '../models/cart.dart';
@@ -83,6 +84,39 @@ class CheckoutController extends CartController {
 
 
              //Navigator.of(scaffoldKey?.currentContext).pushNamed('/Pages', arguments: 4);
+           }else{
+             showDialog(
+                 context: scaffoldKey.currentState.context,
+                 builder: (_) => Container(
+                     color: Color(0xFF8E9198),
+                     child: GlobalPopup(
+                       //for Forgot password case
+                       // title: "Your password has \n been reset",
+                       // subTitle:
+                       // "You'll shortly receive an email with a \n code to setup a new password",
+                       // imageName: "LockIconWithArrow.png",
+                       // popupType: PopupType.forgotPassword,
+                       // btnTitle: "Done",
+                       // bottombtnTitle: "",
+
+                       //for Enable Location case
+                       // title: "Enable Your Location",
+                       // subTitle:
+                       // "Please allow to use your location to\n show nearby resturant on the map ",
+                       // imageName: "EnablelocaitonIcon.png",
+                       // popupType: PopupType.enableLocation,
+                       // btnTitle: "Enable Location",
+                       // bottombtnTitle: "",
+
+
+                       //incase of order success
+                       title: "Your order has \n been Placed!",
+                       subTitle: "You can track the delivery in the \n \"Orders\" section"  ,
+                       imageName: "OrderSuceccfullIcon.png",
+                       popupType: PopupType.orderSucessfull,
+                       btnTitle: "Check on Order",
+                       bottombtnTitle: "Go to orders",
+                     )));
            }
         });
       }

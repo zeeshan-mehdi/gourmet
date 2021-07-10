@@ -202,6 +202,7 @@ class _GlobalPopupState extends State<GlobalPopup> {
 
                                 break;
                               case PopupType.orderSucessfull:
+                                Navigator.of(context).pushNamed('/Pages',arguments: 1);
                                 print("orderSucessfull");
                                 break;
                             }
@@ -223,12 +224,31 @@ class _GlobalPopupState extends State<GlobalPopup> {
                           ),
                           //  color: Theme.of(context).accentColor,
                           onTap: ()  {
+
+                            switch (popupType){
+                              case PopupType.forgotPassword:
+                                print("forgot password");
+                                Navigator.of(context).pushReplacementNamed('/Login');
+                                break;
+                              case PopupType.enableLocation:
+                                print("enableLocation");
+
+                                break;
+                              case PopupType.orderSucessfull:
+                                //Navigator.of(context).pop();
+                                Navigator.of(context).pushNamed('/Pages',arguments: 1);
+                                print("orderSucessfull");
+                                break;
+                            }
+
+
+
                             // _con.login();
                             //SharedPreferences prefs = await SharedPreferences.getInstance();
                             // int counter = (prefs.getInt('counter') ?? 0) + 1;
                             // print('set boolean true.');
                             //  await prefs.setBool('welcome', true);
-                            Navigator.of(context).pushReplacementNamed('/Login');
+                          //  Navigator.of(context).pushReplacementNamed('/Login');
                           },
                         ),
                       )
