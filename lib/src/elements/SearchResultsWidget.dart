@@ -7,6 +7,7 @@ import '../elements/CardWidget.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../elements/ProductItemWidget.dart';
 import '../models/route_argument.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 
 class SearchResultWidget extends StatefulWidget {
   final String heroTag;
@@ -32,7 +33,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF878A92),
+      color: _con.markets.isEmpty && _con.products.isEmpty ? Color(0xFF878A92) : Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -89,83 +90,116 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
             )
 
           ),
-          Container(
-            height: 500,
-
-            color: Color(0xFF878A92),
-            child: Column(
-              children: [
-                Spacer(),
-                Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
-                SizedBox(height: 10,),
-                Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
-                SizedBox(height: 30,),
-              ],
-            ),
-          )
-          // _con.markets.isEmpty && _con.products.isEmpty
-          //     ? CircularLoadingWidget(height: 288)
-          //     : Expanded(
-          //         child: ListView(
-          //           children: <Widget>[
-          //             Padding(
-          //               padding: const EdgeInsets.only(left: 20, right: 20),
-          //               child: ListTile(
-          //                 dense: true,
-          //                 contentPadding: EdgeInsets.symmetric(vertical: 0),
-          //                 title: Text(
-          //                   S.of(context).products_results,
-          //                   style: Theme.of(context).textTheme.subtitle1,
-          //                 ),
-          //               ),
-          //             ),
-          //             ListView.separated(
-          //               scrollDirection: Axis.vertical,
-          //               shrinkWrap: true,
-          //               primary: false,
-          //               itemCount: _con.products.length,
-          //               separatorBuilder: (context, index) {
-          //                 return SizedBox(height: 10);
-          //               },
-          //               itemBuilder: (context, index) {
-          //                 return ProductItemWidget(
-          //                   heroTag: 'search_list',
-          //                   product: _con.products.elementAt(index),
-          //                 );
-          //               },
-          //             ),
-          //             Padding(
-          //               padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-          //               child: ListTile(
-          //                 dense: true,
-          //                 contentPadding: EdgeInsets.symmetric(vertical: 0),
-          //                 title: Text(
-          //                   S.of(context).markets_results,
-          //                   style: Theme.of(context).textTheme.subtitle1,
-          //                 ),
-          //               ),
-          //             ),
-          //             ListView.builder(
-          //               shrinkWrap: true,
-          //               primary: false,
-          //               itemCount: _con.markets.length,
-          //               itemBuilder: (context, index) {
-          //                 return GestureDetector(
-          //                   onTap: () {
-          //                     Navigator.of(context).pushNamed('/Details',
-          //                         arguments: RouteArgument(
-          //                           id: '0',
-          //                           param: _con.markets.elementAt(index).id,
-          //                           heroTag: widget.heroTag,
-          //                         ));
-          //                   },
-          //                   child: CardWidget(market: _con.markets.elementAt(index), heroTag: widget.heroTag),
-          //                 );
-          //               },
-          //             ),
-          //           ],
-          //         ),
+          // Container(
+          //   height: 500,
+          //
+          //   color: Color(0xFF878A92),
+          //   child: Column(
+          //     children: [
+          //       Spacer(),
+          //       InkWell(
+          //         child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+          //         onTap:() async {
+          //           //  Navigator.of(context).pushReplacementNamed('/qr_code');
+          //            String cameraScanResult = await scanner.scan();
+          //            print(cameraScanResult);
+          //            Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: cameraScanResult, heroTag: 'menu_tab'));
+          //
+          //           //
+          //         },
           //       ),
+          //       SizedBox(height: 10,),
+          //       Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
+          //       SizedBox(height: 30,),
+          //     ],
+          //   ),
+          // ),
+          _con.markets.isEmpty && _con.products.isEmpty
+              ?    Container(
+    height: 500,
+
+    color: Color(0xFF878A92),
+    child: Column(
+    children: [
+    Spacer(),
+    InkWell(
+    child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+    onTap:() async {
+    //  Navigator.of(context).pushReplacementNamed('/qr_code');
+    String cameraScanResult = await scanner.scan();
+    print(cameraScanResult);
+    Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: cameraScanResult, heroTag: 'menu_tab'));
+
+    //
+    },
+    ),
+    SizedBox(height: 10,),
+    Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
+    SizedBox(height: 30,),
+    ],
+    ),
+    )
+              : Expanded(
+                  child: ListView(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: ListTile(
+                          dense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 0),
+                          title: Text(
+                            S.of(context).products_results,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ),
+                      ),
+                      ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: _con.products.length,
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 10);
+                        },
+                        itemBuilder: (context, index) {
+                          return ProductItemWidget(
+                            heroTag: 'search_list',
+                            product: _con.products.elementAt(index),
+                          );
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        child: ListTile(
+                          dense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 0),
+                          title: Text(
+                            S.of(context).markets_results,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ),
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: _con.markets.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/Details',
+                                  arguments: RouteArgument(
+                                    id: '0',
+                                    param: _con.markets.elementAt(index).id,
+                                    heroTag: widget.heroTag,
+                                  ));
+                            },
+                            child: CardWidget(market: _con.markets.elementAt(index), heroTag: widget.heroTag),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
         ],
       ),
     );

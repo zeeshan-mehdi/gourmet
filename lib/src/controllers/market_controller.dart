@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:markets/src/helpers/custom_trace.dart';
+import 'package:markets/src/models/favorite.dart';
+import 'package:markets/src/models/option.dart';
+import 'package:markets/src/models/user.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -15,9 +19,12 @@ import '../repository/gallery_repository.dart';
 import '../repository/market_repository.dart';
 import '../repository/product_repository.dart';
 import '../repository/settings_repository.dart';
+import '../repository/user_repository.dart' as userRepo;
 
 class MarketController extends ControllerMVC {
   Market market;
+  Favorite favorite;
+
   List<Gallery> galleries = <Gallery>[];
   List<Product> products = <Product>[];
   List<Category> categories = <Category>[];
@@ -121,6 +128,8 @@ class MarketController extends ControllerMVC {
     listenForProducts(market.id, categoriesId: categoriesId);
   }
 
+
+
   Future<void> refreshMarket() async {
     var _id = market.id;
     market = new Market();
@@ -132,4 +141,39 @@ class MarketController extends ControllerMVC {
     listenForGalleries(_id);
     listenForFeaturedProducts(_id);
   }
+
+  void addToFavorite(String market) async {
+    var _favorite = new Favorite();
+   // print(product.id);
+   // _favorite.product = product;
+
+   // _favorite.options = product.options.where((Option _option) {
+   //    return _option.checked;
+   //  }).toList();
+   // print(_favorite.product.id);
+
+    addFavoriteKitchen(market).then((value) {
+      setState(() {
+        print(value.product.name);
+        this.favorite = value;
+      });
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text(S.of(state.context).thisProductWasAddedToFavorite),
+      ));
+    });
+  }
+
+  void removeFromFavorite(Favorite _favorite) async {
+    removeFavoriteKitechen(_favorite).then((value) {
+      setState(() {
+        this.favorite = new Favorite();
+      });
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text(S.of(state.context).thisProductWasRemovedFromFavorites),
+      ));
+    });
+  }
+
+
+
 }

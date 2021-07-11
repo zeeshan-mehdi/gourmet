@@ -21,9 +21,12 @@ class SearchController extends ControllerMVC {
     if (search == null) {
       search = await getRecentSearch();
     }
+    print(search);
     Address _address = deliveryAddress.value;
+    print(_address.address);
     final Stream<Market> stream = await searchMarkets(search, _address);
     stream.listen((Market _market) {
+      print(_market.name);
       setState(() => markets.add(_market));
     }, onError: (a) {
       print(a);
@@ -53,6 +56,8 @@ class SearchController extends ControllerMVC {
   }
 
   void saveSearch(String search) {
-    setRecentSearch(search);
+    print(search);
+    refreshSearch(search);
+    //setRecentSearch(search);
   }
 }

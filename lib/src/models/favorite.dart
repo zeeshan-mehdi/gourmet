@@ -1,9 +1,12 @@
+import 'package:markets/restaurent_app/src/models/market.dart';
+
 import '../models/option.dart';
 import '../models/product.dart';
 
 class Favorite {
   String id;
   Product product;
+  Market market;
   List<Option> options;
   String userId;
 
