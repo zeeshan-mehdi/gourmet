@@ -10,6 +10,9 @@ import 'package:markets/src/pages/my_fatoorah.dart';
 import 'package:markets/src/pages/qr_code_scanner.dart';
 
 import 'src/models/route_argument.dart';
+import 'src/pages/Cuisines.dart';
+import 'src/pages/CuisinesDetail.dart';
+import 'src/pages/FilterPage.dart';
 import 'src/pages/cart.dart';
 import 'src/pages/category.dart';
 import 'src/pages/chat.dart';
@@ -125,6 +128,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SplashForNewUserScreen());
       case '/RestaurantsMemberShip':
         return MaterialPageRoute(builder: (_) => RestaurantsMemberShip());
+        case '/Coisines':
+        return MaterialPageRoute(builder: (_) => Coisines());
+        case '/CoisinesDetail':
+        return MaterialPageRoute(builder: (_) => CoisinesDetail());
+        case '/FilterPage':
+        return MaterialPageRoute(builder: (_) => FilterPage());
 
 
       //***************************************Restaurent App Routes ***********************************************//

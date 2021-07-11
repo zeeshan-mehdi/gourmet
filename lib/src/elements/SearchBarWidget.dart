@@ -38,6 +38,7 @@ class SearchBarWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.caption.merge(TextStyle(fontSize: 13,color: Colors.grey.withOpacity(0.7))),
               ),
             ),
+
             SizedBox(width: 8),
             // InkWell(
             //   onTap: () {
