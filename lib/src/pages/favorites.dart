@@ -84,7 +84,6 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                         //  icon: Icon(Icons.directions_transit),
                         text: "Food",
                       ),
-
                     ],
                   ),),
                   Expanded(
@@ -204,6 +203,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                             ),
                           ),
                         ),
+
                         currentUser.value.apiToken == null
                             ? PermissionDeniedWidget()
                             : RefreshIndicator(

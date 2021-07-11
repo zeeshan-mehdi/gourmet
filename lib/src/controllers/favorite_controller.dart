@@ -7,6 +7,7 @@ import '../repository/product_repository.dart';
 
 class FavoriteController extends ControllerMVC {
   List<Favorite> favorites = <Favorite>[];
+  List<Favorite> favoritesKitchen = <Favorite>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
   FavoriteController() {
@@ -16,6 +17,25 @@ class FavoriteController extends ControllerMVC {
 
   void listenForFavorites({String message}) async {
     final Stream<Favorite> stream = await getFavorites();
+    stream.listen((Favorite _favorite) {
+      setState(() {
+        favorites.add(_favorite);
+      });
+    }, onError: (a) {
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text(S.of(state.context).verify_your_internet_connection),
+      ));
+    }, onDone: () {
+      if (message != null) {
+        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+      }
+    });
+  }
+
+  void listenForFavoritesKitchen({String message}) async {
+    final Stream<Favorite> stream = await getFavoritesKitchen();
     stream.listen((Favorite _favorite) {
       setState(() {
         favorites.add(_favorite);

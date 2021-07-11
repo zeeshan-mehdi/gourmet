@@ -154,6 +154,7 @@ Future<Stream<Favorite>> getFavorites() async {
   }
 }
 
+
 Future<Favorite> addFavorite(Favorite favorite) async {
   User _user = userRepo.currentUser.value;
   if (_user.apiToken == null) {
@@ -284,5 +285,81 @@ Future<Review> addProductReview(Review review, Product product) async {
   } catch (e) {
     print(CustomTrace(StackTrace.current, message: url).toString());
     return Review.fromJSON({});
+  }
+}
+
+Future<Stream<Favorite>> getFavoritesKitchen() async {
+  User _user = userRepo.currentUser.value;
+  if (_user.apiToken == null) {
+    return Stream.value(null);
+  }
+  final String _apiToken = 'api_token=${_user.apiToken}&';
+  final String url =
+      '${GlobalConfiguration().getValue('api_base_url')}favorites?${_apiToken}with=product;user;options&search=user_id:${_user.id}&searchFields=user_id:=';
+
+  final client = new http.Client();
+  final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
+  try {
+    return streamedRest.stream
+        .transform(utf8.decoder)
+        .transform(json.decoder)
+        .map((data) => Helper.getData(data))
+        .expand((data) => (data as List))
+        .map((data) => Favorite.fromJSON(data));
+  } catch (e) {
+    print(CustomTrace(StackTrace.current, message: url).toString());
+    return new Stream.value(new Favorite.fromJSON({}));
+  }
+}
+
+Future<Favorite> addFavoriteKitchen(String favorite) async {
+ // print(favorite.id);
+  User _user = userRepo.currentUser.value;
+  if (_user.apiToken == null) {
+    return new Favorite();
+  }
+  final String _apiToken = 'api_token=${_user.apiToken}';
+  //favorite.userId = _user.id;
+  // favorite.product.i
+  print("user${_user.id}");
+  //print(favorite);
+  var body  =  {
+    "user_id": _user.id,
+    "market_id": favorite //id
+  };
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}favorites?$_apiToken';
+  try {
+    final client = new http.Client();
+    final response = await client.post(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+      body: json.encode(body),
+    );
+    print(response.body);
+    return Favorite.fromJSON(json.decode(response.body)['data']);
+  } catch (e) {
+
+    print(CustomTrace(StackTrace.current, message: url).toString());
+    return Favorite.fromJSON({});
+  }
+}
+
+Future<Favorite> removeFavoriteKitechen(Favorite favorite) async {
+  User _user = userRepo.currentUser.value;
+  if (_user.apiToken == null) {
+    return new Favorite();
+  }
+  final String _apiToken = 'api_token=${_user.apiToken}';
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}favorites/${favorite.id}?$_apiToken';
+  try {
+    final client = new http.Client();
+    final response = await client.delete(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+    return Favorite.fromJSON(json.decode(response.body)['data']);
+  } catch (e) {
+    print(CustomTrace(StackTrace.current, message: url).toString());
+    return Favorite.fromJSON({});
   }
 }

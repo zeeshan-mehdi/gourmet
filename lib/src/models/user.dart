@@ -15,10 +15,8 @@ class User {
   String address;
   String bio;
   Media image;
-
   // used for indicate if client logged in or not
   bool auth;
-
   int memebership;
   String trialEnds;
 

@@ -14,11 +14,11 @@ class ProfileKitchenSection extends StatefulWidget {
 
 class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
+
       child: Column(
         children: [
 

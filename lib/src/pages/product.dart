@@ -16,6 +16,7 @@ import 'package:markets/src/pages/cart.dart';
 import 'package:markets/src/pages/kitchen_cart.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../helpers/app_config.dart' as config;
 
 import '../elements/CircularLoadingWidget.dart';
 import '../helpers/helper.dart';
@@ -104,12 +105,14 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                           expandedHeight: 275,
                           elevation: 0,
                           automaticallyImplyLeading: false,
+                         // leadingWidth:  config.App(context).appWidth(400),
                           leading: IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+
                           iconTheme: IconThemeData(
                               color: Theme.of(context).primaryColor),
                           flexibleSpace: FlexibleSpaceBar(
@@ -355,6 +358,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                               ),
                             ),
                           ),
+
                           // flexibleSpace: FlexibleSpaceBar(
                           //   collapseMode: CollapseMode.parallax,
                           //   background: Stack(
@@ -423,6 +427,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                           //   ),
                           // ),
                         ),
+
                         SliverToBoxAdapter(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -1024,7 +1029,6 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                       ],
                     ),
                   ),
-
                   // Positioned(
                   //   top: 32,
                   //   right: 20,
@@ -1138,41 +1142,45 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                   //                     ],
                   //                   ),
                   //                   SizedBox(height: 10),
-                  //                   Container(
-                  //
-                  //                     child:  Row(
-                  //                       children: <Widget>[
-                  //                         // Expanded(
-                  //                         //   child: _con.favorite?.id != null
-                  //                         //       ? OutlineButton(
-                  //                         //           onPressed: () {
-                  //                         //             _con.removeFromFavorite(_con.favorite);
-                  //                         //           },
-                  //                         //           padding: EdgeInsets.symmetric(vertical: 14),
-                  //                         //           color: Theme.of(context).primaryColor,
-                  //                         //           shape: StadiumBorder(),
-                  //                         //           borderSide: BorderSide(color: Theme.of(context).accentColor),
-                  //                         //           child: Icon(
-                  //                         //             Icons.favorite,
-                  //                         //             color: Theme.of(context).accentColor,
-                  //                         //           ))
-                  //                         //       : MaterialButton(
-                  //                         //           elevation: 0,
-                  //                         //           onPressed: () {
-                  //                         //             if (currentUser.value.apiToken == null) {
-                  //                         //               Navigator.of(context).pushNamed("/Login");
-                  //                         //             } else {
-                  //                         //               _con.addToFavorite(_con.product);
-                  //                         //             }
-                  //                         //           },
-                  //                         //           padding: EdgeInsets.symmetric(vertical: 14),
-                  //                         //           color: Theme.of(context).accentColor,
-                  //                         //           shape: StadiumBorder(),
-                  //                         //           child: Icon(
-                  //                         //             Icons.favorite_outline,
-                  //                         //             color: Theme.of(context).primaryColor,
-                  //                         //           )),
-                  //                         // ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child:  Container(
+                                    //  color: Colors.yellow,
+
+                                      margin: EdgeInsets.only(left: config.App(context).appWidth(78),top: 40),
+                                        child:  Row(
+                                            children: <Widget>[
+                                              _con.favorite?.id != null
+                                                  ? OutlineButton(
+                                                  onPressed: () {
+                                                    _con.removeFromFavorite(_con.favorite);
+                                                  },
+                                                  padding: EdgeInsets.symmetric(vertical: 0),
+                                                  color: Theme.of(context).primaryColor,
+                                                  //shape: StadiumBorder(),
+                                                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                  child: Icon(
+                                                    Icons.favorite,
+                                                    color: Theme.of(context).accentColor,
+                                                  ))
+                                                  : MaterialButton(
+                                                  elevation: 0,
+                                                  onPressed: () {
+                                                    if (currentUser.value.apiToken == null) {
+                                                      Navigator.of(context).pushNamed("/Login");
+                                                    } else {
+                                                      _con.addToFavorite(_con.market.id);
+                                                    }
+                                                  },
+                                                  padding: EdgeInsets.symmetric(vertical: 0),
+                                                  color: Colors.transparent,
+                                                 // shape: StadiumBorder(),
+                                                  child: Icon(
+                                                    Icons.favorite_outline,
+                                                    color: Theme.of(context).primaryColor,
+                                                  )),
+                                            ])),
+                                  )
                   // Spacer(),
                   // SizedBox(width: 2),
                   // Stack(
