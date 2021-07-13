@@ -6,7 +6,7 @@ import '../models/product.dart';
 class Favorite {
   String id;
   Product product;
-  Market market;
+  //Market market;
   List<Option> options;
   String userId;
 
@@ -16,6 +16,7 @@ class Favorite {
     try {
       id = jsonMap['id'] != null ? jsonMap['id'].toString() : null;
       product = jsonMap['product'] != null ? Product.fromJSON(jsonMap['product']) : Product.fromJSON({});
+     // market = jsonMap['market'] != null ? Market.fromJSON(jsonMap['product']) : Market.fromJSON({});
       options = jsonMap['options'] != null ? List.from(jsonMap['options']).map((element) => Option.fromJSON(element)).toList() : null;
     } catch (e) {
       id = '';

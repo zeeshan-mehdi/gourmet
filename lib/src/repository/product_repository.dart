@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +13,18 @@ import '../models/product.dart';
 import '../models/review.dart';
 import '../models/user.dart';
 import '../repository/user_repository.dart' as userRepo;
+
+import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+
+import  'package:markets/generated/l10n.dart';
+import '../models/gallery.dart';
+import '../models/market.dart';
+import '../models/product.dart';
+import '../models/review.dart';
+import '../repository/gallery_repository.dart';
+import '../repository/product_repository.dart';
+import 'market_repository.dart';
 
 Future<Stream<Product>> getTrendingProducts(Address address) async {
   Uri uri = Helper.getUri('api/products');
@@ -288,30 +299,127 @@ Future<Review> addProductReview(Review review, Product product) async {
   }
 }
 
-Future<Stream<Favorite>> getFavoritesKitchen() async {
-  User _user = userRepo.currentUser.value;
-  if (_user.apiToken == null) {
-    return Stream.value(null);
-  }
-  final String _apiToken = 'api_token=${_user.apiToken}&';
-  final String url =
-      '${GlobalConfiguration().getValue('api_base_url')}favorites?${_apiToken}with=product;user;options&search=user_id:${_user.id}&searchFields=user_id:=';
+ Future<List<Market>> getFavoritesKitchen() async {
+   print("favorit kitchen is Api caling 1");
 
-  final client = new http.Client();
-  final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
-  try {
-    return streamedRest.stream
-        .transform(utf8.decoder)
-        .transform(json.decoder)
-        .map((data) => Helper.getData(data))
-        .expand((data) => (data as List))
-        .map((data) => Favorite.fromJSON(data));
-  } catch (e) {
-    print(CustomTrace(StackTrace.current, message: url).toString());
-    return new Stream.value(new Favorite.fromJSON({}));
-  }
+   User _user = userRepo.currentUser.value;
+   if (_user.apiToken == null) {
+     return null;
+   }
+   final String _apiToken = 'api_token=${_user.apiToken}&';
+   final String url =
+       '${GlobalConfiguration().getValue(
+       'api_base_url')}favorite_markets?${_apiToken}';
+//      '${GlobalConfiguration().getValue('api_base_url')}favorite_markets?${_apiToken}with=product;user;options&search=user_id:${_user.id}&searchFields=user_id:=';
+
+   final client = new http.Client();
+
+   final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
+
+   Stream<dynamic> data =  streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+     return data;
+   });
+
+    List<Market> markets = [];
+
+   data.listen((marketJson) async{
+     String id = marketJson["id"];
+     Market m = await getbyMarket(id);
+     markets.add(m);
+   });
+
+   return markets;
+
+
+
+
+
+   //final response = await client.get(Uri.parse(url));
+  //  print((response.body));
+  //  print("${ jsonDecode(response.body)}");
+  //   print(json.decode(response.body));
+  //  var marketIds = jsonDecode(response.body)['data'];
+  //  //user["user"] = resBody;
+  // // String str = json.decode(user);
+  //  List<Market> markets = [];
+  //
+  //  for (int i = 0; i < marketIds.length; i++) {
+  //    String id = marketIds[i];
+  //    Market m = await getbyMarket(id);
+  //    markets.add(m);
+  //  }
+  //
+  //  return markets;
+
+  // print(streamedRest);
+  // try {
+  // //  print(streamedRest.stream.map((event) => event.firs));
+  //
+  //   // var ff = streamedRest.stream
+  //   //     .transform(utf8.decoder)
+  //   //     .transform(json.decoder)
+  //   //     .map((data) => Helper.getData(data))
+  //   //     .expand((data) => (data as List))
+  //   //     .map((data) => Favorite.fromJSON(data));
+  //   //
+  //   // print(ff);
+  //  // final Stream<Market> stream = await getMarket(25);
+  //   String id;
+  //    Future<Market>  Marketstream =  getbyMarket("25");
+  //   print(Marketstream);
+  //  // List<Market> aaaa  = stream.map((event) => event);
+  //
+  //   // print( Favorite.fromJSON());
+  //  // favourite.fromjson(data) withprint(data);
+  //
+  //   return streamedRest.stream
+  //       .transform(utf8.decoder)
+  //       .transform(json.decoder)
+  //       .map((data) => Helper.getData(data))
+  //       .expand((data) => (data as List))
+  //       .map((data)  {
+  //     print("print data is");
+  //     print(data);
+  //         return Favorite.fromJSON(data);});
+  //
+  //
+  // } catch (e) {
+  //   print("no no");
+  //   print(CustomTrace(StackTrace.current, message: url).toString());
+  //   return new Stream.value(new Favorite.fromJSON({}));
+  // }
 }
 
+Future<Market> getbyMarket(String id) async {
+  Uri uri = Helper.getUri('api/markets/$id');
+  Map<String, dynamic> _queryParams = {};
+  _queryParams['with'] = 'users';
+  uri = uri.replace(queryParameters: _queryParams);
+  try {
+    final client = new http.Client();
+    //final streamedRest = await client.send(http.Request('get', uri));
+    print('market');
+    final responce = await client.get(uri);
+    print((responce.body));
+
+    var parsed = jsonDecode(responce.body);
+    Market market =  Market.fromJSON(parsed['data']);
+    return market;
+   // print(market);
+    // print(market.map((e) => e.name));
+    // return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).map((data) {
+    //   var aad  =  data as Market;
+    //   print("name ois " + aad.name.toString());
+    //   print(aad.id);
+    //   print(aad.address);
+    //   print(aad.description);
+    //   return  Market.fromJSON(data);
+    // });
+  } catch (e) {
+    print(CustomTrace(StackTrace.current, message: uri.toString()).toString());
+   // return new Stream.value(new Market.fromJSON({}));
+  }
+}
 Future<Favorite> addFavoriteKitchen(String favorite) async {
  // print(favorite.id);
   User _user = userRepo.currentUser.value;
