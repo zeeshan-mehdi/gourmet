@@ -15,7 +15,8 @@ paidKitchenDialog(context){
           Navigator.of(context).pop();
         }, child: Text('Cancel'),),
         ElevatedButton(onPressed: (){
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>PagesTestWidget(currentTab: 5,)));
+          Navigator.of(context).pushNamed('/Pages',arguments: 10);
+          //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>PagesTestWidget(currentTab: 5,)));
         }, child: Text('Upgrade'))
       ],
     ),

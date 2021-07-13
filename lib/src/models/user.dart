@@ -15,6 +15,7 @@ class User {
   String address;
   String bio;
   Media image;
+  String membershipType;
   // used for indicate if client logged in or not
   bool auth;
   int memebership;
@@ -52,6 +53,8 @@ class User {
       try {
         bio = jsonMap['custom_fields']['bio']['view'];
         memebership = jsonMap['membership'];
+        trialEnds = jsonMap['trial_ends_at'];
+        membershipType =  jsonMap['membership_type'];
       } catch (e) {
         bio = "";
       }
@@ -78,6 +81,7 @@ class User {
     map["bio"] = bio;
     map["membership"]= memebership;
     map['trial_ends_at'] = trialEnds;
+    map['membership_type'] = membershipType;
     map["media"] = image?.toMap();
     return map;
   }

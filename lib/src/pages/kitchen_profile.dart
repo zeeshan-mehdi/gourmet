@@ -51,199 +51,201 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
     }
 
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-             currentUser.value.apiToken != null
-                ? Container(
-               padding: EdgeInsets.only(top: 58,left: 15),
-               height: 200,
-                  color: Color(0xFFF7F8FA),
-                  child: Row(
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+               currentUser.value.apiToken != null
+                  ? Container(
+                 padding: EdgeInsets.only(top: 58,left: 15),
+                 height: 200,
+                    color: Color(0xFFF7F8FA),
+                    child: Row(
 
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                   Stack(
-                     children: [
-                       SizedBox(
-                         width: 80,
-                         height: 80,
-                         child: ClipRRect(
-                           borderRadius: BorderRadius.all(Radius.circular(80)),
-                           child: CachedNetworkImage(
-                             height: 80,
-                             width: double.infinity,
-                             fit: BoxFit.cover,
-                             imageUrl:url,
-                             placeholder: (context, url) => Image.asset(
-                               'assets/img/loading.gif',
-                               fit: BoxFit.cover,
-                               width: double.infinity,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                     Stack(
+                       children: [
+                         SizedBox(
+                           width: 80,
+                           height: 80,
+                           child: ClipRRect(
+                             borderRadius: BorderRadius.all(Radius.circular(80)),
+                             child: CachedNetworkImage(
                                height: 80,
+                               width: double.infinity,
+                               fit: BoxFit.cover,
+                               imageUrl:url,
+                               placeholder: (context, url) => Image.asset(
+                                 'assets/img/loading.gif',
+                                 fit: BoxFit.cover,
+                                 width: double.infinity,
+                                 height: 80,
+                               ),
+                               errorWidget: (context, url, error) => Icon(Icons.error_outline),
                              ),
-                             errorWidget: (context, url, error) => Icon(Icons.error_outline),
                            ),
                          ),
-                       ),
-                       Positioned(
-                         top: 0,
-                         right: 0,
-                         child: currentUser.value.verifiedPhone ?? false
-                             ? Icon(
-                           Icons.check_circle,
-                           color: Theme.of(context).accentColor,
-                           size: 24,
+                         Positioned(
+                           top: 0,
+                           right: 0,
+                           child: currentUser.value.verifiedPhone ?? false
+                               ? Icon(
+                             Icons.check_circle,
+                             color: Theme.of(context).accentColor,
+                             size: 24,
+                           )
+                               : SizedBox(),
                          )
-                             : SizedBox(),
-                       )
-                     ],
-                   ),
+                       ],
+                     ),
 
-                   SizedBox(width: 25,),
-                   Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.start,
-                         children: [
-                           Text(myMarket!=null && myMarket.name!=null ? myMarket.name.toUpperCase() :currentUser.value.name?.toUpperCase()??'',style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.bold,fontSize: 20)),
-                           SizedBox(width: 5,),
-                           InkWell(child: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black.withOpacity(0.3),),onTap: (){},),
-                         ],
-                       ),
-                       SizedBox(height: 5,),
-                       Container(
-                         height: 25,
-                         margin: EdgeInsets.all(0),
-                         child: Padding(
-                           padding: const EdgeInsets.symmetric(horizontal:12.0,),
-                           child: Center(child: Text( myMarket!=null? myMarket.isPaidKitchen ?  'VIP KITCHEN' : 'FREE KITCHEN'  :'FREE USER', style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 12,color: Colors.white))),
+                     SizedBox(width: 25,),
+                     Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Row(
+                           mainAxisAlignment: MainAxisAlignment.start,
+                           children: [
+                             Text(myMarket!=null && myMarket.name!=null ? myMarket.name.toUpperCase() :currentUser.value.name?.toUpperCase()??'',style: Theme.of(context).textTheme.headline1.copyWith(fontWeight: FontWeight.bold,fontSize: 20)),
+                             SizedBox(width: 5,),
+                             InkWell(child: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black.withOpacity(0.3),),onTap: (){},),
+                           ],
                          ),
-                         decoration: BoxDecoration(
-                             border: Border.all(color:myMarket!=null&&myMarket.isPaidKitchen ?  const Color(0xFFFF2E55):  Theme.of(context).accentColor),
-                             borderRadius: BorderRadius.all(Radius.circular(5)),
-                             color:myMarket!=null&&myMarket.isPaidKitchen ?  const Color(0xFFFF2E55) :  Theme.of(context).accentColor
+                         SizedBox(height: 5,),
+                         Container(
+                           height: 25,
+                           margin: EdgeInsets.all(0),
+                           child: Padding(
+                             padding: const EdgeInsets.symmetric(horizontal:12.0,),
+                             child: Center(child: Text( myMarket!=null? myMarket.isPaidKitchen ?  'VIP KITCHEN' : 'FREE KITCHEN'  :'FREE USER', style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 12,color: Colors.white))),
+                           ),
+                           decoration: BoxDecoration(
+                               border: Border.all(color:myMarket!=null&&myMarket.isPaidKitchen ?  const Color(0xFFFF2E55):  Theme.of(context).accentColor),
+                               borderRadius: BorderRadius.all(Radius.circular(5)),
+                               color:myMarket!=null&&myMarket.isPaidKitchen ?  const Color(0xFFFF2E55) :  Theme.of(context).accentColor
+                           ),
                          ),
-                       ),
-                     ],
-                   ),
+                       ],
+                     ),
 
-               ],
-             ),
-                )
-                : Container(
-               width: MediaQuery.of(context).size.width,
-              height: 200,
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-              decoration: BoxDecoration(
-                color: Theme.of(context).hintColor.withOpacity(0.1),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(S.of(context).welcomeee, style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).accentColor))),
-                  SizedBox(height: 5),
-                  Text(S.of(context).loginAccountOrCreateNewOneForFree, style: Theme.of(context).textTheme.bodyText2),
-                  SizedBox(height: 15),
-                  Wrap(
-                    spacing: 10,
-                    children: <Widget>[
-                      MaterialButton(
-                        elevation: 0,
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/Login');
-                        },
-                        color: Theme.of(context).accentColor,
-                        height: 40,
-                        child: Wrap(
-                          runAlignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: 9,
-                          children: [
-                            Icon(Icons.exit_to_app_outlined, color: Theme.of(context).primaryColor, size: 24),
-                            Text(
-                              S.of(context).login,
-                              style: Theme.of(context).textTheme.subtitle2.merge(TextStyle(color: Theme.of(context).primaryColor)),
-                            ),
-                          ],
+                 ],
+               ),
+                  )
+                  : Container(
+                 width: MediaQuery.of(context).size.width,
+                height: 200,
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).hintColor.withOpacity(0.1),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(S.of(context).welcomeee, style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).accentColor))),
+                    SizedBox(height: 5),
+                    Text(S.of(context).loginAccountOrCreateNewOneForFree, style: Theme.of(context).textTheme.bodyText2),
+                    SizedBox(height: 15),
+                    Wrap(
+                      spacing: 10,
+                      children: <Widget>[
+                        MaterialButton(
+                          elevation: 0,
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/Login');
+                          },
+                          color: Theme.of(context).accentColor,
+                          height: 40,
+                          child: Wrap(
+                            runAlignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 9,
+                            children: [
+                              Icon(Icons.exit_to_app_outlined, color: Theme.of(context).primaryColor, size: 24),
+                              Text(
+                                S.of(context).login,
+                                style: Theme.of(context).textTheme.subtitle2.merge(TextStyle(color: Theme.of(context).primaryColor)),
+                              ),
+                            ],
+                          ),
+                          shape: StadiumBorder(),
                         ),
-                        shape: StadiumBorder(),
-                      ),
-                      MaterialButton(
-                        elevation: 0,
-                        color: Theme.of(context).focusColor.withOpacity(0.2),
-                        height: 40,
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/SignUp');
-                        },
-                        child: Wrap(
-                          runAlignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: 9,
-                          children: [
-                            Icon(Icons.person_add_outlined, color: Theme.of(context).hintColor, size: 24),
-                            Text(
-                              S.of(context).register,
-                              style: Theme.of(context).textTheme.subtitle2.merge(TextStyle(color: Theme.of(context).hintColor)),
-                            ),
-                          ],
+                        MaterialButton(
+                          elevation: 0,
+                          color: Theme.of(context).focusColor.withOpacity(0.2),
+                          height: 40,
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/SignUp');
+                          },
+                          child: Wrap(
+                            runAlignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 9,
+                            children: [
+                              Icon(Icons.person_add_outlined, color: Theme.of(context).hintColor, size: 24),
+                              Text(
+                                S.of(context).register,
+                                style: Theme.of(context).textTheme.subtitle2.merge(TextStyle(color: Theme.of(context).hintColor)),
+                              ),
+                            ],
+                          ),
+                          shape: StadiumBorder(),
                         ),
-                        shape: StadiumBorder(),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
 
 
-            Container(
-              height: MediaQuery.of(context).size.height-260,
-              color: Colors.white,
-              child: Column(
-                children: [
-                 loading  ? KitchenLoadingWidget(width: MediaQuery.of(context).size.width-50.0,height: 200, )  : myMarket==null ? Container(
-                   padding: EdgeInsets.all(8),
-                   child: Column(
-                     children: [
-                       Text(currentUser.value.apiToken != null?'Do you know ?':'We\'ve got plenty of food options',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
-                       SizedBox(height: 10,),
-                       Container(child: Text( currentUser.value.apiToken != null?'You can become a kitchen and sell at Gourmet': 'Sign in to Gourmet to benefit from amazing food !!',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
-                       SizedBox(height: 20,),
-                       MaterialButton(
-                         elevation: 0,
-                         onPressed: () async{
-                           if(currentUser.value.apiToken != null) {
-                             await Navigator.of(context).pushNamed(
-                                 '/Pages', arguments: 8);
-                             getFirstMarket();
-                           }else{
-                             Navigator.of(context).pushNamed('/Login');
-                           }
-                         },
-                         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                         color: Theme.of(context).accentColor.withOpacity(1),
-                         shape: StadiumBorder(),
-                         child: Text(
-                           currentUser.value.apiToken != null ? 'Become Kitchen' : 'Login',
-                           style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
-                         ),
-                       )
-                     ],
-                   ),
-                 )    : ProfileKitchenSection(market: myMarket,),
+              Container(
+                height: MediaQuery.of(context).size.height-260,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                   loading  ? KitchenLoadingWidget(width: MediaQuery.of(context).size.width-50.0,height: 200, )  : myMarket==null ? Container(
+                     padding: EdgeInsets.all(8),
+                     child: Column(
+                       children: [
+                         Text(currentUser.value.apiToken != null?'Do you know ?':'We\'ve got plenty of food options',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
+                         SizedBox(height: 10,),
+                         Container(child: Text( currentUser.value.apiToken != null?'You can become a kitchen and sell at Gourmet': 'Sign in to Gourmet to benefit from amazing food !!',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
+                         SizedBox(height: 20,),
+                         MaterialButton(
+                           elevation: 0,
+                           onPressed: () async{
+                             if(currentUser.value.apiToken != null) {
+                               await Navigator.of(context).pushNamed(
+                                   '/Pages', arguments: 8);
+                               getFirstMarket();
+                             }else{
+                               Navigator.of(context).pushNamed('/Login');
+                             }
+                           },
+                           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                           color: Theme.of(context).accentColor.withOpacity(1),
+                           shape: StadiumBorder(),
+                           child: Text(
+                             currentUser.value.apiToken != null ? 'Become Kitchen' : 'Login',
+                             style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
+                           ),
+                         )
+                       ],
+                     ),
+                   )    : ProfileKitchenSection(market: myMarket,),
 
-                  SizedBox(height: 30,),
+                    SizedBox(height: 30,),
 
-                  currentUser.value.apiToken != null ? UserProfileSection() : Container(),
-                ],
-              ),
-            )
+                    currentUser.value.apiToken != null ? UserProfileSection() : Container(),
+                  ],
+                ),
+              )
 
 
 
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -166,7 +166,7 @@ class CartController extends ControllerMVC {
 
         RouteArgument routeArgument = RouteArgument(param: {
           'autoAccept':carts[0].product.market.autoAccept,
-          'isPaid':carts[0].product.market.isPaid
+          'isPaid':carts[0].product.market.isPaidKitchen
         });
 
         Navigator.of(state.context).pushNamed('/DeliveryPickup',arguments: routeArgument);

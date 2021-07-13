@@ -46,7 +46,7 @@ class CheckoutController extends CartController {
     _order.tax = carts[0].product.market.defaultTax;
     _order.deliveryFee = payment.method == 'Pay on Pickup' ? 0 : carts[0].product.market.deliveryFee;
     OrderStatus _orderStatus = new OrderStatus();
-    if(carts[0].product.market.autoAccept==1||carts[0].product.market.isPaid==0)
+    if(carts[0].product.market.autoAccept==1||carts[0].product.market.isPaidKitchen==false)
       _orderStatus.id = '1';
     else {
       isOrderRequest = true;

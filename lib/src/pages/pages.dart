@@ -11,6 +11,8 @@ import 'package:markets/restaurent_app/src/pages/orders.dart' as restOrders;
 import 'package:markets/restaurent_app/src/pages/product.dart';
 import 'package:markets/restaurent_app/src/pages/settings.dart' as restSettings;
 import 'package:markets/restaurent_app/src/pages/markets.dart';
+import 'package:markets/src/pages/MemberShip.dart';
+import 'package:markets/src/pages/delivery_addresses.dart';
 import 'package:markets/src/pages/favorites.dart';
 import 'package:markets/src/pages/kitchen_profile.dart';
 import 'package:markets/src/pages/profile.dart';
@@ -106,6 +108,11 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage =  NewProductPage();
           break;
 
+        case 10:
+          widget.currentPage = RestaurantsMemberShip();
+          break;
+        case 11 :
+          widget.currentPage = DeliveryAddressesWidget();
 
       }
     });

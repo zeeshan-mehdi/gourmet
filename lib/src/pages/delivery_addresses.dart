@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_map_location_picker/google_map_location_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:markets/src/pages/add_new_adress.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -44,36 +45,52 @@ class _DeliveryAddressesWidgetState extends StateMVC<DeliveryAddressesWidget> {
           S.of(context).delivery_addresses,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed('/Pages', arguments: 3);
+          },
+          icon: Icon(Icons.arrow_back),
+          color: Theme.of(context).hintColor,
+        ),
+
+        automaticallyImplyLeading: false,
+
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
-      floatingActionButton: _con.cart != null && _con.cart.product.market.availableForDelivery
-          ? FloatingActionButton(
+      // floatingActionButton: _con.cart != null && _con.cart.product.market.availableForDelivery
+      //     ?
+
+      floatingActionButton : FloatingActionButton(
               onPressed: () async {
-                LocationResult result = await showLocationPicker(
-                  context,
-                  setting.value.googleMapsKey,
-                  initialCenter: LatLng(deliveryAddress.value?.latitude ?? 0, deliveryAddress.value?.longitude ?? 0),
-                  //automaticallyAnimateToCurrentLocation: true,
-                  //mapStylePath: 'assets/mapStyle.json',
-                  myLocationButtonEnabled: true,
-                  //resultCardAlignment: Alignment.bottomCenter,
-                );
-                _con.addAddress(new Address.fromJSON({
-                  'address': result.address,
-                  'latitude': result.latLng.latitude,
-                  'longitude': result.latLng.longitude,
-                }));
-                print("result = $result");
+
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Material(child: AddNewAddress())));
+
+
+                // LocationResult result = await showLocationPicker(
+                //   context,
+                //   setting.value.googleMapsKey,
+                //   initialCenter: LatLng(deliveryAddress.value?.latitude ?? 0, deliveryAddress.value?.longitude ?? 0),
+                //   //automaticallyAnimateToCurrentLocation: true,
+                //   //mapStylePath: 'assets/mapStyle.json',
+                //   myLocationButtonEnabled: true,
+                //   //resultCardAlignment: Alignment.bottomCenter,
+                // );
+                // _con.addAddress(new Address.fromJSON({
+                //   'address': result.address,
+                //   'latitude': result.latLng.latitude,
+                //   'longitude': result.latLng.longitude,
+                // }));
+                // print("result = $result");
                 //setState(() => _pickedLocation = result);
               },
               backgroundColor: Theme.of(context).accentColor,
               child: Icon(
                 Icons.add,
                 color: Theme.of(context).primaryColor,
-              ))
-          : SizedBox(height: 0),
+              )),
+          // : SizedBox(height: 0),
       body: RefreshIndicator(
         onRefresh: _con.refreshAddresses,
         child: SingleChildScrollView(

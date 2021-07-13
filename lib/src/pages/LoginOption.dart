@@ -41,7 +41,7 @@ class _LoginOptionState extends State<LoginOption> {
       //         labelColor: Theme.of(context).accentColor),
       //   ],
       // ),
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xFF1E232E),
       body: SingleChildScrollView(
 
         padding: EdgeInsets.symmetric(vertical: config.App(context).appHeight(30)),
@@ -60,7 +60,7 @@ class _LoginOptionState extends State<LoginOption> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "GOURMET \n SLOGEN \n COMES \n HERE",
+                      "GOURMET \nSLOGEN\nCOMES\nHERE",
                       style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 40),
                     ),
                     Text(

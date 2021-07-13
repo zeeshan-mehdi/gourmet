@@ -89,7 +89,7 @@ INSERT INTO `app_settings` (`id`, `key`, `value`) VALUES
 (121, 'accent_dark_color', '#9999aa'),
 (122, 'scaffold_dark_color', '#2c2c2c'),
 (123, 'scaffold_color', '#fafafa'),
-(124, 'google_maps_key', 'AIzaSyAT07iMlfZ9bJt1gmGj9KhJDLFY8srI6dA'),
+(124, 'google_maps_key', 'AIzaSyCaNUDAM3xlf3i55pS3evhCrUmbiluyjHg'),
 (125, 'mobile_language', 'en'),
 (126, 'app_version', '2.0.0'),
 (127, 'enable_version', '1'),

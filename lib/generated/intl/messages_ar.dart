@@ -345,6 +345,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "your_have_an_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("لديك أمر معين لك"),
 
 
+    "city" : MessageLookupByLibrary.simpleMessage("مدينة"),
+    "cityIsRequired" : MessageLookupByLibrary.simpleMessage("خانة المدينة / البلدة مطلوب"),
+    "stateIsRequired" : MessageLookupByLibrary.simpleMessage("خانة المحافظة / الولاية / المقاطعة مطلوب"),
+    "stateProvince" : MessageLookupByLibrary.simpleMessage("المحافظة / الولاية / المقاطعة"),
+
+    "streetIsRequired" : MessageLookupByLibrary.simpleMessage("خانة اسم الشارع مطلوب"),
+    "streetName" : MessageLookupByLibrary.simpleMessage("اسم الشارع"),
+    "streetNameApartment" : MessageLookupByLibrary.simpleMessage("الشقة"),
+    "streetNameBlock" : MessageLookupByLibrary.simpleMessage("الحي"),
+
+    "country" : MessageLookupByLibrary.simpleMessage("بلد"),
+    "countryIsRequired" : MessageLookupByLibrary.simpleMessage("خانة الدولة مطلوب"),
+    "house" : MessageLookupByLibrary.simpleMessage("رقم المنزل / المبنى"),
+    "apartmentNumber" : MessageLookupByLibrary.simpleMessage("رقم الشقة"),
+    "longitude" : MessageLookupByLibrary.simpleMessage("خط الطول"),
+    "latitude" : MessageLookupByLibrary.simpleMessage("خط العرض"),
+    "pick_location" : MessageLookupByLibrary.simpleMessage("اختر الموقع باستخدام الخريطة"),
 
   };
 }
