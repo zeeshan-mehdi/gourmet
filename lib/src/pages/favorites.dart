@@ -268,7 +268,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     ),
                                   ),
                                 ),
-                                _con.favorites.isEmpty
+                                _con.favoritesKitchen.isEmpty
                                     ? Center(
                                   child: Text("There is no favourtie items"),
                                 )
@@ -279,19 +279,19 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount: _con.favorites.length,
+                                    itemCount: _con.favoritesKitchen.length,
                                     separatorBuilder: (context, index) {
                                       return SizedBox(height: 10);
                                     },
                                     itemBuilder: (context, index) {
                                       return FavoriteListItemWidget(
                                         heroTag: 'favorites_list',
-                                        favorite: _con.favorites.elementAt(index),
+                                        favorite: _con.favoritesKitchen.elementAt(index),
                                       );
                                     },
                                   ),
                                 ),
-                                _con.favorites.isEmpty
+                                _con.favoritesKitchen.isEmpty
                                     ? CircularLoadingWidget(height: 500)
                                     : Offstage(
                                   offstage: this.layout != 'grid',
@@ -306,10 +306,10 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     // horizontal, this produces 2 rows.
                                     crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
                                     // Generate 100 widgets that display their index in the List.
-                                    children: List.generate(_con.favorites.length, (index) {
+                                    children: List.generate(_con.favoritesKitchen.length, (index) {
                                       return FavoriteGridItemWidget(
                                         heroTag: 'favorites_grid',
-                                        favorite: _con.favorites.elementAt(index),
+                                        favorite: _con.favoritesKitchen.elementAt(index),
                                       );
                                     }),
                                   ),

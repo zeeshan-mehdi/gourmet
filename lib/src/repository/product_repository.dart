@@ -327,7 +327,7 @@ Future<Favorite> addFavoriteKitchen(String favorite) async {
     "user_id": _user.id,
     "market_id": favorite //id
   };
-  final String url = '${GlobalConfiguration().getValue('api_base_url')}favorites?$_apiToken';
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}favorite_markets?$_apiToken';
   try {
     final client = new http.Client();
     final response = await client.post(
