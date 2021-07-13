@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/restaurent_app/src/controllers/product_controller.dart';
@@ -565,6 +566,7 @@ class _Page2State extends StateMVC<Page2> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               keyboardType: TextInputType.number,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               onSaved: (input) => _con.product.capacity= input,
@@ -599,6 +601,7 @@ class _Page2State extends StateMVC<Page2> {
             ),
             SizedBox(height: 30),
             TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               keyboardType: TextInputType.number,
               onSaved: (input) => _con.product.packageItemsCount = input,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
@@ -619,7 +622,8 @@ class _Page2State extends StateMVC<Page2> {
             SizedBox(height: 30),
 
             DropdownButton<Market>(
-              hint: Text('Choose Kitchen'),
+              isExpanded: true,
+              hint: Text('Choose Kitchen',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
               value: selectedKitchen,
               items:kitchens.map((Market value) {
                 return new DropdownMenuItem<Market>(
@@ -636,7 +640,8 @@ class _Page2State extends StateMVC<Page2> {
             ),
             SizedBox(height: 30),
            DropdownButton<Category>(
-             hint: Text('Choose Category'),
+             isExpanded: true,
+             hint: Text('Choose Category',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
              value: selectedCategory,
              items:categories.map((Category value) {
             return new DropdownMenuItem<Category>(

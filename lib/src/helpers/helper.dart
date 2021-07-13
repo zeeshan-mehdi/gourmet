@@ -194,8 +194,12 @@ class Helper {
     String _unit = setting.value.distanceUnit;
     double _deliveryRange = _market.deliveryRange;
     double _distance = _market.distance;
+
+
+
     carts?.forEach((Cart _cart) {
       _can &= _cart.product.deliverable;
+      print('product deliverable ${_cart.product.deliverable}');
     });
 
     if (_unit == 'km') {
@@ -205,7 +209,15 @@ class Helper {
       _distance = sqrt(pow(69.1 * (double.parse(_market.latitude) - deliveryAddress.value.latitude), 2) +
           pow(69.1 * (deliveryAddress.value.longitude - double.parse(_market.longitude)) * cos(double.parse(_market.latitude) / 57.3), 2));
     }
+
+    print('delivery address added by client ${deliveryAddress.value.toMap()}');
+
+    print('delivery range $_deliveryRange and distance   : $_distance');
+
     _can &= _market.availableForDelivery && (_distance < _deliveryRange) && !deliveryAddress.value.isUnknown();
+
+    print('can delivery $_can     ');
+
     return _can;
 
     return true;

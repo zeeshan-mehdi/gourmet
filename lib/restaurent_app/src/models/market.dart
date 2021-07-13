@@ -28,12 +28,17 @@ class Market {
   bool availableForDelivery= false;
   double deliveryRange;
   double distance;
+  String cuisine;
+  bool sameDayDelivery = false;
+  bool vegetarianFood = false;
+  int maximumOrdersPerDay = 100;
+  int autoAccept;
 
   String uuid;
   List<User> users;
   List drivers;
 
-  Market({closed = false,isPaidKitchen = false,availableForDelivery= false});
+  Market({this.closed = false,this.isPaidKitchen = false,this.availableForDelivery= false,this.sameDayDelivery = false,this.maximumOrdersPerDay = 100,this.vegetarianFood = false});
 
   Market.fromJSON(Map<String, dynamic> jsonMap) {
     print(jsonMap);
@@ -55,8 +60,15 @@ class Market {
       informationAr = jsonMap['information_ar'];
       latitude = jsonMap['latitude'];
       longitude = jsonMap['longitude'];
+      autoAccept = jsonMap['auto_accept'] ?? 0;
       closed = jsonMap['closed'] ?? false;
       availableForDelivery = jsonMap['available_for_delivery'] ?? false;
+      vegetarianFood = jsonMap['vegetarian_food']==1 ?? false;
+      sameDayDelivery = jsonMap['same_day_delivery']==1 ?? false;
+      isPaidKitchen = jsonMap['is_paid']==1 ?? false;
+      cuisine = jsonMap['cuisine'] ?? null;
+      maximumOrdersPerDay = jsonMap['maximum_orders_per_day'] ??100;
+
       distance = jsonMap['distance'] != null ? double.parse(jsonMap['distance'].toString()) : 0.0;
       users = jsonMap['users'] != null && (jsonMap['users'] as List).length > 0 ? List.from(jsonMap['users']).map((element) => User.fromJSON(element)).toSet().toList() : [];
     } catch (e) {
@@ -96,6 +108,12 @@ class Market {
   }
 
   Map<String, dynamic> toJson(apiToken) {
+
+    // String cuisine;
+    // bool sameDayDelivery = false;
+    // bool vegetarianFood = false;
+    // int maximumOrdersPerDay = 100;
+
     return {
       'user_id': id,
       'name': name,
@@ -104,7 +122,7 @@ class Market {
       'latitude': latitude,
       'longitude': longitude,
       'delivery_fee': deliveryFee,
-      'delivery_range': distance,
+      'delivery_range': deliveryRange,
       'description': description,
       'description_ar': descriptionAr,
       'information': information,
@@ -118,6 +136,11 @@ class Market {
       'mobile': mobile,
       'phone': phone,
       'drivers':drivers,
+      'cuisine':cuisine,
+      'same_day_delivery':sameDayDelivery,
+      'vegetarian_food':vegetarianFood,
+      'maximum_orders_per_day':maximumOrdersPerDay,
+
       'api_token':apiToken
     };
   }

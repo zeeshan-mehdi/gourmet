@@ -49,7 +49,7 @@ class UserController extends ControllerMVC {
     }, onDone: () {});
   }
 
-  updateMembership(model.User user,lang,context,double amount,int durationInDays)async{
+  updateMembership(model.User user,lang,context,double amount,int durationInDays,String membershipType)async{
     await MyFatoorah.startPayment(
       context: context,
       errorChild:const Center(
@@ -76,7 +76,7 @@ class UserController extends ControllerMVC {
         errorUrl:
         'https://www.digitalpaymentguru.com/wp-content/uploads/2019/08/Transaction-Failed.png',
         //invoiceAmount: 100*100.0,
-        invoiceAmount: amount.toDouble() * 100,
+        invoiceAmount: amount.toDouble(),
         language: lang=='en'? ApiLanguage.English : ApiLanguage.Arabic,
       ),
     ).then((PaymentResponse response) async{
@@ -84,6 +84,7 @@ class UserController extends ControllerMVC {
       if(response.isSuccess){
         userRepo.currentUser.value.memebership = 1;
         userRepo.currentUser.value.trialEnds = DateTime.now().add(Duration(days: durationInDays)).toString();
+        userRepo.currentUser.value.membershipType = membershipType;
         update(userRepo.currentUser.value);
       }else if(response.isError){
         Fluttertoast.showToast(msg: 'Payment Failed please try again!!');

@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
@@ -281,9 +282,14 @@ class _Page1State extends StateMVC<Page1> {
   bool isKitchenPaid = false;
   bool isKitchenClosed = false;
   bool isKitchenAvailableForDelivery = false;
+  bool sameDayDelivery = false;
   List _selectedValues = [];
   List drivers;
   bool loading = true;
+  String selectedCuisine;
+  List<String> cuisines = ['Desert','Asian','Arabic','Pizza','Kuwaiti','Fast Food','European'];
+
+  var vegetarianFood = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -409,6 +415,7 @@ class _Page1State extends StateMVC<Page1> {
 
 
             TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               keyboardType: TextInputType.number,
               onSaved: (input) => _con.kitchen.deliveryRange = double.parse(input),
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
@@ -427,12 +434,33 @@ class _Page1State extends StateMVC<Page1> {
             ),
             SizedBox(height: 30),
             TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               keyboardType: TextInputType.number,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               onSaved: (input) => _con.kitchen.deliveryFee = double.parse(input),
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
                 labelText: 'Delivery Fee',
+                labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                contentPadding: EdgeInsets.all(12),
+                hintText: '20',
+                hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
+
+                border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
+              ),
+            ),
+
+            SizedBox(height: 30),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
+              validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
+              onSaved: (input) => _con.kitchen.maximumOrdersPerDay = int.parse(input),
+              // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
+              decoration: InputDecoration(
+                labelText: 'Maximum Orders Per Day',
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -454,6 +482,28 @@ class _Page1State extends StateMVC<Page1> {
             ),
 
             SizedBox(height: 0),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                isExpanded: true,
+                hint: Text('Select Cuisine',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
+                value: selectedCuisine,
+                items:cuisines.map((String value) {
+                  return new DropdownMenuItem<String>(
+                    value: value,
+                    child: new Text(value),
+                  );
+                }).toList(),
+                onChanged: (val) {
+                  print(val);
+                  _con.kitchen.cuisine =  val;
+                  selectedCuisine = val;
+                  setState(() { });
+                },
+              ),
+            ),
+
             Row(
               children: [
                 Checkbox(
@@ -499,6 +549,30 @@ class _Page1State extends StateMVC<Page1> {
                   setState(() { });
                 }),
                 Text('Kitchen Available For Delivery')
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Theme.of(context).accentColor,
+                    value: sameDayDelivery, onChanged: (newVal){
+                  sameDayDelivery = newVal;
+                  _con.kitchen.sameDayDelivery = newVal;
+                  setState(() { });
+                }),
+                Text('Same Day Delivery')
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                    activeColor: Theme.of(context).accentColor,
+                    value: vegetarianFood, onChanged: (newVal){
+                  vegetarianFood = newVal;
+                  _con.kitchen.vegetarianFood = newVal;
+                  setState(() { });
+                }),
+                Text('Vegetarian Food')
               ],
             ),
             SizedBox(height: 10),
@@ -558,11 +632,12 @@ class _Page2State extends StateMVC<Page2> {
               keyboardType: TextInputType.phone,
               validator: (input) => input==null||input=="" || input.length<9? S.of(context).invalid_field : null,
               onSaved: (input) => _con.kitchen.phone = input,
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               decoration: InputDecoration(
                 labelText: 'Phone',
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: '+965XXXXXXXX',
+                hintText: '00965XXXXXXXX',
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -572,14 +647,16 @@ class _Page2State extends StateMVC<Page2> {
             ),
             SizedBox(height: 30),
             TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               keyboardType: TextInputType.phone,
               onSaved: (input) => _con.kitchen.mobile = input,
               validator: (input) => input==null||input=="" || input.length<9? S.of(context).invalid_field : null,
               decoration: InputDecoration(
+
                 labelText: 'Mobile',
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: '+965XXXXXXXX',
+                hintText: '00965XXXXXXXX',
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),

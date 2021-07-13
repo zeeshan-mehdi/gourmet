@@ -27,7 +27,7 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
           },),
 
           ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',onPressed: (){
-            Navigator.of(context).pushNamed('/RestaurantsMemberShip');
+            Navigator.of(context).pushNamed('/Pages',arguments: 10);
 
 
 
@@ -62,7 +62,9 @@ class _UserProfileSectionState extends State<UserProfileSection> {
             Navigator.of(context).pushNamed('/Pages',arguments: 6);
           },),
 
-          ListItem(color:Colors.lightBlue , title: 'My Addresses',),
+          ListItem(color:Colors.lightBlue , title: 'My Addresses',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: 11);//my addresses
+          },),
 
           ListItem(color:Colors.indigo, title: 'Orders',onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 1);

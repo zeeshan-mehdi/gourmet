@@ -151,6 +151,9 @@ Future<Address> addAddress(Address address) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(address.toMap()),
   );
+
+  print(response.body);
+
   return Address.fromJSON(json.decode(response.body)['data']);
 }
 

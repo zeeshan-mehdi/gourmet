@@ -42,7 +42,7 @@ class Setting {
       accentDarkColor = jsonMap['accent_dark_color'] ?? '';
       scaffoldDarkColor = jsonMap['scaffold_dark_color'] ?? '';
       scaffoldColor = jsonMap['scaffold_color'] ?? '';
-      googleMapsKey = jsonMap['google_maps_key'] ?? 'AIzaSyAT07iMlfZ9bJt1gmGj9KhJDLFY8srI6dA'??null;
+      googleMapsKey = jsonMap['google_maps_key'] ?? 'AIzaSyCaNUDAM3xlf3i55pS3evhCrUmbiluyjHg'??null;
       fcmKey = jsonMap['fcm_key'] ?? null;
       mobileLanguage.value = Locale(jsonMap['mobile_language'] ?? "en", '');
       appVersion = jsonMap['app_version'] ?? '';

@@ -35,6 +35,265 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+
+
+  //add new address fields
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City/Area',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `State / Province`
+  String get stateProvince {
+    return Intl.message(
+      'Way/ Jada/ Province/ Governorate',
+      name: 'stateProvince',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Block`
+  String get block {
+    return Intl.message(
+      'Block',
+      name: 'block',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `Province`
+  String get province {
+    return Intl.message(
+      'Province',
+      name: 'province',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `area`
+  String get area {
+    return Intl.message(
+      'Area',
+      name: 'area',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `area`
+  String get jada {
+    return Intl.message(
+      'Jada',
+      name: 'jada',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+
+  /// `governorate`
+  String get governorate {
+    return Intl.message(
+      'Governorate',
+      name: 'governorate',
+      desc: '',
+      args: [],
+    );
+  }
+  /// `way`
+  String get way {
+    return Intl.message(
+      'Way',
+      name: 'way',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emirates`
+  String get emirates {
+    return Intl.message(
+      'Emirates',
+      name: 'emirates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zip-code`
+  String get zipCode {
+    return Intl.message(
+      'Zip-code',
+      name: 'zipCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Apartment`
+  String get apartmentNumber {
+    return Intl.message(
+      'Apartment Number',
+      name: 'streetNameApartment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Street Name`
+  String get streetName {
+    return Intl.message(
+      'Street',
+      name: 'streetName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The first name field is required`
+  String get firstNameIsRequired {
+    return Intl.message(
+      'The first name field is required',
+      name: 'firstNameIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Block`
+  String get streetNameBlock {
+    return Intl.message(
+      'Block',
+      name: 'streetNameBlock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The last name field is required`
+  String get lastNameIsRequired {
+    return Intl.message(
+      'The last name field is required',
+      name: 'lastNameIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The street name field is required`
+  String get streetIsRequired {
+    return Intl.message(
+      'The street name field is required',
+      name: 'streetIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The city field is required`
+  String get cityIsRequired {
+    return Intl.message(
+      'The city field is required',
+      name: 'cityIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The state field is required`
+  String get stateIsRequired {
+    return Intl.message(
+      'The state field is required',
+      name: 'stateIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The country field is required`
+  String get countryIsRequired {
+    return Intl.message(
+      'The country field is required',
+      name: 'countryIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The phone number field is required`
+  String get phoneIsRequired {
+    return Intl.message(
+      'The phone number field is required',
+      name: 'phoneIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `House - Building Number`
+  String get house {
+    return Intl.message(
+      'House - Building Number',
+      name: 'house',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `House - Building Number`
+  String get floor {
+    return Intl.message(
+      'Floor',
+      name: 'floor',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `The email field is required`
+  String get emailIsRequired {
+    return Intl.message(
+      'The email field is required',
+      name: 'emailIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The zip code field is required`
+  String get zipCodeIsRequired {
+    return Intl.message(
+      'The zip code field is required',
+      name: 'zipCodeIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  //end here
+
   /// `Search for markets or products`
   String get search_for_markets_or_products {
     return Intl.message(
@@ -1355,6 +1614,37 @@ class S {
     return Intl.message(
       'Add Delivery Address',
       name: 'add_delivery_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Longitude`
+  String get longitude {
+    return Intl.message(
+      'Longitude',
+      name: 'longitude',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latitude`
+  String get latitude {
+    return Intl.message(
+      'Latitude',
+      name: 'latitude',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Pick Location using map`
+  String get pick_location {
+    return Intl.message(
+      'Pick Location Using Map',
+      name: 'pick_location',
       desc: '',
       args: [],
     );

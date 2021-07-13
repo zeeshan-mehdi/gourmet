@@ -23,7 +23,12 @@ class Market {
   double deliveryRange;
   double distance;
   List<User> users;
-  int isPaid;
+  bool isPaidKitchen = false;
+
+  String cuisine;
+  bool sameDayDelivery = false;
+  bool vegetarianFood = false;
+  int maximumOrdersPerDay = 100;
 
   int autoAccept;
 
@@ -48,8 +53,12 @@ class Market {
       longitude = jsonMap['longitude'];
       closed = jsonMap['closed'] ?? false;
       autoAccept = jsonMap['auto_accept'] ?? 0;
-      isPaid = jsonMap['is_paid'] ?? 0;
+      isPaidKitchen = jsonMap['is_paid']==1 ?? false;
       availableForDelivery = jsonMap['available_for_delivery'] ?? false;
+      vegetarianFood = jsonMap['vegetarian_food']==1 ?? false;
+      sameDayDelivery = jsonMap['same_day_delivery']==1 ?? false;
+      cuisine = jsonMap['cuisine'] ?? null;
+      maximumOrdersPerDay = jsonMap['maximum_orders_per_day'] ??100;
       distance = jsonMap['distance'] != null ? double.parse(jsonMap['distance'].toString()) : 0.0;
       users = jsonMap['users'] != null && (jsonMap['users'] as List).length > 0 ? List.from(jsonMap['users']).map((element) => User.fromJSON(element)).toSet().toList() : [];
     } catch (e) {
@@ -71,7 +80,7 @@ class Market {
       closed = false;
       availableForDelivery = false;
       distance = 0.0;
-      isPaid = 0;
+      isPaidKitchen = false;
       autoAccept = 0;
       users = [];
       print(CustomTrace(StackTrace.current, message: e.toString()).toString());
@@ -87,6 +96,10 @@ class Market {
       'longitude': longitude,
       'delivery_fee': deliveryFee,
       'distance': distance,
+      'cuisine':cuisine,
+      'same_day_delivery':sameDayDelivery,
+      'vegetarian_food':vegetarianFood,
+      'maximum_orders_per_day':maximumOrdersPerDay,
     };
   }
 }

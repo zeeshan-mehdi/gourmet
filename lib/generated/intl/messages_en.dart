@@ -346,6 +346,29 @@ class MessageLookup extends MessageLookupByLibrary {
     "your_have_an_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("Your have an order assigned to you"),
 
 
+    //new address fields
+
+    "yourUsernameEmail" : MessageLookupByLibrary.simpleMessage("Your username or email"),
+    "zipCode" : MessageLookupByLibrary.simpleMessage("Zip-code"),
+    "zipCodeIsRequired" : MessageLookupByLibrary.simpleMessage("The zip code field is required"),
+
+    "streetIsRequired" : MessageLookupByLibrary.simpleMessage("The street name field is required"),
+    "streetName" : MessageLookupByLibrary.simpleMessage("Street Name"),
+    "streetNameApartment" : MessageLookupByLibrary.simpleMessage("Apartment"),
+    "streetNameBlock" : MessageLookupByLibrary.simpleMessage("Block"),
+
+    "stateIsRequired" : MessageLookupByLibrary.simpleMessage("The state field is required"),
+    "stateProvince" : MessageLookupByLibrary.simpleMessage("State / Province"),
+
+    "city" : MessageLookupByLibrary.simpleMessage("City"),
+    "cityIsRequired" : MessageLookupByLibrary.simpleMessage("The city field is required"),
+    "house" : MessageLookupByLibrary.simpleMessage("House/Building Number"),
+    "floor" : MessageLookupByLibrary.simpleMessage("Floor"),
+    "apartmentNumber" : MessageLookupByLibrary.simpleMessage("Apartment Number"),
+    "latitude" : MessageLookupByLibrary.simpleMessage("Latitude"),
+    "longitude" : MessageLookupByLibrary.simpleMessage("Longitude"),
+    "pick_location" : MessageLookupByLibrary.simpleMessage("Pick Location Using Map"),
+
 
   };
 }
