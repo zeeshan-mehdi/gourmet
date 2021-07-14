@@ -90,29 +90,32 @@ class ListItem extends StatelessWidget {
   const ListItem({Key key, this.title, this.color, this.onPressed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:  Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                    border: Border.all(color: color),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: color
+    return InkWell(
+      child: Container(
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: color),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: color
+                  ),
                 ),
-              ),
-              SizedBox(width: 20,),
-              Text('$title',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black,fontSize: 20),),
+                SizedBox(width: 20,),
+                Text('$title',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black,fontSize: 20),),
 
-            ],
-          ),
-          IconButton(icon: Icon(Icons.arrow_forward_ios_outlined,size: 20,),color: Colors.black.withOpacity(0.3), onPressed: this.onPressed)
+              ],
+            ),
+            IconButton(icon: Icon(Icons.arrow_forward_ios_outlined,size: 20,),color: Colors.black.withOpacity(0.3), onPressed: (){})
 
-        ],),
+          ],),
+      ),
+      onTap: this.onPressed,
     );
   }
 }

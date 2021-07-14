@@ -176,10 +176,8 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                            print("hello");
                          //  Navigator.of(context).pushNamed('/Coisines');
                            Navigator.of(context).pushNamed('/FilterPage');
-
                            }
                          ),
-
                        ],
                      ),
                       Padding(

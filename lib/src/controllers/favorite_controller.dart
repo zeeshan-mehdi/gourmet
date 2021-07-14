@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:markets/src/models/market.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -10,9 +12,11 @@ class FavoriteController extends ControllerMVC {
   List<Favorite> favoritesKitchen = <Favorite>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
+
   FavoriteController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     listenForFavorites();
+    listenForFavoritesKitchen();
   }
 
   void listenForFavorites({String message}) async {
@@ -34,23 +38,68 @@ class FavoriteController extends ControllerMVC {
     });
   }
 
-  void listenForFavoritesKitchen({String message}) async {
-    final Stream<Favorite> stream = await getFavoritesKitchen();
-    stream.listen((Favorite _favorite) {
-      setState(() {
-        favorites.add(_favorite);
-      });
-    }, onError: (a) {
+
+  void deleteFavoriteKitchen(Favorite favorite)async{
+    var resp = await removeFavoriteKitchen(favorite);
+
+    if(resp['success']==true) {
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-        content: Text(S.of(state.context).verify_your_internet_connection),
+        content: Text('Kitchen removed from Favorites'),
       ));
-    }, onDone: () {
-      if (message != null) {
-        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-          content: Text(message),
-        ));
-      }
+
+      listenForFavoritesKitchen();
+    }else{
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text('Failed to remove Kitchen from Favorites'),
+      ));
+    }
+
+
+
+  }
+
+  void listenForFavoritesKitchen({String message}) async {
+    favoritesKitchen = [];
+    Stream<FavoriteMarket> data = await getFavoritesKitchen();
+    print('favourite kitchens that i have');
+
+    await data.listen((marketJson) async{
+      int id = marketJson.marketId;
+      Market m = await getbyMarket(id);
+      Favorite f = Favorite();
+      f.id = '${marketJson.favoriteId}';
+      f.market = m;
+      favoritesKitchen.add(f);
+      //print(m);
+      setState(() {});
     });
+
+    setState(() { });
+
+
+    //print(favoritesKitchen);
+
+    //setState(() {});
+    // print("favorit kitchen is caling");
+    // var aa  = stream.map((event) => event.id.toString());
+    // print(aa.map((event) => event.toString()));
+    // print(stream.map((event) => event.id.toString()));
+    // stream.listen((Favorite _favorite) {
+    //   setState(() {
+    //     favoritesKitchen.add(_favorite);
+    //     print(_favorite);
+    //   });
+    // }, onError: (a) {
+    //   ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+    //     content: Text(S.of(state.context).verify_your_internet_connection),
+    //   ));
+    // }, onDone: () {
+    //   if (message != null) {
+    //     ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+    //       content: Text(message),
+    //     ));
+    //   }
+    // });
   }
 
   Future<void> refreshFavorites() async {

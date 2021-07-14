@@ -77,7 +77,7 @@ class ProductController extends ControllerMVC {
 
       return carts[0].product?.market?.id == product.market?.id;
     }
-    return false;
+    return true;
   }
 
   void addToCart(Product product, {bool reset = false}) async {
