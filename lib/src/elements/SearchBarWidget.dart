@@ -31,7 +31,7 @@ class SearchBarWidget extends StatelessWidget {
             Expanded(
               child: Text(
                 "Search",
-               // S.of(context).search_for_markets_or_products,
+                // S.of(context).search_for_markets_or_products,
                 maxLines: 1,
                 softWrap: false,
                 overflow: TextOverflow.fade,
