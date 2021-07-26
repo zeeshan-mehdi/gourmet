@@ -1,12 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:markets/restaurent_app/src/elements/CardWidget.dart';
 import 'package:markets/restaurent_app/src/pages/pages.dart';
+import 'package:markets/src/elements/CardWidget.dart';
 import 'package:markets/src/elements/LoginSlider.dart';
 import 'package:markets/src/elements/PaymentSettingsDialog.dart';
 import 'package:markets/src/elements/ProfileKitchenSection.dart';
+import 'package:markets/src/models/route_argument.dart';
+import 'package:markets/src/pages/product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../generated/l10n.dart';
+import '../controllers/search_controller.dart';
+import '../elements/ProductItemWidget.dart';
+
 import '../models/user.dart' as userModel;
 import '../controllers/user_controller.dart';
 import '../elements/BlockButtonWidget.dart';
@@ -22,12 +27,16 @@ class CoisinesDetail extends StatefulWidget {
 }
 
 class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
-  UserController _con;
-
-  _CoisinesDetailState() : super(UserController()) {
+  // UserController _con;
+  //
+  // _CoisinesDetailState() : super(UserController()) {
+  //   _con = controller;
+  // }
+  SearchController _con;
+  final String heroTag =  "search";
+  _CoisinesDetailState() : super(SearchController()) {
     _con = controller;
   }
-
   List<CuisinesDetail> cuisinesDetailItems;
 
   @override
@@ -35,6 +44,7 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
     super.initState();
     cuisinesDetailItems = CuisinesDetail.sampleData();
   }
+
 
   // HomeController _conn;
   @override
@@ -56,7 +66,7 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
         //         Navigator.of(context).pop();
         //       },
         //     )),
-        key: _con.scaffoldKey,
+        //key: _con.scaffoldKey,
         resizeToAvoidBottomInset: false,
         body: Column(
             // alignment: AlignmentDirectional.topCenter,
@@ -103,7 +113,7 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                             children: [
                            //   Spacer(),
                               Text(
-                                "4 kitchen",
+                                "3 kitchen",
                                 style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),
                               ),
                               Spacer()
@@ -133,168 +143,240 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                               top: 0, right: 20, left: 20, bottom: 0),
                           width: config.App(context).appWidth(100),
 //                          height: config.App(context).appHeight(55),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  height: config.App(context).appHeight(59),
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: cuisinesDetailItems.length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          print("hello");
-                                          //  },
+                      child:  _con.markets.isEmpty && _con.products.isEmpty
+                          ?SizedBox()
+                          : Expanded(
+                        child: ListView(
+                          children: <Widget>[
 
-                                          // Navigator.of(context).pushNamed('/Product',
-                                          //     arguments: RouteArgument(
-                                          //       id: '0',
-                                          //       param: widget.marketsList.elementAt(index).id,
-                                          //       heroTag: widget.heroTag,
-                                          //     ));
-                                        },
-                                        child: Container(
-                                          width: 292,
-                                          height: 130,
-                                          margin: EdgeInsets.only(
-                                              left: 8,
-                                              right: 8,
-                                              top: 8,
-                                              bottom: 8),
-                                          decoration: BoxDecoration(
-                                            // color: Colors.grey.withOpacity(0.9),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            color: Colors.white,
-                                             boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 4,
-                                                color: Theme.of(context)
-                                                    .hintColor
-                                                    .withOpacity(0.08),
-                                                //  col
-                                              )
-                                            ]
-                                            // gradient: LinearGradient(
-                                            //   colors: [
-                                            //     Colors.grey,
-                                            //     Colors.grey.withOpacity(0.9),
-                                            //   ],
-                                            //   begin: const FractionalOffset(
-                                            //       1.0, 1.0),
-                                            //   end: const FractionalOffset(
-                                            //       1.0, 0.0),
-                                            //   stops: [0.0, 1.0],
-                                            //   tileMode: TileMode.clamp,
-                                            // ),
-                                          ),
-                                          child:  Column(
-                                            children: [
-                                              Spacer(),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                // mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  // Image of the card
-                                                  SizedBox(height: 20,),
-                                                  Container(
-                                                   //  tag: this.heroTag + market.id,
-                                                    child: ClipRRect(
-                                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
-                                                      child: CachedNetworkImage(
-                                                        height: 60,
-                                                        width: 80,
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: "market.image.url",
-                                                        placeholder: (context, url) => Image.asset(
-                                                          'assets/img/loading.gif',
-                                                          fit: BoxFit.cover,
-                                                          width: double.infinity,
-                                                          height: 60,
-                                                        ),
-                                                        errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: <Widget>[
-                                                        Text(
-                                                          cuisinesDetailItems[index].name,
-                                                          overflow: TextOverflow.fade,
-                                                          softWrap: false,
-                                                          style: Theme.of(context).textTheme.subtitle1,
-                                                        ),
-                                                        Text(
-                                                          cuisinesDetailItems[index].address,
-                                                         // cuisinesDetailItems.name.length > 25 ? cuisinesDetailItems.name.substring(0,25)+'...' : market?.address,
-                                                          // Helper.skipHtml(market?.address??''),
-                                                          overflow: TextOverflow.ellipsis,
+                            // Row(
+                            //   children: [
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(right: 0, left: 12),
+                            //       child:ElevatedButton(
+                            //         style:  ButtonStyle(
+                            //             backgroundColor: MaterialStateProperty.all(Colors.orangeAccent),
+                            //             // padding: MaterialStateProperty.all(EdgeInsets.all(50)),
+                            //             textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                            //         child: const Text('Cuisines'),
+                            //         onPressed:(){
+                            //           Navigator.of(context).pushNamed('/Coisines');
+                            //         },
+                            //       ),),
+                            //     Spacer(),
+                            //     InkWell(
+                            //         child: Padding(
+                            //           padding: const EdgeInsets.only(right: 12, left: 0),
+                            //           child: Icon(Icons.sort, color: Colors.grey),
+                            //         ),
+                            //         onTap:()  {
+                            //           print("hello");
+                            //           //  Navigator.of(context).pushNamed('/Coisines');
+                            //           Navigator.of(context).pushNamed('/FilterPage');
+                            //         }
+                            //     ),
+                            //   ],
+                            // ),
 
-                                                          //overflow: TextOverflow.fade,
-                                                          softWrap: false,
-                                                          style: Theme.of(context).textTheme.caption,
-                                                        ),
-                                                      //  SizedBox(height: 5),
-                                                        SizedBox(height: 5),
-                                                        Row(
-                                                          children: Helper.getStarsList(double.parse(cuisinesDetailItems[index].rating)),
-                                                        ),
-                                                        // Row(
-                                                        //   children: Helper.getStarsList(double.parse(market.rate)),
-                                                        // ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  // )
-                                                ],
-                                              ),
-                                              Spacer(),
-                                             // SizedBox(height: 12,),
-                                              // Divider(color: Colors.black.withOpacity(0.2),
-                                              //   indent: 0,endIndent: 0,)
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
+                            Padding(
+                              padding:
+                              const EdgeInsets.only(top: 0, left: 20, right: 20),
+                              child: ListTile(
+                                dense: true,
+                                contentPadding: EdgeInsets.symmetric(vertical: 0),
+                                title: Text(
+                                  S.of(context).markets_results,
+                                  style: Theme.of(context).textTheme.subtitle1,
                                 ),
-
-                                // BlockButtonWidget(
-                                //   text: Text(
-                                //     S.of(context).login,
-                                //     style: TextStyle(
-                                //         color:
-                                //             Theme.of(context).primaryColor),
-                                //   ),
-                                //   color: Theme.of(context).accentColor,
-                                //   onPressed: () {
-                                //     _con.login();
-                                //   },
-                                // ),
-
-                                // MaterialButton(
-                                //   elevation: 0,
-                                //   onPressed: () {
-                                //     Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
-                                //   },
-                                //   shape: StadiumBorder(),
-                                //   textColor: Theme.of(context).hintColor,
-                                //   child: Text(S.of(context).skip),
-                                //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-                                // ),
-
-                                //   SizedBox(height: 30),
-                                //   SizedBox(height: 10),
-                              ],
-                              //),
+                              ),
                             ),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount: _con.markets.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductWidget(routeArgument: RouteArgument(param: _con.markets.elementAt(index).id),)));
+
+                                    // Navigator.of(context).pushNamed('/roduct',
+                                    //     arguments: RouteArgument(
+                                    //       id: '0',
+                                    //       param: _con.markets.elementAt(index).id,
+                                    //       heroTag: widget.heroTag,
+                                    //     ));
+                                  },
+                                  child: CardWidget(
+                                      market: _con.markets.elementAt(index),
+                                      heroTag: heroTag),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+//                             child: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.stretch,
+//                               mainAxisAlignment: MainAxisAlignment.start,
+//                               children: <Widget>[
+//                                 Container(
+//                                   height: config.App(context).appHeight(59),
+//                                   child: ListView.builder(
+//                                     scrollDirection: Axis.vertical,
+//                                     itemCount: cuisinesDetailItems.length,
+//                                     itemBuilder: (context, index) {
+//                                       return GestureDetector(
+//                                         onTap: () {
+//                                           print("hello");
+//                                           //  },
+//
+//                                           // Navigator.of(context).pushNamed('/Product',
+//                                           //     arguments: RouteArgument(
+//                                           //       id: '0',
+//                                           //       param: widget.marketsList.elementAt(index).id,
+//                                           //       heroTag: widget.heroTag,
+//                                           //     ));
+//                                         },
+//                                         child: Container(
+//                                           width: 292,
+//                                           height: 130,
+//                                           margin: EdgeInsets.only(
+//                                               left: 8,
+//                                               right: 8,
+//                                               top: 8,
+//                                               bottom: 8),
+//                                           decoration: BoxDecoration(
+//                                             // color: Colors.grey.withOpacity(0.9),
+//                                             borderRadius: BorderRadius.all(
+//                                                 Radius.circular(10)),
+//                                             color: Colors.white,
+//                                              boxShadow: [
+//                                               BoxShadow(
+//                                                 blurRadius: 4,
+//                                                 color: Theme.of(context)
+//                                                     .hintColor
+//                                                     .withOpacity(0.08),
+//                                                 //  col
+//                                               )
+//                                             ]
+//                                             // gradient: LinearGradient(
+//                                             //   colors: [
+//                                             //     Colors.grey,
+//                                             //     Colors.grey.withOpacity(0.9),
+//                                             //   ],
+//                                             //   begin: const FractionalOffset(
+//                                             //       1.0, 1.0),
+//                                             //   end: const FractionalOffset(
+//                                             //       1.0, 0.0),
+//                                             //   stops: [0.0, 1.0],
+//                                             //   tileMode: TileMode.clamp,
+//                                             // ),
+//                                           ),
+//                                           child:  Column(
+//                                             children: [
+//                                               Spacer(),
+//                                               Row(
+//                                                 mainAxisAlignment: MainAxisAlignment.start,
+//                                                 // mainAxisSize: MainAxisSize.min,
+//                                                 crossAxisAlignment: CrossAxisAlignment.start,
+//                                                 children: <Widget>[
+//                                                   // Image of the card
+//                                                   SizedBox(height: 20,),
+//                                                   Container(
+//                                                    //  tag: this.heroTag + market.id,
+//                                                     child: ClipRRect(
+//                                                       borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
+//                                                       child: CachedNetworkImage(
+//                                                         height: 60,
+//                                                         width: 80,
+//                                                         fit: BoxFit.cover,
+//                                                         imageUrl: "market.image.url",
+//                                                         placeholder: (context, url) => Image.asset(
+//                                                           'assets/img/loading.gif',
+//                                                           fit: BoxFit.cover,
+//                                                           width: double.infinity,
+//                                                           height: 60,
+//                                                         ),
+//                                                         errorWidget: (context, url, error) => Icon(Icons.error_outline),
+//                                                       ),
+//                                                     ),
+//                                                   ),
+//                                                   Padding(
+//                                                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+//                                                     child: Column(
+//                                                       crossAxisAlignment: CrossAxisAlignment.start,
+//                                                       children: <Widget>[
+//                                                         Text(
+//                                                           cuisinesDetailItems[index].name,
+//                                                           overflow: TextOverflow.fade,
+//                                                           softWrap: false,
+//                                                           style: Theme.of(context).textTheme.subtitle1,
+//                                                         ),
+//                                                         Text(
+//                                                           cuisinesDetailItems[index].address,
+//                                                          // cuisinesDetailItems.name.length > 25 ? cuisinesDetailItems.name.substring(0,25)+'...' : market?.address,
+//                                                           // Helper.skipHtml(market?.address??''),
+//                                                           overflow: TextOverflow.ellipsis,
+//
+//                                                           //overflow: TextOverflow.fade,
+//                                                           softWrap: false,
+//                                                           style: Theme.of(context).textTheme.caption,
+//                                                         ),
+//                                                       //  SizedBox(height: 5),
+//                                                         SizedBox(height: 5),
+//                                                         Row(
+//                                                           children: Helper.getStarsList(double.parse(cuisinesDetailItems[index].rating)),
+//                                                         ),
+//                                                         // Row(
+//                                                         //   children: Helper.getStarsList(double.parse(market.rate)),
+//                                                         // ),
+//                                                       ],
+//                                                     ),
+//                                                   ),
+//                                                   // )
+//                                                 ],
+//                                               ),
+//                                               Spacer(),
+//                                              // SizedBox(height: 12,),
+//                                               // Divider(color: Colors.black.withOpacity(0.2),
+//                                               //   indent: 0,endIndent: 0,)
+//                                             ],
+//                                           ),
+//                                         ),
+//                                       );
+//                                     },
+//                                   ),
+//                                 ),
+//
+//                                 // BlockButtonWidget(
+//                                 //   text: Text(
+//                                 //     S.of(context).login,
+//                                 //     style: TextStyle(
+//                                 //         color:
+//                                 //             Theme.of(context).primaryColor),
+//                                 //   ),
+//                                 //   color: Theme.of(context).accentColor,
+//                                 //   onPressed: () {
+//                                 //     _con.login();
+//                                 //   },
+//                                 // ),
+//
+//                                 // MaterialButton(
+//                                 //   elevation: 0,
+//                                 //   onPressed: () {
+//                                 //     Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
+//                                 //   },
+//                                 //   shape: StadiumBorder(),
+//                                 //   textColor: Theme.of(context).hintColor,
+//                                 //   child: Text(S.of(context).skip),
+//                                 //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+//                                 // ),
+//
+//                                 //   SizedBox(height: 30),
+//                                 //   SizedBox(height: 10),
+//                               ],
+//                               //),
+//                             ),
                           ),
                     ],
                   ),

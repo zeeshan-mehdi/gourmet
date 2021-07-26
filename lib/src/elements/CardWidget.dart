@@ -95,8 +95,8 @@ class CardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        market.name,
-                        overflow: TextOverflow.fade,
+                        market.name.length > 20 ? market?.name.substring(0,20)+'...' : market?.name,
+                        overflow: TextOverflow.ellipsis,
                         softWrap: false,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),

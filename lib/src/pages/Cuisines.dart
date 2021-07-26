@@ -77,7 +77,7 @@ class _CoisinesState extends StateMVC<Coisines> {
                         child: Container(
                             // transform:  Matrix4.translationValues(
                             //     0.0, -12.0, 0.0),
-                            height: config.App(context).appHeight(80),
+                            height: config.App(context).appHeight(84),
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               //  borderRadius:
@@ -114,9 +114,7 @@ class _CoisinesState extends StateMVC<Coisines> {
                                         return GestureDetector(
                                           onTap: () {
                                             print("hello");
-
                                             //  },
-
                                             Navigator.of(context).pushNamed(
                                               '/CoisinesDetail',
                                             );

@@ -13,8 +13,9 @@ import 'package:qrscan/qrscan.dart' as scanner;
 
 class SearchResultWidget extends StatefulWidget {
   final String heroTag;
+  int searchTag;
 
-  SearchResultWidget({Key key, this.heroTag}) : super(key: key);
+  SearchResultWidget({Key key, this.heroTag,this.searchTag}) : super(key: key);
 
   @override
   _SearchResultWidgetState createState() => _SearchResultWidgetState();
@@ -35,7 +36,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: _con.markets.isEmpty && _con.products.isEmpty
+      color: widget.searchTag == 1
           ? Color(0xFF878A92)
           : Colors.white,
       child: Column(
@@ -75,8 +76,13 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     ),
                     borderRadius: BorderRadius.circular(40)),
                 child: TextField(
+                  onChanged: (txt){
+                    widget.searchTag = 0;
+                  },
+
                   onSubmitted: (text) async {
                     await _con.refreshSearch(text);
+                    widget.searchTag = 0;
                     _con.saveSearch(text);
                   },
                   autofocus: true,
@@ -96,7 +102,8 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     // enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.1))),
                   ),
                 ),
-              )),
+              )
+          ),
           // Container(
           //   height: 500,
           //
@@ -124,36 +131,25 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
           _con.markets.isEmpty && _con.products.isEmpty
               ? Container(
             height: 500,
+            width: 375,
             color: Color(0xFF878A92),
             child: Column(
-
               children: [
-
                 Spacer(),
                 InkWell(
-                  child: Text(
-                    "Scan the QR code",
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                        color: Theme.of(context).accentColor),
-                  ),
-                  onTap: () async {
+                  child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+                  onTap:() async {
                     //  Navigator.of(context).pushReplacementNamed('/qr_code');
                     String cameraScanResult = await scanner.scan();
                     print(cameraScanResult);
-                    Navigator.of(context).pushNamed('/Pages',
-                        arguments: RouteArgument(
-                            id: '4',
-                            param: cameraScanResult,
-                            heroTag: 'menu_tab'));
+                    Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: cameraScanResult, heroTag: 'menu_tab'));
 
                     //
                   },
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10,),
+                Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
+                SizedBox(height: 30,),
                 // Text(
                 //   "Use image Library",
                 //   style:
@@ -168,8 +164,20 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
               : Expanded(
             child: ListView(
               children: <Widget>[
-                Row(
+                widget.searchTag == 1? SizedBox() : Row(
                   children: [
+          Padding(
+          padding: const EdgeInsets.only(right: 0, left: 12),
+          child:ElevatedButton(
+                      style:  ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.orangeAccent),
+                          // padding: MaterialStateProperty.all(EdgeInsets.all(50)),
+                          textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                      child: const Text('Cuisines'),
+                      onPressed:(){
+                        Navigator.of(context).pushNamed('/Coisines');
+                      },
+                    ),),
                     Spacer(),
                     InkWell(
                         child: Padding(
@@ -184,7 +192,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     ),
                   ],
                 ),
-                Padding(
+                widget.searchTag == 1? SizedBox(): Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: ListTile(
                     dense: true,
@@ -195,7 +203,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     ),
                   ),
                 ),
-                ListView.separated(
+                widget.searchTag == 1? SizedBox(): ListView.separated(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   primary: false,
@@ -210,7 +218,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     );
                   },
                 ),
-                Padding(
+                widget.searchTag == 1? SizedBox(): Padding(
                   padding:
                   const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: ListTile(
@@ -222,7 +230,78 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     ),
                   ),
                 ),
-                ListView.builder(
+                widget.searchTag == 1? Container(
+                  height: 500,
+                  color: Color(0xFF878A92),
+                  child: Column(
+                    children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.all(16.0),
+                      //   child: Row(
+                      //     children: [
+                      //       ElevatedButton(
+                      //         style:  ButtonStyle(
+                      //             backgroundColor: MaterialStateProperty.all(Colors.orangeAccent),
+                      //             // padding: MaterialStateProperty.all(EdgeInsets.all(50)),
+                      //             textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                      //         child: const Text('Cuisines'),
+                      //         onPressed:(){},
+                      //       ),
+                      //       Spacer(),
+                      //     ],
+                      //   ),
+                      //
+                      // ),
+                      Spacer(),
+                            InkWell(
+                              child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+                              onTap:() async {
+                                //  Navigator.of(context).pushReplacementNamed('/qr_code');
+                                 String cameraScanResult = await scanner.scan();
+                                 print(cameraScanResult);
+                                 Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: cameraScanResult, heroTag: 'menu_tab'));
+
+                                //
+                              },
+                            ),
+                            SizedBox(height: 10,),
+                            Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
+                            SizedBox(height: 30,),
+                      // InkWell(
+                      //   child: Text(
+                      //     "Scan the QR code",
+                      //     style: TextStyle(
+                      //         fontSize: 24,
+                      //         fontWeight: FontWeight.w800,
+                      //         color: Theme.of(context).accentColor),
+                      //   ),
+                      //   onTap: () async {
+                      //     //  Navigator.of(context).pushReplacementNamed('/qr_code');
+                      //     String cameraScanResult = await scanner.scan();
+                      //     print(cameraScanResult);
+                      //     Navigator.of(context).pushNamed('/Pages',
+                      //         arguments: RouteArgument(
+                      //             id: '4',
+                      //             param: cameraScanResult,
+                      //             heroTag: 'menu_tab'));
+                      //
+                      //     //
+                      //   },
+                      // ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      // Text(
+                      //   "Use image Library",
+                      //   style:
+                      //   TextStyle(fontSize: 20, color: Colors.orangeAccent),
+                      // ),
+                      // SizedBox(
+                      //   height: 30,
+                      // ),
+                    ],
+                  ),
+                ): ListView.builder(
                   shrinkWrap: true,
                   primary: false,
                   itemCount: _con.markets.length,
