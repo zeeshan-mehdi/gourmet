@@ -4,6 +4,19 @@
 <dict>
 	<key>CLIENT_ID</key>
 	<string>444847367722-mk38rcif909bfmnkt0ati1fncenh7hon.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.444847367722-mk38rcif909bfmnkt0ati1fncenh7hon</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.444847367722-mk38rcif909bfmnkt0ati1fncenh7hon</string>
 	<key>ANDROID_CLIENT_ID</key>
@@ -21,15 +34,15 @@
 	<key>STORAGE_BUCKET</key>
 	<string>gourmet-f5c31.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:444847367722:ios:abeef4e070b34f134cc553</string>
 </dict>
