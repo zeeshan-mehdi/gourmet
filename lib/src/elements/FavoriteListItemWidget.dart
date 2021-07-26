@@ -14,12 +14,20 @@ class FavoriteListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String url = this.favorite.product.image.thumb;
+
+    if(url!=null&& url!=""&&!url.contains("https")){
+      url = url.replaceFirst("http", "https");
+    }
+
+
     return InkWell(
       splashColor: Theme.of(context).accentColor,
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
       onTap: () {
-        Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
+       // Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -39,7 +47,7 @@ class FavoriteListItemWidget extends StatelessWidget {
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
-                  image: DecorationImage(image: NetworkImage(favorite.product.image.thumb), fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -83,18 +91,24 @@ class FavoriteListItemWidget extends StatelessWidget {
 
 class FavoriteKitchenListItemWidget extends StatelessWidget {
   String heroTag;
-  Market favorite;
+  Favorite favorite;
 
   FavoriteKitchenListItemWidget({Key key, this.heroTag, this.favorite}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String url = this.favorite.market.image.thumb;
+
+    if(url!=null&& url!=""&&!url.contains("https")){
+      url = url.replaceFirst("http", "https");
+    }
+
     return InkWell(
       splashColor: Theme.of(context).accentColor,
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
       onTap: () {
-        Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.id));
+       // Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.id));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -108,13 +122,13 @@ class FavoriteKitchenListItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Hero(
-              tag: heroTag + favorite.id,
+              tag:'$heroTag${favorite.id}',
               child: Container(
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
-                  image: DecorationImage(image: NetworkImage(favorite.image.thumb), fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -128,13 +142,13 @@ class FavoriteKitchenListItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          favorite.name,
+                          favorite.market.name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
-                          favorite.name,
+                          favorite.market.name,
                           overflow: TextOverflow.fade,
                           softWrap: false,
                           style: Theme.of(context).textTheme.caption,
@@ -144,7 +158,7 @@ class FavoriteKitchenListItemWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 8),
                   Text(
-                    favorite.name,
+                    favorite.market.description!=null &&favorite.market.description.length>50?favorite.market.description.substring(0,50):favorite.market.description,
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: Theme.of(context).textTheme.caption,

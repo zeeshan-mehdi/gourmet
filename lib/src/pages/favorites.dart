@@ -43,9 +43,9 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
           "My Favourite ",
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3,color: Colors.black)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: Scaffold(
         body: SafeArea(
@@ -153,9 +153,9 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     ),
                                   ),
                                 ),
-                                _con.favorites.isEmpty
+                                _con.favoritesKitchen.isEmpty
                                     ? Center(
-                                  child: Text("There is no favourtie items"),
+                                  child: Text("There is no favorite items"),
                                 )
 
                                     : Offstage(
@@ -164,19 +164,19 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount: _con.favorites.length,
+                                    itemCount: _con.favoritesKitchen.length,
                                     separatorBuilder: (context, index) {
                                       return SizedBox(height: 10);
                                     },
                                     itemBuilder: (context, index) {
-                                      return FavoriteListItemWidget(
+                                      return FavoriteKitchenListItemWidget(
                                         heroTag: 'favorites_list',
-                                        favorite: _con.favorites.elementAt(index),
+                                        favorite: _con.favoritesKitchen.elementAt(index),
                                       );
                                     },
                                   ),
                                 ),
-                                _con.favorites.isEmpty
+                                _con.favoritesKitchen.isEmpty
                                     ? CircularLoadingWidget(height: 500)
                                     : Offstage(
                                   offstage: this.layout != 'grid',
@@ -191,10 +191,11 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     // horizontal, this produces 2 rows.
                                     crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
                                     // Generate 100 widgets that display their index in the List.
-                                    children: List.generate(_con.favorites.length, (index) {
+                                    children: List.generate(_con.favoritesKitchen.length, (index) {
                                       return FavoriteGridItemWidget(
                                         heroTag: 'favorites_grid',
-                                        favorite: _con.favorites.elementAt(index),
+                                        favorite: _con.favoritesKitchen.elementAt(index),
+                                        controller: _con,
                                       );
                                     }),
                                   ),
@@ -203,6 +204,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                             ),
                           ),
                         ),
+
 
                         currentUser.value.apiToken == null
                             ? PermissionDeniedWidget()
@@ -268,7 +270,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     ),
                                   ),
                                 ),
-                                _con.favoritesKitchen.isEmpty
+                                _con.favorites.isEmpty
                                     ? Center(
                                   child: Text("There is no favourtie items"),
                                 )
@@ -279,45 +281,70 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     primary: false,
-                                    itemCount: _con.favoritesKitchen.length,
+                                    itemCount: _con.favorites.length,
                                     separatorBuilder: (context, index) {
                                       return SizedBox(height: 10);
                                     },
                                     itemBuilder: (context, index) {
-                                      return FavoriteKitchenListItemWidget(
+                                      return FavoriteListItemWidget(
                                         heroTag: 'favorites_list',
-                                        favorite: _con.favoritesKitchen.elementAt(index),
+                                        favorite: _con.favorites.elementAt(index),
                                       );
                                     },
                                   ),
                                 ),
-                                // _con.favoritesKitchen.isEmpty
-                                //     ? CircularLoadingWidget(height: 500)
-                                //     : Offstage(
-                                //   offstage: this.layout != 'grid',
-                                //   child:   GridView.count(
-                                //     scrollDirection: Axis.vertical,
-                                //     shrinkWrap: true,
-                                //     primary: false,
-                                //     crossAxisSpacing: 10,
-                                //     mainAxisSpacing: 20,
-                                //     padding: EdgeInsets.symmetric(horizontal: 20),
-                                //     // Create a grid with 2 columns. If you change the scrollDirection to
-                                //     // horizontal, this produces 2 rows.
-                                //     crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
-                                //     // Generate 100 widgets that display their index in the List.
-                                //     children: List.generate(_con.favoritesKitchen.length, (index) {
-                                //       return FavoriteGridItemWidget(
-                                //         heroTag: 'favorites_grid',
-                                //         favorite: _con.favoritesKitchen.elementAt(index),
-                                //       );
-                                //     }),
-                                //   ),
-                                // )
+                                _con.favorites.isEmpty
+                                    ? CircularLoadingWidget(height: 500)
+                                    : Offstage(
+                                  offstage: this.layout != 'grid',
+                                  child:   GridView.count(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 20,
+                                    padding: EdgeInsets.symmetric(horizontal: 20),
+                                    // Create a grid with 2 columns. If you change the scrollDirection to
+                                    // horizontal, this produces 2 rows.
+                                    crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
+                                    // Generate 100 widgets that display their index in the List.
+                                    children: List.generate(_con.favorites.length, (index) {
+                                      return FavoriteProductGridItemWidget(
+                                        heroTag: 'favorites_grid',
+                                        favorite: _con.favorites.elementAt(index),
+                                      );
+                                    }),
+                                  ),
+                                )
                               ],
                             ),
                           ),
                         ),
+
+                        // _con.favoritesKitchen.isEmpty
+                        //     ? CircularLoadingWidget(height: 500)
+                        //     : Offstage(
+                        //   offstage: this.layout != 'grid',
+                        //   child:   GridView.count(
+                        //     scrollDirection: Axis.vertical,
+                        //     shrinkWrap: true,
+                        //     primary: false,
+                        //     crossAxisSpacing: 10,
+                        //     mainAxisSpacing: 20,
+                        //     padding: EdgeInsets.symmetric(horizontal: 20),
+                        //     // Create a grid with 2 columns. If you change the scrollDirection to
+                        //     // horizontal, this produces 2 rows.
+                        //     crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
+                        //     // Generate 100 widgets that display their index in the List.
+                        //     children: List.generate(_con.favoritesKitchen.length, (index) {
+                        //       return FavoriteGridItemWidget(
+                        //         heroTag: 'favorites_grid',
+                        //         favorite: _con.favoritesKitchen.elementAt(index),
+                        //       );
+                        //     }),
+                        //   ),
+                        // )
+
 
                       ],
                     ),

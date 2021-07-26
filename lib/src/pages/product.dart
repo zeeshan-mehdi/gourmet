@@ -459,34 +459,68 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25.0),
-                                                    // color: Colors.greenAccent,
-                                                  ),
-                                                  child: CachedNetworkImage(
-                                                    width: 200,
-                                                    height: 120,
-                                                    fit: BoxFit.cover,
-                                                    imageUrl: _con
-                                                        .products[index]
-                                                        .image
-                                                        .url,
-                                                    placeholder:
-                                                        (context, url) =>
-                                                            Image.asset(
-                                                      'assets/img/loading.gif',
-                                                      fit: BoxFit.cover,
-                                                      width: 200,
-                                                      height: 120,
+                                                Stack(
+                                                  alignment: AlignmentDirectional.topEnd,
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                25.0),
+                                                        // color: Colors.greenAccent,
+                                                      ),
+                                                      child: CachedNetworkImage(
+                                                        width: 200,
+                                                        height: 120,
+                                                        fit: BoxFit.cover,
+                                                        imageUrl: _con
+                                                            .products[index]
+                                                            .image
+                                                            .url,
+                                                        placeholder:
+                                                            (context, url) =>
+                                                                Image.asset(
+                                                          'assets/img/loading.gif',
+                                                          fit: BoxFit.cover,
+                                                          width: 200,
+                                                          height: 120,
+                                                        ),
+                                                        errorWidget:
+                                                            (context, url, error) =>
+                                                                Icon(Icons
+                                                                    .error_outline),
+                                                      ),
                                                     ),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            Icon(Icons
-                                                                .error_outline),
-                                                  ),
+                                                    _con.favoriteProduct?.id != null
+                                                        ? IconButton(
+                                                        onPressed: () {
+                                                          _con.removeFromFavorite(_con.favoriteProduct);
+                                                        },
+                                                        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                                                        //color: Theme.of(context).primaryColor,
+                                                        //shape: StadiumBorder(),
+                                                        // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                        icon: Icon(
+                                                          Icons.bookmark,
+                                                          color: Theme.of(context).accentColor,
+                                                        ))
+                                                        : IconButton(
+
+                                                        onPressed: () {
+                                                          if (currentUser.value.apiToken == null) {
+                                                            Navigator.of(context).pushNamed("/Login");
+                                                          } else {
+                                                            _con.addToFavorite(_con.products[index]);
+                                                          }
+                                                        },
+                                                        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                                                        color: Colors.transparent,
+                                                        // shape: StadiumBorder(),
+                                                        icon: Icon(
+                                                          Icons.bookmark_border_outlined,
+                                                          color: Theme.of(context).primaryColor,
+                                                        )),
+                                                  ],
                                                 ),
                                                 Column(
                                                   crossAxisAlignment:
@@ -578,6 +612,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                   // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
                                                   products.toSet().toList();
 
+                                                  print('index  $index');
+
                                                   if (currentUser
                                                           .value.apiToken ==
                                                       null) {
@@ -590,7 +626,24 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                     if (_productController
                                                         .isSameMarkets(_con
                                                                 .products[
-                                                            selectedIndex])) {
+                                                            index])) {
+
+                                                      _productController
+                                                          .addToCart(_con
+                                                          .products[
+                                                      index]);
+                                                      Future.delayed(
+                                                          Duration(seconds: 3),
+                                                              () {
+                                                            refreshCart();
+                                                            _productController.listenForCart();
+                                                            setState(() {
+                                                              cartLoading = false;
+                                                            });
+                                                          });
+
+                                                    } else {
+
 
                                                       showDialog(
                                                         context: context,
@@ -599,24 +652,12 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                           // return object of type Dialog
                                                           return AddToCartAlertDialogWidget(
                                                               oldProduct:
-                                                              _productController
-                                                                  .carts
-                                                                  .elementAt(
-                                                                  0)
-                                                                  ?.product,
-                                                              newProduct: _con
-                                                                  .products[
-                                                              selectedIndex],
-                                                              onPressed: (product,
-                                                                  {reset:
-                                                                  true}) {
-
+                                                              _productController.carts.elementAt(0)?.product,
+                                                              newProduct: _con.products[selectedIndex],
+                                                              onPressed: (product, {reset: true}) {
                                                                 _productController
-                                                                    .addToCart(
-                                                                    _con.products[
-                                                                    selectedIndex],
-                                                                    reset:
-                                                                    true);
+                                                                    .addToCart(product,
+                                                                    reset:reset);
                                                                 Future.delayed(
                                                                     Duration(seconds: 3),
                                                                         () {
@@ -633,21 +674,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                         },
                                                       );
 
-                                                    } else {
 
-                                                      _productController
-                                                          .addToCart(_con
-                                                          .products[
-                                                      selectedIndex]);
-                                                      Future.delayed(
-                                                          Duration(seconds: 3),
-                                                              () {
-                                                            refreshCart();
-                                                            _productController.listenForCart();
-                                                            setState(() {
-                                                              cartLoading = false;
-                                                            });
-                                                          });
 
                                                     }
                                                   }
@@ -684,8 +711,10 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                         refreshCart = func;
                                       },
                                       removeFromCart:(){
-                                        _productController.listenForCart();
-                                        refreshCart();
+                                        Future.delayed(Duration(milliseconds: 30),(){
+                                          _productController.listenForCart();
+                                          refreshCart();
+                                        });
                                       }
                                     )),
 
@@ -1151,32 +1180,32 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                         child:  Row(
                                             children: <Widget>[
                                               _con.favorite?.id != null
-                                                  ? OutlineButton(
+                                                  ? IconButton(
                                                   onPressed: () {
-                                                    _con.removeFromFavorite(_con.favorite);
+                                                    _con.removeFromFavoriteKitchens(_con.favorite);
                                                   },
-                                                  padding: EdgeInsets.symmetric(vertical: 0),
-                                                  color: Theme.of(context).primaryColor,
+                                                  padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
+                                                  //color: Theme.of(context).primaryColor,
                                                   //shape: StadiumBorder(),
-                                                  borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                                  child: Icon(
-                                                    Icons.favorite,
+                                                 // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                  icon: Icon(
+                                                    Icons.bookmark,
                                                     color: Theme.of(context).accentColor,
                                                   ))
-                                                  : MaterialButton(
-                                                  elevation: 0,
+                                                  : IconButton(
+
                                                   onPressed: () {
                                                     if (currentUser.value.apiToken == null) {
                                                       Navigator.of(context).pushNamed("/Login");
                                                     } else {
-                                                      _con.addToFavorite(_con.market.id);
+                                                      _con.addToFavoriteKitchens(_con.market.id);
                                                     }
                                                   },
-                                                  padding: EdgeInsets.symmetric(vertical: 0),
+                                                  padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
                                                   color: Colors.transparent,
                                                  // shape: StadiumBorder(),
-                                                  child: Icon(
-                                                    Icons.favorite_outline,
+                                                  icon: Icon(
+                                                    Icons.bookmark_border_outlined,
                                                     color: Theme.of(context).primaryColor,
                                                   )),
                                             ])),

@@ -24,6 +24,7 @@ import '../repository/user_repository.dart' as userRepo;
 class MarketController extends ControllerMVC {
   Market market;
   Favorite favorite;
+  Favorite favoriteProduct;
 
   List<Gallery> galleries = <Gallery>[];
   List<Product> products = <Product>[];
@@ -142,15 +143,37 @@ class MarketController extends ControllerMVC {
     listenForFeaturedProducts(_id);
   }
 
-  void addToFavorite(String market) async {
+  void addToFavorite(Product product) async {
     var _favorite = new Favorite();
-   // print(product.id);
-   // _favorite.product = product;
+   print(product.id);
+   _favorite.product = product;
 
-   // _favorite.options = product.options.where((Option _option) {
-   //    return _option.checked;
-   //  }).toList();
-   // print(_favorite.product.id);
+   _favorite.options = product.options.where((Option _option) {
+      return _option.checked;
+    }).toList();
+   print(_favorite.product.id);
+
+    addFavorite(_favorite).then((value) {
+      setState(() {
+        print(value.product.name);
+        this.favoriteProduct = value;
+      });
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text(S.of(state.context).thisProductWasAddedToFavorite),
+      ));
+    });
+  }
+
+
+  void addToFavoriteKitchens(String market) async {
+    var _favorite = new Favorite();
+    // print(product.id);
+    // _favorite.product = product;
+
+    // _favorite.options = product.options.where((Option _option) {
+    //    return _option.checked;
+    //  }).toList();
+    // print(_favorite.product.id);
 
     addFavoriteKitchen(market).then((value) {
       setState(() {
@@ -163,8 +186,21 @@ class MarketController extends ControllerMVC {
     });
   }
 
+
   void removeFromFavorite(Favorite _favorite) async {
     removeFavoriteKitechen(_favorite).then((value) {
+      setState(() {
+        this.favorite = new Favorite();
+      });
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text(S.of(state.context).thisProductWasRemovedFromFavorites),
+      ));
+    });
+  }
+
+
+  void removeFromFavoriteKitchens(Favorite _favorite) async {
+    removeFavoriteKitchen(_favorite).then((value) {
       setState(() {
         this.favorite = new Favorite();
       });

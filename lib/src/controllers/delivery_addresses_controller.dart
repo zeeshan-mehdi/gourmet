@@ -89,6 +89,10 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
     userRepo.updateAddress(address).then((value) {
       setState(() {});
       addresses.clear();
+      if(address !=null && address.isDefault){
+        settingRepo.deliveryAddress.value = address;
+        notifyListeners();
+      }
       listenForAddresses(message: S.of(state.context).the_address_updated_successfully);
     });
   }

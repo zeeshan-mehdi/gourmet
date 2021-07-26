@@ -50,9 +50,9 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
           S.of(context).my_orders,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3,color: Colors.black)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: currentUser.value.apiToken == null
           ? PermissionDeniedWidget()

@@ -84,7 +84,7 @@ class CartController extends ControllerMVC {
     removeCart(_cart).then((value) {
       calculateSubtotal();
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-        content: Text(S.of(state.context).the_product_was_removed_from_your_cart(_cart.product.name)),
+        content: Text(S.of(state.context).the_product_was_removed_from_your_cart),
       ));
     });
   }

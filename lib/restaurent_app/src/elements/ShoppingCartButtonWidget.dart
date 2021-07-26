@@ -35,7 +35,7 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
     return MaterialButton(
       elevation: 0,
       onPressed: () {
-        Navigator.of(context).pushNamed('/Notifications');
+        Navigator.of(context).pushNamed('/KitchenNotifications');
       },
       child: Stack(
         alignment: AlignmentDirectional.bottomEnd,

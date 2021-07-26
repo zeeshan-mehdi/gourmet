@@ -68,7 +68,11 @@ class CheckoutController extends CartController {
       settingRepo.coupon = new Coupon.fromJSON({});
       return value;
     }).then((value) {
-      if (value is Order) {
+
+      print('order created');
+
+
+      if (value !=null && value is Order ) {
         setState(() {
           loading = false;
            if(isOrderRequest) {
@@ -119,6 +123,40 @@ class CheckoutController extends CartController {
                      )));
            }
         });
+      }else{
+        showDialog(
+            context: scaffoldKey.currentState.context,
+            builder: (_) => Container(
+                color: Color(0xFF8E9198),
+                child: GlobalPopup(
+                  //for Forgot password case
+                  // title: "Your password has \n been reset",
+                  // subTitle:
+                  // "You'll shortly receive an email with a \n code to setup a new password",
+                  // imageName: "LockIconWithArrow.png",
+                  // popupType: PopupType.forgotPassword,
+                  // btnTitle: "Done",
+                  // bottombtnTitle: "",
+
+                  //for Enable Location case
+                  // title: "Enable Your Location",
+                  // subTitle:
+                  // "Please allow to use your location to\n show nearby resturant on the map ",
+                  // imageName: "EnablelocaitonIcon.png",
+                  // popupType: PopupType.enableLocation,
+                  // btnTitle: "Enable Location",
+                  // bottombtnTitle: "",
+
+
+                  //incase of order success
+                  title: "Order Failed",
+                  subTitle: "Something Went Wrong, Could not place order"  ,
+                  imageName: "order_failed.png",
+                  popupType: PopupType.orderFailed,
+                  btnTitle: "Order Something Else",
+                  bottombtnTitle: "Go to Home",
+                )));
+
       }
     });
   }

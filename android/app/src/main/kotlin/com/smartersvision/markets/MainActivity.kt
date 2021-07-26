@@ -1,4 +1,4 @@
-package com.gourmet.booking
+package com.gourmetapp
 
 import io.flutter.embedding.android.FlutterActivity;
 

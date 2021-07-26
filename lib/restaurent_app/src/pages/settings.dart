@@ -9,7 +9,7 @@ import '../elements/ProfileSettingsDialog.dart';
 import '../helpers/helper.dart';
 import '../repository/user_repository.dart';
 
-import '../repository/settings_repository.dart' as settingRepo;
+import '../../src/repository/settings_repository.dart' as settingRepo;
 
 class SettingsWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;

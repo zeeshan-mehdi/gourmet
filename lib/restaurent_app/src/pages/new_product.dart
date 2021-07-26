@@ -392,6 +392,7 @@ class _Page1State extends StateMVC<Page1> {
 
             TextFormField(
               keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               onSaved: (input) => _con.product.price = double.parse(input),
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
@@ -409,6 +410,7 @@ class _Page1State extends StateMVC<Page1> {
             ),
             SizedBox(height: 30),
             TextFormField(
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               keyboardType: TextInputType.number,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               onSaved: (input) => _con.product.discountPrice = double.parse(input),

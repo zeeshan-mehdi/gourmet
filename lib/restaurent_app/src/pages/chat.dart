@@ -87,9 +87,9 @@ class _ChatWidgetState extends StateMVC<ChatWidget> {
           maxLines: 1,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,

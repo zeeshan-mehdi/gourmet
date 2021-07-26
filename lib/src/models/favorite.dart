@@ -1,4 +1,4 @@
-import 'package:markets/restaurent_app/src/models/market.dart';
+import 'package:markets/src/models/market.dart';
 
 import '../models/option.dart';
 import '../models/product.dart';
@@ -6,7 +6,7 @@ import '../models/product.dart';
 class Favorite {
   String id;
   Product product;
-  //Market market;
+  Market market;
   List<Option> options;
   String userId;
 
@@ -31,7 +31,21 @@ class Favorite {
     map["id"] = id;
     map["product_id"] = product.id;
     map["user_id"] = userId;
-    map["options"] = options.map((element) => element.id).toList();
+    //map["options"] = options.map((element) => element.id).toList();
     return map;
   }
+}
+
+
+
+class FavoriteMarket{
+  int marketId;
+  int favoriteId;
+
+  FavoriteMarket.fromJson(data){
+    marketId = data['market_id'];
+    favoriteId = data['id'];
+  }
+
+
 }

@@ -48,10 +48,10 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                 padding: EdgeInsets.symmetric(vertical: 7),
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: SearchBarWidget(),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                    //   child: SearchBarWidget(),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       child: Row(
@@ -331,6 +331,28 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+
+
+                    ListTile(
+                      onTap: () {
+                        if (currentUser.value.apiToken != null) {
+                          logout().then((value) {
+                            Navigator.of(context).pushNamed('/Login');
+                            //Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 0);
+                          });
+                        } else {
+                          Navigator.of(context).pushNamed('/Login');
+                        }
+                      },
+                      leading: Icon(
+                        Icons.exit_to_app_outlined,
+                        color: Theme.of(context).focusColor.withOpacity(1),
+                      ),
+                      title: Text(
+                        currentUser.value.apiToken != null ? S.of(context).log_out : S.of(context).login,
+                        style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
                   ],

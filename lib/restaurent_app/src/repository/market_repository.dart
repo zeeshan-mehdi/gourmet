@@ -241,23 +241,31 @@ Future<String> uploadImage(File imageFile)async{
   //   } else
   //     print('something went wrong');
   // });
-   var dio = Dio();
-  var file = await MultipartFile.fromFile(imageFile.path,
-      filename: basename(imageFile.path),
-      contentType: MediaType("image", basename(imageFile.path)));
 
-  FormData formData = new FormData.fromMap({
-    "field": "image",
-    "uuid":uuid,
-    "file": file
-  });
-  var response = await dio.post("${url}uploads/store?api_token=${user.apiToken}&user_id=${user.id}", data: formData);
+  try {
+    var dio = Dio();
+    var file = await MultipartFile.fromFile(imageFile.path,
+        filename: basename(imageFile.path),
+        contentType: MediaType("image", basename(imageFile.path)));
+
+    FormData formData = new FormData.fromMap({
+      "field": "image",
+      "uuid": uuid,
+      "file": file
+    });
+    var response = await dio.post(
+        "${url}uploads/store?api_token=${user.apiToken}&user_id=${user.id}",
+        data: formData);
 
 
-  print(response);
+    print(response);
 
 
-  return uuid;
+    return uuid;
+  }catch(e){
+    print('exception while uploading image');
+    print(e);
+  }
 
 }
 

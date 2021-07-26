@@ -97,7 +97,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            S.of(context).welcomeee + " " + "BACK!",
+                            S.of(context).welcome + " " + "BACK!",
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.headline1.merge(
                               TextStyle(

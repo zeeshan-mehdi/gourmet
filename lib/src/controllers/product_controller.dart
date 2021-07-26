@@ -55,6 +55,7 @@ class ProductController extends ControllerMVC {
   }
 
   void listenForCart() async {
+    carts = [];
     setState(() {loading = true;});
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
@@ -77,7 +78,7 @@ class ProductController extends ControllerMVC {
 
       return carts[0].product?.market?.id == product.market?.id;
     }
-    return false;
+    return true;
   }
 
   void addToCart(Product product, {bool reset = false}) async {

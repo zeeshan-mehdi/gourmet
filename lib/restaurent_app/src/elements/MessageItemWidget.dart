@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 import  'package:markets/generated/l10n.dart';
-import '../models/conversation.dart' as model;
 import '../models/route_argument.dart';
+import '../models/conversation.dart' as model;
 import '../repository/user_repository.dart';
 
 class MessageItemWidget extends StatefulWidget {
@@ -47,7 +47,7 @@ class _MessageItemWidgetState extends State<MessageItemWidget> {
       },
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed('/Chat', arguments: RouteArgument(param: widget.message));
+          Navigator.of(context).pushNamed('/RestaurantChat', arguments: RouteArgument(param: widget.message,id: '0'));
         },
         child: Container(
           color: this.widget.message.readByUsers.contains(currentUser.value.id) ? Colors.transparent : Theme.of(context).focusColor.withOpacity(0.05),

@@ -181,6 +181,12 @@ Future<Favorite> addFavorite(Favorite favorite) async {
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
       body: json.encode(favorite.toMap()),
     );
+
+    print('response from favorites api');
+
+    print(response.body);
+
+
     return Favorite.fromJSON(json.decode(response.body)['data']);
   } catch (e) {
     print(CustomTrace(StackTrace.current, message: url).toString());
@@ -207,6 +213,38 @@ Future<Favorite> removeFavorite(Favorite favorite) async {
     return Favorite.fromJSON({});
   }
 }
+
+
+Future<dynamic> removeFavoriteKitchen(Favorite favorite) async {
+  User _user = userRepo.currentUser.value;
+  if (_user.apiToken == null) {
+    return new Favorite();
+  }
+  final String _apiToken = 'api_token=${_user.apiToken}';
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}favorite_markets/${favorite.id}?$_apiToken';
+  try {
+    final client = new http.Client();
+    final response = await client.delete(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+    );
+
+    print('remove market response');
+    print('${response.body}');
+
+    return jsonDecode(response.body);
+
+    //return Favorite.fromJSON(json.decode(response.body)['data']);
+  } catch (e) {
+    print(CustomTrace(StackTrace.current, message: url).toString());
+   // return Favorite.fromJSON({});
+  }
+}
+
+
+
+
+
 
 Future<Stream<Product>> getProductsOfMarket(String marketId, {List<String> categories}) async {
   Uri uri = Helper.getUri('api/products/categories');
@@ -299,7 +337,7 @@ Future<Review> addProductReview(Review review, Product product) async {
   }
 }
 
- Future<List<Market>> getFavoritesKitchen() async {
+ Future<Stream<FavoriteMarket>> getFavoritesKitchen() async {
    print("favorit kitchen is Api caling 1");
 
    User _user = userRepo.currentUser.value;
@@ -314,24 +352,18 @@ Future<Review> addProductReview(Review review, Product product) async {
 
    final client = new http.Client();
 
+   print(url);
+
    final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
 
-   Stream<dynamic> data =  streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
-     return data;
+
+
+   Stream<FavoriteMarket> data =  streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+     return FavoriteMarket.fromJson(data);
    });
 
-    List<Market> markets = [];
 
-   data.listen((marketJson) async{
-     String id = marketJson["id"];
-     Market m = await getbyMarket(id);
-     markets.add(m);
-   });
-
-   return markets;
-
-
-
+   return data;
 
 
    //final response = await client.get(Uri.parse(url));
@@ -390,7 +422,7 @@ Future<Review> addProductReview(Review review, Product product) async {
   // }
 }
 
-Future<Market> getbyMarket(String id) async {
+Future<Market> getbyMarket(int id) async {
   Uri uri = Helper.getUri('api/markets/$id');
   Map<String, dynamic> _queryParams = {};
   _queryParams['with'] = 'users';

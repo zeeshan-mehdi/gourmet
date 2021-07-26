@@ -85,12 +85,12 @@ class _ChatWidgetState extends StateMVC<ChatWidget> {
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
             onPressed: () {
-              if (widget.routeArgument.id == null) {
+              //if (widget.routeArgument.id == null) {
                 // from conversation page
-                Navigator.of(context).pushNamed('/Pages', arguments: 4);
-              } else {
-                Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: widget.routeArgument.id, heroTag: 'chat_tab'));
-              }
+                Navigator.of(context).pushNamed('/Pages', arguments: 1);
+              // } else {
+              //   Navigator.of(context).pushNamed('/Pages', arguments: RouteArgument(id: '4', param: widget.routeArgument.id, heroTag: 'chat_tab'));
+              // }
             }),
         automaticallyImplyLeading: false,
         title: Text(
@@ -99,9 +99,9 @@ class _ChatWidgetState extends StateMVC<ChatWidget> {
           maxLines: 1,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,

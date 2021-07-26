@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/src/models/market.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -8,8 +9,9 @@ import '../repository/product_repository.dart';
 
 class FavoriteController extends ControllerMVC {
   List<Favorite> favorites = <Favorite>[];
-  List<Market> favoritesKitchen = <Market>[];
+  List<Favorite> favoritesKitchen = <Favorite>[];
   GlobalKey<ScaffoldState> scaffoldKey;
+
 
   FavoriteController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -36,9 +38,48 @@ class FavoriteController extends ControllerMVC {
     });
   }
 
+
+  void deleteFavoriteKitchen(Favorite favorite)async{
+    var resp = await removeFavoriteKitchen(favorite);
+
+    if(resp['success']==true) {
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text('Kitchen removed from Favorites'),
+      ));
+
+      listenForFavoritesKitchen();
+    }else{
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text('Failed to remove Kitchen from Favorites'),
+      ));
+    }
+
+
+
+  }
+
   void listenForFavoritesKitchen({String message}) async {
-    favoritesKitchen = await getFavoritesKitchen();
-    setState(() {});
+    favoritesKitchen = [];
+    Stream<FavoriteMarket> data = await getFavoritesKitchen();
+    print('favourite kitchens that i have');
+
+    await data.listen((marketJson) async{
+      int id = marketJson.marketId;
+      Market m = await getbyMarket(id);
+      Favorite f = Favorite();
+      f.id = '${marketJson.favoriteId}';
+      f.market = m;
+      favoritesKitchen.add(f);
+      //print(m);
+      setState(() {});
+    });
+
+    setState(() { });
+
+
+    //print(favoritesKitchen);
+
+    //setState(() {});
     // print("favorit kitchen is caling");
     // var aa  = stream.map((event) => event.id.toString());
     // print(aa.map((event) => event.toString()));

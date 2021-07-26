@@ -18,11 +18,12 @@ class Constants {
 }
 
 class GlobalPopup extends StatefulWidget {
-  String title, subTitle, imageName,btnTitle ,bottombtnTitle;
-  PopupType popupType;
+  final String title, subTitle, imageName,btnTitle ,bottombtnTitle;
+  final PopupType popupType;
+  final Function onEnablePressed;
 
   GlobalPopup(
-      {this.title, this.subTitle, this.imageName, this.popupType,this.btnTitle,this.bottombtnTitle});
+      {this.title, this.subTitle, this.imageName, this.popupType,this.btnTitle,this.bottombtnTitle,this.onEnablePressed});
 
   @override
   _GlobalPopupState createState() => _GlobalPopupState(
@@ -32,15 +33,17 @@ class GlobalPopup extends StatefulWidget {
     popupType: popupType,
     btnTitle: btnTitle,
     bottombtnTitle: bottombtnTitle,
+    onEnablePressed: onEnablePressed
+
   );
 }
 
 class _GlobalPopupState extends State<GlobalPopup> {
-  String title, subTitle, imageName, btnTitle, bottombtnTitle;
-  PopupType popupType;
-
+  final String title, subTitle, imageName, btnTitle, bottombtnTitle;
+  final PopupType popupType;
+  final Function onEnablePressed;
   _GlobalPopupState(
-      {this.title, this.subTitle, this.imageName, this.popupType,this.btnTitle,this.bottombtnTitle});
+      {this.title, this.subTitle, this.imageName, this.popupType,this.btnTitle,this.bottombtnTitle,this.onEnablePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -199,11 +202,17 @@ class _GlobalPopupState extends State<GlobalPopup> {
                                 break;
                               case PopupType.enableLocation:
                                 print("enableLocation");
-
+                                Navigator.of(context).pop();
+                                this.onEnablePressed();
                                 break;
                               case PopupType.orderSucessfull:
                                 Navigator.of(context).pushNamed('/Pages',arguments: 1);
                                 print("orderSucessfull");
+                                break;
+                              case PopupType.orderFailed:
+                              //Navigator.of(context).pop();
+                                Navigator.of(context).pushNamed('/Pages',arguments: 0);
+                                print("orderfailed");
                                 break;
                             }
                             // _con.login();
@@ -239,6 +248,11 @@ class _GlobalPopupState extends State<GlobalPopup> {
                                 Navigator.of(context).pushNamed('/Pages',arguments: 1);
                                 print("orderSucessfull");
                                 break;
+                              case PopupType.orderFailed:
+                              //Navigator.of(context).pop();
+                                Navigator.of(context).pushNamed('/Pages',arguments: 0);
+                                print("orderfailed");
+                                break;
                             }
 
 
@@ -263,4 +277,4 @@ class _GlobalPopupState extends State<GlobalPopup> {
   }
 }
 
-enum PopupType { forgotPassword, enableLocation, orderSucessfull }
+enum PopupType { forgotPassword, enableLocation, orderSucessfull,orderFailed }
