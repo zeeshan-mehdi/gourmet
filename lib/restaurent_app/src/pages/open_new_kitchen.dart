@@ -861,15 +861,17 @@ class _Page3State extends StateMVC<Page3> {
         maxImages: 1,
         enableCamera: true,
         selectedAssets: images,
+
         cupertinoOptions: CupertinoOptions(
           takePhotoIcon: "chat",
-          doneButtonTitle: "Fatto",
+          doneButtonTitle: "Done",
         ),
         materialOptions: MaterialOptions(
           actionBarColor: "#abcdef",
           actionBarTitle: "Gourmet",
           allViewTitle: "All Photos",
           useDetailsView: false,
+
           selectCircleStrokeColor: "#000000",
         ),
       );

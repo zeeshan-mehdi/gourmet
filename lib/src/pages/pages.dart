@@ -2,6 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:markets/driver_app/src/pages/map.dart';
+import 'package:markets/driver_app/src/pages/orders.dart';
+import 'package:markets/driver_app/src/pages/orders_history.dart';
+import 'package:markets/driver_app/src/pages/profile.dart';
 import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
 import 'package:markets/restaurent_app/src/pages/details.dart';
@@ -28,6 +32,23 @@ import '../pages/notifications.dart';
 import '../pages/orders.dart';
 import 'messages.dart';
 
+
+enum NavPages {
+  Home,
+  MyOrders,
+  Favorites,
+  Profile,
+  RestaurantManagement,
+  RestaurantOrders,
+  MyAccount,
+  MySettings,
+  BecomeKitchen,
+  AddProduct,
+  RestaurantMembership,
+  MyAddresses,  DriverProfile,DriverOrders,OrderHistory,DriverMap
+}
+
+
 // ignore: must_be_immutable
 class PagesWidget extends StatefulWidget {
   dynamic currentTab;
@@ -42,10 +63,13 @@ class PagesWidget extends StatefulWidget {
     if (currentTab != null) {
       if (currentTab is RouteArgument) {
         routeArgument = currentTab;
-        currentTab = int.parse(currentTab.id);
+
+        int index= int.parse(currentTab.id);
+
+        currentTab =  NavPages.values.elementAt(index);
       }
     } else {
-      currentTab = 0;
+      currentTab = NavPages.Home;
     }
   }
 
@@ -69,50 +93,70 @@ class _PagesWidgetState extends State<PagesWidget> {
     super.didUpdateWidget(oldWidget);
   }
 
-  void _selectTab(int tabItem) {
+  void _selectTab(tabItem) {
+
+    if(tabItem is int){
+      tabItem = NavPages.values.elementAt(tabItem);
+    }
+
+
     setState(() {
       widget.currentTab = tabItem;
       switch (tabItem) {
-        case 0:
+        case NavPages.Home:
           widget.currentPage = HomeWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
-        case 1:
+        case NavPages.MyOrders:
           widget.currentPage = OrdersWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
-        case 2:
+        case NavPages.Favorites:
           widget.currentPage = FavoritesWidget(); //FavoritesWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
-        case 3:
+        case NavPages.Profile:
           widget.currentPage = KitchenProfile();
           break;
-        case 4:
+        case NavPages.RestaurantManagement:
           widget.currentPage = ProductWidget(routeArgument: widget.routeArgument,);
           //widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
           break;
-        case 5:
+        case NavPages.RestaurantOrders:
           widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,);
           break;
 
-        case 6:
+        case NavPages.MyAccount:
           widget.currentPage =  ProfileWidget();
           break;
-        case 7:
+        case NavPages.MySettings:
           widget.currentPage =  SettingsWidget();
           break;
 
-        case 8:
+        case NavPages.BecomeKitchen:
           widget.currentPage =  OpenNewKitchenPage();
           break;
 
-        case 9:
+        case NavPages.AddProduct:
           widget.currentPage =  NewProductPage();
           break;
 
-        case 10:
+        case NavPages.RestaurantMembership:
           widget.currentPage = RestaurantsMemberShip();
           break;
-        case 11 :
+        case NavPages.MyAddresses :
           widget.currentPage = DeliveryAddressesWidget();
+          break;
+        case NavPages.DriverProfile:
+          widget.currentPage = DriverProfileWidget(parentScaffoldKey: widget.scaffoldKey);
+          break;
+        case NavPages.DriverOrders:
+          widget.currentPage = DriverOrdersWidget(parentScaffoldKey: widget.scaffoldKey);
+          break;
+        case NavPages.OrderHistory:
+          widget.currentPage = OrdersHistoryWidget(parentScaffoldKey: widget.scaffoldKey);
+          break;
+        case NavPages.DriverMap:
+          widget.currentPage = DriverMapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
+          break;
+
 
       }
     });
@@ -141,7 +185,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           backgroundColor: Colors.transparent,
           selectedIconTheme: IconThemeData(size: 22),
           unselectedItemColor: Theme.of(context).focusColor.withOpacity(1),
-          currentIndex: widget.currentTab>=4? 3 : widget.currentTab,
+          currentIndex: NavPages.values.indexOf( widget.currentTab)>=4? 3 : NavPages.values.indexOf( widget.currentTab),
           onTap: (int i) {
             this._selectTab(i);
           },
@@ -154,7 +198,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   new Icon(FontAwesomeIcons.compass),
                   SizedBox(height: 3,),
-                  Text('Explore',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==0? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text('Explore',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.Home? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
             ),
@@ -165,7 +209,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                       alignment: Alignment.center,
                       transform: Matrix4.rotationX(pi),child: new Icon(FontAwesomeIcons.file)),
                   SizedBox(height: 3,),
-                  Text('Orders',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==1? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text('Orders',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.MyOrders? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
               label: '',
@@ -175,7 +219,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   Icon(FontAwesomeIcons.bookmark),
                   SizedBox(height: 3,),
-                  Text('Favorite',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color:widget.currentTab==2? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text('Favorite',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color:widget.currentTab==NavPages.Favorites? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
               label: '',
@@ -187,7 +231,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   new Icon(FontAwesomeIcons.addressBook),
                   SizedBox(height: 3,),
-                  Text('Profile',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12, color:widget.currentTab==3? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text('Profile',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12, color:widget.currentTab==NavPages.Profile? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
               label: '',

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:markets/restaurent_app/src/models/market.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
+import 'package:markets/src/pages/pages.dart';
 
 class ProfileKitchenSection extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
@@ -79,6 +80,45 @@ class _UserProfileSectionState extends State<UserProfileSection> {
     );
   }
 }
+
+
+
+class DriverProfileSection extends StatefulWidget {
+  @override
+  _DriverProfileSectionState createState() => _DriverProfileSectionState();
+}
+
+class _DriverProfileSectionState extends State<DriverProfileSection> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+
+          ListItem(color:Colors.red , title: 'Driver Profile',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverProfile));
+          },),
+
+          ListItem(color:Colors.lightBlue , title: 'Driver Orders',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverOrders));//my addresses
+          },),
+
+          ListItem(color:Colors.indigo, title: 'Order History',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.OrderHistory));
+          },),
+
+          ListItem(color:Colors.orange , title: 'Driver Map',onPressed: (){
+            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverMap) );
+          },),
+
+        ],
+      ),
+    );
+  }
+}
+
+
 
 
 

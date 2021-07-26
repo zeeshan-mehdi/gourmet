@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:markets/restaurent_app/src/pages/markets.dart';
+import 'package:markets/restaurent_app/src/pages/notifications.dart';
 import 'package:markets/restaurent_app/src/pages/order_edit.dart';
 import 'package:markets/restaurent_app/src/pages/pages.dart';
 import 'package:markets/src/pages/LoginOption.dart';
@@ -147,7 +148,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => restOrderEdit.OrderEditWidget(routeArgument: args ));
       case '/RestaurantChat':
         return MaterialPageRoute(builder: (_) => restChat.ChatWidget(routeArgument: args ));
-
+      case '/KitchenNotifications':
+        return MaterialPageRoute(builder: (_) => NotificationsWidget());
       // case '/RestaurantPages':
       //   return MaterialPageRoute(builder: (_) => MarketsWidget(parentScaffoldKey: args));
 

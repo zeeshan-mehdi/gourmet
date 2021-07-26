@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/market.dart';
+import 'package:markets/src/pages/product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import 'package:markets/generated/l10n.dart';
@@ -131,19 +132,19 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                 Spacer(),
                 InkWell(
                   child: Text(
-                    "Scan the OR code",
+                    "Scan the QR code",
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w800,
-                        color: Colors.black),
+                        color: Theme.of(context).accentColor),
                   ),
                   onTap: () async {
                     //  Navigator.of(context).pushReplacementNamed('/qr_code');
                     String cameraScanResult = await scanner.scan();
                     print(cameraScanResult);
-                    Navigator.of(context).pushNamed('/Details',
+                    Navigator.of(context).pushNamed('/Pages',
                         arguments: RouteArgument(
-                            id: '0',
+                            id: '4',
                             param: cameraScanResult,
                             heroTag: 'menu_tab'));
 
@@ -153,14 +154,14 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "Use image Library",
-                  style:
-                  TextStyle(fontSize: 20, color: Colors.orangeAccent),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
+                // Text(
+                //   "Use image Library",
+                //   style:
+                //   TextStyle(fontSize: 20, color: Colors.orangeAccent),
+                // ),
+                // SizedBox(
+                //   height: 30,
+                // ),
               ],
             ),
           )
@@ -228,12 +229,14 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/Details',
-                            arguments: RouteArgument(
-                              id: '0',
-                              param: _con.markets.elementAt(index).id,
-                              heroTag: widget.heroTag,
-                            ));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductWidget(routeArgument: RouteArgument(param: _con.markets.elementAt(index).id),)));
+
+                        // Navigator.of(context).pushNamed('/roduct',
+                        //     arguments: RouteArgument(
+                        //       id: '0',
+                        //       param: _con.markets.elementAt(index).id,
+                        //       heroTag: widget.heroTag,
+                        //     ));
                       },
                       child: CardWidget(
                           market: _con.markets.elementAt(index),
@@ -306,9 +309,9 @@ class _SearchResultByFitlerWidgetState extends StateMVC<SearchResultByFitlerWidg
                 //  Navigator.of(context).pushNamed('/Pages', arguments: 0);
                   String cameraScanResult = await scanner.scan();
                   print(cameraScanResult);
-                  Navigator.of(context).pushNamed('/Details',
+                  Navigator.of(context).pushNamed('/Pages',
                       arguments: RouteArgument(
-                          id: '0',
+                          id: '4',
                           param: cameraScanResult,
                           heroTag: 'menu_tab'));
                   // Navigator.pop(context);
@@ -364,7 +367,7 @@ class _SearchResultByFitlerWidgetState extends StateMVC<SearchResultByFitlerWidg
           //     children: [
           //       Spacer(),
           //       InkWell(
-          //         child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+          //         child: Text("Scan the QR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
           //         onTap:() async {
           //           //  Navigator.of(context).pushReplacementNamed('/qr_code');
           //            String cameraScanResult = await scanner.scan();

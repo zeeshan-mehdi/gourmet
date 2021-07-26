@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gourmet.booking">
+    package="com.gourmetapp"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -15,8 +16,9 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Markets"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Gourmet"
+        tools:replace="android:icon"
+        android:icon="@mipmap/launcher_icon">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyCaNUDAM3xlf3i55pS3evhCrUmbiluyjHg"/>

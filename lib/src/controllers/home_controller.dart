@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:markets/src/pages/GlobalPopup.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/helper.dart';
 import '../models/category.dart';
@@ -20,6 +23,10 @@ class HomeController extends ControllerMVC {
   List<Market> popularMarkets = <Market>[];
   List<Review> recentReviews = <Review>[];
   List<Product> trendingProducts = <Product>[];
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool once = true;
+
 
   HomeController() {
     listenForTopMarkets();
@@ -28,6 +35,7 @@ class HomeController extends ControllerMVC {
     listenForCategories();
     listenForPopularMarkets();
     listenForRecentReviews();
+
   }
 
   Future<void> listenForSlides() async {
@@ -52,8 +60,12 @@ class HomeController extends ControllerMVC {
     final Stream<Market> stream = await getNearMarkets(deliveryAddress.value, deliveryAddress.value);
     //final Stream<Market> stream = await getPopularMarkets(deliveryAddress.value);
     stream.listen((Market _market) {
-      setState(() => topMarkets.add(_market));
-    }, onError: (a) {}, onDone: () {});
+      if(_market.isPaidKitchen) {
+        setState(() => topMarkets.add(_market));
+      }
+    }, onError: (a) {}, onDone: () {
+
+    });
   }
 
   Future<void> listenForPopularMarkets() async {
@@ -79,16 +91,67 @@ class HomeController extends ControllerMVC {
     }, onDone: () {});
   }
 
-  void requestForCurrentLocation(BuildContext context) {
-    OverlayEntry loader = Helper.overlayLoader(state.context);
-    Overlay.of(state.context).insert(loader);
-    setCurrentLocation().then((_address) async {
-      deliveryAddress.value = _address;
-      await refreshHome();
-      loader.remove();
-    }).catchError((e) {
-      loader.remove();
-    });
+  void requestForCurrentLocation() async{
+
+    //if(deliveryAddress.value.latitude==null || deliveryAddress.value.longitude==null||deliveryAddress.value.latitude=="" || deliveryAddress.value.longitude==""){
+
+    if(once) {
+      once = false;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      // print( prefs.get("welcome"));
+      prefs.get("welcome");
+      if (prefs.get("welcome") == true) {
+        // OverlayEntry loader = Helper.overlayLoader(state.context);
+        // Overlay.of(state.context).insert(loader);
+        setCurrentLocation().then((_address) async {
+          deliveryAddress.value = _address;
+          await refreshHome();
+          // loader.remove();
+          once = false;
+        }).catchError((e) {
+          // loader.remove();
+        });
+        // Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
+      } else {
+        showDialog(
+            context: scaffoldKey.currentState.context,
+            builder: (_) =>
+                Container(
+                    color: Color(0xFF8E9198),
+                    child: GlobalPopup(
+
+                      title: "Enable Your Location",
+                      subTitle:
+                      "Please allow to use your location to\n show nearby resturant on the map ",
+                      imageName: "EnablelocaitonIcon.png",
+                      popupType: PopupType.enableLocation,
+                      btnTitle: "Enable Location",
+                      bottombtnTitle: "",
+                      onEnablePressed: () {
+                        OverlayEntry loader = Helper.overlayLoader(
+                            state.context);
+                        Overlay.of(state.context).insert(loader);
+                        setCurrentLocation().then((_address) async {
+                          deliveryAddress.value = _address;
+                          await refreshHome();
+                          loader.remove();
+                          once = false;
+                        }).catchError((e) {
+                          loader.remove();
+                        });
+                      },
+
+                    )));
+      }
+    }
+
+
+
+    //}
+
+
+
+
   }
 
   Future<void> refreshHome() async {

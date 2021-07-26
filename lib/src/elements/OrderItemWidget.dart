@@ -20,8 +20,13 @@ class OrderItemWidget extends StatefulWidget {
 }
 
 class _OrderItemWidgetState extends State<OrderItemWidget> {
+
+
   @override
   Widget build(BuildContext context) {
+
+    print('order status ${widget.order.orderStatus.id}');
+
     final theme = Theme.of(context).copyWith(dividerColor: Colors.transparent);
     return Stack(
       children: <Widget>[
@@ -126,6 +131,35 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                                       ),
                                     ),
                                     Helper.getPrice(Helper.getTotalOrdersPrice(widget.order), context, style: Theme.of(context).textTheme.headline4)
+                                  ],
+                                ),
+
+                                SizedBox(height: 10,),
+
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text(
+                                       'Order Status',
+                                        style: Theme.of(context).textTheme.bodyText1,
+                                      ),
+                                    ),
+
+                                    Container(
+                                      height: 25,
+                                      margin: EdgeInsets.all(0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal:12.0,),
+                                        child: Center(child: Text( widget.order.orderStatus.status, style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 12,color: Colors.white))),
+                                      ),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: widget.order.orderStatus.id == "5" ? Colors.green   :  widget.order.orderStatus.id == "7" ?  Colors.red :  Theme.of(context).accentColor),
+                                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                                          color: widget.order.orderStatus.id == "5" ? Colors.green   :  widget.order.orderStatus.id == "7" ?   Colors.red :  Theme.of(context).accentColor
+                                      ),
+                                    ),
+
+
                                   ],
                                 ),
                               ],

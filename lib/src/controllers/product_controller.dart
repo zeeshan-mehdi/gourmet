@@ -55,6 +55,7 @@ class ProductController extends ControllerMVC {
   }
 
   void listenForCart() async {
+    carts = [];
     setState(() {loading = true;});
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {

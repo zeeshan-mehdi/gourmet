@@ -18,14 +18,11 @@ class FavoriteGridItemWidget extends StatelessWidget {
     if(url!=null&& url!=""&&!url.contains("https")){
       url = url.replaceFirst("http", "https");
     }
-
-
-
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Theme.of(context).accentColor.withOpacity(0.08),
       onTap: () {
-        Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
+        //Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
       },
       child: Stack(
         alignment: AlignmentDirectional.topEnd,
@@ -100,7 +97,7 @@ class FavoriteProductGridItemWidget extends StatelessWidget {
       highlightColor: Colors.transparent,
       splashColor: Theme.of(context).accentColor.withOpacity(0.08),
       onTap: () {
-        Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
+        //Navigator.of(context).pushNamed('/Product', arguments: new RouteArgument(heroTag: this.heroTag, id: this.favorite.product.id));
       },
       child: Stack(
         alignment: AlignmentDirectional.topEnd,

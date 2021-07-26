@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/models/route_argument.dart';
+import 'package:markets/src/pages/product.dart';
 
 import '../helpers/helper.dart';
-import '../models/product.dart';
-import '../models/route_argument.dart';
+import 'package:markets/src/models/product.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final String heroTag;
@@ -25,7 +26,12 @@ class ProductItemWidget extends StatelessWidget {
       focusColor: Theme.of(context).accentColor,
       highlightColor: Theme.of(context).primaryColor,
       onTap: () {
-        Navigator.of(context).pushNamed('/Product', arguments: RouteArgument(id: product.id, heroTag: this.heroTag));
+
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductWidget(routeArgument: RouteArgument(param:  product.market.id),)));
+
+        //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductWidget(routeArgument: RouteArgument(param: product.market.id),)));
+
+        //Navigator.of(context).pushNamed('/Pages', arguments: RouteArgument(id: "4",param: '${product.market.id}'));
       },
       child: Container(
         width: 100,

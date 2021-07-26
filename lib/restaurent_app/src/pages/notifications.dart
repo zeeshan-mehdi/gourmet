@@ -30,8 +30,8 @@ class _NotificationsWidgetState extends StateMVC<NotificationsWidget> {
       drawer: DrawerWidget(),
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
+          icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+          onPressed: () =>Navigator.of(context).pop(),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
@@ -41,37 +41,37 @@ class _NotificationsWidgetState extends StateMVC<NotificationsWidget> {
           S.of(context).notifications,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
-        actions: <Widget>[
-          MaterialButton(
-            elevation: 0,
-            onPressed: () {
-              Navigator.of(context).pushNamed('/Notifications');
-            },
-            child: Stack(
-              alignment: AlignmentDirectional.bottomEnd,
-              children: <Widget>[
-                Icon(
-                  Icons.notifications_none,
-                  color: Theme.of(context).hintColor,
-                  size: 28,
-                ),
-                Container(
-                  child: Text(
-                    _con.unReadNotificationsCount.toString(),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.caption.merge(
-                          TextStyle(color: Theme.of(context).primaryColor, fontSize: 8),
-                        ),
-                  ),
-                  padding: EdgeInsets.all(0),
-                  decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.all(Radius.circular(10))),
-                  constraints: BoxConstraints(minWidth: 13, maxWidth: 13, minHeight: 13, maxHeight: 13),
-                ),
-              ],
-            ),
-            color: Colors.transparent,
-          )
-        ],
+        // actions: <Widget>[
+        //   MaterialButton(
+        //     elevation: 0,
+        //     onPressed: () {
+        //       Navigator.of(context).pushNamed('/Notifications');
+        //     },
+        //     child: Stack(
+        //       alignment: AlignmentDirectional.bottomEnd,
+        //       children: <Widget>[
+        //         Icon(
+        //           Icons.notifications_none,
+        //           color: Theme.of(context).hintColor,
+        //           size: 28,
+        //         ),
+        //         Container(
+        //           child: Text(
+        //             _con.unReadNotificationsCount.toString(),
+        //             textAlign: TextAlign.center,
+        //             style: Theme.of(context).textTheme.caption.merge(
+        //                   TextStyle(color: Theme.of(context).primaryColor, fontSize: 8),
+        //                 ),
+        //           ),
+        //           padding: EdgeInsets.all(0),
+        //           decoration: BoxDecoration(color: Theme.of(context).accentColor, borderRadius: BorderRadius.all(Radius.circular(10))),
+        //           constraints: BoxConstraints(minWidth: 13, maxWidth: 13, minHeight: 13, maxHeight: 13),
+        //         ),
+        //       ],
+        //     ),
+        //     color: Colors.transparent,
+        //   )
+        // ],
       ),
       body: RefreshIndicator(
         onRefresh: _con.refreshNotifications,

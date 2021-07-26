@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/restaurent_app/src/pages/messages.dart';
 import 'package:markets/restaurent_app/src/pages/new_product.dart';
+import 'package:markets/restaurent_app/src/pages/settings.dart';
+import 'package:markets/restaurent_app/src/pages/settings_page.dart';
 import 'package:markets/src/controllers/market_controller.dart';
 import 'package:markets/src/models/market.dart';
 import 'package:markets/src/pages/cart.dart';
@@ -210,6 +213,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                     mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                     children: [
+                                                      Expanded(child: SizedBox()),
                                                       Padding(
                                                         padding: EdgeInsets.all(8),
                                                         child: Container(
@@ -251,6 +255,22 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                             borderRadius: BorderRadius.circular(6),),
                                                         ),
                                                       ),
+
+
+                                                      Expanded(child: SizedBox()),
+
+
+                                                      IconButton(icon: Icon(Icons.chat_bubble,color:Colors.white,size: 20,), onPressed: (){
+                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MessagesWidget()));
+                                                      }),
+
+
+
+                                                      _con.market.isPaidKitchen ? IconButton(icon: Icon(Icons.settings,color:Colors.white,size: 20,), onPressed: (){
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage()));
+                                                      }):Container()
+
+
                                                     ],
                                                   ),
                                                 ],

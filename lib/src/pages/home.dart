@@ -27,6 +27,7 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends StateMVC<HomeWidget> {
   HomeController _con;
 
+
   _HomeWidgetState() : super(HomeController()) {
     _con = controller;
   }
@@ -34,6 +35,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _con.scaffoldKey,
       appBar: AppBar(
         // leading: new IconButton(
         //   icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
@@ -108,21 +110,21 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                     fontWeight: FontWeight.w800),
                               ),
                               Spacer(),
-                              Text(
-                                "See more",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.arrow_right,
-                                  color: Colors.black,
-                                ),
-                                onPressed: () {
-                                  print("See more");
-                                },
-                              ),
+                              // Text(
+                              //   "See more",
+                              //   style: TextStyle(
+                              //       color: Colors.black,
+                              //       fontWeight: FontWeight.w500),
+                              // ),
+                              // IconButton(
+                              //   icon: const Icon(
+                              //     Icons.arrow_right,
+                              //     color: Colors.black,
+                              //   ),
+                              //   onPressed: () {
+                              //     print("See more");
+                              //   },
+                              // ),
                             ],
                           ))
                     ],
@@ -171,21 +173,21 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                   overflow: TextOverflow.fade,
                                 ),
                                 Spacer(),
-                                Text(
-                                  "See all",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.arrow_right,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {
-                                    print("See all");
-                                  },
-                                ),
+                                // Text(
+                                //   "See all",
+                                //   style: TextStyle(
+                                //       color: Colors.black,
+                                //       fontWeight: FontWeight.w500),
+                                // ),
+                                // IconButton(
+                                //   icon: const Icon(
+                                //     Icons.arrow_right,
+                                //     color: Colors.black,
+                                //   ),
+                                //   onPressed: () {
+                                //     print("See all");
+                                //   },
+                                // ),
                                 // Text(
                                 //   "Adversting",
                                 // style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),

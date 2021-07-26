@@ -65,9 +65,9 @@ class _DeliveryPickupWidgetState extends StateMVC<DeliveryPickupWidget> {
           S.of(context).delivery_or_pickup,
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        ],
+        // actions: <Widget>[
+        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        // ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 10),

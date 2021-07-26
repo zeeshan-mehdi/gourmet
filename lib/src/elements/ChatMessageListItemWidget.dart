@@ -20,7 +20,7 @@ class ChatMessageListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).focusColor.withOpacity(0.2),
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15), topRight: Radius.circular(15))),
         padding: EdgeInsets.symmetric(vertical: 7, horizontal: 15),
         margin: EdgeInsets.symmetric(vertical: 5),
         child: Row(
@@ -40,25 +40,25 @@ class ChatMessageListItem extends StatelessWidget {
                 ],
               ),
             ),
-            new Container(
-              margin: const EdgeInsets.only(left: 8.0),
-              width: 42,
-              height: 42,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(42)),
-                child: CachedNetworkImage(
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  imageUrl: this.chat.user.image.thumb,
-                  placeholder: (context, url) => Image.asset(
-                    'assets/img/loading.gif',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                ),
-              ),
-            ),
+            // new Container(
+            //   margin: const EdgeInsets.only(left: 8.0),
+            //   width: 42,
+            //   height: 42,
+            //   child: ClipRRect(
+            //     borderRadius: BorderRadius.all(Radius.circular(42)),
+            //     child: CachedNetworkImage(
+            //       width: double.infinity,
+            //       fit: BoxFit.cover,
+            //       imageUrl: this.chat.user.image.thumb,
+            //       placeholder: (context, url) => Image.asset(
+            //         'assets/img/loading.gif',
+            //         fit: BoxFit.cover,
+            //         width: double.infinity,
+            //       ),
+            //       errorWidget: (context, url, error) => Icon(Icons.error_outline),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -71,7 +71,7 @@ class ChatMessageListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).accentColor,
-            borderRadius: BorderRadius.only(topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
+            borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
         padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
         margin: EdgeInsets.symmetric(vertical: 5),
         child: Row(
@@ -79,25 +79,25 @@ class ChatMessageListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: 42,
-              height: 42,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(42)),
-                child: CachedNetworkImage(
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  imageUrl: this.chat.user.image.thumb,
-                  placeholder: (context, url) => Image.asset(
-                    'assets/img/loading.gif',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error_outline),
-                ),
-              ),
-            ),
+            // new Container(
+            //   margin: const EdgeInsets.only(right: 10),
+            //   width: 42,
+            //   height: 42,
+            //   child: ClipRRect(
+            //     borderRadius: BorderRadius.all(Radius.circular(42)),
+            //     child: CachedNetworkImage(
+            //       width: double.infinity,
+            //       fit: BoxFit.cover,
+            //       imageUrl: this.chat.user.image.thumb,
+            //       placeholder: (context, url) => Image.asset(
+            //         'assets/img/loading.gif',
+            //         fit: BoxFit.cover,
+            //         width: double.infinity,
+            //       ),
+            //       errorWidget: (context, url, error) => Icon(Icons.error_outline),
+            //     ),
+            //   ),
+            // ),
             new Flexible(
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

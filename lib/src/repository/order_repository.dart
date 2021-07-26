@@ -110,7 +110,7 @@ Future<Order> addOrder(Order order, Payment payment) async {
     return Order.fromJSON(json.decode(response.body)['data']);
   }catch(e){
     print(e);
-    return Order.fromJSON({});
+    return null;
   }
 }
 
