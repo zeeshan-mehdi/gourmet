@@ -38,6 +38,7 @@ class SearchModal extends ModalRoute<void> {
         minimum: EdgeInsets.only(top: 40),
         child: SearchResultWidget(
           heroTag: "search",
+          searchTag: 1,
         ),
       ),
     );
