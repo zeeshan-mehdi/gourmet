@@ -46,6 +46,9 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
   Widget build(BuildContext context) {
     var url = currentUser.value?.image?.thumb??'';
 
+    print('current user');
+    print(currentUser.value);
+
     if(url!=null && !url.contains("https")){
       url = url.replaceFirst('http', 'https');
     }
@@ -199,6 +202,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
               ),
 
 
+
               Container(
                 height: MediaQuery.of(context).size.height-260,
                 color: Colors.white,
@@ -230,7 +234,9 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                              currentUser.value.apiToken != null ? 'Become Kitchen' : 'Login',
                              style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
                            ),
-                         )
+                         ),
+                         SizedBox(height: 20,),
+
                        ],
                      ),
                    )    : ProfileKitchenSection(market: myMarket,),
@@ -238,10 +244,12 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                     SizedBox(height: 30,),
 
                     //currentUser.value.apiToken != null ? UserProfileSection() : Container(),
-                    currentUser.value.apiToken != null ? DriverProfileSection() : Container(),
+                    currentUser.value.apiToken != null  ? currentUser.value.isDriver !=null &&currentUser.value.isDriver ==true ? DriverProfileSection() :   ProfileDriverSection():Container(),
                   ],
                 ),
-              )
+              ),
+
+              currentUser.value.apiToken != null ?  UserProfileSection():Container(),
 
 
 

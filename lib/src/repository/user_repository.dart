@@ -121,6 +121,11 @@ Future<userModel.User> update(userModel.User user) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(user.toMap()),
   );
+
+  print('update response');
+  print(response.body);
+
+
   setCurrentUser(response.body);
   currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   return currentUser.value;

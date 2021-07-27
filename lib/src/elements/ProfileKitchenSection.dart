@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/user_controller.dart';
 import 'package:markets/restaurent_app/src/models/market.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
 import 'package:markets/src/pages/pages.dart';
@@ -179,6 +180,43 @@ class KitchenLoadingWidget extends StatelessWidget {
       ),
     ) ;
   }
+}
+
+
+class ProfileDriverSection extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Text('Do you know ?',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
+          SizedBox(height: 10,),
+          Container(child: Text( 'You can become a driver and work at Gourmet',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
+          SizedBox(height: 20,),
+          MaterialButton(
+            elevation: 0,
+            onPressed: becomeDriver,
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+            color: Colors.blueAccent.withOpacity(1),
+            shape: StadiumBorder(),
+            child: Text( 'Become Driver' ,
+              style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+
+  becomeDriver()async{
+    var controller = UserController();
+    controller.becomeDriver();
+  }
+
+
+
 }
 
 

@@ -20,16 +20,21 @@ class User {
   bool auth;
   int memebership;
   String trialEnds;
+  bool isDriver;
 
 
 
 
 //  String role;
 
-  User();
+  User({isDriver = false});
 
   User.fromJSON(Map<String, dynamic> jsonMap) {
     try {
+      print('is_driver received');
+      print(jsonMap['is_driver']);
+
+
       id = jsonMap['id'].toString();
       name = jsonMap['name'] != null ? jsonMap['name'] : '';
       email = jsonMap['email'] != null ? jsonMap['email'] : '';
@@ -51,10 +56,12 @@ class User {
         address = "";
       }
       try {
+        isDriver = jsonMap['is_driver'];
         bio = jsonMap['custom_fields']['bio']['view'];
         memebership = jsonMap['membership'];
         trialEnds = jsonMap['trial_ends_at'];
         membershipType =  jsonMap['membership_type'];
+
       } catch (e) {
         bio = "";
       }
@@ -82,6 +89,7 @@ class User {
     map["membership"]= memebership;
     map['trial_ends_at'] = trialEnds;
     map['membership_type'] = membershipType;
+    map['is_driver'] = isDriver;
     map["media"] = image?.toMap();
     return map;
   }

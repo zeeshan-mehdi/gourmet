@@ -99,6 +99,15 @@ class UserController extends ControllerMVC {
       Fluttertoast.showToast(msg: 'Payment Failed please try again!! ${e}');
     });
   }
+
+
+  void becomeDriver()async{
+    userRepo.currentUser.value.isDriver = true;
+    update(userRepo.currentUser.value);
+    notifyListeners();
+  }
+
+
   void update(userModel.User user) async {
     user.deviceToken = null;
     repository.update(user).then((value) {
