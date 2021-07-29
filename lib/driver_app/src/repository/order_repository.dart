@@ -25,10 +25,20 @@ Future<Stream<Order>> getOrders() async {
   _queryParams['searchJoin'] = 'and';
   _queryParams['orderBy'] = 'id';
   _queryParams['sortedBy'] = 'asc';
+  print('uri for orders $uri');
+
   uri = uri.replace(queryParameters: _queryParams);
+
+  //String url = uri.toString();
+  //url=url+"?api_token=${_user.apiToken}with=user;productOrders;productOrders.product;productOrders.options;orderStatus;payment&search=driver.id:${_user.id}&searchFields=driver.id:=&orderBy=id&sortedBy=desc";
+
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}orders?api_token=${_user.apiToken}&with=driver;productOrders;productOrders.product;productOrders.options;orderStatus;deliveryAddress;payment&search;=driver.id=${_user.id}&order_status_id=$orderStatusId&delivery_address_id=null&searchFields=driver.id;=&order_status_id;=&delivery_address_id;=&searchJoin=and&orderBy=id&sortedBy=asc';
+
+  //print(url);
+
   try {
     final client = new http.Client();
-    final streamedRest = await client.send(http.Request('get', uri));
+    final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
     return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
       return Order.fromJSON(data);
     });

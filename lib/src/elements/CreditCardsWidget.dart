@@ -68,18 +68,18 @@ class CreditCardsWidget extends StatelessWidget {
                       height: 22,
                       width: 70,
                     ),
-                    ButtonTheme(
-                      padding: EdgeInsets.all(0),
-                      minWidth: 50.0,
-                      height: 10.0,
-                      child: PaymentSettingsDialog(
-                        creditCard: creditCard,
-                        onChanged: () {
-                          onChanged(creditCard);
-                          //setState(() {});
-                        },
-                      ),
-                    ),
+                    // ButtonTheme(
+                    //   padding: EdgeInsets.all(0),
+                    //   minWidth: 50.0,
+                    //   height: 10.0,
+                    //   child: PaymentSettingsDialog(
+                    //     creditCard: creditCard,
+                    //     onChanged: () {
+                    //       onChanged(creditCard);
+                    //       //setState(() {});
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
                 Text(

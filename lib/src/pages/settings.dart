@@ -78,7 +78,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(300),
                                 onTap: () {
-                                  Navigator.of(context).pushNamed('/Profile');
+                                  //Navigator.of(context).pushNamed('/Profile');
                                 },
                                 child: CircleAvatar(
                                   backgroundImage: NetworkImage(currentUser.value.image.thumb),
@@ -218,7 +218,7 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                           ListTile(
                             leading: Icon(Icons.credit_card),
                             title: Text(
-                              S.of(context).payments_settings,
+                              S.of(context).profile_settings,
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
                             trailing: ButtonTheme(
@@ -226,9 +226,9 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               minWidth: 50.0,
                               height: 25.0,
                               child: PaymentSettingsDialog(
-                                creditCard: _con.creditCard,
+                                generalSettings: _con.generalSettings,
                                 onChanged: () {
-                                  _con.updateCreditCard(_con.creditCard);
+                                  _con.saveKey(_con.generalSettings.myFatoorahApiKey,_con.generalSettings.time);
                                   //setState(() {});
                                 },
                               ),
@@ -237,11 +237,24 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                           ListTile(
                             dense: true,
                             title: Text(
-                              S.of(context).default_credit_card,
+                              S.of(context).my_fatoorah,
                               style: Theme.of(context).textTheme.bodyText2,
                             ),
                             trailing: Text(
-                              _con.creditCard.number.isNotEmpty ? _con.creditCard.number.replaceRange(0, _con.creditCard.number.length - 4, '...') : '',
+                              _con.generalSettings.myFatoorahApiKey.isNotEmpty ? _con.generalSettings.myFatoorahApiKey : '',
+                              style: TextStyle(color: Theme.of(context).focusColor),
+                            ),
+                          ),
+
+
+                          ListTile(
+                            dense: true,
+                            title: Text(
+                              S.of(context).max_wait,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                            trailing: Text(
+                              _con.generalSettings.time!=null ? _con.generalSettings.time.toString() : '',
                               style: TextStyle(color: Theme.of(context).focusColor),
                             ),
                           ),
@@ -310,26 +323,26 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               ],
                             ),
                           ),
-                          ListTile(
-                            onTap: () {
-                              Navigator.of(context).pushNamed('/Help');
-                            },
-                            dense: true,
-                            title: Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.help_outline,
-                                  size: 22,
-                                  color: Theme.of(context).focusColor,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  S.of(context).help_support,
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                              ],
-                            ),
-                          ),
+                          // ListTile(
+                          //   onTap: () {
+                          //     Navigator.of(context).pushNamed('/Help');
+                          //   },
+                          //   dense: true,
+                          //   title: Row(
+                          //     children: <Widget>[
+                          //       Icon(
+                          //         Icons.help_outline,
+                          //         size: 22,
+                          //         color: Theme.of(context).focusColor,
+                          //       ),
+                          //       SizedBox(width: 10),
+                          //       Text(
+                          //         S.of(context).help_support,
+                          //         style: Theme.of(context).textTheme.bodyText2,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

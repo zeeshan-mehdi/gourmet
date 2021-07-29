@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:markets/driver_app/src/pages/map.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,7 +13,7 @@ import '../elements/DrawerWidget.dart';
 import '../elements/ProductOrderItemWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../helpers/helper.dart';
-import '../models/route_argument.dart';
+import 'package:markets/restaurent_app/src/models/route_argument.dart';
 
 class OrderWidget extends StatefulWidget {
   final RouteArgument routeArgument;
@@ -189,8 +190,8 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                 floating: true,
                 automaticallyImplyLeading: false,
                 leading: new IconButton(
-                  icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-                  onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
+                  icon: new Icon(Icons.arrow_back, color: Theme.of(context).hintColor),
+                  onPressed: () => Navigator.of(context).pop(),
                 ),
                 centerTitle: true,
                 title: Text(
@@ -398,7 +399,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                   padding: EdgeInsets.all(0),
                                   disabledColor: Theme.of(context).focusColor.withOpacity(0.4),
                                   onPressed: () {
-                                    Navigator.of(context).pushNamed('/Pages', arguments: new RouteArgument(id: '3', param: _con.order));
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DriverMapWidget(routeArgument: RouteArgument(id: '3', param: _con.order),)));
                                   },
                                   child: Icon(
                                     Icons.directions,

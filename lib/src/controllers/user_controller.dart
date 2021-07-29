@@ -103,18 +103,28 @@ class UserController extends ControllerMVC {
 
   void becomeDriver()async{
     userRepo.currentUser.value.isDriver = true;
-    update(userRepo.currentUser.value);
     notifyListeners();
+    update(userRepo.currentUser.value);
+
   }
 
 
   void update(userModel.User user) async {
     user.deviceToken = null;
     repository.update(user).then((value) {
-      setState(() {});
-      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-        content: Text(S.of(state.context).profile_settings_updated_successfully),
-      ));
+      userRepo.currentUser.value  = value;
+      setState(() {
+        notifyListeners();
+      });
+      try {
+        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+          content: Text(S
+              .of(state.context)
+              .profile_settings_updated_successfully),
+        ));
+      }catch(e){
+        print('in user controller $e');
+      }
     });
   }
 

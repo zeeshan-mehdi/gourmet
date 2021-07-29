@@ -2774,6 +2774,17 @@ class S {
     );
   }
 
+
+  /// `EXPIRY DATE`
+  String get max_wait {
+    return Intl.message(
+      'Maximum Time to wait for order acceptance(minutes)',
+      name: 'max_wait',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `CVV`
   String get cvv {
     return Intl.message(

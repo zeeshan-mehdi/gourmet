@@ -13,6 +13,8 @@
   "total": "Total",
   "favorite_products": "Favorite Products",
   "extras": "Extras",
+  "max_wait": "Maximum Time to wait for order acceptance(minutes)",
+
   "faq": "Faq",
   "help_supports": "Help & Supports",
   "app_language": "App Language",

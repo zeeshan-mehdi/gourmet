@@ -85,6 +85,7 @@ class OrderController extends ControllerMVC {
         drivers.add(_driver);
       });
     }, onError: (a) {
+      print('error while listening for drivers');
       print(a);
       // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
       //   content: Text(S.of(state.context).verify_your_internet_connection),

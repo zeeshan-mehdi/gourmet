@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/driver_app/src/pages/notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../controllers/notification_controller.dart';
@@ -35,7 +36,7 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
     return MaterialButton(
       elevation: 0,
       onPressed: () {
-        Navigator.of(context).pushNamed('/Notifications');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NotificationsWidget()));
       },
       child: Stack(
         alignment: AlignmentDirectional.bottomEnd,

@@ -8,7 +8,7 @@ import '../elements/EmptyOrdersWidget.dart';
 import '../elements/OrderItemWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../elements/StatisticsCarouselWidget.dart';
-import '../repository/settings_repository.dart' as settingsRepo;
+import 'package:markets/src/repository/settings_repository.dart' as settingsRepo;
 
 class OrdersWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
@@ -53,13 +53,13 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
           builder: (context, value, child) {
             return Text(
               value.appName ?? S.of(context).home,
-              style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+              style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3),),
             );
           },
         ),
-        // actions: <Widget>[
-        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        // ],
+        actions: <Widget>[
+          new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: _con.refreshOrders,

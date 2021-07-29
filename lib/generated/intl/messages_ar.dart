@@ -362,6 +362,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "longitude" : MessageLookupByLibrary.simpleMessage("خط الطول"),
     "latitude" : MessageLookupByLibrary.simpleMessage("خط العرض"),
     "pick_location" : MessageLookupByLibrary.simpleMessage("اختر الموقع باستخدام الخريطة"),
+    "max_wait" : MessageLookupByLibrary.simpleMessage("أقصى وقت لانتظار قبول الطلب (دقائق)"),
 
   };
 }

@@ -97,21 +97,21 @@ class _DriverProfileSectionState extends State<DriverProfileSection> {
       child: Column(
         children: [
 
-          ListItem(color:Colors.red , title: 'Driver Profile',onPressed: (){
-            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverProfile));
-          },),
+          // ListItem(color:Colors.red , title: 'Driver Profile',onPressed: (){
+          //   Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverProfile));
+          // },),
 
           ListItem(color:Colors.lightBlue , title: 'Driver Orders',onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverOrders));//my addresses
           },),
 
-          ListItem(color:Colors.indigo, title: 'Order History',onPressed: (){
-            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.OrderHistory));
-          },),
-
-          ListItem(color:Colors.orange , title: 'Driver Map',onPressed: (){
-            Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverMap) );
-          },),
+          // ListItem(color:Colors.indigo, title: 'Order History',onPressed: (){
+          //   Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.OrderHistory));
+          // },),
+          //
+          // ListItem(color:Colors.orange , title: 'Driver Map',onPressed: (){
+          //   Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverMap) );
+          // },),
 
         ],
       ),
@@ -183,12 +183,22 @@ class KitchenLoadingWidget extends StatelessWidget {
 }
 
 
-class ProfileDriverSection extends StatelessWidget {
+class ProfileDriverSection extends StatefulWidget {
+
+  @override
+  State<ProfileDriverSection> createState() => _ProfileDriverSectionState();
+}
+
+class _ProfileDriverSectionState extends State<ProfileDriverSection> {
+  bool load = false;
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: load ?  Center(child:CircularProgressIndicator()) :Column(
         children: [
           Text('Do you know ?',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
           SizedBox(height: 10,),
@@ -209,14 +219,17 @@ class ProfileDriverSection extends StatelessWidget {
     );
   }
 
-
   becomeDriver()async{
     var controller = UserController();
     controller.becomeDriver();
+    setState(() {
+      load = true;
+    });
+
+    await Future.delayed(Duration(milliseconds: 30),(){
+      Navigator.of(context).pushReplacementNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.Profile));
+    });
   }
-
-
-
 }
 
 

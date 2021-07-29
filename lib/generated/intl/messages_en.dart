@@ -182,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ordered_by_nearby_first" : MessageLookupByLibrary.simpleMessage("Ordered by Nearby first"),
     "orders_refreshed_successfuly" : MessageLookupByLibrary.simpleMessage("Orders refreshed successfully"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),
+    "max_wait" : MessageLookupByLibrary.simpleMessage("Maximum Time to wait for order acceptance(minutes)"),
     "pay_on_pickup" : MessageLookupByLibrary.simpleMessage("Pay on Pickup"),
     "payment_card_updated_successfully" : MessageLookupByLibrary.simpleMessage("Payment card updated successfully"),
     "payment_mode" : MessageLookupByLibrary.simpleMessage("Payment Mode"),

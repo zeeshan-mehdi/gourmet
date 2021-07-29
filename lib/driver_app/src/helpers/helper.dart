@@ -13,7 +13,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html/parser.dart';
 
-import '../../generated/l10n.dart';
+import 'package:markets/generated/l10n.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../models/order.dart';
 import '../models/product_order.dart';

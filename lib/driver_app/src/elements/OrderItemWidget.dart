@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:markets/driver_app/src/pages/order.dart';
 
-import '../../generated/l10n.dart';
+import 'package:markets/generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/order.dart';
-import '../models/route_argument.dart';
+import 'package:markets/restaurent_app/src/models/route_argument.dart';
 import 'ProductOrderItemWidget.dart';
 
 class OrderItemWidget extends StatefulWidget {
@@ -121,7 +122,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                   MaterialButton(
                     elevation: 0,
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/OrderDetails', arguments: RouteArgument(id: widget.order.id));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OrderWidget(routeArgument: RouteArgument(id: widget.order.id),)));
                     },
                     textColor: Theme.of(context).hintColor,
                     child: Wrap(

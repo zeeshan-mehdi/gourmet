@@ -12,6 +12,9 @@ import '../models/address.dart';
 import '../models/credit_card.dart';
 import '../models/user.dart';
 import '../repository/user_repository.dart' as userRepo;
+import 'package:markets/src/models/user.dart' as restUser;
+
+import 'package:markets/src/repository/user_repository.dart' as restUserRepo;
 
 ValueNotifier<User> currentUser = new ValueNotifier(User());
 
@@ -235,13 +238,16 @@ Future<Address> removeDeliveryAddress(Address address) async {
 Future<Stream<User>> getDriversOfMarket(String marketId) async {
   Uri uri = Helper.getUri('api/manager/users/drivers_of_market/$marketId');
   Map<String, dynamic> _queryParams = {};
-  User _user = userRepo.currentUser.value;
+  restUser.User _user = restUserRepo.currentUser.value;
 
   _queryParams['api_token'] = _user.apiToken;
   uri = uri.replace(queryParameters: _queryParams);
 
   try {
     final client = new http.Client();
+
+    print('driver uri $uri');
+
     final streamedRest = await client.send(http.Request('get', uri));
 
     return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {

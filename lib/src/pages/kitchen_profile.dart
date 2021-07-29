@@ -204,7 +204,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
 
 
               Container(
-                height: MediaQuery.of(context).size.height-260,
+                height: currentUser.value.isDriver !=null &&currentUser.value.isDriver ==true ? 310: 500,
                 color: Colors.white,
                 child: Column(
                   children: [
@@ -250,8 +250,6 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
               ),
 
               currentUser.value.apiToken != null ?  UserProfileSection():Container(),
-
-
 
             ],
           ),

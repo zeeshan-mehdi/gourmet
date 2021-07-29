@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/driver_app/src/pages/notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../controllers/cart_controller.dart';
@@ -38,7 +39,8 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
       elevation: 0,
       onPressed: () {
         if (currentUser.value.apiToken != null) {
-          Navigator.of(context).pushNamed('/Cart', arguments: RouteArgument(param: '/Pages', id: '2'));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NotificationsWidget()));
+         // Navigator.of(context).pushNamed('/Cart', arguments: RouteArgument(param: '/Pages', id: '2'));
         } else {
           Navigator.of(context).pushNamed('/Login');
         }
@@ -47,7 +49,7 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
         alignment: AlignmentDirectional.bottomEnd,
         children: <Widget>[
           Icon(
-            Icons.shopping_cart_outlined,
+            Icons.notifications,
             color: this.widget.iconColor,
             size: 28,
           ),

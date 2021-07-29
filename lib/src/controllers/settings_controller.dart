@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:markets/src/models/general_settings.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:my_fatoorah/my_fatoorah.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../repository/user_repository.dart' as userRepo;
 
 import  'package:markets/generated/l10n.dart';
@@ -15,10 +17,47 @@ class SettingsController extends ControllerMVC {
   CreditCard creditCard = new CreditCard();
   GlobalKey<FormState> loginFormKey;
   GlobalKey<ScaffoldState> scaffoldKey;
+  String key;
+  GeneralSettings generalSettings;
+  SharedPreferences instance;
 
   SettingsController() {
     loginFormKey = new GlobalKey<FormState>();
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
+    generalSettings = GeneralSettings('sdfjsldkf sldkf asflkjsdfsdf', 5);
+    getKey();
+  }
+
+  saveKey(newKey,time)async{
+    if(instance==null) instance = await SharedPreferences.getInstance();
+
+      instance.setString('key', newKey);
+      instance.setInt('time', time);
+      key = newKey;
+      generalSettings.myFatoorahApiKey = key;
+      generalSettings.time = time;
+      setState(() {
+        try {
+          ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(
+              SnackBar(
+                content: Text('General Settings Updated'),
+              ));
+        }catch(e) {
+           Fluttertoast.showToast(msg: 'General Settings Updated');
+        }
+      });
+
+  }
+
+  void getKey() async{
+    if(instance==null) instance = await SharedPreferences.getInstance();
+
+    key = instance.get('key');
+    generalSettings.time = instance.get('time')??5;
+
+
+    generalSettings.myFatoorahApiKey = key??'sdkfjsdf sdlfjsdfksdf sldjfs dfsldkfj';
+    setState(() { });
   }
 
   Future<void> verifyPhone(userModel.User user) async {
