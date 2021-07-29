@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/driver_app/src/controllers/map_controller.dart';
 import 'package:markets/src/controllers/search_controller.dart';
 import 'package:markets/src/elements/SearchResultsWidget.dart';
 import 'package:markets/src/elements/SearchWidget.dart';
@@ -6,7 +7,26 @@ import 'package:markets/src/models/market.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../repository/user_repository.dart' as userRepo;
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../helpers/custom_trace.dart';
+import '../helpers/maps_util.dart';
+import '../models/address.dart';
+import '../models/coupon.dart';
+import '../models/setting.dart';
 import 'package:markets/generated/l10n.dart';
 import '../elements/CardWidget.dart';
 import 'MultiSelectListView.dart';
@@ -98,25 +118,27 @@ class _FilterPageState extends StateMVC<FilterPage> {
               margin: EdgeInsets.only(top: 18, right: 8),
               child:  Text("Done",style: TextStyle(fontSize: 17,color: Colors.orange)),
             ),
-            onTap: () {
+            onTap: () async {
               print("Filtered items is");
               print(FilterPage.sortValues);
               print(FilterPage.filterValues);
               print(_con.markets.map((e) => e.rate));
+
               List<Market> filterItems = List<Market>();
 
               // print(_con.markets.map((element) => element.cuisine));
               // print(selectedCuisine.map((e) => e.name));
 
               if (selectedCuisine.length != 0){
-                print(_con.markets.where((element) => element.cuisine ==selectedCuisine.map((e) => e.name).last));
+                print("hello");
+                print(_con.markets.map((e) => e.cuisine));
+                print(_con.markets.where((element) => element.cuisine == selectedCuisine.map((e) => e.name).last));
                 //Market mark = _con.markets.firstWhere((element) =>
                //  element == selectedCuisine.map((e) => e.name),orElse: () {
                //    return null;
                //  });
                // / print(mark.name);
                //  print(mark.id);
-
                 filterItems.addAll(_con.markets.where((element) => element.cuisine ==selectedCuisine.map((e) => e.name).first));
               }else{}
               if(FilterPage.sortValues.length != 0){
@@ -125,13 +147,18 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 element == "Top Rated",orElse: () {
                   return null;
                 }) == "Top Rated"){
+                  print(_con.markets.map((e) => e.rate));
                   print("sort Value is Top Rated");
+                  filterItems = _con.markets;
+
                 }else{}
 
                 if (FilterPage.sortValues.firstWhere((element) =>
                 element == "Nearest",orElse: () {
                   return null;
                 }) == "Nearest"){
+                  print(_con.markets.map((e) => e.distance));
+                  filterItems.addAll(_con.markets.where((element) => element.distance >= 0.0));
                   print("sort Value Nearest");
                 }else{}
 
@@ -139,6 +166,18 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 element == "Cost High to Low",orElse: () {
                   return null;
                 }) == "Cost High to Low"){
+                 // User _user =
+                 // print(userRepo.currentUser.value.address);
+                  print(_con.markets.map((e) => e.longitude));
+
+                  Address aa = await _con.getCurrentLocation();
+
+                  print( aa.address);
+                 // print( aa.then((value) => value.latitude));
+                 // print( aa.then((value) => value.latitude));
+
+
+;                  print(_con.markets.map((e) => e.latitude));
                   print("sort Value Cost High to Low");
                 }else{}
 
@@ -146,9 +185,9 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 element == "Most Popular",orElse: () {
                   return null;
                 }) == "Most Popular"){
+                  filterItems = _con.markets;
                   print("sort Value Most Popular");
                 }else{}
-
                 print("sort result is");
                 filterItems.addAll(_con.markets.where((element) => element.cuisine == selectedCuisine.map((e) => e.name)));
               }else {}
@@ -167,22 +206,24 @@ class _FilterPageState extends StateMVC<FilterPage> {
                   return null;
                 }) == "Same Day Delivery"){
                   print("sort Value Same Day Delivery");
-                  filterItems.addAll(_con.markets.where((element) => element.sameDayDelivery == false));
+                  print(_con.markets.map((element) => element.sameDayDelivery));
+                  filterItems.addAll(_con.markets.where((element) => element.sameDayDelivery == true));
                 }else{}
 
                 if (FilterPage.filterValues.firstWhere((element) =>
                 element == "Vegetarian Food",orElse: () {
                   return null;
                 }) == "Vegetarian Food"){
-                  filterItems.addAll(_con.markets.where((element) => element.vegetarianFood == false));
+                  filterItems.addAll(_con.markets.where((element) => element.vegetarianFood == true));
                   print("sort Value Vegetarian Food");
                 }else{}
               }else{}
 
-              print("Filtered items is ${filterItems.map((e) => e.id).toSet()}");
+              print("Filtered items is ${filterItems.map((e) => e).toSet()}");
+              var item =  filterItems.map((e) => e).toSet().toList();
               //var
              // Navigator.of(context).push(SearchResultByFitlerWidget(filterMarket: filterItems,heroTag: "search",));
-              Navigator.of(context).push(SearchFilterModal(marketFilteredList: filterItems));
+              Navigator.of(context).push(SearchFilterModal(marketFilteredList: item));
 
                //Navigator.of(context).pu
               // Navigator.of(context).push(MaterialPageRoute(

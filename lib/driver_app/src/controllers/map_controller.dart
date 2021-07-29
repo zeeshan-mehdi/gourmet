@@ -46,7 +46,7 @@ class MapController extends ControllerMVC {
         });
   }
 
-  void getCurrentLocation() async {
+   void getCurrentLocation() async {
     try {
       currentAddress = sett.myAddress.value;
       setState(() {

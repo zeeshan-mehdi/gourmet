@@ -381,21 +381,22 @@ class _SearchResultByFitlerWidgetState extends StateMVC<SearchResultByFitlerWidg
                   // Navigator.pop(context);
                 },
               ),
-              leading: IconButton(
-                icon: Icon(Icons.sort),
-                color: Theme.of(context).hintColor,
-                onPressed: () async {
-                //  Navigator.of(context).pushNamed('/Pages', arguments: 0);
-                  String cameraScanResult = await scanner.scan();
-                  print(cameraScanResult);
-                  Navigator.of(context).pushNamed('/Pages',
-                      arguments: RouteArgument(
-                          id: '4',
-                          param: cameraScanResult,
-                          heroTag: 'menu_tab'));
-                  // Navigator.pop(context);
-                },
-              ),
+              // leading: IconButton(
+              //   icon: Icon(Icons.sort),
+              //   color: Theme.of(context).hintColor,
+              //   onPressed: () async {
+              //   //  Navigator.of(context).pushNamed('/Pages', arguments: 0);
+              //     String cameraScanResult = await scanner.scan();
+              //     print(cameraScanResult);
+              //     Navigator.of(context).pushNamed('/Pages',
+              //         arguments: RouteArgument(
+              //             id: '4',
+              //             param: cameraScanResult,
+              //             heroTag: 'menu_tab'));
+              //     // Navigator.pop(context);
+              //   },
+              // ),
+
               // title: Text(
               //   S.of(context).search,
               //   style: Theme.of(context).textTheme.headline4,
