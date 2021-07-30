@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:markets/driver_app/src/controllers/search_controller.dart';
 import 'package:markets/restaurent_app/src/elements/CardWidget.dart';
 import 'package:markets/restaurent_app/src/pages/pages.dart';
+import 'package:markets/src/controllers/search_controller.dart';
 import 'package:markets/src/elements/LoginSlider.dart';
 import 'package:markets/src/elements/PaymentSettingsDialog.dart';
 import 'package:markets/src/elements/ProfileKitchenSection.dart';
+import 'package:markets/src/pages/CuisinesDetail.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../generated/l10n.dart';
 import '../models/user.dart' as userModel;
@@ -17,26 +20,45 @@ import '../repository/user_repository.dart' as userRepo;
 import '../repository/settings_repository.dart' as settingRepo;
 
 class Coisines extends StatefulWidget {
+  List<Cuisines> cuisinesItems;
+  Coisines({this.cuisinesItems});
   @override
-  _CoisinesState createState() => _CoisinesState();
+  _CoisinesState createState() => _CoisinesState(cuisinesItems: cuisinesItems);
 }
 
 class _CoisinesState extends StateMVC<Coisines> {
-  UserController _con;
+  SearchController _con;
+  List<Cuisines> cuisinesItems;
 
-  _CoisinesState() : super(UserController()) {
+  _CoisinesState({this.cuisinesItems}) : super(SearchController()) {
     _con = controller;
   }
 
-  List<Cuisines> cuisinesItems;
+ // List<Cuisines> cuisinesItems;
+ // List<Cuisines> cusiein =    List<Cuisines>();
 
   // _CoisinesState() : super(UserController()) {
   //   _con = controller;
   // }
+
   @override
   void initState() {
     super.initState();
-    cuisinesItems = Cuisines.sampleData();
+      print(cuisinesItems.map((e) => e.name));
+      print(cuisinesItems.map((e) => e.id));
+
+    // print("cusi is ${_con.topMarkets.map((e) => e.cuisine)}");
+    // var  cuisinesList =_con.topMarkets.map((e) => e.cuisine).toList();
+    setState(() {
+
+
+    // for (var i = 0; i < cuisinesList.length; i++) {
+    //   cusiein.add(new Cuisines(id: i,name: cuisinesList[i]));
+    // }
+    // print("hello");
+   // print("aa " + cusiein.map((e) => e).toString());
+   // cuisinesItems = Cuisines.sampleData();
+    });
   }
 
   // HomeController _conn;
@@ -105,7 +127,7 @@ class _CoisinesState extends StateMVC<Coisines> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  Container(
+                                Container(
                                     height: config.App(context).appHeight(80),
                                     child: ListView.builder(
                                       scrollDirection: Axis.vertical,
@@ -114,10 +136,18 @@ class _CoisinesState extends StateMVC<Coisines> {
                                         return GestureDetector(
                                           onTap: () {
                                             print("hello");
+                                            print(cuisinesItems[index].id);
+                                            print(cuisinesItems[index].name);
+                                            print(cuisinesItems[index].count);
                                             //  },
-                                            Navigator.of(context).pushNamed(
-                                              '/CoisinesDetail',
-                                            );
+
+                                           var aa =  _con.topMarkets.where((element) => element.cuisine == cuisinesItems[index].name).toList();
+                                            print(aa.map((e) => e.id));
+                                            print(aa.map((e) => e.name));
+                                            Navigator.of(context).push( MaterialPageRoute(builder: (_) => CoisinesDetail(allMarkets: aa,)));
+                                           // Navigator.of(context).pushNamed(
+                                           //    '/CoisinesDetail',
+                                           //  );
                                           },
                                           child: Container(
                                             width: 292,
@@ -176,8 +206,7 @@ class _CoisinesState extends StateMVC<Coisines> {
                                                                 .end,
                                                         children: <Widget>[
                                                           Text(
-                                                            cuisinesItems[index]
-                                                                .name,
+                                                            cuisinesItems[index].name,
                                                             overflow:
                                                                 TextOverflow
                                                                     .fade,
@@ -192,7 +221,7 @@ class _CoisinesState extends StateMVC<Coisines> {
                                                                 fontSize: 22),
                                                           ),
                                                           Text(
-                                                            "${cuisinesItems.length} Restaurants",
+                                                            "${cuisinesItems[index].count} Restaurants",
                                                             overflow:
                                                                 TextOverflow
                                                                     .fade,
@@ -294,17 +323,19 @@ class _CoisinesState extends StateMVC<Coisines> {
 }
 
 class Cuisines {
-  int id;
+  String id;
   String name;
+  int count;
 
-  Cuisines({this.id, this.name});
 
-  static List<Cuisines> sampleData() {
-    return [
-      Cuisines(id: 1, name: "Asian"),
-      Cuisines(id: 2, name: "Middle Eastern"),
-      Cuisines(id: 3, name: "Desert"),
-      Cuisines(id: 4, name: "chinese")
-    ];
-  }
+  Cuisines({this.id, this.name,this.count});
+
+  // static List<Cuisines> sampleData() {
+  //   return [
+  //     Cuisines(id: 1, name: "Asian"),
+  //     Cuisines(id: 2, name: "Middle Eastern"),
+  //     Cuisines(id: 3, name: "Desert"),
+  //     Cuisines(id: 4, name: "chinese")
+  //   ];
+  // }
 }

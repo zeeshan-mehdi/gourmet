@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import '../models/market.dart';
 import 'package:markets/restaurent_app/src/pages/pages.dart';
 import 'package:markets/src/elements/CardWidget.dart';
 import 'package:markets/src/elements/LoginSlider.dart';
@@ -22,8 +23,10 @@ import '../repository/user_repository.dart' as userRepo;
 import '../repository/settings_repository.dart' as settingRepo;
 
 class CoisinesDetail extends StatefulWidget {
+  List<Market> allMarkets;
+  CoisinesDetail({this.allMarkets});
   @override
-  _CoisinesDetailState createState() => _CoisinesDetailState();
+  _CoisinesDetailState createState() => _CoisinesDetailState(allMarkets: allMarkets);
 }
 
 class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
@@ -32,9 +35,11 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
   // _CoisinesDetailState() : super(UserController()) {
   //   _con = controller;
   // }
+  List<Market> allMarkets;
+
   SearchController _con;
   final String heroTag =  "search";
-  _CoisinesDetailState() : super(SearchController()) {
+  _CoisinesDetailState({this.allMarkets}) : super(SearchController()) {
     _con = controller;
   }
   List<CuisinesDetail> cuisinesDetailItems;
@@ -81,9 +86,9 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                         children: [
                           Container(
                             width: config.App(context).appWidth(100),
-                            height: config.App(context).appHeight(34),
+                            height: config.App(context).appHeight(10),
                             decoration: BoxDecoration(color: Colors.transparent),
-                            child: LoginSliderWidget(slides: _con.slides),
+                            child: SizedBox(),
                             // ),
                           ),
                          Container(
@@ -113,7 +118,7 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                             children: [
                            //   Spacer(),
                               Text(
-                                "3 kitchen",
+                                "${allMarkets.length} kitchen",
                                 style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),
                               ),
                               Spacer()
@@ -143,12 +148,9 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                               top: 0, right: 20, left: 20, bottom: 0),
                           width: config.App(context).appWidth(100),
 //                          height: config.App(context).appHeight(55),
-                      child:  _con.markets.isEmpty && _con.products.isEmpty
-                          ?SizedBox()
-                          : Expanded(
+                      child: Expanded(
                         child: ListView(
                           children: <Widget>[
-
                             // Row(
                             //   children: [
                             //     Padding(
@@ -193,12 +195,11 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                             ListView.builder(
                               shrinkWrap: true,
                               primary: false,
-                              itemCount: _con.markets.length,
+                              itemCount: allMarkets.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductWidget(routeArgument: RouteArgument(param: _con.markets.elementAt(index).id),)));
-
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductWidget(routeArgument: RouteArgument(param: allMarkets.elementAt(index).id),)));
                                     // Navigator.of(context).pushNamed('/roduct',
                                     //     arguments: RouteArgument(
                                     //       id: '0',
@@ -207,7 +208,7 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                                     //     ));
                                   },
                                   child: CardWidget(
-                                      market: _con.markets.elementAt(index),
+                                      market: allMarkets[index],
                                       heroTag: heroTag),
                                 );
                               },

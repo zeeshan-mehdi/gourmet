@@ -1,14 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/models/address.dart';
 import 'package:markets/src/models/credit_card.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
+import '../models/market.dart';
+import '../models/product.dart';
+import '../repository/market_repository.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:my_fatoorah/my_fatoorah.dart';
 import '../repository/user_repository.dart' as userRepo;
-
+import '../helpers/helper.dart';
+import '../models/category.dart';
+import '../models/market.dart';
+import '../models/product.dart';
+import '../models/review.dart';
+import '../models/slide.dart';
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/slide.dart';
@@ -31,6 +39,7 @@ class UserController extends ControllerMVC {
   List<Slide> slides = <Slide>[];
   UserController() {
     loginFormKey = new GlobalKey<FormState>();
+
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     _firebaseMessaging = FirebaseMessaging();
     listenForSlides();
@@ -194,6 +203,23 @@ class UserController extends ControllerMVC {
       codeAutoRetrievalTimeout: autoRetrieve,
     );
   }
+  ValueNotifier<Address> deliveryAddress = new ValueNotifier(new Address());
+
+  // Future<void> listenForTopMarkets() async {
+  //   final Stream<Market> stream = await getNearMarkets(deliveryAddress.value, deliveryAddress.value);
+  //   //final Stream<Market> stream = await getPopularMarkets(deliveryAddress.value);
+  //   stream.listen((Market _market) {
+  //     if(_market.isPaidKitchen) {
+  //       print(_market.cuisine);
+  //   //    setState(() =>
+  //       setState(() {
+  //         topMarkets.add(_market);
+  //       });
+  //     }
+  //   }, onError: (a) {}, onDone: () {
+  //
+  //   });
+  // }
 
   void register() async {
     loader = Helper.overlayLoader(state.context);

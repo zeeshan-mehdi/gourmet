@@ -129,8 +129,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SplashForNewUserScreen());
       case '/RestaurantsMemberShip':
         return MaterialPageRoute(builder: (_) => RestaurantsMemberShip());
-        case '/Coisines':
-        return MaterialPageRoute(builder: (_) => Coisines());
+        // case '/Coisines':
+        // return MaterialPageRoute(builder: (_) => Coisines(cuisinesItems: ,));
+
         case '/CoisinesDetail':
         return MaterialPageRoute(builder: (_) => CoisinesDetail());
         case '/FilterPage':

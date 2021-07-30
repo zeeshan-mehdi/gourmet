@@ -171,13 +171,10 @@ class _FilterPageState extends StateMVC<FilterPage> {
                   print(_con.markets.map((e) => e.longitude));
 
                   Address aa = await _con.getCurrentLocation();
-
                   print( aa.address);
-                 // print( aa.then((value) => value.latitude));
-                 // print( aa.then((value) => value.latitude));
-
-
-;                  print(_con.markets.map((e) => e.latitude));
+                  // print( aa.then((value) => value.latitude));
+                  // print( aa.then((value) => value.latitude));
+                 print(_con.markets.map((e) => e.latitude));
                   print("sort Value Cost High to Low");
                 }else{}
 
@@ -271,7 +268,7 @@ class _FilterPageState extends StateMVC<FilterPage> {
               Container(
                 height: 150,
                 width: 370,
-                child: MultiSelectItemsWidget(mainList :[{"key":"Top Rated"},{"key" :"Nearest"},{"key": "Cost High to Low"},{"key" :"Most Popular"}], filterby: FilterType.sort,),
+                child: MultiSelectItemsWidget(mainList :[{"key":"Top Rated"},{"key" :"Nearest"},{"key" :"Most Popular"}], filterby: FilterType.sort,),
 
               ),
               SizedBox(height: 20),
@@ -290,43 +287,43 @@ class _FilterPageState extends StateMVC<FilterPage> {
 
               ),
               SizedBox(height: 20),
-              Row(
-                children: [
-                  Text("  Price",style: TextStyle(color: Colors.grey.withOpacity(0.8),fontSize: 20),),
-                  Spacer()
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     Text("  Price",style: TextStyle(color: Colors.grey.withOpacity(0.8),fontSize: 20),),
+              //     Spacer()
+              //   ],
+              // ),
               SizedBox(height: 20,),
-              Row(
-                children: [
-                  SizedBox(width: 10,),
-                  Text("KD $_starValue",style: TextStyle(color: Colors.grey,fontSize: 20),),
-                  SizedBox(width: 40,),
-                  Text("KD  $_endValue",style: TextStyle(color: Colors.grey,fontSize: 20),),
-                ],
-              ),
-              SliderTheme(
-                data: SliderThemeData(
-                  trackHeight: 7,
-                ),
-                child:
-                RangeSlider(
-
-                  values: RangeValues(_starValue, _endValue),
-                  inactiveColor: Colors.grey.withOpacity(0.25),
-                  //divisions : 8,
-                  activeColor: Colors.orange,
-                  min: 0.0,
-                  max: 100.0,
-                  onChanged: (values){
-                    setState(() {
-                      _starValue = values.start.roundToDouble();
-                      _endValue = values.end.roundToDouble();
-                      print(_starValue);
-                      print(_endValue);
-                    });
-                  },
-                ),),
+              // Row(
+              //   children: [
+              //     SizedBox(width: 10,),
+              //     Text("KD $_starValue",style: TextStyle(color: Colors.grey,fontSize: 20),),
+              //     SizedBox(width: 40,),
+              //     Text("KD  $_endValue",style: TextStyle(color: Colors.grey,fontSize: 20),),
+              //   ],
+              // ),
+              // SliderTheme(
+              //   data: SliderThemeData(
+              //     trackHeight: 7,
+              //   ),
+              //   child:
+              //   RangeSlider(
+              //
+              //     values: RangeValues(_starValue, _endValue),
+              //     inactiveColor: Colors.grey.withOpacity(0.25),
+              //     //divisions : 8,
+              //     activeColor: Colors.orange,
+              //     min: 0.0,
+              //     max: 100.0,
+              //     onChanged: (values){
+              //       setState(() {
+              //         _starValue = values.start.roundToDouble();
+              //         _endValue = values.end.roundToDouble();
+              //         print(_starValue);
+              //         print(_endValue);
+              //       });
+              //     },
+              //   ),),
 
               // RangeSlider(
               //     values: RangeValues(0.0,40.0),

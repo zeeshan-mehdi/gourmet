@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:markets/restaurent_app/src/models/user.dart';
@@ -44,18 +45,25 @@ class SearchController extends ControllerMVC {
   List<Product> products = <Product>[];
   List<Slide> slides = <Slide>[];
   Set<Polyline> polylines = new Set();
+  List<Market> topMarkets = <Market>[];
+  GlobalKey<ScaffoldState> scaffoldKey;
+
   CameraPosition cameraPosition;
   SearchController() {
+    this.scaffoldKey = new GlobalKey<ScaffoldState>();
+
     listenForMarkets();
     listenForProducts();
     listenForSlides();
-   // setCurrentLocation();
+    listenForTopMarkets();
+
+    // setCurrentLocation();
    // getCurrentLocation();
   }
 
   Address currentAddress;
   Completer<GoogleMapController> mapController = Completer();
- // ValueNotifier<Address> deliveryAddress = new ValueNotifier(new Address());
+  // ValueNotifier<Address> deliveryAddress = new ValueNotifier(new Address());
 
   // Future<void> goCurrentLocation() async {
   //   final GoogleMapController controller = await mapController.future;
@@ -86,8 +94,21 @@ class SearchController extends ControllerMVC {
       return Address.fromJSON({});
     }
   }
+  Future<void> listenForTopMarkets() async {
+    final Stream<Market> stream = await getNearMarkets(deliveryAddress.value, deliveryAddress.value);
+    //final Stream<Market> stream = await getPopularMarkets(deliveryAddress.value);
+    stream.listen((Market _market) {
+      if(_market.isPaidKitchen) {
+        print(_market.cuisine);
+        //    setState(() =>
+        setState(() {
+          topMarkets.add(_market);
+        });
+      }
+    }, onError: (a) {}, onDone: () {
 
-  //var location = new Location();
+    });
+  }
 
   Future<dynamic> setCurrentLocation() async {
     var location = new Location();
@@ -113,7 +134,6 @@ class SearchController extends ControllerMVC {
     });
     return whenDone.future;
   }
-
 
   Future<void> listenForSlides() async {
     final Stream<Slide> stream = await getSlides();
@@ -148,6 +168,7 @@ class SearchController extends ControllerMVC {
       return new Stream.value(new Slide.fromJSON({}));
     }
   }
+
   void listenForMarkets({String search}) async {
     if (search == null) {
       search = await getRecentSearch();
@@ -190,6 +211,47 @@ class SearchController extends ControllerMVC {
     print(search);
     refreshSearch(search);
     //setRecentSearch(search);
+  }
+
+  Future getKitchens()async{
+    final List<Market> stream = await getAllMarketss();
+    return stream;
+  }
+  Future<List<Market>> getAllMarketss() async {
+    List<Market> markets = [];
+    Uri uri = Helper.getUri('api/manager/markets');
+    Map<String, dynamic> _queryParams = {};
+    var _user = userRepo.currentUser.value;
+    if (_user.apiToken == null) {
+      return [];
+    }
+    _queryParams['api_token'] = _user.apiToken;
+    _queryParams['orderBy'] = 'id';
+    _queryParams['sortedBy'] = 'desc';
+    uri = uri.replace(queryParameters: _queryParams);
+    try {
+      final client = new http.Client();
+      final response = await client.get( uri);
+
+      var resp = jsonDecode(response.body);
+
+      if(resp['success']) {
+        resp = resp['data'];
+        resp.forEach((val) {
+          markets.add(Market.fromJSON(val));
+        });
+
+        return markets;
+      }else{
+        return [];
+      }
+      // return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+      //   return Market.fromJSON(data);
+      // });
+    } catch (e) {
+      print(CustomTrace(StackTrace.current, message: uri.toString()).toString());
+      return [];
+    }
   }
 
 

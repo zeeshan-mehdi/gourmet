@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/market.dart';
+import 'package:markets/src/pages/Cuisines.dart';
 import 'package:markets/src/pages/product.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -23,9 +24,11 @@ class SearchResultWidget extends StatefulWidget {
 
 class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
   SearchController _con;
+   List<Cuisines> allCuisines =    List<Cuisines>();
 
   _SearchResultWidgetState() : super(SearchController()) {
     _con = controller;
+
   }
 
   @override
@@ -175,7 +178,22 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                           textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
                       child: const Text('Cuisines'),
                       onPressed:(){
-                        Navigator.of(context).pushNamed('/Coisines');
+                        allCuisines = [];
+                       // List<String> cuisines = ['Desert','Asian','Arabic','Pizza','Kuwaiti','Fast Food','European'];
+
+                        List<String> cuisinesList = _con.topMarkets.map((e) => e.cuisine).toSet().toList();
+
+                        List<String> cuisinesId = _con.topMarkets.map((e) => e.id).toList();
+                        for (var i = 0; i < cuisinesList.length; i++) {
+                          var  a  = _con.topMarkets.where((element) => element.cuisine == cuisinesList[i]);
+                         print("count is ${a.length}");
+                          allCuisines.add(new Cuisines(id: cuisinesId[i],name: cuisinesList[i],count: a.length));
+                        }
+                        // print("hello");
+                        // print("aa " + allCuisines.map((e) => e.id).toString());
+                        // print("aa " + allCuisines.map((e) => e.name).toString());
+                       // Navigator.of(context).pushNamed('/Coisines');
+                        Navigator.of(context).push( MaterialPageRoute(builder: (_) => Coisines(cuisinesItems: allCuisines)));
                       },
                     ),),
                     Spacer(),
