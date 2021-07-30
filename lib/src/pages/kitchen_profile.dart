@@ -212,9 +212,9 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                      padding: EdgeInsets.all(8),
                      child: Column(
                        children: [
-                         Text(currentUser.value.apiToken != null?'Do you know ?':'We\'ve got plenty of food options',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
+                         Text(currentUser.value.apiToken != null?S.of(context).do_you_know:S.of(context).food_options,style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
                          SizedBox(height: 10,),
-                         Container(child: Text( currentUser.value.apiToken != null?'You can become a kitchen and sell at Gourmet': 'Sign in to Gourmet to benefit from amazing food !!',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
+                         Container(child: Text( currentUser.value.apiToken != null? S.of(context).you_can_become_kitchen_and_work_at_gourmet: S.of(context).gourmet_benefits,style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
                          SizedBox(height: 20,),
                          MaterialButton(
                            elevation: 0,
@@ -231,7 +231,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                            color: Theme.of(context).accentColor.withOpacity(1),
                            shape: StadiumBorder(),
                            child: Text(
-                             currentUser.value.apiToken != null ? 'Become Kitchen' : 'Login',
+                             currentUser.value.apiToken != null ? S.of(context).become_kitchen : S.of(context).login,
                              style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
                            ),
                          ),

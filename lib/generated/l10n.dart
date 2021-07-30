@@ -46,6 +46,149 @@ class S {
     );
   }
 
+
+  /// `Manage Restaurant`
+  String get manage_restaurant {
+    return Intl.message(
+      'Manage Restaurant',
+      name: 'manage_restaurant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurant Orders`
+  String get restaurant_orders {
+    return Intl.message(
+      'Restaurant Orders',
+      name: 'restaurant_orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `help_from_gourmet`
+  String get help_from_gourmet {
+    return Intl.message(
+      'Help From Gourmet',
+      name: 'help_from_gourmet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `restaurant_membership`
+  String get restaurant_membership {
+    return Intl.message(
+      'Restaurant Membership',
+      name: 'restaurant_membership',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Account`
+  String get my_account {
+    return Intl.message(
+      'My Account',
+      name: 'my_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `My Addresses`
+  String get my_addresses {
+    return Intl.message(
+      'My Addresses',
+      name: 'my_addresses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Driver Orders`
+  String get driver_orders {
+    return Intl.message(
+      'Driver Orders',
+      name: 'driver_orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Do you know ?`
+  String get do_you_know {
+    return Intl.message(
+      'Do You Know ?',
+      name: 'do_you_know',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+
+  /// `Become driver`
+  String get become_driver {
+    return Intl.message(
+      'Become Driver',
+      name: 'become_driver',
+      desc: '',
+      args: [],
+    );
+  }
+  String get become_kitchen {
+    return Intl.message(
+      'Become Kitchen',
+      name: 'become_kitchen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `you can become driver and work at gourmet`
+  String get you_can_become_driver_and_work_at_gourmet {
+    return Intl.message(
+      'You can become a Driver and work at Gourmet',
+      name: 'you_can_become_driver_and_work_at_gourmet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `you can become kitchen and work at gourmet`
+  String get you_can_become_kitchen_and_work_at_gourmet {
+    return Intl.message(
+      'You can become a Kitchen and work at Gourmet',
+      name: 'you_can_become_kitchen_and_work_at_gourmet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get gourmet_benefits {
+    return Intl.message(
+      'Sign in to Gourmet to benefit from amazing food !!',
+      name: 'gourmet_benefits',
+      desc: '',
+      args: [],
+    );
+  }
+  String get food_options {
+    return Intl.message(
+      'We\'ve got plenty of food options',
+      name: 'food options',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
   /// Latest Addition
   String get latest_addition {
     return Intl.message(

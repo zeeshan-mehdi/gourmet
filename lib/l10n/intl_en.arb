@@ -23,6 +23,24 @@
   "restaurant_achievements" : "Restaurant Achievements",
   "menu" : "Menu",
 
+    "manage_restaurant" : "Manage Restaurant",
+    "restaurant_orders" : "Restaurant Orders",
+    "help_from_gourmet" : "Help from Gourmet",
+    "restaurant_membership" : "Restaurant Membership",
+    "driver_orders" : "Driver Orders",
+    "my_account" : "My Account",
+    "my_addresses" : "My Addresses",
+    "become_driver" : "Become Driver",
+    "become_kitchen" : "Become Kitchen",
+    "do_you_know" : "Do you know ?",
+    "you_can_become_driver_and_work_at_gourmet" : "You can become driver and work at Gourmet",
+    "you_can_become_kitchen_and_work_at_gourmet" : "You can become Kitchen and work at Gourmet",
+
+   "gourmet_benefits" :"Sign in to Gourmet to benefit from amazing food !!",
+    "food_options" : "We\'ve got plenty of food options",
+
+
+
   "order_declined" : "Order Declined By Kitchen",
   "latest_addition" : "Latest Addition",
   "advertising" : "Advertising",

@@ -23,6 +23,29 @@
     "popular_this_month" : "شعبية هذا الشهر",
     "restaurant_achievements" : "إنجازات المطعم",
     "menu" :"قائمة",
+    "gourmet_benefits" : "سجل الدخول إلى جورميه للاستفادة من الطعام الرائع !!",
+    "food_options" :"لدينا الكثير من خيارات الطعام",
+
+
+
+    "manage_restaurant" : "إدارة المطعم"),
+    "restaurant_orders" :"طلبات المطاعم",
+    "help_from_gourmet" : "مساعدة من الذواقة",
+    "restaurant_membership" : "عضوية مطعم",
+    "driver_orders" : "أوامر السائق",
+    "my_account" : "ملفي",
+    "my_addresses" : "عناويني",
+    "become_driver" : يصبح سائقا",
+    "become_kitchen" : "تصبح مطبخ",
+    "do_you_know" : "هل تعرف",
+    "you_can_become_driver_and_work_at_gourmet" : "يمكنك أن تصبح سائقا وتعمل في الذواقة",
+    "you_can_become_kitchen_and_work_at_gourmet" : "يمكنك أن تصبح مطبخًا وتعمل في ذواقة",
+
+
+
+
+
+
     "faq": "التعليمات",
     "help_supports": "المساعدة والدعم",
     "app_language": "لغة التطبيق",

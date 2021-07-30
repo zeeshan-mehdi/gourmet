@@ -5,6 +5,8 @@ import 'package:markets/restaurent_app/src/models/market.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
 import 'package:markets/src/pages/pages.dart';
 
+import 'package:markets/generated/l10n.dart';
+
 class ProfileKitchenSection extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
   final Market market;
@@ -24,22 +26,22 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
       child: Column(
         children: [
 
-          ListItem(color:Colors.red , title: 'Manage Restaurant',onPressed: (){
+          ListItem(color:Colors.red , title: S.of(context).manage_restaurant,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4',param: widget.market.id  ) );
           },),
 
-          ListItem(color:Colors.lightBlue , title: 'Restaurant Membership',onPressed: (){
+          ListItem(color:Colors.lightBlue , title: S.of(context).restaurant_membership,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 10);
 
 
 
           },),
 
-          ListItem(color:Colors.indigo, title: 'Restaurant Orders',onPressed: (){
+          ListItem(color:Colors.indigo, title: S.of(context).restaurant_orders,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 5 );
           },),
 
-          ListItem(color:Colors.orange , title: 'Help from Gourmet',),
+          ListItem(color:Colors.orange , title: S.of(context).help_from_gourmet,),
 
         ],
       ),
@@ -60,19 +62,19 @@ class _UserProfileSectionState extends State<UserProfileSection> {
       child: Column(
         children: [
 
-          ListItem(color:Colors.red , title: 'My Account',onPressed: (){
+          ListItem(color:Colors.red , title: S.of(context).my_account,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 6);
           },),
 
-          ListItem(color:Colors.lightBlue , title: 'My Addresses',onPressed: (){
+          ListItem(color:Colors.lightBlue , title: S.of(context).my_addresses,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 11);//my addresses
           },),
 
-          ListItem(color:Colors.indigo, title: 'Orders',onPressed: (){
+          ListItem(color:Colors.indigo, title: S.of(context).orders,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 1);
           },),
 
-          ListItem(color:Colors.orange , title: 'Settings',onPressed: (){
+          ListItem(color:Colors.orange , title: S.of(context).settings,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 7);
           },),
 
@@ -101,7 +103,7 @@ class _DriverProfileSectionState extends State<DriverProfileSection> {
           //   Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverProfile));
           // },),
 
-          ListItem(color:Colors.lightBlue , title: 'Driver Orders',onPressed: (){
+          ListItem(color:Colors.lightBlue , title: S.of(context).driver_orders,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: NavPages.values.indexOf(NavPages.DriverOrders));//my addresses
           },),
 
@@ -200,9 +202,9 @@ class _ProfileDriverSectionState extends State<ProfileDriverSection> {
     return Container(
       child: load ?  Center(child:CircularProgressIndicator()) :Column(
         children: [
-          Text('Do you know ?',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
+          Text(S.of(context).do_you_know,style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 30),textAlign: TextAlign.center,),
           SizedBox(height: 10,),
-          Container(child: Text( 'You can become a driver and work at Gourmet',style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
+          Container(child: Text(S.of(context).you_can_become_driver_and_work_at_gourmet,style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 24),textAlign: TextAlign.center,)),
           SizedBox(height: 20,),
           MaterialButton(
             elevation: 0,
@@ -210,7 +212,7 @@ class _ProfileDriverSectionState extends State<ProfileDriverSection> {
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),
             color: Colors.blueAccent.withOpacity(1),
             shape: StadiumBorder(),
-            child: Text( 'Become Driver' ,
+            child: Text( S.of(context).become_driver ,
               style: Theme.of(context).textTheme.headline6.merge(TextStyle(color: Theme.of(context).scaffoldBackgroundColor)),
             ),
           )

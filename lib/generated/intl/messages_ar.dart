@@ -352,6 +352,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "restaurant_achievements" : MessageLookupByLibrary.simpleMessage("إنجازات المطعم"),
     "menu" : MessageLookupByLibrary.simpleMessage("قائمة"),
 
+    "manage_restaurant" : MessageLookupByLibrary.simpleMessage("إدارة المطعم"),
+    "restaurant_orders" : MessageLookupByLibrary.simpleMessage("طلبات المطاعم"),
+    "help_from_gourmet" : MessageLookupByLibrary.simpleMessage("مساعدة من الذواقة"),
+    "restaurant_membership" : MessageLookupByLibrary.simpleMessage("عضوية مطعم"),
+    "driver_orders" : MessageLookupByLibrary.simpleMessage("أوامر السائق"),
+    "my_account" : MessageLookupByLibrary.simpleMessage("ملفي"),
+    "my_addresses" : MessageLookupByLibrary.simpleMessage("عناويني"),
+    "become_driver" : MessageLookupByLibrary.simpleMessage("يصبح سائقا"),
+    "become_kitchen" : MessageLookupByLibrary.simpleMessage("تصبح مطبخ"),
+    "do_you_know" : MessageLookupByLibrary.simpleMessage("هل تعرف"),
+    "you_can_become_driver_and_work_at_gourmet" : MessageLookupByLibrary.simpleMessage("يمكنك أن تصبح سائقا وتعمل في الذواقة"),
+    "you_can_become_kitchen_and_work_at_gourmet" : MessageLookupByLibrary.simpleMessage("يمكنك أن تصبح مطبخًا وتعمل في ذواقة"),
+    "gourmet_benefits" : MessageLookupByLibrary.simpleMessage("سجل الدخول إلى جورميه للاستفادة من الطعام الرائع !!"),
+    "food_options" : MessageLookupByLibrary.simpleMessage("لدينا الكثير من خيارات الطعام"),
+
+
+
 
     "city" : MessageLookupByLibrary.simpleMessage("مدينة"),
     "cityIsRequired" : MessageLookupByLibrary.simpleMessage("خانة المدينة / البلدة مطلوب"),

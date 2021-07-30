@@ -174,6 +174,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "menu" : MessageLookupByLibrary.simpleMessage("Menu"),
 
 
+    "manage_restaurant" : MessageLookupByLibrary.simpleMessage("Manage Restaurant"),
+    "restaurant_orders" : MessageLookupByLibrary.simpleMessage("Restaurant Orders"),
+    "help_from_gourmet" : MessageLookupByLibrary.simpleMessage("Help from Gourmet"),
+    "restaurant_membership" : MessageLookupByLibrary.simpleMessage("Restaurant Membership"),
+    "driver_orders" : MessageLookupByLibrary.simpleMessage("Driver Orders"),
+    "my_account" : MessageLookupByLibrary.simpleMessage("My Account"),
+    "my_addresses" : MessageLookupByLibrary.simpleMessage("My Addresses"),
+    "become_driver" : MessageLookupByLibrary.simpleMessage("Become Driver"),
+    "become_kitchen" : MessageLookupByLibrary.simpleMessage("Become Kitchen"),
+    "do_you_know" : MessageLookupByLibrary.simpleMessage("Do you know ?"),
+    "you_can_become_driver_and_work_at_gourmet" : MessageLookupByLibrary.simpleMessage("You can become driver and work at Gourmet"),
+    "you_can_become_kitchen_and_work_at_gourmet" : MessageLookupByLibrary.simpleMessage("You can become Kitchen and work at Gourmet"),
+
+    "gourmet_benefits" : MessageLookupByLibrary.simpleMessage("Sign in to Gourmet to benefit from amazing food !!"),
+    "food_options" : MessageLookupByLibrary.simpleMessage("We\'ve got plenty of food options"),
+
+
+
+
+
     "notifications" : MessageLookupByLibrary.simpleMessage("Notifications"),
     "notifications_refreshed_successfuly" : MessageLookupByLibrary.simpleMessage("Notifications refreshed successfully"),
     "number" : MessageLookupByLibrary.simpleMessage("Number"),
