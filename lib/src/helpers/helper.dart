@@ -385,6 +385,8 @@ class Helper {
         return S.of(context).order_status_changed;
       case "App\\Notifications\\NewOrder":
         return S.of(context).new_order_from_client;
+      case "App\\Notifications\\OrderDeclined":
+        return S.of(context).order_declined;
       case "km":
         return S.of(context).km;
       case "mi":

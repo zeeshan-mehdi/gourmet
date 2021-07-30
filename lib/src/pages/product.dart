@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_map_location_picker/generated/l10n.dart';
+import 'package:markets/generated/l10n.dart';
 import 'package:markets/restaurent_app/src/controllers/order_controller.dart';
 import 'package:markets/src/controllers/cart_controller.dart';
 import 'package:markets/src/controllers/checkout_controller.dart';
@@ -21,6 +21,7 @@ import '../helpers/app_config.dart' as config;
 import '../elements/CircularLoadingWidget.dart';
 import '../helpers/helper.dart';
 import '../models/route_argument.dart';
+import '../repository/settings_repository.dart' as settingRepo;
 
 // ignore: must_be_immutable
 class ProductWidget extends StatefulWidget {
@@ -78,6 +79,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
 // List<SelectedOrderItem> selecteditems = List<SelectedOrderItem>();
   @override
   Widget build(BuildContext context) {
+    String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
+
     return Scaffold(
       // appBar: AppBar(
       //   actions: <Widget>[
@@ -157,7 +160,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 2, right: 20),
                                               child: Text(
-                                                _con.market?.name ?? '',
+                                                langCode=='en'? _con.market?.name??'' :_con.market?.nameAr  ?? '',
                                                 overflow: TextOverflow.fade,
                                                 softWrap: false,
                                                 maxLines: 2,
@@ -258,8 +261,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                     CrossAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    "Restaurant Achievements!" ??
-                                                        '',
+                                                    S.of(context).restaurant_achievements,
                                                     overflow: TextOverflow.fade,
                                                     softWrap: false,
                                                     maxLines: 2,
@@ -436,7 +438,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                               runSpacing: 8,
                               children: [
                                 Text(
-                                  "Favorites" ?? '',
+                                  S.of(context).favorites,
                                   overflow: TextOverflow.fade,
                                   softWrap: false,
                                   maxLines: 2,
@@ -460,7 +462,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Stack(
-                                                  alignment: AlignmentDirectional.topEnd,
+                                                  alignment:langCode=='en'? AlignmentDirectional.topEnd : AlignmentDirectional.topStart,
                                                   children: [
                                                     Container(
                                                       decoration: BoxDecoration(
@@ -530,8 +532,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                       height: 8,
                                                     ),
                                                     Text(
-                                                        _con.products[index]
-                                                            .name,
+                                                        langCode=='en'?_con.products[index]
+                                                            .name??'':_con.products[index]
+                                                            .nameAr??'',
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             color: Colors.black,
@@ -690,7 +693,7 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                 ),
 
                                 Text(
-                                  'Menu',
+                                  S.of(context).menu,
                                   style: Theme.of(context).textTheme.headline4,
                                 ),
 
@@ -1173,10 +1176,10 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                   //                   SizedBox(height: 10),
                                   Align(
                                     alignment: Alignment.topLeft,
-                                    child:  Container(
+                                    child: Container(
                                     //  color: Colors.yellow,
 
-                                      margin: EdgeInsets.only(left: config.App(context).appWidth(78),top: 40),
+                                      margin:  langCode =='en' ? EdgeInsets.only( left: config.App(context).appWidth(78),top: 40): EdgeInsets.only( right: config.App(context).appWidth(78),top: 40),
                                         child:  Row(
                                             children: <Widget>[
                                               _con.favorite?.id != null

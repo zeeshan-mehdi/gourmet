@@ -11,6 +11,7 @@ import 'coupon.dart';
 class Product {
   String id;
   String name;
+  String nameAr;
   double price;
   double discountPrice;
   Media image;
@@ -35,6 +36,7 @@ class Product {
     try {
       id = jsonMap['id'].toString();
       name = jsonMap['name'];
+      nameAr = jsonMap['name_ar'];
       price = jsonMap['price'] != null ? jsonMap['price'].toDouble() : 0.0;
       discountPrice = jsonMap['discount_price'] != null ? jsonMap['discount_price'].toDouble() : 0.0;
       price = discountPrice != 0 ? discountPrice : price;

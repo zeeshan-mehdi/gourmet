@@ -5,7 +5,7 @@ import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/market.dart';
 import '../models/route_argument.dart';
-import '../repository/settings_repository.dart';
+import '../repository/settings_repository.dart' as settingRepo;
 
 // ignore: must_be_immutable
 class CardWidget extends StatelessWidget {
@@ -15,6 +15,22 @@ class CardWidget extends StatelessWidget {
   CardWidget({Key key, this.market, this.heroTag}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
+    print('lang code $langCode');
+
+    String name ;
+    String address;
+    address = market?.address.length > 25 ? market?.address.substring(0,25)+'...' : market?.address;
+    if(langCode=='en'){
+      name = market.name.length > 20 ? market?.name.substring(0,20)+'...' : market?.name;
+
+    }else{
+      name = market.nameAr.length > 20 ? market?.nameAr.substring(0,20)+'...' : market?.nameAr;
+    }
+
+
+
     return Container(
       width: 292,
       height: 100,
@@ -95,13 +111,13 @@ class CardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        market.name.length > 20 ? market?.name.substring(0,20)+'...' : market?.name,
+                        name,
                         overflow: TextOverflow.ellipsis,
                         softWrap: false,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       Text(
-                        market?.address.length > 25 ? market?.address.substring(0,25)+'...' : market?.address,
+                        address,
                        // Helper.skipHtml(market?.address??''),
                         overflow: TextOverflow.ellipsis,
 

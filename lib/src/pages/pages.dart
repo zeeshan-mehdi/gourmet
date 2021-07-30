@@ -1,11 +1,11 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:markets/driver_app/src/pages/map.dart';
 import 'package:markets/driver_app/src/pages/orders.dart';
 import 'package:markets/driver_app/src/pages/orders_history.dart';
 import 'package:markets/driver_app/src/pages/profile.dart';
+import 'package:markets/generated/l10n.dart';
 import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
 import 'package:markets/restaurent_app/src/pages/details.dart';
@@ -198,7 +198,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   new Icon(FontAwesomeIcons.compass),
                   SizedBox(height: 3,),
-                  Text('Explore',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.Home? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text(S.of(context).explore,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.Home? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
             ),
@@ -209,7 +209,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                       alignment: Alignment.center,
                       transform: Matrix4.rotationX(pi),child: new Icon(FontAwesomeIcons.file)),
                   SizedBox(height: 3,),
-                  Text('Orders',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.MyOrders? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text(S.of(context).orders,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.MyOrders? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
               label: '',
@@ -219,7 +219,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   Icon(FontAwesomeIcons.bookmark),
                   SizedBox(height: 3,),
-                  Text('Favorite',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color:widget.currentTab==NavPages.Favorites? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text(S.of(context).favorites,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color:widget.currentTab==NavPages.Favorites? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
               label: '',
@@ -231,7 +231,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   new Icon(FontAwesomeIcons.addressBook),
                   SizedBox(height: 3,),
-                  Text('Profile',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12, color:widget.currentTab==NavPages.Profile? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  Text(S.of(context).profile,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12, color:widget.currentTab==NavPages.Profile? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
                 ],
               ),
               label: '',

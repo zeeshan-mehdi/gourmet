@@ -16,6 +16,7 @@ class Order {
   User user;
   Payment payment;
   Address deliveryAddress;
+  String expire;
 
   Order();
 
@@ -59,7 +60,7 @@ class Order {
     map["delivery_fee"] = deliveryFee;
     map["products"] = productOrders?.map((element) => element.toMap())?.toList();
     map["payment"] = payment?.toMap();
-    map['expire'] = DateTime.now().add(Duration(minutes: 5)).toUtc().toString();
+    map['expire'] = expire;
     if (!deliveryAddress.isUnknown()) {
       map["delivery_address_id"] = deliveryAddress?.id;
     }

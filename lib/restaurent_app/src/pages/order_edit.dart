@@ -61,7 +61,8 @@ class _OrderEditWidgetState extends StateMVC<OrderEditWidget> {
                         textColor: Theme.of(context).focusColor,
                         child: new Text(S.of(context).confirm),
                         onPressed: () {
-                          _con.doUpdateOrder(_con.order);
+                           Navigator.of(context).pop();
+                          _con.doUpdateOrder(context,_con.order);
                         },
                       ),
                       MaterialButton(

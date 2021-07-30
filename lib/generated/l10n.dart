@@ -36,6 +36,66 @@ class S {
   }
 
 
+  /// `Explore`
+  String get explore {
+    return Intl.message(
+      'Explore',
+      name: 'explore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// Latest Addition
+  String get latest_addition {
+    return Intl.message(
+      'Latest Addition',
+      name: 'latest_addition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// Latest Menu
+  String get menu {
+    return Intl.message(
+      'Menu',
+      name: 'menu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// Latest Addition
+  String get restaurant_achievements {
+    return Intl.message(
+      'Restaurant Achievements',
+      name: 'restaurant_achievements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// Advertising
+  String get advertising {
+    return Intl.message(
+      'Advertising',
+      name: 'advertising',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// Popular this Month
+  String get popular_this_month {
+    return Intl.message(
+      'Popular This Month',
+      name: 'popular_this_month',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message(
@@ -2275,6 +2335,16 @@ class S {
     return Intl.message(
       'New order from client',
       name: 'new_order_from_client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New order from client`
+  String get order_declined {
+    return Intl.message(
+      'Order Declined By Kitchen',
+      name: 'order_declined',
       desc: '',
       args: [],
     );

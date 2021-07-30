@@ -104,7 +104,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                           child: Row(
                             children: [
                               Text(
-                                "Latest Additions ",
+                                S.of(context).latest_addition,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w800),
@@ -138,7 +138,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Advertising",
+                        S.of(context).advertising,
                         style: Theme.of(context).textTheme.headline4,
                         maxLines: 1,
                         softWrap: false,
@@ -166,7 +166,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                               children: [
                                  Text(
                                   // S.of(context).top_markets,
-                                  "Popular this month",
+                                  S.of(context).popular_this_month,
                                   style: Theme.of(context).textTheme.headline4,
                                   maxLines: 1,
                                   softWrap: false,

@@ -69,7 +69,7 @@ class Order {
   Map editableMap() {
     var map = new Map<String, dynamic>();
     map["id"] = id;
-    if (orderStatus?.id != 'null') map["order_status_id"] = orderStatus?.id;
+    if (orderStatus?.id != 'null') map["order_status_id"] = orderStatus?.id.toString();
     if (driver?.id != 'null') map["driver_id"] = driver?.id;
     print(driver?.id);
     map['hint'] = hint;

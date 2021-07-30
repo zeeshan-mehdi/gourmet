@@ -343,6 +343,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "youDontHaveProductsPleaseSigninUsingAdminPanelAnd" : MessageLookupByLibrary.simpleMessage("You don\'t have products, please add new product"),
     "you_dont_have_any_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("ليست لديك أي طلبيات حاليا!"),
     "your_have_an_order_assigned_to_you" : MessageLookupByLibrary.simpleMessage("لديك أمر معين لك"),
+    "order_declined" : MessageLookupByLibrary.simpleMessage("طلب رفض من قبل المطبخ"),
+    "explore" : MessageLookupByLibrary.simpleMessage("يكتشف"),
+    "latest_addition" : MessageLookupByLibrary.simpleMessage("أحدث إضافة"),
+    "advertising" : MessageLookupByLibrary.simpleMessage("إعلان"),
+    "popular_this_month" : MessageLookupByLibrary.simpleMessage("شعبية هذا الشهر"),
+
+    "restaurant_achievements" : MessageLookupByLibrary.simpleMessage("إنجازات المطعم"),
+    "menu" : MessageLookupByLibrary.simpleMessage("قائمة"),
 
 
     "city" : MessageLookupByLibrary.simpleMessage("مدينة"),

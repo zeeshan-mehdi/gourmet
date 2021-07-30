@@ -79,24 +79,32 @@ class OrderController extends ControllerMVC {
   }
 
   void listenForDrivers({String message}) async {
-    final Stream<User> stream = await getDriversOfMarket(this.order?.productOrders[0]?.product?.market?.id ?? '0');
-    stream.listen((User _driver) {
-      setState(() {
-        drivers.add(_driver);
-      });
-    }, onError: (a) {
-      print('error while listening for drivers');
-      print(a);
-      // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-      //   content: Text(S.of(state.context).verify_your_internet_connection),
-      // ));
-    }, onDone: () {
-      if (message != null) {
-        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-          content: Text(message),
-        ));
+    try {
+      if (order.productOrders.length > 0) {
+        final Stream<User> stream = await getDriversOfMarket(
+            this.order?.productOrders[0]?.product?.market?.id ?? '0');
+        stream.listen((User _driver) {
+          setState(() {
+            drivers.add(_driver);
+          });
+        }, onError: (a) {
+          print('error while listening for drivers');
+          print(a);
+          // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+          //   content: Text(S.of(state.context).verify_your_internet_connection),
+          // ));
+        }, onDone: () {
+          if (message != null) {
+            ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                ));
+          }
+        });
       }
-    });
+    }catch(e){
+      print('exception $e');
+    }
   }
 
   void listenForOrders({statusesIds, String message}) async {
@@ -175,16 +183,22 @@ class OrderController extends ControllerMVC {
     listenForOrders(statusesIds: selectedStatuses, message:null);
   }
 
-  void doUpdateOrder(Order _order) async {
+  void doUpdateOrder(context,Order _order) async {
     updateOrder(_order).then((value) {
-      Navigator.of(state.context).pushNamed('/OrderDetails', arguments: RouteArgument(id: order.id));
-//      FocusScope.of(context).unfocus();
-//      setState(() {
-//        this.order.orderStatus.id = '5';
-//      });
+      Navigator.of(context).pop();
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
         content: Text(S.of(state.context).thisOrderUpdatedSuccessfully),
       ));
+
+
+//       Navigator.of(state.context).pushNamed('/OrderDetails', arguments: RouteArgument(id: order.id));
+// //      FocusScope.of(context).unfocus();
+// //      setState(() {
+// //        this.order.orderStatus.id = '5';
+// //      });
+//       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+//         content: Text(S.of(state.context).thisOrderUpdatedSuccessfully),
+//       ));
     });
   }
 

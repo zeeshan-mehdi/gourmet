@@ -20,6 +20,15 @@
   "app_language": "App Language",
   "i_forgot_password": "I forgot password ?",
   "i_dont_have_an_account": "I don't have an account?",
+  "restaurant_achievements" : "Restaurant Achievements",
+  "menu" : "Menu",
+
+  "order_declined" : "Order Declined By Kitchen",
+  "latest_addition" : "Latest Addition",
+  "advertising" : "Advertising",
+  "popular_this_month" : "Popular This Month",
+
+
   "notifications": "Notifications",
   "tax": "TAX",
   "profile": "Profile",

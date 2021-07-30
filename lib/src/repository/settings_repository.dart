@@ -50,6 +50,11 @@ Future<Setting> initSettings() async {
   return setting.value;
 }
 
+Future<int> getTime() async{
+  SharedPreferences instance = await SharedPreferences.getInstance();
+  return instance.get('time')??5;
+}
+
 Future<dynamic> setCurrentLocation() async {
   var location = new Location();
   MapsUtil mapsUtil = new MapsUtil();

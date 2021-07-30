@@ -6,13 +6,16 @@ import 'user.dart';
 class Market {
   String id;
   String name;
+  String nameAr;
   Media image;
   String rate;
   String address;
   String description;
+  String descriptionAr;
   String phone;
   String mobile;
   String information;
+  String informationAr;
   double deliveryFee;
   double adminCommission;
   double defaultTax;
@@ -38,6 +41,7 @@ class Market {
     try {
       id = jsonMap['id'].toString();
       name = jsonMap['name'];
+      nameAr = jsonMap['name_ar'];
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
       rate = jsonMap['rate'] ?? '0';
       deliveryFee = jsonMap['delivery_fee'] != null ? jsonMap['delivery_fee'].toDouble() : 0.0;
@@ -45,10 +49,12 @@ class Market {
       deliveryRange = jsonMap['delivery_range'] != null ? jsonMap['delivery_range'].toDouble() : 0.0;
       address = jsonMap['address'];
       description = jsonMap['description'];
+      descriptionAr = jsonMap['description_ar'];
       phone = jsonMap['phone'];
       mobile = jsonMap['mobile'];
       defaultTax = jsonMap['default_tax'] != null ? jsonMap['default_tax'].toDouble() : 0.0;
       information = jsonMap['information'];
+      informationAr = jsonMap['information_ar'];
       latitude = jsonMap['latitude'];
       longitude = jsonMap['longitude'];
       closed = jsonMap['closed'] ?? false;

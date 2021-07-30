@@ -320,6 +320,8 @@ class Helper {
         return S.of(context).new_order_from_costumer;
       case "App\\Notifications\\AssignedOrder":
         return S.of(context).your_have_an_order_assigned_to_you;
+      case "App\\Notifications\\OrderDeclined":
+        return S.of(context).order_declined;
       case "km":
         return S.of(context).km;
       case "mi":

@@ -165,6 +165,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_a_valid_phone" : MessageLookupByLibrary.simpleMessage("Not a valid phone"),
     "not_deliverable" : MessageLookupByLibrary.simpleMessage("Not Deliverable"),
     "notificationWasRemoved" : MessageLookupByLibrary.simpleMessage("Notification was removed"),
+    "order_declined" : MessageLookupByLibrary.simpleMessage("Order Declined By Kitchen"),
+    "explore" : MessageLookupByLibrary.simpleMessage("Explore"),
+    "latest_addition" : MessageLookupByLibrary.simpleMessage("Latest Addition"),
+    "advertising" : MessageLookupByLibrary.simpleMessage("Advertising"),
+    "popular_this_month" : MessageLookupByLibrary.simpleMessage("Popular This Month"),
+    "restaurant_achievements" : MessageLookupByLibrary.simpleMessage("Restaurant Achievements"),
+    "menu" : MessageLookupByLibrary.simpleMessage("Menu"),
+
+
     "notifications" : MessageLookupByLibrary.simpleMessage("Notifications"),
     "notifications_refreshed_successfuly" : MessageLookupByLibrary.simpleMessage("Notifications refreshed successfully"),
     "number" : MessageLookupByLibrary.simpleMessage("Number"),

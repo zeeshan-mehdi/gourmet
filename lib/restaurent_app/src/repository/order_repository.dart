@@ -171,25 +171,36 @@ Future<Stream<OrderStatus>> getOrderStatuses() async {
 }
 
 Future<Order> updateOrder(Order order) async {
-  print('request params');
-  print((CustomTrace(StackTrace.current, message: order.editableMap().toString()).toString()));
-  Uri uri = Helper.getUri('api/orders/${order.id}');
-  User _user = userRepo.currentUser.value;
-  if (_user.apiToken == null) {
-    return new Order();
-  }
-  Map<String, dynamic> _queryParams = {};
-  _queryParams['api_token'] = _user.apiToken;
-  uri = uri.replace(queryParameters: _queryParams);
 
-  //final String url = '${GlobalConfiguration().getString('api_base_url')}orders/${order.id}?$_apiToken';
-  final client = new http.Client();
-  final response = await client.put(
-    uri.toString(),
-    headers: {HttpHeaders.contentTypeHeader: 'application/json'},
-    body: json.encode(order.editableMap()),
-  );
-  return Order.fromJSON(json.decode(response.body)['data']);
+  try {
+    print('request params');
+    print((CustomTrace(
+        StackTrace.current, message: order.editableMap().toString())
+        .toString()));
+    Uri uri = Helper.getUri('api/orders/${order.id}');
+    User _user = userRepo.currentUser.value;
+    if (_user.apiToken == null) {
+      return new Order();
+    }
+    Map<String, dynamic> _queryParams = {};
+    _queryParams['api_token'] = _user.apiToken;
+    uri = uri.replace(queryParameters: _queryParams);
+
+    //final String url = '${GlobalConfiguration().getString('api_base_url')}orders/${order.id}?$_apiToken';
+    final client = new http.Client();
+    final response = await client.put(
+      uri.toString(),
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+      body: json.encode(order.editableMap()),
+    );
+
+    print('response');
+    print(response.body);
+
+    return Order.fromJSON(json.decode(response.body)['data']);
+  }catch(e){
+    return Order.fromJSON({});
+  }
 }
 
 Future<Order> cancelOrder(Order order) async {
