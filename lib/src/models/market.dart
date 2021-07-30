@@ -27,12 +27,10 @@ class Market {
   double distance;
   List<User> users;
   bool isPaidKitchen = false;
-
   String cuisine;
   bool sameDayDelivery = false;
   bool vegetarianFood = false;
   int maximumOrdersPerDay = 100;
-
   int autoAccept;
 
   Market();
