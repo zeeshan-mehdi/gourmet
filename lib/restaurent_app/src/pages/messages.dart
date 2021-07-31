@@ -45,7 +45,7 @@ class _MessagesWidgetState extends StateMVC<MessagesWidget> {
               primary: false,
               itemBuilder: (context, index) {
                 Conversation _conversation = Conversation.fromJSON(_docs[index].data());
-                if(_conversation.users!=null&&_conversation.users.length>1) {
+                if(_conversation.users!=null&&_conversation.users.length>0) {
                   return MessageItemWidget(
                     message: _conversation,
                     onDismissed: (conversation) {

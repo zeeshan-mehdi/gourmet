@@ -15,7 +15,6 @@ import '../repository/product_repository.dart';
 class MarketController extends ControllerMVC {
   Market market;
   Market kitchen = Market();
-
   List<Gallery> galleries = <Gallery>[];
   List<Market> markets = <Market>[];
   List<Product> products = <Product>[];
@@ -39,6 +38,7 @@ class MarketController extends ControllerMVC {
   }
 
   getFirstMarket()async{
+
     final Stream<Market> stream = await getMarkets();
     Market firstMarket ;
     try {
@@ -50,7 +50,6 @@ class MarketController extends ControllerMVC {
         print('something went wrong');
 
         print(a);
-
         // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
         //   content: Text(S.of(state.context).verify_your_internet_connection),
         // ));

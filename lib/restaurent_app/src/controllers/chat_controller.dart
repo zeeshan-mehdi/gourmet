@@ -7,7 +7,7 @@ import '../models/chat.dart';
 import '../models/conversation.dart';
 import '../repository/chat_repository.dart';
 import '../repository/notification_repository.dart';
-import '../repository/user_repository.dart';
+import 'package:markets/src/repository/user_repository.dart';
 
 class ChatController extends ControllerMVC {
   Conversation conversation;

@@ -313,6 +313,7 @@ class Helper {
   }
 
   String trans(String text) {
+    print('translating $text');
     switch (text) {
       case "App\\Notifications\\StatusChangedOrder":
         return S.of(context).order_satatus_changed;
