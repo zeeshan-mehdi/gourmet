@@ -91,7 +91,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                   autofocus: true,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12),
-                    hintText: "Search",
+                    hintText: "${S.of(context).search}",
                     hintStyle: Theme.of(context).textTheme.caption.merge(
                       TextStyle(
                           fontSize: 16,
@@ -140,7 +140,8 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
               children: [
                 Spacer(),
                 InkWell(
-                  child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+
+                  child: Text(S.of(context).scan_the_OR_code,style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
                   onTap:() async {
                     //  Navigator.of(context).pushReplacementNamed('/qr_code');
                     String cameraScanResult = await scanner.scan();
@@ -151,7 +152,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                   },
                 ),
                 SizedBox(height: 10,),
-                Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
+                Text(S.of(context).use_image_library,style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
                 SizedBox(height: 30,),
                 // Text(
                 //   "Use image Library",
@@ -176,7 +177,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                           backgroundColor: MaterialStateProperty.all(Colors.orangeAccent),
                           // padding: MaterialStateProperty.all(EdgeInsets.all(50)),
                           textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
-                      child: const Text('Cuisines'),
+                      child:  Text('${S.of(context).cuisines}'),
                       onPressed:(){
                         allCuisines = [];
                        // List<String> cuisines = ['Desert','Asian','Arabic','Pizza','Kuwaiti','Fast Food','European'];
@@ -272,7 +273,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                       // ),
                       Spacer(),
                             InkWell(
-                              child: Text("Scan the OR code",style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
+                              child: Text(S.of(context).scan_the_OR_code,style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.black),),
                               onTap:() async {
                                 //  Navigator.of(context).pushReplacementNamed('/qr_code');
                                  String cameraScanResult = await scanner.scan();
@@ -283,7 +284,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                               },
                             ),
                             SizedBox(height: 10,),
-                            Text("Use image Library",style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
+                            Text( S.of(context).use_image_library ,style: TextStyle(fontSize: 20,color: Colors.orangeAccent),),
                             SizedBox(height: 30,),
                       // InkWell(
                       //   child: Text(

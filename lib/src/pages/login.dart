@@ -97,7 +97,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            S.of(context).welcome + " " + "BACK!",
+                            S.of(context).welcome + " " + "${S.of(context).back}",
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.headline1.merge(
                               TextStyle(
@@ -106,7 +106,7 @@ class _LoginWidgetState extends StateMVC<LoginWidget>{
                             ),
                           ),
                           Text(
-                            "Login to your account",
+                            S.of(context).login_to_your_account,
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.headline6.merge(
                               TextStyle(
@@ -149,7 +149,6 @@ class _LoginWidgetState extends StateMVC<LoginWidget>{
                               ),
                             ),
                           ),
-                          //
                           SizedBox(height: 30),
                           Container(
                             decoration: BoxDecoration(

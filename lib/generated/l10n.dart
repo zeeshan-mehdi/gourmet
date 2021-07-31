@@ -14,22 +14,22 @@ import 'intl/messages_all.dart';
 
 class S {
   S();
-  
+
   static S current;
-  
+
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       S.current = S();
-      
+
       return S.current;
     });
-  } 
+  }
 
   static S of(BuildContext context) {
     return Localizations.of<S>(context, S);
@@ -244,7 +244,14 @@ class S {
       args: [],
     );
   }
-
+  String get restaurants {
+    return Intl.message(
+      'Restaurants',
+      name: 'restaurants',
+      desc: '',
+      args: [],
+    );
+  }
   /// Advertising
   String get advertising {
     return Intl.message(
@@ -270,6 +277,33 @@ class S {
     return Intl.message(
       'Login',
       name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  //Sign in with Apple
+  String get sign_in_with_Apple{
+    return Intl.message(
+      'Sign in with Apple',
+      name: 'sign_in_with_Apple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get sign_in_with_google{
+    return Intl.message(
+      'Sign in with Google',
+      name: 'sign_in_with_google',
+      desc: '',
+      args: [],
+    );
+  }
+ String get find_the_food_that_you_deserve {
+    return Intl.message(
+      'Find the food that you deserve',
+      name: 'find_the_food_that_you_deserve',
       desc: '',
       args: [],
     );
@@ -394,7 +428,79 @@ class S {
       args: [],
     );
   }
+  //"Top Rated", "Nearest","Most Popular"
 
+
+  String get top_rated {
+    return Intl.message(
+      'Top Rated',
+      name: 'top_rated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get places {
+    return Intl.message(
+      'Places',
+      name: 'places',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // String get food {
+  //   return Intl.message(
+  //     'Foods',
+  //     name: 'food',
+  //     desc: '',
+  //     args: [],
+  //   );
+  // }
+
+  String get nearest {
+    return Intl.message(
+      'Nearest',
+      name: 'nearest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get most_popular {
+    return Intl.message(
+      'Most Popular',
+      name: 'most_popular',
+      desc: '',
+      args: [],
+    );
+  }
+//key":"Order Taking"},{"key" :"Same Day Delivery"},{"key": "Vegetarian Food"}
+
+  String get order_taking {
+    return Intl.message(
+      'Order Taking',
+      name: 'order_taking',
+      desc: '',
+      args: [],
+    );
+  }
+  String get same_day_delivery {
+    return Intl.message(
+      'Same Day Delivery',
+      name: 'same_day_delivery',
+      desc: '',
+      args: [],
+    );
+  }
+  String get vegetarian_food {
+    return Intl.message(
+      'Vegetarian Food',
+      name: 'vegetarian_food',
+      desc: '',
+      args: [],
+    );
+  }
   /// `Extras`
   String get extras {
     return Intl.message(
@@ -815,6 +921,23 @@ class S {
     );
   }
 
+  String get scan_the_OR_code {
+    return Intl.message(
+      'Scan the OR code',
+      name: 'scan_the_OR_code',
+      desc: '',
+      args: [],
+    );
+  }
+  String get use_image_library {
+    return Intl.message(
+      'Use image Library',
+      name: 'use_image_library',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Close`
   String get close {
     return Intl.message(
@@ -1203,7 +1326,53 @@ class S {
       args: [],
     );
   }
+  String get back {
+    return Intl.message(
+      'BACK!',
+      name: 'back',
+      desc: '',
+      args: [],
+    );
+  }
+  String get login_to_your_account {
+    return Intl.message(
+      'Login to your account',
+      name: 'login_to_your_account',
+      desc: '',
+      args: [],
+    );
+  }
+  //usama addtion
+  String get sort {
+    return Intl.message(
+      'Sort',
+      name: 'sort',
+      desc: '',
+      args: [],
+    );
+  }
 
+
+ //Done
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  //CUISINES
+  String get cuisines {
+    return Intl.message(
+      'CUISINES',
+      name: 'cuisines',
+      desc: '',
+      args: [],
+    );
+  }
   /// `Wrong email or password`
   String get wrong_email_or_password {
     return Intl.message(
@@ -2051,8 +2220,6 @@ class S {
   }
 
 
-  //end here
-
   /// `Search for markets or products`
   String get search_for_markets_or_products {
     return Intl.message(
@@ -2103,17 +2270,17 @@ class S {
     );
   }
 
-  /// `Most Popular`
-  String get most_popular {
-    return Intl.message(
-      'Most Popular',
-      name: 'most_popular',
-      desc: '',
-      args: [],
-    );
-  }
+  // `Most Popular`
+  // String get most_popular {
+  //   return Intl.message(
+  //     'Most Popular',
+  //     name: 'most_popular',
+  //     desc: '',
+  //     args: [],
+  //   );
+  // }
 
-  /// `Recent Reviews`
+  // `Recent Reviews`
   String get recent_reviews {
     return Intl.message(
       'Recent Reviews',
@@ -2122,7 +2289,6 @@ class S {
       args: [],
     );
   }
-
 
 
   /// `Select your preferred payment mode`
@@ -2330,7 +2496,15 @@ class S {
     );
   }
 
-
+  /// `Kitchen  `
+  String get kitchen {
+    return Intl.message(
+      'Kitchen',
+      name: 'kitchen',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `PayPal Payment`
   String get paypal_payment {

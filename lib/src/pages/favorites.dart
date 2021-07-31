@@ -40,7 +40,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          S.of(context).favorites,
+          "My Favourite ",
           style: Theme.of(context).textTheme.headline6.merge(TextStyle(letterSpacing: 1.3,color: Colors.black)),
         ),
         // actions: <Widget>[
@@ -78,11 +78,12 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                     tabs: [
                       Tab(
                         //icon: Icon(Icons.directions_car),
-                        text: S.of(context).places,
+
+                        text: "${ S.of(context).places}",
                       ),
                       Tab(
                         //  icon: Icon(Icons.directions_transit),
-                        text: S.of(context).food,
+                        text: "${ S.of(context).food}",
                       ),
                     ],
                   ),),
@@ -155,7 +156,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                 ),
                                 _con.favoritesKitchen.isEmpty
                                     ? Center(
-                                  child: Text(S.of(context).there_are_no_favorite_items),
+                                  child: Text("There is no favorite items"),
                                 )
 
                                     : Offstage(
@@ -272,7 +273,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                 ),
                                 _con.favorites.isEmpty
                                     ? Center(
-                                  child: Text(S.of(context).there_are_no_favorite_items),
+                                  child: Text("There is no favourtie items"),
                                 )
 
                                     : Offstage(

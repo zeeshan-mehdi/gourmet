@@ -73,9 +73,11 @@ class _FilterPageState extends StateMVC<FilterPage> {
     // Animal(id: 7, name: "German"),
     // Animal(id: 8, name: "Desert"),
   ];
+
   final _items = _animals
       .map((animal) => MultiSelectItem<Animal>(animal, animal.name))
       .toList();
+
   //List<Animal> _selectedAnimals = [];
   List<Animal> selectedCuisine = [];
   List<Animal> _selectedAnimals3 = [];
@@ -100,13 +102,13 @@ class _FilterPageState extends StateMVC<FilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Filter",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+        title: Text("${S.of(context).filter}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
         automaticallyImplyLeading: false,
         leading:
         InkWell(
           child:Container(
             margin: EdgeInsets.only(top: 18, left: 8),
-            child:  Text("Reset",style: TextStyle(fontSize: 17,)),
+            child:  Text("${S.of(context).reset}",style: TextStyle(fontSize: 17,)),
           ),
           onTap: () {
             Navigator.of(context).pop();
@@ -116,7 +118,7 @@ class _FilterPageState extends StateMVC<FilterPage> {
           InkWell(
             child:  Container(
               margin: EdgeInsets.only(top: 18, right: 8),
-              child:  Text("Done",style: TextStyle(fontSize: 17,color: Colors.orange)),
+              child:  Text("${S.of(context).done}",style: TextStyle(fontSize: 17,color: Colors.orange)),
             ),
             onTap: () async {
               print("Filtered items is");
@@ -245,7 +247,7 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 //scrollBar: VerticalScrollBar(isAlwaysShown: true),
                 items: _items,
                 // initialValue: [_animals[4], _animals[7], _animals[6]],
-                title: Text("CUISINES"),
+                title: Text("${S.of(context).cuisines}"),
 
                 headerColor: Colors.white.withOpacity(0.6),
                 decoration: BoxDecoration(
@@ -260,7 +262,7 @@ class _FilterPageState extends StateMVC<FilterPage> {
               SizedBox(height: 20),
               Row(
                 children: [
-                  Text("  Sort",style: TextStyle(color: Colors.grey.withOpacity(0.8),fontSize: 20),),
+                  Text("  ${S.of(context).sort}",style: TextStyle(color: Colors.grey.withOpacity(0.8),fontSize: 20),),
                   Spacer()
                 ],
               ),
@@ -268,13 +270,13 @@ class _FilterPageState extends StateMVC<FilterPage> {
               Container(
                 height: 150,
                 width: 370,
-                child: MultiSelectItemsWidget(mainList :[{"key":"Top Rated"},{"key" :"Nearest"},{"key" :"Most Popular"}], filterby: FilterType.sort,),
 
+                child: MultiSelectItemsWidget(mainList :[{"key":"${S.of(context).top_rated}"},{"key" :"${S.of(context).nearest}"},{"key" :"${S.of(context).most_popular}"}], filterby: FilterType.sort,),
               ),
               SizedBox(height: 20),
               Row(
                 children: [
-                  Text("  Filter",style: TextStyle(color: Colors.grey.withOpacity(0.8),fontSize: 20),),
+                  Text(" ${S.of(context).filter} ",style: TextStyle(color: Colors.grey.withOpacity(0.8),fontSize: 20),),
                   Spacer()
                 ],
               ),
@@ -283,7 +285,8 @@ class _FilterPageState extends StateMVC<FilterPage> {
               Container(
                 height: 120,
                 width: 370,
-                child: MultiSelectItemsWidget(mainList :[{"key":"Order Taking"},{"key" :"Same Day Delivery"},{"key": "Vegetarian Food"}],filterby: FilterType.filter),
+
+                child: MultiSelectItemsWidget(mainList :[{"key":"${S.of(context).order_taking}"},{"key" :"${S.of(context).same_day_delivery}"},{"key": "${S.of(context).vegetarian_food}"}],filterby: FilterType.filter),
 
               ),
               SizedBox(height: 20),
@@ -343,8 +346,6 @@ class _FilterPageState extends StateMVC<FilterPage> {
               //       });
               //     }
               // ),
-
-
             ],
           ),
         ),
