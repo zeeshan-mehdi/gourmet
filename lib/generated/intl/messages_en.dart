@@ -189,7 +189,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
     "gourmet_benefits" : MessageLookupByLibrary.simpleMessage("Sign in to Gourmet to benefit from amazing food !!"),
     "food_options" : MessageLookupByLibrary.simpleMessage("We\'ve got plenty of food options"),
+    "there_are_no_favorite_items" : MessageLookupByLibrary.simpleMessage("There are no favorite items"),
 
+    "food" : MessageLookupByLibrary.simpleMessage("Food"),
+    "places" : MessageLookupByLibrary.simpleMessage("Places"),
 
 
 

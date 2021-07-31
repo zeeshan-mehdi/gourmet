@@ -17,6 +17,7 @@ class Product {
   Media image;
   List<Media> images;
   String description;
+  String descriptionAr;
   String ingredients;
   String capacity;
   String unit;
@@ -46,6 +47,7 @@ class Product {
               ? jsonMap['price'].toDouble()
               : 0.0;
       description = jsonMap['description'];
+      descriptionAr = jsonMap['description_ar'];
       capacity = jsonMap['capacity'].toString();
       unit = jsonMap['unit'] != null ? jsonMap['unit'].toString() : '';
       packageItemsCount = jsonMap['package_items_count'].toString();

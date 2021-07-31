@@ -96,6 +96,32 @@ class S {
       args: [],
     );
   }
+  String get there_are_no_favorite_items {
+    return Intl.message(
+      'There are no favorite items',
+      name: 'there_are_no_favorite_items',
+      desc: '',
+      args: [],
+    );
+  }
+  String get food {
+    return Intl.message(
+      'Food',
+      name: 'food',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get places {
+    return Intl.message(
+      'Places',
+      name: 'places',
+      desc: '',
+      args: [],
+    );
+  }
 
 
   /// `My Addresses`

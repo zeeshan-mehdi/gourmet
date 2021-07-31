@@ -4,7 +4,7 @@ import 'package:markets/src/models/market.dart';
 import '../helpers/helper.dart';
 import '../models/favorite.dart';
 import '../models/route_argument.dart';
-
+import 'package:markets/src/repository/settings_repository.dart' as settingRepo;
 // ignore: must_be_immutable
 class FavoriteListItemWidget extends StatelessWidget {
   String heroTag;
@@ -14,7 +14,7 @@ class FavoriteListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
     String url = this.favorite.product.image.thumb;
 
     if(url!=null&& url!=""&&!url.contains("https")){
@@ -61,13 +61,13 @@ class FavoriteListItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          favorite.product.name,
+                          langCode=='en' ? favorite.product.name??'':favorite.product.nameAr??'',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
-                          favorite.product.market.name,
+                          langCode=='en' ? favorite.product.market.name??'':favorite.product.market.nameAr??'',
                           overflow: TextOverflow.fade,
                           softWrap: false,
                           style: Theme.of(context).textTheme.caption,
@@ -98,9 +98,23 @@ class FavoriteKitchenListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String url = this.favorite.market.image.thumb;
+    String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
 
     if(url!=null&& url!=""&&!url.contains("https")){
       url = url.replaceFirst("http", "https");
+    }
+
+    String description;
+
+
+    if(langCode =='en') {
+      description = favorite.market.description != null && favorite.market.description.length > 50
+          ? favorite.market.description.substring(0, 50)
+          : favorite.market.description??'';
+    }else{
+      description = favorite.market.descriptionAr != null && favorite.market.descriptionAr.length > 50
+          ? favorite.market.descriptionAr.substring(0, 50)
+          : favorite.market.descriptionAr??'';
     }
 
     return InkWell(
@@ -142,13 +156,13 @@ class FavoriteKitchenListItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          favorite.market.name,
+                          langCode=='en' ? favorite.market.name??'':favorite.market.nameAr??'',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         Text(
-                          favorite.market.name,
+                          langCode=='en' ? favorite.market.name??'':favorite.market.nameAr??'',
                           overflow: TextOverflow.fade,
                           softWrap: false,
                           style: Theme.of(context).textTheme.caption,
@@ -158,7 +172,7 @@ class FavoriteKitchenListItemWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 8),
                   Text(
-                    favorite.market.description!=null &&favorite.market.description.length>50?favorite.market.description.substring(0,50):favorite.market.description,
+                    description,
                     overflow: TextOverflow.fade,
                     softWrap: false,
                     style: Theme.of(context).textTheme.caption,

@@ -366,9 +366,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "you_can_become_kitchen_and_work_at_gourmet" : MessageLookupByLibrary.simpleMessage("يمكنك أن تصبح مطبخًا وتعمل في ذواقة"),
     "gourmet_benefits" : MessageLookupByLibrary.simpleMessage("سجل الدخول إلى جورميه للاستفادة من الطعام الرائع !!"),
     "food_options" : MessageLookupByLibrary.simpleMessage("لدينا الكثير من خيارات الطعام"),
-
-
-
+    "there_are_no_favorite_items" : MessageLookupByLibrary.simpleMessage("لا توجد عناصر مفضلة"),
+    "food" : MessageLookupByLibrary.simpleMessage("غذاء"),
+    "places" : MessageLookupByLibrary.simpleMessage("أماكن"),
 
     "city" : MessageLookupByLibrary.simpleMessage("مدينة"),
     "cityIsRequired" : MessageLookupByLibrary.simpleMessage("خانة المدينة / البلدة مطلوب"),
