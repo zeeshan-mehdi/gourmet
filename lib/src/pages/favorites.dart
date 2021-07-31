@@ -78,11 +78,12 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                     tabs: [
                       Tab(
                         //icon: Icon(Icons.directions_car),
-                        text: "Places",
+
+                        text: "${ S.of(context).places}",
                       ),
                       Tab(
                         //  icon: Icon(Icons.directions_transit),
-                        text: "Food",
+                        text: "${ S.of(context).food}",
                       ),
                     ],
                   ),),

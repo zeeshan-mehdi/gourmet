@@ -118,7 +118,7 @@ class _CoisinesDetailState extends StateMVC<CoisinesDetail> {
                             children: [
                            //   Spacer(),
                               Text(
-                                "${allMarkets.length} kitchen",
+                                "${allMarkets.length} ${S.of(context).kitchen}",
                                 style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),
                               ),
                               Spacer()

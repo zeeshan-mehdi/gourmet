@@ -68,7 +68,7 @@ class _CoisinesState extends StateMVC<Coisines> {
       // onWillPop: Helper.of(context).onWillPop,
       child: Scaffold(
         appBar: AppBar(
-            title: Text("Cuisines",
+            title: Text(S.of(context).cuisines,
                 style: TextStyle(
                   color: Colors.black,
                 )),
@@ -221,7 +221,7 @@ class _CoisinesState extends StateMVC<Coisines> {
                                                                 fontSize: 22),
                                                           ),
                                                           Text(
-                                                            "${cuisinesItems[index].count} Restaurants",
+                                                            "${cuisinesItems[index].count} ${S.of(context).restaurants}",
                                                             overflow:
                                                                 TextOverflow
                                                                     .fade,
