@@ -449,14 +449,14 @@ class S {
     );
   }
 
-  String get food {
-    return Intl.message(
-      'Foods',
-      name: 'food',
-      desc: '',
-      args: [],
-    );
-  }
+  // String get food {
+  //   return Intl.message(
+  //     'Foods',
+  //     name: 'food',
+  //     desc: '',
+  //     args: [],
+  //   );
+  // }
 
   String get nearest {
     return Intl.message(
