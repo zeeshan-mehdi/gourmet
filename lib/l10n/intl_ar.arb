@@ -25,9 +25,12 @@
     "menu" :"قائمة",
     "gourmet_benefits" : "سجل الدخول إلى جورميه للاستفادة من الطعام الرائع !!",
     "food_options" :"لدينا الكثير من خيارات الطعام",
+    "food" :"غذاء",
+    "places" :"أماكن",
 
 
 
+    "there_are_no_favorite_items" : "لا توجد عناصر مفضلة",
     "manage_restaurant" : "إدارة المطعم"),
     "restaurant_orders" :"طلبات المطاعم",
     "help_from_gourmet" : "مساعدة من الذواقة",
