@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:markets/restaurent_app/src/pages/markets.dart';
 import 'package:markets/restaurent_app/src/pages/notifications.dart';
 import 'package:markets/restaurent_app/src/pages/order_edit.dart';
@@ -41,7 +41,7 @@ import 'src/pages/settings.dart';
 import 'src/pages/signup.dart';
 import 'src/pages/splash_screen.dart';
 import 'src/pages/tracking.dart';
-
+import 'package:flutter/material.dart';
 // restaurent app imports
 
 import 'restaurent_app/src/pages/details.dart' as restDetails;

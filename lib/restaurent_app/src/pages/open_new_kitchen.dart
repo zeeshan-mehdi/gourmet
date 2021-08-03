@@ -46,7 +46,8 @@ class _OpenNewKitchenPageState extends StateMVC<OpenNewKitchenPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   child: Text(
-                    'About Kitchen',
+                    S.of(context).about_kitchen
+                    ,
                     style: TextStyle(
                         color: tabIndex == 0
                             ? Theme.of(context).accentColor
@@ -87,7 +88,7 @@ class _OpenNewKitchenPageState extends StateMVC<OpenNewKitchenPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   child: Text(
-                    'Kitchen Detail',
+                    S.of(context).Kitchen_Detail,
                     style: TextStyle(
                         color: tabIndex == 1
                             ? Theme.of(context).accentColor
@@ -122,7 +123,7 @@ class _OpenNewKitchenPageState extends StateMVC<OpenNewKitchenPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   child: Text(
-                    'Kitchen Media',
+                    S.of(context).Kitchen_Media,
                     style: TextStyle(
                         color: tabIndex == 2
                             ? Theme.of(context).accentColor
@@ -221,7 +222,7 @@ class _OpenNewKitchenPageState extends StateMVC<OpenNewKitchenPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            'Add Kitchen'), centerTitle: true,
+            S.of(context).add_kitchen), centerTitle: true,
         elevation: 0,
 
         automaticallyImplyLeading: false,
@@ -345,10 +346,14 @@ class _Page1State extends StateMVC<Page1> {
               onSaved: (input) => _con.kitchen.name = input,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               decoration: InputDecoration(
-                labelText: 'Name',
+                labelText: S.of(context).full_name,
+
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
+
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+
+                hintText: S.of(context).My_Kitchen,
+
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -363,11 +368,18 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Name (arabic)',
-                labelStyle: TextStyle(color: Theme.of(context).accentColor),
-                contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
-                hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
+
+
+
+              labelText: 'Name (arabic)',
+
+              labelStyle: TextStyle(color: Theme.of(context).accentColor),
+
+              contentPadding: EdgeInsets.all(12),
+
+              hintText:  S.of(context).My_Kitchen,
+
+              hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
@@ -381,10 +393,11 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
+
                 labelText: 'Description',
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+                hintText:  S.of(context).My_Kitchen,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -403,7 +416,7 @@ class _Page1State extends StateMVC<Page1> {
                 labelText: 'Description (arabic)',
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+                hintText:S.of(context).My_Kitchen,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -421,7 +434,7 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Delivery Range in KM',
+                labelText: S.of(context).Delivery_Range_in_KM,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -440,7 +453,7 @@ class _Page1State extends StateMVC<Page1> {
               onSaved: (input) => _con.kitchen.deliveryFee = double.parse(input),
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Delivery Fee',
+                labelText: S.of(context).Delivery_Fee,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -460,7 +473,7 @@ class _Page1State extends StateMVC<Page1> {
               onSaved: (input) => _con.kitchen.maximumOrdersPerDay = int.parse(input),
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Maximum Orders Per Day',
+                labelText: S.of(context).Maximum_Orders_Per_Day,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -473,7 +486,7 @@ class _Page1State extends StateMVC<Page1> {
             ),
             SizedBox(height: 30),
             MultipleDropDown(
-              placeholder: 'Select Delivery Boys',
+              placeholder: S.of(context).Select_Delivery_Boys,
               disabled: false,
               values: _selectedValues,
 
@@ -487,7 +500,8 @@ class _Page1State extends StateMVC<Page1> {
               padding: const EdgeInsets.all(8.0),
               child: DropdownButton<String>(
                 isExpanded: true,
-                hint: Text('Select Cuisine',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
+                hint: Text(S.of(context).Select_Cuisine,
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
                 value: selectedCuisine,
                 items:cuisines.map((String value) {
                   return new DropdownMenuItem<String>(
@@ -521,7 +535,7 @@ class _Page1State extends StateMVC<Page1> {
                         showDialog(context: context, builder: (context)=>paidKitchenDialog(context));
                       }
                 }),
-                Text('Paid Kitchen')
+                Text(S.of(context).Paid_Kitchen)
               ],
             ),
             SizedBox(height: 0),
@@ -535,7 +549,7 @@ class _Page1State extends StateMVC<Page1> {
                   _con.kitchen.closed = newVal;
                   setState(() { });
                 }),
-                Text('Closed Kitchen')
+                Text(S.of(context).Closed_Kitchen)
               ],
             ),
             SizedBox(height: 0),
@@ -548,7 +562,7 @@ class _Page1State extends StateMVC<Page1> {
                   _con.kitchen.availableForDelivery = newVal;
                   setState(() { });
                 }),
-                Text('Kitchen Available For Delivery')
+                Text(S.of(context).Kitchen_Available_For_Delivery)
               ],
             ),
             Row(
@@ -560,7 +574,7 @@ class _Page1State extends StateMVC<Page1> {
                   _con.kitchen.sameDayDelivery = newVal;
                   setState(() { });
                 }),
-                Text('Same Day Delivery')
+                Text(S.of(context).Same_Day_Delivery)
               ],
             ),
             Row(
@@ -572,13 +586,13 @@ class _Page1State extends StateMVC<Page1> {
                   _con.kitchen.vegetarianFood = newVal;
                   setState(() { });
                 }),
-                Text('Vegetarian Food')
+                Text(S.of(context).Vegetarian_Food)
               ],
             ),
             SizedBox(height: 10),
             BlockButtonWidget(
               text: Text(
-                'Next',
+                S.of(context).Next,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               color: Theme.of(context).accentColor,
@@ -634,7 +648,7 @@ class _Page2State extends StateMVC<Page2> {
               onSaved: (input) => _con.kitchen.phone = input,
               inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),],
               decoration: InputDecoration(
-                labelText: 'Phone',
+                labelText: S.of(context).Phone,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '00965XXXXXXXX',
@@ -672,10 +686,10 @@ class _Page2State extends StateMVC<Page2> {
 
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Address',
+                labelText: S.of(context).Address,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: '31st street kuwait city',
+                hintText: S.of(context).street_kuwait_city,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -691,7 +705,7 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Latitude',
+                labelText: S.of(context).Latitude,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '33.45444',
@@ -709,7 +723,7 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Longitude',
+                labelText: S.of(context).Longitude,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '77.45444',
@@ -727,10 +741,10 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Information',
+                labelText: S.of(context).Information,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+                hintText: S.of(context).My_Kitchen,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -746,10 +760,10 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Information (arabic)',
+                labelText: S.of(context).Information,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+                hintText: S.of(context).My_Kitchen,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -764,10 +778,10 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Terms and Conditions',
+                labelText: S.of(context).Terms_and_Conditions,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+                hintText: S.of(context).My_Kitchen,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -783,10 +797,10 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Terms and Conditions (arabic)',
+                labelText: S.of(context).Terms_and_Conditions,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My Kitchen',
+                hintText: S.of(context).My_Kitchen,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -798,7 +812,7 @@ class _Page2State extends StateMVC<Page2> {
             SizedBox(height: 30),
             BlockButtonWidget(
               text: Text(
-                'Next',
+                S.of(context).Next,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               color: Theme.of(context).accentColor,
@@ -919,7 +933,7 @@ class _Page3State extends StateMVC<Page3> {
           ),
           BlockButtonWidget(
             text: Text(
-              'Submit',
+              S.of(context).submit,
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
             color: Theme.of(context).accentColor,
@@ -945,7 +959,7 @@ class _Page3State extends StateMVC<Page3> {
                 }
               }catch(e){
                 print(e);
-                Fluttertoast.showToast(msg: 'somethig went wrong !!');
+                Fluttertoast.showToast(msg: S.of(context).something_went_wrong);
               }
               loading = false;
               setState(() {});

@@ -46,7 +46,7 @@ class _NewProductPageState extends StateMVC<NewProductPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   child: Text(
-                    'About Product',
+                    S.of(context).About_Product,
                     style: TextStyle(
                         color: tabIndex == 0
                             ? Theme.of(context).accentColor
@@ -87,7 +87,7 @@ class _NewProductPageState extends StateMVC<NewProductPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 13),
                   child: Text(
-                    'Product Detail',
+                    S.of(context).Product_Detail,
                     style: TextStyle(
                         color: tabIndex == 1
                             ? Theme.of(context).accentColor
@@ -220,8 +220,7 @@ class _NewProductPageState extends StateMVC<NewProductPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            'Add Product'), centerTitle: true,
+        title: Text(S.of(context).Add_Product), centerTitle: true,
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: IconButton(icon: Icon(Icons.arrow_back),color: Colors.black.withOpacity(0.7),onPressed: (){
@@ -357,7 +356,7 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Description',
+                labelText: S.of(context).Description,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: 'My product',
@@ -376,7 +375,7 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Description (arabic)',
+                labelText:S.of(context).Description,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: 'My product',
@@ -461,7 +460,7 @@ class _Page1State extends StateMVC<Page1> {
             SizedBox(height: 10),
             BlockButtonWidget(
               text: Text(
-                'Next',
+                S.of(context).Next,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               color: Theme.of(context).accentColor,
@@ -679,7 +678,7 @@ class _Page2State extends StateMVC<Page2> {
 
             BlockButtonWidget(
               text: Text(
-                'Save',
+                S.of(context).save,
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               color: Theme.of(context).accentColor,
@@ -712,7 +711,7 @@ class _Page2State extends StateMVC<Page2> {
                       Fluttertoast.showToast(msg: resp['message']);
                     }
                   }catch(e){
-                    Fluttertoast.showToast(msg:'Something Went wrong please try again !!');
+                    Fluttertoast.showToast(msg:S.of(context).something_went_wrong);
                   }
                   loading = false;
                   setState(() {});

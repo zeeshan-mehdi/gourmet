@@ -445,5 +445,47 @@
   "phoneNumber": "Phone Number",
   "smsHasBeenSentTo": "SMS has been sent to",
   "weAreSendingOtpToValidateYourMobileNumberHang": "We are sending OTP to validate your mobile number. Hang on!",
-  "verifyPhoneNumber": "Verify Phone Number"
+  "verifyPhoneNumber": "Verify Phone Number",
+  'add_kitchen': 'أضف مطبخ',
+  'Kitchen_Media' :'حول المطبخ',
+  'Kitchen_Detail':'حول المطبخ',
+  'add_kitchen':'أضف مطبخ',
+  'My_Kitchen':'مطبخي',
+  'Description':'وصف',
+  'Delivery_Range_in_KM':'نطاق التسليم في KM',
+  'Delivery_Fee':'رسوم التوصيل',
+  'Maximum_Orders_Per_Day':'الحد الأقصى للطلبات في اليوم',
+  'Select_Delivery_Boys':'حدد تسليم الأولاد',
+  'Select_Cuisine':'حدد المطبخ',
+  'Paid_Kitchen':'مطبخ مدفوع',
+  'Closed_Kitchen':'مطبخ مغلق',
+  'Kitchen_Available_For_Delivery':'المطبخ متاح للتسليم',
+  'Same_Day_Delivery':'التوصيل في نفس اليوم',
+  'Vegetarian_Food':'طعام نباتي',
+  'Next':'التالي',
+  'Phone':'هاتف',
+  'Mobile':'التليفون المحمول',
+  'Address':'التليفون المحمول',
+  'street_kuwait_city':'شارع 31 مدينة الكويت',
+  'Latitude':'خط العرض',
+  'Longitude':'خط الطول',
+  'Information':'معلومة',
+Terms_and_Conditions't':'الأحكام والشروط',
+'something_went_wrong':'هناك خطأ ما !!',
+'About_Product': 'حول المنتج',
+'Product_Detail':'تفاصيل المنتج',
+'Add_product':'أضف منتج',
+'Scan':'مسح'
+
+
+
+
+
+
+
+
+
+
+
+
 }
