@@ -310,6 +310,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "generalInformation" : MessageLookupByLibrary.simpleMessage("General Information"),
     "goToHome" : MessageLookupByLibrary.simpleMessage("Go To Home"),
     "auto_accept" : MessageLookupByLibrary.simpleMessage("أوامر قبول السيارات"),
+    "start_order" : MessageLookupByLibrary.simpleMessage("بدء الطلب"),
+    "view_cart" : MessageLookupByLibrary.simpleMessage("عرض عربة التسوق"),
+    "my_order" : MessageLookupByLibrary.simpleMessage("عرض عربة التسوق"),
     "hint" : MessageLookupByLibrary.simpleMessage("Hint"),
     "history" : MessageLookupByLibrary.simpleMessage("التاريخ"),
     "insertAnAdditionalInformationForThisOrder" : MessageLookupByLibrary.simpleMessage("Insert an additional information for this order"),
@@ -331,6 +334,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tapBackAgainToLeave" : MessageLookupByLibrary.simpleMessage("إضغط مرة أخرى للخروج"),
     "theConversationWithIsDismissed" : m1,
     "thisAccountNotExist" : MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
+    "staff_email" : MessageLookupByLibrary.simpleMessage("البريد الإلكتروني للموظفين"),
+
+
     "thisNotificationHasMarkedAsUnRead" : MessageLookupByLibrary.simpleMessage("This notification has marked as un read"),
     "thisOrderUpdatedSuccessfully" : MessageLookupByLibrary.simpleMessage("This order updated successfully"),
     "totalEarning" : MessageLookupByLibrary.simpleMessage("مجموع الأرباح"),

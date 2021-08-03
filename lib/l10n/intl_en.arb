@@ -23,6 +23,10 @@
   "restaurant_achievements" : "Restaurant Achievements",
   "menu" : "Menu",
 
+   "start_order" : MessageLookupByLibrary.simpleMessage("Start Order"),
+   "view_cart" : MessageLookupByLibrary.simpleMessage("View Cart"),
+   "my_order" : MessageLookupByLibrary.simpleMessage("My Order"),
+
     "manage_restaurant" : "Manage Restaurant",
     "restaurant_orders" : "Restaurant Orders",
     "help_from_gourmet" : "Help from Gourmet",
@@ -41,6 +45,7 @@
     "there_are_no_favorite_items" : "There are no favorite items",
     "food" : "Food",
     "places" : "Places",
+    "staff_email" : "Staff Email",
 
 
 

@@ -185,7 +185,7 @@ class OrderController extends ControllerMVC {
 
   void doUpdateOrder(context,Order _order) async {
     updateOrder(_order).then((value) {
-      Navigator.of(context).pop();
+      //Navigator.of(context).pop();
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
         content: Text(S.of(state.context).thisOrderUpdatedSuccessfully),
       ));

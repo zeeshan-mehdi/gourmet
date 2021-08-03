@@ -1,9 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/restaurent_app/src/controllers/staff_controller.dart';
+import 'package:markets/restaurent_app/src/pages/add_new_staff.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 class RestaurantStaff extends StatefulWidget {
+  final String marketId;
+
+  const RestaurantStaff({Key key, this.marketId}) : super(key: key);
   @override
   _RestaurantStaffState createState() => _RestaurantStaffState();
 }
@@ -13,8 +18,9 @@ class _RestaurantStaffState extends StateMVC<RestaurantStaff> {
   StaffController _con;
 
 
-  _RestaurantStaffState(){
-    _con = StaffController();
+
+  _RestaurantStaffState(): super(StaffController()) {
+  _con = controller;
   }
 
 
@@ -48,21 +54,29 @@ class _RestaurantStaffState extends StateMVC<RestaurantStaff> {
       // floatingActionButton: _con.cart != null && _con.cart.product.market.availableForDelivery
       //     ?
 
-      body: Container(
+      body: _con.users.length==0 && _con.isFetched==false ? Center(child: CircularProgressIndicator(),) :_con.users.length==0  ? Center(child: Text('No Staff Found'),)  : Container(
         child: ListView.builder(
             itemCount: _con.users.length,
             itemBuilder: (context,index){
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              leading:CircleAvatar(
+              leading: CircleAvatar(
                 backgroundImage: NetworkImage(
                   _con.users[index].image.url
                 ),
               ),
-
               title: Text(_con.users[index].name),
 
+              trailing: IconButton(icon: Icon(Icons.highlight_remove_sharp,color: Colors.red,),onPressed: ()async{
+                var deleted= await _con.deleteStaff1(widget.marketId, _con.users[index].id);
+                if(deleted){
+                  Fluttertoast.showToast(msg: 'Staff Successfully removed');
+                }else{
+                  Fluttertoast.showToast(msg: 'Unable to Remove Staff');
+                }
+                _con.refreshKitchens();
+              },),
             ),
           );
         }),
@@ -70,6 +84,11 @@ class _RestaurantStaffState extends StateMVC<RestaurantStaff> {
 
       floatingActionButton : FloatingActionButton(
           onPressed: () async {
+
+            await Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddNewStaff(marketId: widget.marketId,controller: _con,)));
+
+            _con.refreshKitchens();
+
 
             //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Material(child: AddNewAddress())));
 

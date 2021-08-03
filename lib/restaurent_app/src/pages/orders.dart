@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:markets/restaurent_app/src/pages/restaurant_staff.dart';
+import 'package:markets/restaurent_app/src/models/market.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import  'package:markets/generated/l10n.dart';
@@ -13,8 +14,9 @@ import 'package:markets/src/repository/settings_repository.dart' as settingsRepo
 
 class OrdersWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
+  Market market;
 
-  OrdersWidget({Key key, this.parentScaffoldKey}) : super(key: key);
+  OrdersWidget({Key key, this.parentScaffoldKey,this.market}) : super(key: key);
 
   @override
   _OrdersWidgetState createState() => _OrdersWidgetState();
@@ -81,7 +83,7 @@ class _OrdersWidgetState extends StateMVC<OrdersWidget> {
                 ),
               ),
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RestaurantStaff()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RestaurantStaff(marketId: widget.market.id,)));
               },
             ),
             SizedBox(height: 5,),

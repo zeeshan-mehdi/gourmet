@@ -83,8 +83,8 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                     widget.searchTag = 0;
                   },
 
-                  onSubmitted: (text) async {
-                    await _con.refreshSearch(text);
+                  onSubmitted: (text) {
+                   // await _con.refreshSearch(text);
                     widget.searchTag = 0;
                     _con.saveSearch(text);
                   },

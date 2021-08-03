@@ -56,7 +56,7 @@ class User {
         address = "";
       }
       try {
-        isDriver = jsonMap['is_driver'];
+        isDriver = jsonMap['is_driver']==1?true:false;
         bio = jsonMap['custom_fields']['bio']['view'];
         memebership = jsonMap['membership'];
         trialEnds = jsonMap['trial_ends_at'];

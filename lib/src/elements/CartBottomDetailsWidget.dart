@@ -86,7 +86,7 @@ class CartBottomDetailsWidget extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(10.0)),
                               ),
                           child: Text(
-                            'Start Order',
+                            S.of(context).start_order,
                             textAlign: TextAlign.start,
                             style: Theme.of(context).textTheme.headline4.merge(TextStyle(color: Theme.of(context).primaryColor)),
                           ),

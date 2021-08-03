@@ -103,7 +103,7 @@ class _KitchenCartWidgetState extends StateMVC<KitchenCartWidget> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20),
                             child: Text(
-                              'View Cart',
+                              S.of(context).view_cart,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color:

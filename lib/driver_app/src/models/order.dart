@@ -16,6 +16,7 @@ class Order {
   User user;
   Payment payment;
   Address deliveryAddress;
+  int driver_id;
 
   Order();
 
@@ -25,6 +26,7 @@ class Order {
       tax = jsonMap['tax'] != null ? jsonMap['tax'].toDouble() : 0.0;
       deliveryFee = jsonMap['delivery_fee'] != null ? jsonMap['delivery_fee'].toDouble() : 0.0;
       hint = jsonMap['hint'].toString();
+      driver_id = jsonMap['driver_id'];
       orderStatus = jsonMap['order_status'] != null ? OrderStatus.fromJSON(jsonMap['order_status']) : new OrderStatus();
       dateTime = DateTime.parse(jsonMap['updated_at']);
       user = jsonMap['user'] != null ? User.fromJSON(jsonMap['user']) : new User();

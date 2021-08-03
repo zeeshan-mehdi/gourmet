@@ -149,6 +149,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "mi" : MessageLookupByLibrary.simpleMessage("mi"),
     "most_popular" : MessageLookupByLibrary.simpleMessage("Most Popular"),
     "my_orders" : MessageLookupByLibrary.simpleMessage("My Orders"),
+    "my_order" : MessageLookupByLibrary.simpleMessage("My Order"),
+    "start_order" : MessageLookupByLibrary.simpleMessage("Start Order"),
+    "view_cart" : MessageLookupByLibrary.simpleMessage("View Cart"),
     "near_to" : MessageLookupByLibrary.simpleMessage("Near to"),
     "near_to_your_current_location" : MessageLookupByLibrary.simpleMessage("Near to your current location"),
     "newMessageFrom" : MessageLookupByLibrary.simpleMessage("New message from"),
@@ -172,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "popular_this_month" : MessageLookupByLibrary.simpleMessage("Popular This Month"),
     "restaurant_achievements" : MessageLookupByLibrary.simpleMessage("Restaurant Achievements"),
     "menu" : MessageLookupByLibrary.simpleMessage("Menu"),
+    "staff_email" : MessageLookupByLibrary.simpleMessage("Staff Email"),
 
 
     "manage_restaurant" : MessageLookupByLibrary.simpleMessage("Manage Restaurant"),

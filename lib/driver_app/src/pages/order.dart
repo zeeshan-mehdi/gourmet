@@ -428,7 +428,7 @@ class _OrderWidgetState extends StateMVC<OrderWidget> with SingleTickerProviderS
                                       style: Theme.of(context).textTheme.caption,
                                     ),
                                     Text(
-                                      _con.order.user.phone,
+                                      _con.order.user.phone??'',
                                       overflow: TextOverflow.ellipsis,
                                       style: Theme.of(context).textTheme.bodyText1,
                                     ),

@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import '../helpers/custom_trace.dart';
 import '../helpers/helper.dart';
 import '../models/notification.dart';
-import '../models/user.dart';
-import '../repository/user_repository.dart' as userRepo;
+import 'package:markets/src/models/user.dart';
+import 'package:markets/src/repository/user_repository.dart' as userRepo;
 import 'settings_repository.dart';
 
 Future<Stream<Notification>> getNotifications() async {

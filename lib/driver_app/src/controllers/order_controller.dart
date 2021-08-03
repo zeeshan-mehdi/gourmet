@@ -4,6 +4,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../generated/l10n.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
+import 'package:markets/src/repository/user_repository.dart' as userRepo;
 
 class OrderController extends ControllerMVC {
   List<Order> orders = <Order>[];
@@ -17,7 +18,12 @@ class OrderController extends ControllerMVC {
     final Stream<Order> stream = await getOrders();
     stream.listen((Order _order) {
       setState(() {
-        orders.add(_order);
+        try {
+          if (_order.driver_id == int.parse(userRepo.currentUser.value.id))
+            orders.add(_order);
+        }catch(e){
+
+        }
       });
     }, onError: (a) {
       print(a);

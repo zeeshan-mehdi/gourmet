@@ -419,6 +419,36 @@ class S {
     );
   }
 
+  /// `Start order`
+  String get start_order {
+    return Intl.message(
+      'Start Order',
+      name: 'start_oder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View cart`
+  String get view_cart {
+    return Intl.message(
+      'View Cart',
+      name: 'view_cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `my order`
+  String get my_order {
+    return Intl.message(
+      'My Order',
+      name: 'my_order',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Favorite Products`
   String get favorite_products {
     return Intl.message(
@@ -440,14 +470,26 @@ class S {
     );
   }
 
-  String get places {
+  String get staff_email {
     return Intl.message(
-      'Places',
-      name: 'places',
+      'Staff Email',
+      name: 'staff_email',
       desc: '',
       args: [],
     );
   }
+
+
+
+
+  // String get places {
+  //   return Intl.message(
+  //     'Places',
+  //     name: 'places',
+  //     desc: '',
+  //     args: [],
+  //   );
+  // }
 
   // String get food {
   //   return Intl.message(

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
 import 'package:markets/restaurent_app/src/helpers/helper.dart';
@@ -72,7 +73,9 @@ import 'package:markets/src/repository/user_repository.dart' as userRepo;
         var user = User.fromJSON(u[0]);
         print('converting from json ');
 
-        users.add(user);
+        if(user.id != userRepo.currentUser.value.id) {
+          users.add(user);
+        }
         print('user added');
       }catch(e){
         print('problem is here');
@@ -96,6 +99,101 @@ import 'package:markets/src/repository/user_repository.dart' as userRepo;
     var data = Helper.getData(jsonDecode(response.body));
 
     return data;
+
+  }
+
+  getUserByEmail(String email)async{
+
+    String url ='${GlobalConfiguration().getValue('api_base_url')}users/by-email/$email?api_token=${userRepo.currentUser.value.apiToken}';
+
+    final client = new http.Client();
+    final response = await client.get(Uri.parse(url));
+
+    var data = Helper.getData(jsonDecode(response.body));
+
+    print('user found or not $data');
+    if(data!=null && data.length>0) {
+      return User.fromJSON(data[0]);
+    }else{return null;
+    }
+  }
+
+  deleteStaff(String marketId,userId)async{
+
+    try {
+      String endPoint = 'user/markets/delete';
+      String url = '${GlobalConfiguration().getValue(
+          'api_base_url')}$endPoint?api_token=${userRepo.currentUser.value
+          .apiToken}';
+
+
+      final client = new http.Client();
+      Map<String, dynamic> headers = {
+        'market_id': marketId,
+        'user_id': userId
+      };
+      final response = await client.post(Uri.parse(url), body: headers);
+
+      print(response.body);
+
+      var data = jsonDecode(response.body);
+
+      print(data);
+
+      if (data['success'])
+        return true;
+      else {
+        Fluttertoast.showToast(msg: '${data['message']}');
+        return false;
+      }
+    }catch(e){
+      print('exception $e');
+      return false;
+    }
+
+
+  }
+
+
+
+
+  addStaffUser(String marketId,email)async{
+    User user = await getUserByEmail(email);
+
+    if(user ==null){
+      Fluttertoast.showToast(msg: 'User with this email does not exist');
+      return false;
+    }
+
+    String endPoint  = 'user/markets';
+    String url ='${GlobalConfiguration().getValue('api_base_url')}$endPoint?api_token=${userRepo.currentUser.value.apiToken}';
+
+    if(user!=null){
+      final client = new http.Client();
+      Map<String,dynamic> headers = {
+        'market_id':marketId,
+        'user_id':user.id
+      };
+      final response = await client.post(Uri.parse(url),body: headers);
+
+      print(response.body);
+
+      var data = jsonDecode(response.body);
+
+      print(data);
+
+      if(data['success'])
+        return true;
+      else {
+        Fluttertoast.showToast(msg: '${data['message']}');
+        return false;
+      }
+
+    }
+
+
+
+
 
   }
 

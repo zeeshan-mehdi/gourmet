@@ -38,7 +38,7 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
           },),
 
           ListItem(color:Colors.indigo, title: S.of(context).restaurant_orders,onPressed: (){
-            Navigator.of(context).pushNamed('/Pages',arguments: 5 );
+            Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '5',param: widget.market) );
           },),
 
           ListItem(color:Colors.orange , title: S.of(context).help_from_gourmet,),
