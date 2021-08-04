@@ -124,13 +124,13 @@ class CheckoutController extends CartController {
 
 
                        //incase of order success
-                       title: "Your order has \n been Placed!",
-                       subTitle: "You can track the delivery in the \n \"Orders\" section"  ,
+                       title: S.of(context).Your_order_has_been_Placed,
+                       subTitle:  S.of(context).You_can_track_the_delivery_in_the_Orders_section ,
                        imageName: "OrderSuceccfullIcon.png",
                        popupType: PopupType.orderSucessfull,
-                       btnTitle: "Check on Order",
-                       bottombtnTitle: "Go to orders",
-                     )));
+                       btnTitle: S.of(context).Check_on_Order,
+                       bottombtnTitle: S.of(context).Go_to_orders,
+                     ),),);
            }
         });
       }else{
@@ -159,12 +159,12 @@ class CheckoutController extends CartController {
 
 
                   //incase of order success
-                  title: "Order Failed",
-                  subTitle: "Something Went Wrong, Could not place order"  ,
+                  title: S.of(context).Order_Failed,
+                  subTitle: S.of(context).Something_Went_Wrong_Could_not_place_order  ,
                   imageName: "order_failed.png",
                   popupType: PopupType.orderFailed,
-                  btnTitle: "Order Something Else",
-                  bottombtnTitle: "Go to Home",
+                  btnTitle: S.of(context).Order_Something_Else,
+                  bottombtnTitle: S.of(context).Go_to_Home,
                 )));
 
       }

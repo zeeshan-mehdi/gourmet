@@ -134,12 +134,12 @@ class _ForgetPasswordWidgetState extends StateMVC<ForgetPasswordWidget> {
                                     color: Color(0xFF8E9198),
                                     child: GlobalPopup(
                                       //for Forgot password case
-                                      title: "Your password has \n been reset",
+                                      title: "${S.of(context).Your_password_has_been_reset}",
                                       subTitle:
-                                      "You'll shortly receive an email with a \n code to setup a new password",
+                                      "${S.of(context).Youll_shortly_receive_an_email_with_a_code_to_setup_new_password}",
                                       imageName: "LockIconWithArrow.png",
                                       popupType: PopupType.forgotPassword,
-                                      btnTitle: "Done",
+                                      btnTitle: "${S.of(context).done}",
                                       bottombtnTitle: "",
 
                                       //for Enable Location case
@@ -169,7 +169,7 @@ class _ForgetPasswordWidgetState extends StateMVC<ForgetPasswordWidget> {
 
                       SizedBox(height: 8,),
                       Text(
-                        "Use Your Phone instead?",
+                        "${S.of(context).Use_Your_Phone_nstead}",
                         textAlign: TextAlign.center,
                         style: (TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16)),
                       ),

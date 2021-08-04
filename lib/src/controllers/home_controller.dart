@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:markets/src/pages/GlobalPopup.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/category.dart';
 import '../models/market.dart';
@@ -120,12 +120,12 @@ class HomeController extends ControllerMVC {
                     color: Color(0xFF8E9198),
                     child: GlobalPopup(
 
-                      title: "Enable Your Location",
+                      title: "${S.of(context).Enable_Your_Location}",
                       subTitle:
-                      "Please allow to use your location to\n show nearby resturant on the map ",
+                      "${S.of(context).Please_allow_to_use_your_location_to_show_nearby_resturant_on_the_map} ",
                       imageName: "EnablelocaitonIcon.png",
                       popupType: PopupType.enableLocation,
-                      btnTitle: "Enable Location",
+                      btnTitle: "${S.of(context).Enable_Location}",
                       bottombtnTitle: "",
                       onEnablePressed: () {
                         OverlayEntry loader = Helper.overlayLoader(
