@@ -440,14 +440,14 @@ class S {
     );
   }
 
-  String get places {
-    return Intl.message(
-      'Places',
-      name: 'places',
-      desc: '',
-      args: [],
-    );
-  }
+  // String get places {
+  //   return Intl.message(
+  //     'Places',
+  //     name: 'places',
+  //     desc: '',
+  //     args: [],
+  //   );
+  // }
 
   // String get food {
   //   return Intl.message(
