@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:markets/src/models/user.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import  'package:markets/generated/l10n.dart';
@@ -7,7 +8,7 @@ import '../models/chat.dart';
 import '../models/conversation.dart';
 import '../repository/chat_repository.dart';
 import '../repository/notification_repository.dart';
-import '../repository/user_repository.dart';
+import 'package:markets/src/repository/user_repository.dart';
 
 class ChatController extends ControllerMVC {
   Conversation conversation;
@@ -67,7 +68,7 @@ class ChatController extends ControllerMVC {
     _chatRepository.addMessage(_conversation, _chat).then((value) {
       _conversation.users.forEach((_user) {
         if (_user.id != currentUser.value.id) {
-          sendNotification(text, S.of(state.context).newMessageFrom + " " + currentUser.value.name, _user);
+          sendNotification(text, S.of(state.context).newMessageFrom + " " + currentUser.value.name, User.fromJSON(_user.toMap()));
         }
       });
     });

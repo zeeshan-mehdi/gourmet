@@ -60,7 +60,7 @@ class _CartWidgetState extends StateMVC<CartWidget> {
           elevation: 0,
           centerTitle: true,
           title: Text(
-            'My Order',
+            S.of(context).my_order,
             style: Theme.of(context).textTheme.headline3.merge(TextStyle(letterSpacing: 1.3)),
           ),
         ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:markets/src/models/route_argument.dart';
+import 'package:markets/src/pages/product.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
 class QRCodeScanner extends StatefulWidget {
@@ -32,7 +33,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
 
           print(cameraScanResult);
 
-          Navigator.of(context).pushNamed('/Details', arguments: RouteArgument(id: '0', param: cameraScanResult, heroTag: 'menu_tab'));
+          Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ProductWidget(routeArgument:RouteArgument(id: '0', param: cameraScanResult, heroTag: 'menu_tab'))));
 
 
         },),

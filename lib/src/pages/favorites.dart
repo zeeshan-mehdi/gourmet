@@ -156,7 +156,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                 ),
                                 _con.favoritesKitchen.isEmpty
                                     ? Center(
-                                  child: Text("There is no favorite items"),
+                                  child: Text(S.of(context).there_are_no_favorite_items),
                                 )
 
                                     : Offstage(
@@ -273,7 +273,7 @@ class _FavoritesWidgetState extends StateMVC<FavoritesWidget> {
                                 ),
                                 _con.favorites.isEmpty
                                     ? Center(
-                                  child: Text("There is no favourtie items"),
+                                  child: Text(S.of(context).there_are_no_favorite_items),
                                 )
 
                                     : Offstage(

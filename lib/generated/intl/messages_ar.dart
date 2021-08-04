@@ -310,6 +310,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "generalInformation" : MessageLookupByLibrary.simpleMessage("General Information"),
     "goToHome" : MessageLookupByLibrary.simpleMessage("Go To Home"),
     "auto_accept" : MessageLookupByLibrary.simpleMessage("أوامر قبول السيارات"),
+    "start_order" : MessageLookupByLibrary.simpleMessage("بدء الطلب"),
+    "view_cart" : MessageLookupByLibrary.simpleMessage("عرض عربة التسوق"),
+    "my_order" : MessageLookupByLibrary.simpleMessage("عرض عربة التسوق"),
     "hint" : MessageLookupByLibrary.simpleMessage("Hint"),
     "history" : MessageLookupByLibrary.simpleMessage("التاريخ"),
     "insertAnAdditionalInformationForThisOrder" : MessageLookupByLibrary.simpleMessage("Insert an additional information for this order"),
@@ -331,6 +334,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tapBackAgainToLeave" : MessageLookupByLibrary.simpleMessage("إضغط مرة أخرى للخروج"),
     "theConversationWithIsDismissed" : m1,
     "thisAccountNotExist" : MessageLookupByLibrary.simpleMessage("هذا الحساب غير موجود"),
+    "staff_email" : MessageLookupByLibrary.simpleMessage("البريد الإلكتروني للموظفين"),
+
+
     "thisNotificationHasMarkedAsUnRead" : MessageLookupByLibrary.simpleMessage("This notification has marked as un read"),
     "thisOrderUpdatedSuccessfully" : MessageLookupByLibrary.simpleMessage("This order updated successfully"),
     "totalEarning" : MessageLookupByLibrary.simpleMessage("مجموع الأرباح"),
@@ -388,6 +394,69 @@ class MessageLookup extends MessageLookupByLibrary {
     "latitude" : MessageLookupByLibrary.simpleMessage("خط العرض"),
     "pick_location" : MessageLookupByLibrary.simpleMessage("اختر الموقع باستخدام الخريطة"),
     "max_wait" : MessageLookupByLibrary.simpleMessage("أقصى وقت لانتظار قبول الطلب (دقائق)"),
+    "about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+    "Kitchen_Detail" : MessageLookupByLibrary.simpleMessage("تفاصيل المطبخ"),
+    "Kitchen_Media" : MessageLookupByLibrary.simpleMessage("وسائط المطبخ"),
+
+    "add_kitchen" : MessageLookupByLibrary.simpleMessage("أضف مطبخ"),
+    "My_Kitchen" :  MessageLookupByLibrary.simpleMessage("مطبخي"),
+    "Description" : MessageLookupByLibrary.simpleMessage("وصف"),
+    "Delivery_Range_in_KM" : MessageLookupByLibrary.simpleMessage('نطاق التسليم في KM'),
+    "Delivery_Fee" : MessageLookupByLibrary.simpleMessage('رسوم التوصيل'),
+    "Maximum_Orders_Per_Day" : MessageLookupByLibrary.simpleMessage('الحد الأقصى للطلبات في اليوم'),
+    "Select_Delivery_Boys" : MessageLookupByLibrary.simpleMessage('حدد تسليم الأولاد'),
+    "Select_Cuisine" : MessageLookupByLibrary.simpleMessage('حدد المطبخ'),
+    "Paid_Kitchen" : MessageLookupByLibrary.simpleMessage('مطبخ مدفوع'),
+    "Closed_Kitchen" : MessageLookupByLibrary.simpleMessage('مطبخ مغلق'),
+    "Kitchen_Available_For_Delivery" : MessageLookupByLibrary.simpleMessage('المطبخ متاح للتسليم'),
+    "Same_Day_Delivery" : MessageLookupByLibrary.simpleMessage('التوصيل في نفس اليوم'),
+    "Vegetarian_Food" : MessageLookupByLibrary.simpleMessage('طعام نباتي'),
+    "Next" : MessageLookupByLibrary.simpleMessage('التالي'),
+    'Phone': MessageLookupByLibrary.simpleMessage("هاتف"),
+    'Mobile': MessageLookupByLibrary.simpleMessage("هاتف"),
+    'Address': MessageLookupByLibrary.simpleMessage("تبوك"),
+    'street_kuwait_city': MessageLookupByLibrary.simpleMessage("شارع 31 مدينة الكويت"),
+    'Latitude': MessageLookupByLibrary.simpleMessage("خط العرض"),
+    'Longitude': MessageLookupByLibrary.simpleMessage("خط الطول"),
+    'Information': MessageLookupByLibrary.simpleMessage("معلومة"),
+    'Terms_and_Conditions': MessageLookupByLibrary.simpleMessage("الأحكام والشروط"),
+    'something_went_wrong': MessageLookupByLibrary.simpleMessage("هناك خطأ ما !!"),
+    'About_Product': MessageLookupByLibrary.simpleMessage("حول المنتج"),
+    'Product_Detail': MessageLookupByLibrary.simpleMessage("تفاصيل المنتج"),
+    'Add_Product': MessageLookupByLibrary.simpleMessage(" أضف منتج"),
+    'Scan': MessageLookupByLibrary.simpleMessage("مسح"),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+"about_kitchen" : MessageLookupByLibrary.simpleMessage("حول المطبخ"),
+
+
 
   };
 }

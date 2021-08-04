@@ -23,6 +23,10 @@
   "restaurant_achievements" : "Restaurant Achievements",
   "menu" : "Menu",
 
+   "start_order" : MessageLookupByLibrary.simpleMessage("Start Order"),
+   "view_cart" : MessageLookupByLibrary.simpleMessage("View Cart"),
+   "my_order" : MessageLookupByLibrary.simpleMessage("My Order"),
+
     "manage_restaurant" : "Manage Restaurant",
     "restaurant_orders" : "Restaurant Orders",
     "help_from_gourmet" : "Help from Gourmet",
@@ -41,6 +45,7 @@
     "there_are_no_favorite_items" : "There are no favorite items",
     "food" : "Food",
     "places" : "Places",
+    "staff_email" : "Staff Email",
 
 
 
@@ -436,18 +441,54 @@
   "forMoreDetailsPleaseChatWithOurManagers": "For more details, please chat with our managers",
   "signinToChatWithOurManagers": "Sign-In to chat with our managers",
   "typeToStartChat": "Type to start chat",
-  "makeItDefault": "Make it default",
-  "notValidAddress": "Not valid address",
-  "swipeLeftTheNotificationToDeleteOrReadUnreadIt": "Swipe left the notification to delete or read / unread it",
-  "thisNotificationHasMarkedAsUnread": "This notification has marked as unread",
-  "notificationWasRemoved": "Notification was removed",
-  "thisNotificationHasMarkedAsRead": "This notification has marked as read",
-  "free": "Free",
-  "loginAccountOrCreateNewOneForFree": "Login account or create new one for free",
-  "phoneNumber": "Phone Number",
-  "smsHasBeenSentTo": "SMS has been sent to",
-  "weAreSendingOtpToValidateYourMobileNumberHang": "We are sending OTP to validate your mobile number. Hang on!",
-  "verifyPhoneNumber": "Verify Phone Number",
+     "makeItDefault": "Make it default",
+      "notValidAddress": "Not valid address",
+      "swipeLeftTheNotificationToDeleteOrReadUnreadIt": "Swipe left the notification to delete or read / unread it",
+      "thisNotificationHasMarkedAsUnread": "This notification has marked as unread",
+      "notificationWasRemoved": "Notification was removed",
+      "thisNotificationHasMarkedAsRead": "This notification has marked as read",
+      "free": "Free",
+      "loginAccountOrCreateNewOneForFree": "Login account or create new one for free",
+      "phoneNumber": "Phone Number",
+      "smsHasBeenSentTo": "SMS has been sent to",
+      "weAreSendingOtpToValidateYourMobileNumberHang": "We are sending OTP to validate your mobile number. Hang on!",
+      "verifyPhoneNumber": "Verify Phone Number",
+      "about_kitchen" : About Kitchen",
+      "Kitchen_Detail" : "Kitchen Detail",
+      "Kitchen_Media" : "Kitchen Media",
+      "add_kitchen" :  "Add Kitchen",
+      'My_Kitchen' :'My Kitchen',
+      'Description':'Description',
+      'Delivery_Range_in_KM':'Delivery Range in KM',
+      'Delivery_Fee':'Delivery Fee',
+      'Maximum_Orders_Per_Day':'Maximum Orders Per Day',
+      'Select_Delivery_Boys':'Select Delivery Boys',
+      'Select_Cuisine':'Select Cuisine',
+      'Paid_Kitchen':'Paid Kitchen',
+      'Closed_Kitchen','Closed Kitchen',
+      'Kitchen_Available_For_Delivery':'Kitchen Available For Delivery',
+      'Same_Day_Delivery':'Same Day Delivery',
+      'Vegetarian_Food':'Vegetarian Food',
+      'Next':'Next',
+      'Phone':'Phone',
+      'Mobile':'Mobile',
+      'Address':'Address'
+      'street_kuwait_city':'31 Street kuwait city',
+      'Latitude':'Latitude',
+      'Longitude': 'Longitude',
+      'Information':'Information',
+      'Terms_and_Conditions':'Terms and Conditions'
+      'something_went_wrong' : 'something went wrong !!',
+      'About_Product':'About Product',
+       'Product_Detail':'Product Detail',
+       'Add_Product':'Add Product,
+       'Scan':'Scan'
+
+
+
+
+
+
 
 
 

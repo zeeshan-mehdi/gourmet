@@ -120,7 +120,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           //widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
           break;
         case NavPages.RestaurantOrders:
-          widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,);
+          widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,market: widget?.routeArgument?.param,);
           break;
 
         case NavPages.MyAccount:

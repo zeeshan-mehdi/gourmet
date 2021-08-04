@@ -149,6 +149,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "mi" : MessageLookupByLibrary.simpleMessage("mi"),
     "most_popular" : MessageLookupByLibrary.simpleMessage("Most Popular"),
     "my_orders" : MessageLookupByLibrary.simpleMessage("My Orders"),
+    "my_order" : MessageLookupByLibrary.simpleMessage("My Order"),
+    "start_order" : MessageLookupByLibrary.simpleMessage("Start Order"),
+    "view_cart" : MessageLookupByLibrary.simpleMessage("View Cart"),
     "near_to" : MessageLookupByLibrary.simpleMessage("Near to"),
     "near_to_your_current_location" : MessageLookupByLibrary.simpleMessage("Near to your current location"),
     "newMessageFrom" : MessageLookupByLibrary.simpleMessage("New message from"),
@@ -172,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "popular_this_month" : MessageLookupByLibrary.simpleMessage("Popular This Month"),
     "restaurant_achievements" : MessageLookupByLibrary.simpleMessage("Restaurant Achievements"),
     "menu" : MessageLookupByLibrary.simpleMessage("Menu"),
+    "staff_email" : MessageLookupByLibrary.simpleMessage("Staff Email"),
 
 
     "manage_restaurant" : MessageLookupByLibrary.simpleMessage("Manage Restaurant"),
@@ -401,6 +405,50 @@ class MessageLookup extends MessageLookupByLibrary {
     "latitude" : MessageLookupByLibrary.simpleMessage("Latitude"),
     "longitude" : MessageLookupByLibrary.simpleMessage("Longitude"),
     "pick_location" : MessageLookupByLibrary.simpleMessage("Pick Location Using Map"),
+    "about_kitchen" : MessageLookupByLibrary.simpleMessage("About Kitchen"),
+    "Kitchen_Detail" : MessageLookupByLibrary.simpleMessage("Kitchen Detail"),
+    "Kitchen_Media" : MessageLookupByLibrary.simpleMessage("Kitchen Media"),
+    "add_kitchen" : MessageLookupByLibrary.simpleMessage("Add Kitchen"),
+
+    "My_Kitchen" : MessageLookupByLibrary.simpleMessage("My Kitchen"),
+    "Description" : MessageLookupByLibrary.simpleMessage("Description"),
+    "Delivery_Range_in_KM" : MessageLookupByLibrary.simpleMessage("Delivery Range in KM"),
+    "Delivery_Fee" : MessageLookupByLibrary.simpleMessage("Delivery Fee"),
+    "Maximum_Orders_Per_Day" : MessageLookupByLibrary.simpleMessage("Maximum Orders Per Day"),
+    "Select_Delivery_Boys" : MessageLookupByLibrary.simpleMessage("Select Delivery Boys"),
+    "Select_Cuisine" : MessageLookupByLibrary.simpleMessage("Select Cuisine"),
+    "Paid_Kitchen" : MessageLookupByLibrary.simpleMessage("Paid Kitchen"),
+    "Closed_Kitchen" : MessageLookupByLibrary.simpleMessage("Closed Kitchen"),
+    "Kitchen_Available_For_Delivery" : MessageLookupByLibrary.simpleMessage("Kitchen Available For Delivery"),
+    "Same_Day_Delivery" : MessageLookupByLibrary.simpleMessage("Same Day Delivery"),
+    "Vegetarian_Food" : MessageLookupByLibrary.simpleMessage("Vegetarian Food"),
+    "Next" : MessageLookupByLibrary.simpleMessage("Next"),
+    'Phone': MessageLookupByLibrary.simpleMessage("Phone") ,
+    'Mobile': MessageLookupByLibrary.simpleMessage("Mobile"),
+    'Address': MessageLookupByLibrary.simpleMessage("Address"),
+    'street_kuwait_city': MessageLookupByLibrary.simpleMessage("31st street kuwait city"),
+    'Latitude': MessageLookupByLibrary.simpleMessage("Latitude"),
+    'Longitude': MessageLookupByLibrary.simpleMessage("Longitude"),
+    'Information': MessageLookupByLibrary.simpleMessage("Information"),
+    'Terms_and_Conditions': MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
+    'something_went_wrong': MessageLookupByLibrary.simpleMessage("something went wrong"),
+    'About_Product': MessageLookupByLibrary.simpleMessage("About Product"),
+    'Product_Detail': MessageLookupByLibrary.simpleMessage("Product Detail"),
+    'Add_Product': MessageLookupByLibrary.simpleMessage("Add Product"),
+'Scan': MessageLookupByLibrary.simpleMessage("Scan"),
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   };

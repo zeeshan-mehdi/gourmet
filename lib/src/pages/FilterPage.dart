@@ -102,13 +102,15 @@ class _FilterPageState extends StateMVC<FilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${S.of(context).filter}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.white,
+        title: Text("${S.of(context).filter}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.orange)),
         automaticallyImplyLeading: false,
         leading:
         InkWell(
           child:Container(
-            margin: EdgeInsets.only(top: 18, left: 8),
-            child:  Text("${S.of(context).reset}",style: TextStyle(fontSize: 17,)),
+            //color: Colors.black,
+            margin: EdgeInsets.only(top: 18, left: 8,right: 8),
+            child:  Text("${S.of(context).reset}",style: TextStyle(fontSize: 17,color: Colors.orange)),
           ),
           onTap: () {
             Navigator.of(context).pop();
@@ -117,7 +119,8 @@ class _FilterPageState extends StateMVC<FilterPage> {
         actions: <Widget>[
           InkWell(
             child:  Container(
-              margin: EdgeInsets.only(top: 18, right: 8),
+              //color: Colors.black,
+              margin: EdgeInsets.only(top: 18, right: 8,left: 8),
               child:  Text("${S.of(context).done}",style: TextStyle(fontSize: 17,color: Colors.orange)),
             ),
             onTap: () async {
@@ -132,16 +135,28 @@ class _FilterPageState extends StateMVC<FilterPage> {
               // print(selectedCuisine.map((e) => e.name));
 
               if (selectedCuisine.length != 0){
-                print("hello");
-                print(_con.markets.map((e) => e.cuisine));
-                print(_con.markets.where((element) => element.cuisine == selectedCuisine.map((e) => e.name).last));
+                // print("hello");
+                // print("selected cuisine $selectedCuisine");
+                // print(_con.markets.map((e) => e.cuisine));
+                // print(_con.markets.where((element) => element.cuisine == selectedCuisine.map((e) => e.name).last));
                 //Market mark = _con.markets.firstWhere((element) =>
                //  element == selectedCuisine.map((e) => e.name),orElse: () {
                //    return null;
                //  });
                // / print(mark.name);
                //  print(mark.id);
-                filterItems.addAll(_con.markets.where((element) => element.cuisine ==selectedCuisine.map((e) => e.name).first));
+                filterItems.addAll(_con.markets.where((element) {
+                      print(element.cuisine.trim().toLowerCase());
+                      print(selectedCuisine.last.name.trim().toLowerCase());
+
+                     return selectedCuisine.where((e) => e.name.trim().toLowerCase()==element.cuisine.trim().toLowerCase()).length>0?true:false;
+
+                    }));
+
+                print('cusine result');
+
+                print(filterItems);
+
               }else{}
               if(FilterPage.sortValues.length != 0){
 
@@ -159,9 +174,9 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 element == "Nearest",orElse: () {
                   return null;
                 }) == "Nearest"){
-                  print(_con.markets.map((e) => e.distance));
-                  filterItems.addAll(_con.markets.where((element) => element.distance >= 0.0));
-                  print("sort Value Nearest");
+                  // print(_con.markets.map((e) => e.distance));
+                  // filterItems.addAll(_con.markets.where((element) => element.distance >= 0.0));
+                  // print("sort Value Nearest");
                 }else{}
 
                 if (FilterPage.sortValues.firstWhere((element) =>
@@ -188,7 +203,8 @@ class _FilterPageState extends StateMVC<FilterPage> {
                   print("sort Value Most Popular");
                 }else{}
                 print("sort result is");
-                filterItems.addAll(_con.markets.where((element) => element.cuisine == selectedCuisine.map((e) => e.name)));
+                var elements = filterItems.where((element) => element.cuisine == selectedCuisine.map((e) => e.name));
+                filterItems.addAll(elements);
               }else {}
               if(FilterPage.filterValues.length != 0){
                 if (FilterPage.filterValues.firstWhere((element) =>
@@ -196,8 +212,17 @@ class _FilterPageState extends StateMVC<FilterPage> {
                   return null;
                 }) == "Order Taking"){
                   print("filter value is Order Taking");
-                  print(_con.markets.map((element) => element.maximumOrdersPerDay));
-                  filterItems.addAll(_con.markets.where((element) => element.maximumOrdersPerDay > 0));
+                 // print(_con.markets.map((element) => element.maximumOrdersPerDay));
+                  var elements = filterItems.where((element) => element.maximumOrdersPerDay > 0);
+
+                //  print('element adding $elements');
+
+
+                 // print('filtered items $filterItems');
+
+                  filterItems= [...filterItems,...elements];
+
+
                 }else{}
 
                 if (FilterPage.filterValues.firstWhere((element) =>
@@ -205,15 +230,15 @@ class _FilterPageState extends StateMVC<FilterPage> {
                   return null;
                 }) == "Same Day Delivery"){
                   print("sort Value Same Day Delivery");
-                  print(_con.markets.map((element) => element.sameDayDelivery));
-                  filterItems.addAll(_con.markets.where((element) => element.sameDayDelivery == true));
+                  print(filterItems.map((element) => element.sameDayDelivery));
+                  filterItems.addAll(filterItems.where((element) => element.sameDayDelivery == true));
                 }else{}
 
                 if (FilterPage.filterValues.firstWhere((element) =>
                 element == "Vegetarian Food",orElse: () {
                   return null;
                 }) == "Vegetarian Food"){
-                  filterItems.addAll(_con.markets.where((element) => element.vegetarianFood == true));
+                  filterItems.addAll(filterItems.where((element) => element.vegetarianFood == true));
                   print("sort Value Vegetarian Food");
                 }else{}
               }else{}
