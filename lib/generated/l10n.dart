@@ -3909,6 +3909,297 @@ class S {
   }
 
 
+  String get about_kitchen {
+    return Intl.message(
+      'About Kitchen',
+      name: 'about_kitchen',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Kitchen_Detail {
+    return Intl.message(
+      'Kitchen Detail',
+      name: 'Kitchen_Detail',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Kitchen_Media {
+    return Intl.message(
+      'Kitchen Media',
+      name: 'Kitchen_Media',
+      desc: '',
+      args: [],
+    );
+  }
+  String get add_kitchen {
+    return Intl.message(
+      'Add Kitchen',
+      name: 'add_kitchen',
+      desc: '',
+      args: [],
+    );
+  }
+  String get My_Kitchen {
+    return Intl.message(
+      'My Kitchen',
+      name: 'My_Kitchen',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Description {
+    return Intl.message(
+      'Description',
+      name: 'Description',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Delivery_Range_in_KM {
+    return Intl.message(
+      'Delivery Range in KM',
+      name: 'Delivery_Range_in_KM',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Delivery_Fee {
+    return Intl.message(
+      'Delivery Fee',
+      name: 'Delivery_Fee',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Maximum_Orders_Per_Day {
+    return Intl.message(
+      'Maximum Orders Per Day',
+      name: 'Maximum_Orders_Per_Day',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Select_Delivery_Boys {
+
+    return Intl.message(
+      'Select Delivery Boys',
+      name: 'Select_Delivery_Boys',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Select_Cuisine {
+
+    return Intl.message(
+      'Select Cuisine',
+      name: 'Select_Cuisine',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Paid_Kitchen {
+
+    return Intl.message(
+      'Paid Kitchen',
+      name: 'Paid_Kitchen',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Closed_Kitchen {
+
+    return Intl.message(
+      'Closed Kitchen',
+      name: 'Closed_Kitchen',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Kitchen_Available_For_Delivery {
+
+    return Intl.message(
+      'Kitchen Available For Delivery',
+      name: 'Kitchen_Available_For_Delivery',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Same_Day_Delivery {
+    return Intl.message(
+      'Same Day Delivery',
+      name: 'Same_Day_Delivery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get Vegetarian_Food {
+    return Intl.message(
+      'Vegetarian Food',
+      name: 'Vegetarian_Food',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Next {
+    return Intl.message(
+      'Next',
+      name: 'Next',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Phone {
+    return Intl.message(
+      'Phone',
+      name: 'Phone',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Mobile {
+    return Intl.message(
+      'Mobile',
+      name: 'Mobile',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Address {
+    return Intl.message(
+      'Address',
+      name: 'Address',
+      desc: '',
+      args: [],
+    );
+  }
+  String get street_kuwait_city {
+    return Intl.message(
+      'street kuwait city',
+      name: 'street_kuwait_city',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Latitude {
+    return Intl.message(
+      'Latitude',
+      name: 'Latitude',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Longitude {
+    return Intl.message(
+      'Latitude',
+      name: 'Latitude',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get Information {
+    return Intl.message(
+      'Information',
+      name: 'Information',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Terms_and_Conditions {
+    return Intl.message(
+      'Terms_and_Conditions',
+      name: 'Terms and Conditions',
+      desc: '',
+      args: [],
+    );
+  }
+  String get something_went_wrong {
+    return Intl.message(
+      'something went wrong',
+      name: 'something_went_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+  String get About_Product {
+    return Intl.message(
+      'About Product',
+      name: 'About_Product',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Product_Detail {
+    return Intl.message(
+      'Product Detail',
+      name: 'Product_Detail',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Add_Product {
+    return Intl.message(
+      'Add Product',
+      name: 'Add_Product',
+      desc: '',
+      args: [],
+    );
+  }String get Scan {
+    return Intl.message(
+      'Scan',
+      name: 'Scan',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Start order`
+  String get start_order {
+    return Intl.message(
+      'Start Order',
+      name: 'start_oder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View cart`
+  String get view_cart {
+    return Intl.message(
+      'View Cart',
+      name: 'view_cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `my order`
+  String get my_order {
+    return Intl.message(
+      'My Order',
+      name: 'my_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get staff_email {
+    return Intl.message(
+      'Staff Email',
+      name: 'staff_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+
 
 
 
