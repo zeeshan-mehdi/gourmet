@@ -346,6 +346,9 @@ class _SignUpWidgetState extends StateMVC<SignUpWidget> {
                             color: Theme.of(context).accentColor,
                             onPressed: () {
                               if (_con.loginFormKey.currentState.validate()) {
+                                ScaffoldMessenger.of(_con.scaffoldKey.currentContext).showSnackBar(SnackBar(
+                                  content: Text("sending sms to ${_con.user.phone})"),
+                                ));
                                 _con.loginFormKey.currentState.save();
                                 var bottomSheetController = _con
                                     .scaffoldKey.currentState
