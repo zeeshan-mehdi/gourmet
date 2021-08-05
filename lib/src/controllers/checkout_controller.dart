@@ -99,73 +99,73 @@ class CheckoutController extends CartController {
 
              //Navigator.of(scaffoldKey?.currentContext).pushNamed('/Pages', arguments: 4);
            }else{
-             showDialog(
-                 context: scaffoldKey.currentState.context,
-                 builder: (_) => Container(
-                     color: Color(0xFF8E9198),
-                     child: GlobalPopup(
-                       //for Forgot password case
-                       // title: "Your password has \n been reset",
-                       // subTitle:
-                       // "You'll shortly receive an email with a \n code to setup a new password",
-                       // imageName: "LockIconWithArrow.png",
-                       // popupType: PopupType.forgotPassword,
-                       // btnTitle: "Done",
-                       // bottombtnTitle: "",
-
-                       //for Enable Location case
-                       // title: "Enable Your Location",
-                       // subTitle:
-                       // "Please allow to use your location to\n show nearby resturant on the map ",
-                       // imageName: "EnablelocaitonIcon.png",
-                       // popupType: PopupType.enableLocation,
-                       // btnTitle: "Enable Location",
-                       // bottombtnTitle: "",
-
-
-                       //incase of order success
-                       title: S.of(context).Your_order_has_been_Placed,
-                       subTitle:  S.of(context).You_can_track_the_delivery_in_the_Orders_section ,
-                       imageName: "OrderSuceccfullIcon.png",
-                       popupType: PopupType.orderSucessfull,
-                       btnTitle: S.of(context).Check_on_Order,
-                       bottombtnTitle: S.of(context).Go_to_orders,
-                     ),),);
+             // showDialog(
+             //     context: scaffoldKey.currentState.context,
+             //     builder: (_) => Container(
+             //         color: Color(0xFF8E9198),
+             //         child: GlobalPopup(
+             //           //for Forgot password case
+             //           // title: "Your password has \n been reset",
+             //           // subTitle:
+             //           // "You'll shortly receive an email with a \n code to setup a new password",
+             //           // imageName: "LockIconWithArrow.png",
+             //           // popupType: PopupType.forgotPassword,
+             //           // btnTitle: "Done",
+             //           // bottombtnTitle: "",
+             //
+             //           //for Enable Location case
+             //           // title: "Enable Your Location",
+             //           // subTitle:
+             //           // "Please allow to use your location to\n show nearby resturant on the map ",
+             //           // imageName: "EnablelocaitonIcon.png",
+             //           // popupType: PopupType.enableLocation,
+             //           // btnTitle: "Enable Location",
+             //           // bottombtnTitle: "",
+             //
+             //
+             //           //incase of order success
+             //           title: S.of(context).Your_order_has_been_Placed,
+             //           subTitle:  S.of(context).You_can_track_the_delivery_in_the_Orders_section ,
+             //           imageName: "OrderSuceccfullIcon.png",
+             //           popupType: PopupType.orderSucessfull,
+             //           btnTitle: S.of(context).Check_on_Order,
+             //           bottombtnTitle: S.of(context).Go_to_orders,
+             //         ),),);
            }
         });
       }else{
-        showDialog(
-            context: scaffoldKey.currentState.context,
-            builder: (_) => Container(
-                color: Color(0xFF8E9198),
-                child: GlobalPopup(
-                  //for Forgot password case
-                  // title: "Your password has \n been reset",
-                  // subTitle:
-                  // "You'll shortly receive an email with a \n code to setup a new password",
-                  // imageName: "LockIconWithArrow.png",
-                  // popupType: PopupType.forgotPassword,
-                  // btnTitle: "Done",
-                  // bottombtnTitle: "",
-
-                  //for Enable Location case
-                  // title: "Enable Your Location",
-                  // subTitle:
-                  // "Please allow to use your location to\n show nearby resturant on the map ",
-                  // imageName: "EnablelocaitonIcon.png",
-                  // popupType: PopupType.enableLocation,
-                  // btnTitle: "Enable Location",
-                  // bottombtnTitle: "",
-
-
-                  //incase of order success
-                  title: S.of(context).Order_Failed,
-                  subTitle: S.of(context).Something_Went_Wrong_Could_not_place_order  ,
-                  imageName: "order_failed.png",
-                  popupType: PopupType.orderFailed,
-                  btnTitle: S.of(context).Order_Something_Else,
-                  bottombtnTitle: S.of(context).Go_to_Home,
-                )));
+        // showDialog(
+        //     context: scaffoldKey.currentState.context,
+        //     builder: (_) => Container(
+        //         color: Color(0xFF8E9198),
+        //         child: GlobalPopup(
+        //           //for Forgot password case
+        //           // title: "Your password has \n been reset",
+        //           // subTitle:
+        //           // "You'll shortly receive an email with a \n code to setup a new password",
+        //           // imageName: "LockIconWithArrow.png",
+        //           // popupType: PopupType.forgotPassword,
+        //           // btnTitle: "Done",
+        //           // bottombtnTitle: "",
+        //
+        //           //for Enable Location case
+        //           // title: "Enable Your Location",
+        //           // subTitle:
+        //           // "Please allow to use your location to\n show nearby resturant on the map ",
+        //           // imageName: "EnablelocaitonIcon.png",
+        //           // popupType: PopupType.enableLocation,
+        //           // btnTitle: "Enable Location",
+        //           // bottombtnTitle: "",
+        //
+        //
+        //           //incase of order success
+        //           title: S.of(context).Order_Failed,
+        //           subTitle: S.of(context).Something_Went_Wrong_Could_not_place_order  ,
+        //           imageName: "order_failed.png",
+        //           popupType: PopupType.orderFailed,
+        //           btnTitle: S.of(context).Order_Something_Else,
+        //           bottombtnTitle: S.of(context).Go_to_Home,
+        //         )));
 
       }
     });

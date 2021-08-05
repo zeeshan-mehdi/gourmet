@@ -1,4 +1,5 @@
 
+import 'package:markets/restaurent_app/src/pages/HomeScreen.dart';
 import 'package:markets/restaurent_app/src/pages/markets.dart';
 import 'package:markets/restaurent_app/src/pages/notifications.dart';
 import 'package:markets/restaurent_app/src/pages/order_edit.dart';
@@ -89,6 +90,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MenuWidget(routeArgument: args as RouteArgument));
       case '/Product':
         return MaterialPageRoute(builder: (_) => ProductWidget(routeArgument: args as RouteArgument));
+      case '/HomeScreen':
+        return MaterialPageRoute(builder: (_) => HomeScreen(routeArgument: args as RouteArgument));
+      case '/menuGrid':
+        return MaterialPageRoute(builder: (_) => HomeScreen(routeArgument: args as RouteArgument));
+      case '/GridMenu':
+        return MaterialPageRoute(builder: (_) => HomeScreen(routeArgument: args as RouteArgument));
       case '/Category':
         return MaterialPageRoute(builder: (_) => CategoryWidget(routeArgument: args as RouteArgument));
       case '/Cart':
