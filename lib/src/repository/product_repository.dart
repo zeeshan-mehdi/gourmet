@@ -134,7 +134,12 @@ Future<Stream<Favorite>> isFavoriteProduct(String productId) async {
 
     print(url);
 
-    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getObjectData(data)).map((data) => Favorite.fromJSON(data));
+    return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getObjectData(data)).map((data)
+    {
+      print('favrt data');
+      print(data);
+      return Favorite.fromJSON(data);
+    });
   } catch (e) {
     print(CustomTrace(StackTrace.current, message: url).toString());
     return new Stream.value(new Favorite.fromJSON({}));

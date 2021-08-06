@@ -1,4 +1,6 @@
+import 'package:markets/driver_app/src/controllers/favorite_controller.dart';
 import 'package:markets/src/helpers/custom_trace.dart';
+import 'package:markets/src/models/favorite.dart';
 
 import '../models/category.dart';
 import '../models/market.dart';
@@ -24,6 +26,7 @@ class Product {
   String packageItemsCount;
   bool featured;
   bool deliverable;
+  Favorite isFavourite;
   Market market;
   Category category;
   List<Option> options;
@@ -53,6 +56,7 @@ class Product {
       packageItemsCount = jsonMap['package_items_count'].toString();
       featured = jsonMap['featured'] ?? false;
       deliverable = jsonMap['deliverable'] ?? false;
+      isFavourite = jsonMap['isFavourite'] != null ?  Favorite.fromJSON(jsonMap['isFavourite']) : Favorite.fromJSON({});
       market = jsonMap['market'] != null ? Market.fromJSON(jsonMap['market']) : Market.fromJSON({});
       category = jsonMap['category'] != null ? Category.fromJSON(jsonMap['category']) : Category.fromJSON({});
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
@@ -79,6 +83,7 @@ class Product {
       packageItemsCount = '';
       featured = false;
       deliverable = false;
+      isFavourite= Favorite.fromJSON({});
       market = Market.fromJSON({});
       category = Category.fromJSON({});
       image = new Media();

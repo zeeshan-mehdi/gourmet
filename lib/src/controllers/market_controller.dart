@@ -75,11 +75,34 @@ class MarketController extends ControllerMVC {
       setState(() => reviews.add(_review));
     }, onError: (a) { print(CustomTrace(StackTrace.current, message: a.toString()).toString());}, onDone: () {});
   }
-
+  Future<bool> listenForFavorite({String productId}) async {
+    final Stream<Favorite> stream = await isFavoriteProduct(productId);
+    stream.listen((Favorite _favorite) {
+    if(_favorite.toString() != '{}'){
+      return true;
+    }else{
+      return false;
+    }
+    }, onError: (a) {
+      print(CustomTrace(StackTrace.current, message: a.toString()).toString());
+    });
+  }
   void listenForProducts(String idMarket, {List<String> categoriesId}) async {
     final Stream<Product> stream = await getProductsOfMarket(idMarket, categories: categoriesId);
-    stream.listen((Product _product) {
-      setState(() => products.add(_product));
+    stream.listen((Product _product) async{
+      final Stream<Favorite> stream = await isFavoriteProduct(_product.id);
+      stream.listen((Favorite _favorite) {
+        if(_favorite.toString() != '{}'){
+          _product.isFavourite = _favorite;
+          setState(() => products.add(_product));
+        }else{
+          setState(() => products.add(_product));
+        }
+      }, onError: (a) {
+        print(CustomTrace(StackTrace.current, message: a.toString()).toString());
+      });
+
+
     }, onError: (a) {
       print(CustomTrace(StackTrace.current, message: a.toString()).toString());
     }, onDone: () {
@@ -166,6 +189,8 @@ class MarketController extends ControllerMVC {
 
 
   void addToFavoriteKitchens(String market) async {
+    print('market');
+    print(market);
     var _favorite = new Favorite();
     // print(product.id);
     // _favorite.product = product;
