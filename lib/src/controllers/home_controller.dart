@@ -64,6 +64,9 @@ class HomeController extends ControllerMVC {
         setState(() => topMarkets.add(_market));
       }
     }, onError: (a) {}, onDone: () {
+      print('market listening done ');
+
+      requestForCurrentLocation(scaffoldKey.currentState?.context);
 
     });
   }
@@ -91,7 +94,7 @@ class HomeController extends ControllerMVC {
     }, onDone: () {});
   }
 
-  void requestForCurrentLocation() async{
+  void requestForCurrentLocation(context) async{
 
     //if(deliveryAddress.value.latitude==null || deliveryAddress.value.longitude==null||deliveryAddress.value.latitude=="" || deliveryAddress.value.longitude==""){
 
@@ -113,35 +116,35 @@ class HomeController extends ControllerMVC {
         });
         // Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
       } else {
-        // showDialog(
-        //     context: scaffoldKey.currentState.context,
-        //     builder: (_) =>
-        //         Container(
-        //             color: Color(0xFF8E9198),
-        //             child: GlobalPopup(
-        //
-        //               title: "${S.of(context).Enable_Your_Location}",
-        //               subTitle:
-        //               "${S.of(context).Please_allow_to_use_your_location_to_show_nearby_resturant_on_the_map} ",
-        //               imageName: "EnablelocaitonIcon.png",
-        //               popupType: PopupType.enableLocation,
-        //               btnTitle: "${S.of(context).Enable_Location}",
-        //               bottombtnTitle: "",
-        //               onEnablePressed: () {
-        //                 OverlayEntry loader = Helper.overlayLoader(
-        //                     state.context);
-        //                 Overlay.of(state.context).insert(loader);
-        //                 setCurrentLocation().then((_address) async {
-        //                   deliveryAddress.value = _address;
-        //                   await refreshHome();
-        //                   loader.remove();
-        //                   once = false;
-        //                 }).catchError((e) {
-        //                   loader.remove();
-        //                 });
-        //               },
-        //
-        //             )));
+        showDialog(
+            context: scaffoldKey.currentState.context,
+            builder: (_) =>
+                Container(
+                    color: Color(0xFF8E9198),
+                    child: GlobalPopup(
+
+                      title: "${S.of(context).Enable_Your_Location}",
+                      subTitle:
+                      "${S.of(context).Please_allow_to_use_your_location_to_show_nearby_resturant_on_the_map} ",
+                      imageName: "EnablelocaitonIcon.png",
+                      popupType: PopupType.enableLocation,
+                      btnTitle: "${S.of(context).Enable_Location}",
+                      bottombtnTitle: "",
+                      onEnablePressed: () {
+                        OverlayEntry loader = Helper.overlayLoader(
+                            state.context);
+                        Overlay.of(state.context).insert(loader);
+                        setCurrentLocation().then((_address) async {
+                          deliveryAddress.value = _address;
+                          await refreshHome();
+                          loader.remove();
+                          once = false;
+                        }).catchError((e) {
+                          loader.remove();
+                        });
+                      },
+
+                    )));
       }
     }
 

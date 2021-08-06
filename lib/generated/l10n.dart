@@ -1617,6 +1617,71 @@ class S {
       args: [],
     );
   }
+//    Animal(id: 1, name: "Desert"),
+//     Animal(id: 2, name: "Asian"),
+//     Animal(id: 3, name: "Arabic"),
+//     Animal(id: 4, name: "Pizza"),
+//     Animal(id: 5, name: "Kuwaiti"),
+//     Animal(id: 6, name: "Fast Food"),
+//     Animal(id: 7, name: "European"),
+
+  String get desert {
+    return Intl.message(
+      'Dessert',
+      name: 'desert',
+      desc: '',
+      args: [],
+    );
+  }
+  String get asian {
+    return Intl.message(
+      'Asian',
+      name: 'asian',
+      desc: '',
+      args: [],
+    );
+  }
+  String get arabic {
+    return Intl.message(
+      'Arabic',
+      name: 'arabic',
+      desc: '',
+      args: [],
+    );
+  }
+  String get pizza {
+    return Intl.message(
+      'Pizza',
+      name: 'pizza',
+      desc: '',
+      args: [],
+    );
+  }
+  String get kuwaiti {
+    return Intl.message(
+      'Kuwaiti',
+      name: 'kuwaiti',
+      desc: '',
+      args: [],
+    );
+  }
+  String get fast_food {
+    return Intl.message(
+      'Fast Food',
+      name: 'fast_food',
+      desc: '',
+      args: [],
+    );
+  }
+  String get european {
+    return Intl.message(
+      'European',
+      name: 'european',
+      desc: '',
+      args: [],
+    );
+  }
+
 
   /// `Addresses refreshed successfuly`
   String get addresses_refreshed_successfuly {

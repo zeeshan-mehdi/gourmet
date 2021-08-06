@@ -67,14 +67,14 @@ class _ProfileSettingsDialogState extends State<ProfileSettingsDialog> {
                           onSaved: (input) => widget.user.phone = input,
                           onChanged: (input) => {widget.user.verifiedPhone = false, print(widget.user.verifiedPhone)},
                         ),
-                        new TextFormField(
-                          style: TextStyle(color: Theme.of(context).hintColor),
-                          keyboardType: TextInputType.text,
-                          decoration: getInputDecoration(hintText: S.of(context).your_address, labelText: S.of(context).address),
-                          initialValue: widget.user.address,
-                          validator: (input) => input.trim().length < 3 ? S.of(context).not_a_valid_address : null,
-                          onSaved: (input) => widget.user.address = input,
-                        ),
+                        // new TextFormField(
+                        //   style: TextStyle(color: Theme.of(context).hintColor),
+                        //   keyboardType: TextInputType.text,
+                        //   decoration: getInputDecoration(hintText: S.of(context).your_address, labelText: S.of(context).address),
+                        //   initialValue: widget.user.address,
+                        //   validator: (input) => input.trim().length < 3 ? S.of(context).not_a_valid_address : null,
+                        //   onSaved: (input) => widget.user.address = input,
+                        // ),
                         new TextFormField(
                           style: TextStyle(color: Theme.of(context).hintColor),
                           keyboardType: TextInputType.text,

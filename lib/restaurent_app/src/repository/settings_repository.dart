@@ -63,7 +63,13 @@ Future<dynamic> setCurrentLocation() async {
   location.requestService().then((value) async {
     location.getLocation().then((_locationData) async {
       String _addressName = '';
+
       _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
+
+      print('i am printing out address ');
+      print(_address.toMap());
+
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('my_address', json.encode(_address.toMap()));
       whenDone.complete(_address);

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../generated/l10n.dart';
@@ -49,9 +50,8 @@ class _MobileVerificationBottomSheetWidgetState
         (AuthCredential auth) { };
     final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {
       print('code sending falied $e');
+      Fluttertoast.showToast(msg: 'code sending failed $e');
     };
-
-
 
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.user.phone,
@@ -88,11 +88,25 @@ class _MobileVerificationBottomSheetWidgetState
             padding: const EdgeInsets.only(top: 25),
             child: ListView(
               padding:
-                  EdgeInsets.only(top: 40, bottom: 15, left: 20, right: 20),
+                  EdgeInsets.only(top: 20, bottom: 15, left: 12, right: 16),
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 70),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.close,
+                        ),
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          //fToast.removeCustomToast();
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 30),
                     Text(
                       "Phone Verification",
                       style: TextStyle(
@@ -288,10 +302,9 @@ class _MobileVerificationBottomSheetWidgetState
                 Center(
                   child: InkWell(
                     onTap: () async {
-
-
-                      isCodeResend = true;
-                      confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
+                      verifyPhone();
+                      // isCodeResend = true;
+                      // confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
 
 
 

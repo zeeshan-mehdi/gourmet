@@ -173,20 +173,20 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                               style: TextStyle(color: Theme.of(context).focusColor),
                             ),
                           ),
-                          ListTile(
-                            onTap: () {},
-                            dense: true,
-                            title: Text(
-                              S.of(context).address,
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                            trailing: Text(
-                              Helper.limitString(currentUser.value.address ?? S.of(context).unknown),
-                              overflow: TextOverflow.fade,
-                              softWrap: false,
-                              style: TextStyle(color: Theme.of(context).focusColor),
-                            ),
-                          ),
+                          // ListTile(
+                          //   onTap: () {},
+                          //   dense: true,
+                          //   title: Text(
+                          //     S.of(context).address,
+                          //     style: Theme.of(context).textTheme.bodyText2,
+                          //   ),
+                          //   trailing: Text(
+                          //     Helper.limitString(currentUser.value.address ?? S.of(context).unknown),
+                          //     overflow: TextOverflow.fade,
+                          //     softWrap: false,
+                          //     style: TextStyle(color: Theme.of(context).focusColor),
+                          //   ),
+                          // ),
                           ListTile(
                             onTap: () {},
                             dense: true,

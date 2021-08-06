@@ -209,6 +209,7 @@ class SearchController extends ControllerMVC {
 
   void saveSearch(String search) {
     print(search);
+
     refreshSearch(search);
     //setRecentSearch(search);
   }

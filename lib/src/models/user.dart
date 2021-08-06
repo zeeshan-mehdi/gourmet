@@ -56,7 +56,9 @@ class User {
         address = "";
       }
       try {
-        isDriver = jsonMap['is_driver']==1?true:false;
+        isDriver = jsonMap['is_driver'] is String && jsonMap['is_driver']==1?true: jsonMap['is_driver'] is String ? false: jsonMap['is_driver'];
+        print('is_driver');
+        print(isDriver);
         bio = jsonMap['custom_fields']['bio']['view'];
         memebership = jsonMap['membership'];
         trialEnds = jsonMap['trial_ends_at'];
@@ -65,7 +67,6 @@ class User {
       } catch (e) {
         bio = "";
       }
-
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
     } catch (e) {
       print(e);
@@ -100,6 +101,7 @@ class User {
     map["email"] = email;
     map["name"] = name;
     map["thumb"] = image?.thumb;
+    map["is_driver"] = isDriver;
     map["device_token"] = deviceToken;
     return map;
   }

@@ -12,6 +12,7 @@ import '../models/filter.dart';
 import '../models/market.dart';
 import '../models/review.dart';
 import '../repository/user_repository.dart';
+import '../repository/settings_repository.dart' as settingRepo;
 
 Future<Stream<Market>> getNearMarkets(Address myLocation, Address areaLocation) async {
   Uri uri = Helper.getUri('api/markets');
@@ -71,9 +72,26 @@ Future<Stream<Market>> getPopularMarkets(Address myLocation) async {
 Future<Stream<Market>> searchMarkets(String search, Address address) async {
   Uri uri = Helper.getUri('api/markets');
   Map<String, dynamic> _queryParams = {};
-  _queryParams['search'] = 'name:$search;description:$search';
-  _queryParams['searchFields'] = 'name:like;description:like';
-  _queryParams['limit'] = '5';
+  print("hello 3");
+  String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
+  
+  if(langCode =='en')
+  {
+    print("language is $langCode");
+    //go with market.name
+    _queryParams['search'] = 'name:$search;description:$search';
+    _queryParams['searchFields'] = 'name:like;description:like';
+    _queryParams['limit'] = '5';
+
+  }else{
+    print("language is $langCode");
+    _queryParams['search'] = 'name_ar:$search;description_ar:$search';
+    _queryParams['searchFields'] = 'name_ar:like;description_ar:like';
+    _queryParams['limit'] = '5';
+
+    //go with market.nameAr
+  }
+
   if (!address.isUnknown()) {
     _queryParams['myLon'] = address.longitude.toString();
     _queryParams['myLat'] = address.latitude.toString();

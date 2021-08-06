@@ -1,12 +1,23 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:markets/src/pages/pages.dart';
+import 'package:markets/src/repository/user_repository.dart';
+
+import '../models/user.dart' as userModel;
+import '../repository/user_repository.dart' as userRepo;
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:markets/src/elements/BlockButtonWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../generated/l10n.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../elements/BlockButtonWidget.dart';
 import '../../generated/l10n.dart';
+import 'package:http/http.dart' as http;
 
 import '../helpers/app_config.dart' as config;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,6 +54,7 @@ class LoginOption extends StatefulWidget {
 
 class _LoginOptionState extends State<LoginOption> {
   // LanguagesList languagesList;
+  ValueNotifier<userModel.User> currentUser = new ValueNotifier(userModel.User());
 
   @override
   void initState() {
@@ -133,7 +145,16 @@ class _LoginOptionState extends State<LoginOption> {
                       elevation: 0,
                       onPressed: () async {
                         print("Sign in with Apple");
-                          // setState(() {
+                        final credential = await SignInWithApple.getAppleIDCredential(
+                          scopes: [
+                            AppleIDAuthorizationScopes.email,
+                            AppleIDAuthorizationScopes.fullName,
+                          ],
+                        );
+
+                        print(credential);
+
+                        // setState(() {
                           //   isLoading = true;
                           // });
 
@@ -180,7 +201,9 @@ class _LoginOptionState extends State<LoginOption> {
 
                             FirebaseService service = new FirebaseService();
                             try {
-                              await service.signInwithGoogle();
+                              //await service.signInwithGoogle();
+                              await service.signInWithGoogle(context);
+
                               // Navigator.pushNamedAndRemoveUntil(context, Constants.homeNavigate, (route) => false);
                             } catch(e){
                               if(e is FirebaseAuthException){
@@ -221,59 +244,213 @@ class _LoginOptionState extends State<LoginOption> {
 }
 class FirebaseService {
 
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   GlobalKey<ScaffoldState> scaffoldKey;
-  model.User user = new model.User();
+  //model.User user = new model.User();
 
-  Future<String> signInwithGoogle() async {
-    try {
-      final GoogleSignInAccount googleSignInAccount =
-      await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-      await _auth.signInWithCredential(credential);
-      repository.login(user).then((value) {
-        if (value != null && value.apiToken != null) {
-          Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
-        } else {
-          print("wrong_email_or_password");
-          // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-          //   content: Text(S.of(state.context).wrong_email_or_password),
-          // ));
-        }
+  // Future<String> signInwithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount googleSignInAccount =
+  //     await _googleSignIn.signIn();
+  //     final GoogleSignInAuthentication googleSignInAuthentication =
+  //     await googleSignInAccount.authentication;
+  //     final AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleSignInAuthentication.accessToken,
+  //       idToken: googleSignInAuthentication.idToken,
+  //     );
+  //     await _auth.signInWithCredential(credential);
+  //     print("aadd");
+  //     print(credential.token);
+  //     print(credential.providerId);
+  //     print(credential.signInMethod);
+  //     // repository.login(user).then((value) {
+  //     //   if (value != null && value.apiToken != null) {
+  //     //     Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+  //     //   } else {
+  //     //     print("wrong_email_or_password");
+  //     //     // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+  //     //     //   content: Text(S.of(state.context).wrong_email_or_password),
+  //     //     // ));
+  //     //   }
+  //     //
+  //     // }
+  //     // ).catchError((e) {
+  //     //   print("this_account_not_exist");
+  //     //   //loader.remove();
+  //     //   // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+  //     //   //   content: Text(S.of(state.context).this_account_not_exist),
+  //     //   //));
+  //     // }).whenComplete(() {
+  //     //  // Helper.hideLoader(loader);
+  //     // });
+  //     // if (credential.token != null && credential.token  != null) {
+  //     //   Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+  //     // } else {
+  //     //   print("wrong_email_or_password");
+  //     //   // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+  //     //   //   content: Text(S.of(state.context).wrong_email_or_password),
+  //     //   // ));
+  //     // }
+  //
+  //   } on FirebaseAuthException catch (e) {
+  //     print(e.message);
+  //     throw e;
+  //   }
+  // }
+  Future<UserCredential> signInWithGoogle(BuildContext context) async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
-      }).catchError((e) {
-        print("this_account_not_exist");
-        //loader.remove();
-        // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-        //   content: Text(S.of(state.context).this_account_not_exist),
-        //));
-      }).whenComplete(() {
-       // Helper.hideLoader(loader);
-      });
-      // if (credential.token != null && credential.token  != null) {
-      //   Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
-      // } else {
-      //   print("wrong_email_or_password");
-      //   // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
-      //   //   content: Text(S.of(state.context).wrong_email_or_password),
-      //   // ));
-      // }
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-      throw e;
-    }
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    print(credential.accessToken);
+    print(credential.idToken);
+    print(googleUser.email);
+    print(googleUser.id);
+    login(googleUser.email,googleUser.id,context,googleUser);
+    print(FirebaseAuth.instance.signInWithCredential(credential));
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   Future<void> signOutFromGoogle() async{
     await _googleSignIn.signOut();
     await _auth.signOut();
+  }
+
+  void _showToast(BuildContext context,String message) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('$message'),
+        action: SnackBarAction(label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
+  void login(String email,String pass,BuildContext context,GoogleSignInAccount userDetial) async {
+    //loader = Helper.overlayLoader(state.context);
+   // FocusScope.of(state.context).unfocus();
+     // loginFormKey.currentState.save();
+      //Overlay.of(state.context).insert(loader);
+    model.User user = new model.User();
+    print(email);
+    print(pass);
+    user.email = email;
+    user.password= pass.toString();
+
+      repository.login(user).then((value) {
+        print("user emai is ${value.apiToken}");
+        print("user emai is ${value.email}");
+        print(user.email);
+        if (value != null && value.apiToken != null) {
+          print("user is login");
+          Navigator.of(context).push( MaterialPageRoute(builder: (_) => PagesWidget(currentTab: 0)));
+
+          //  Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+        } else {
+
+          print(value.email);
+        }
+      }).catchError((e) {
+        print("this_account_not_exist");
+
+      //  _showToast(context,"This account not exist");
+       // register(userDetial,context);
+        model.User user = new model.User();
+        print(userDetial.email);
+        print(userDetial.id);
+       // user.email = userDetial.email;
+        // user.name = userDetial.displayName;
+        // user.password = userDetial.id.toString();
+        // user.phone = "";
+        // user.deviceToken = "eIgcV8ESCU8_iqBjMzN8aL:APA91bFcyGCYlHc22cFooalmHdwziU2Czc-obP6NMb_hobPFxTvMoHRhUQ69XnOqyozDqm68UYm8ge9-JZ5iwAnVIZus_yqVqfonRWJ78NwKJjKbl_LRphspKvyY-tilWUZpISDhYR29";
+        // user.address = "Islamabad";
+        // print("karachi");
+        print(user.toMap());
+        register(userDetial, context);
+       // loader.remove();
+       //  ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+       //    content: Text(S.of(state.context).this_account_not_exist),
+       //  ));
+      }).whenComplete(() {
+       // Helper.hideLoader(loader);
+      });
+  }
+
+
+  Future<userModel.User> registers(userModel.User user) async {
+    print("aabb " + user.email.toString());
+    print("break point 1");
+    final String url = '${GlobalConfiguration().getValue('api_base_url')}manager/register';
+    final client = new http.Client();
+    final response = await client.post(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+      body: json.encode(user.toMap()),
+    );
+    if (response.statusCode == 200) {
+      print("break point 2");
+
+      setCurrentUser(response.body);
+      currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
+    } else {
+      print("break point 3");
+
+      throw new Exception(response.body);
+    }
+    return currentUser.value;
+  }
+
+  void register(GoogleSignInAccount userDetial,BuildContext context) async {
+    print("token is ${"abc"}");
+  //  loader = Helper.overlayLoader(state.context);
+  ///  FocusScope.of(state.context).unfocus();
+   // Overlay.of(state.context).insert(loader);
+    model.User user = new model.User();
+    print(userDetial.email);
+    print(userDetial.id);
+    user.email = userDetial.email;
+    user.name = userDetial.displayName;
+    user.password = userDetial.id.toString();
+    user.phone = "";
+    user.deviceToken = "eIgcV8ESCU8_iqBjMzN8aL:APA91bFcyGCYlHc22cFooalmHdwziU2Czc-obP6NMb_hobPFxTvMoHRhUQ69XnOqyozDqm68UYm8ge9-JZ5iwAnVIZus_yqVqfonRWJ78NwKJjKbl_LRphspKvyY-tilWUZpISDhYR29";
+    user.address = "Islamabad";
+   // user.image = userDetial.photoUrl
+    //user = userDetial.displayName;
+
+    repository.register(user).then((value) {
+      print("token is ${user.name}");
+      print("token 2 is ${user.name}");
+      if (value != null && value.apiToken != null) {
+        Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+      } else {
+        print("wrong_email_or_password");
+        // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        //   content: Text(S.of(state.context).wrong_email_or_password),
+        // ));
+      }
+    }).catchError((e) {
+      print("this_email_account_exists");
+      Navigator.of(context).push( MaterialPageRoute(builder: (_) => PagesWidget(currentTab: 0)));
+
+     // Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+
+    //  _showToast(context,"this email account already exists");
+      // loader.remove();
+     //  ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+     //    content: Text(S.of(state.context).this_email_account_exists),
+     //  ));
+    }).whenComplete(() {
+     // Helper.hideLoader(loader);
+    });
   }
 }

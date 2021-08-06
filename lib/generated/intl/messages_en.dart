@@ -148,6 +148,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "messages" : MessageLookupByLibrary.simpleMessage("Messages"),
     "mi" : MessageLookupByLibrary.simpleMessage("mi"),
     "most_popular" : MessageLookupByLibrary.simpleMessage("Most Popular"),
+    "top_rated" : MessageLookupByLibrary.simpleMessage("Top Rated"),
+    "nearest" : MessageLookupByLibrary.simpleMessage("Nearest"),
+    "order_taking" : MessageLookupByLibrary.simpleMessage("Order Taking"),
+    "same_day_delivery" : MessageLookupByLibrary.simpleMessage("Same Day Delivery"),
+    "vegetarian_food" : MessageLookupByLibrary.simpleMessage("Vegetarian Food"),
+    "sort" : MessageLookupByLibrary.simpleMessage("Sort"),
+    "done" : MessageLookupByLibrary.simpleMessage("Done"),
+    "cuisines" : MessageLookupByLibrary.simpleMessage("CUISINES"),
+    "desert" : MessageLookupByLibrary.simpleMessage("Dessert"),
+    "asian" : MessageLookupByLibrary.simpleMessage("Asian"),
+    "arabic" : MessageLookupByLibrary.simpleMessage("Arabic"),
+    "pizza" : MessageLookupByLibrary.simpleMessage("Pizza"),
+    "kuwaiti" : MessageLookupByLibrary.simpleMessage("Kuwaiti"),
+    "fast_food" : MessageLookupByLibrary.simpleMessage("Fast Food"),
+    "european" : MessageLookupByLibrary.simpleMessage("European"),
+
+
+
+
     "my_orders" : MessageLookupByLibrary.simpleMessage("My Orders"),
     "my_order" : MessageLookupByLibrary.simpleMessage("My Order"),
     "start_order" : MessageLookupByLibrary.simpleMessage("Start Order"),
