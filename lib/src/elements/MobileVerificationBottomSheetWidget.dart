@@ -335,10 +335,10 @@ class _MobileVerificationBottomSheetWidgetState
                       onTap: () async {
 
 
-                        isCodeResend = true;
-                        confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
+                        // isCodeResend = true;
+                        // confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
 
-
+                        verifyPhone();
 
 
 

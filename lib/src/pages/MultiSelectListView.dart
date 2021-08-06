@@ -123,12 +123,12 @@ class _MultiSelectItemsWidgetState extends State<MultiSelectItemsWidget> {
                       case FilterType.filter:
                       // TODO: Handle this case.
                         controller.isSelected(index) ?
-                        FilterPage.filterValues.add(mainList[index]['key'].toString())
+                        FilterPage.filterValues.add(mainList[index]['name'].toString())
                             : print("nothing");
                         break;
                       case FilterType.sort:
                         controller.isSelected(index) ?
-                        FilterPage.sortValues.add(mainList[index]['key'].toString())
+                        FilterPage.sortValues.add(mainList[index]['name'].toString())
                             : print("nothing");
                         // TODO: Handle this case.
                         break;

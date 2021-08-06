@@ -34,10 +34,12 @@ import 'MultiSelectListView.dart';
 class Animal {
   final int id;
   final String name;
+  final String searchName;
 
   Animal({
     this.id,
     this.name,
+    this.searchName
   });
 }
 
@@ -58,25 +60,9 @@ class _FilterPageState extends StateMVC<FilterPage> {
   // Animal(id: 5, name: "Kuwaiti"),
   // Animal(id: 6, name: "Fast Food"),
   // Animal(id: 7, name: "European"),
-  static List<Animal> _animals = [
 
-    Animal(id: 1, name: "Desert"),
-    Animal(id: 2, name: "Asian"),
-    Animal(id: 3, name: "Arabic"),
-    Animal(id: 4, name: "Pizza"),
-    Animal(id: 5, name: "Kuwaiti"),
-    Animal(id: 6, name: "Fast Food"),
-    Animal(id: 7, name: "European"),
-    // Animal(id: 4, name: "Pizza"),
-    // Animal(id: 5, name: "East Asian"),
-    // Animal(id: 6, name: "Caribbean"),
-    // Animal(id: 7, name: "German"),
-    // Animal(id: 8, name: "Desert"),
-  ];
+   List<Animal> _animals;
 
-  final _items = _animals
-      .map((animal) => MultiSelectItem<Animal>(animal, animal.name))
-      .toList();
 
   //List<Animal> _selectedAnimals = [];
   List<Animal> selectedCuisine = [];
@@ -100,6 +86,24 @@ class _FilterPageState extends StateMVC<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
+   _animals = [
+    Animal(id: 1, name: "${S.of(context).desert}",searchName: "desert"),
+    Animal(id: 2, name: "${S.of(context).asian}",searchName: "Asian"),
+    Animal(id: 3, name: "${S.of(context).arabic}",searchName: "aArabic"),
+    Animal(id: 4, name:"${S.of(context).pizza}",searchName: "Pizza"),
+    Animal(id: 5, name: "${S.of(context).kuwaiti}",searchName: "Kuwaiti"),
+    Animal(id: 6, name: "${S.of(context).fast_food}",searchName: "Fast Food"),
+    Animal(id: 7, name: "${S.of(context).european}",searchName: "European"),
+    // Animal(id: 4, name: "Pizza"),
+    // Animal(id: 5, name: "East Asian"),
+    // Animal(id: 6, name: "Caribbean"),
+    // Animal(id: 7, name: "German"),
+    // Animal(id: 8, name: "Desert"),
+    ];
+   var _items = _animals
+       .map((animal) => MultiSelectItem<Animal>(animal, animal.name))
+       .toList();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -109,11 +113,18 @@ class _FilterPageState extends StateMVC<FilterPage> {
         InkWell(
           child:Container(
             //color: Colors.black,
-            margin: EdgeInsets.only(top: 18, left: 8,right: 8),
-            child:  Text("${S.of(context).reset}",style: TextStyle(fontSize: 17,color: Colors.orange)),
+            margin: EdgeInsets.only(top: 0, left: 0,right: 0),
+            child:  IconButton(
+                icon: Icon(Icons.arrow_back),
+                iconSize: 20,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                //  _onLike(currentLikes);
+                }),
+            //Text("${S.of(context).back}",style: TextStyle(fontSize: 15,color: Colors.orange)),
           ),
           onTap: () {
-            Navigator.of(context).pop();
+
           },
         ),
         actions: <Widget>[
@@ -148,8 +159,8 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 filterItems.addAll(_con.markets.where((element) {
                       print(element.cuisine.trim().toLowerCase());
                       print(selectedCuisine.last.name.trim().toLowerCase());
-
-                     return selectedCuisine.where((e) => e.name.trim().toLowerCase()==element.cuisine.trim().toLowerCase()).length>0?true:false;
+                      print(selectedCuisine.last.id);
+                     return selectedCuisine.where((e) => e.searchName.trim().toLowerCase()==element.cuisine.trim().toLowerCase()).length>0?true:false;
 
                     }));
 
@@ -159,7 +170,6 @@ class _FilterPageState extends StateMVC<FilterPage> {
 
               }else{}
               if(FilterPage.sortValues.length != 0){
-
                 if (FilterPage.sortValues.firstWhere((element) =>
                 element == "Top Rated",orElse: () {
                   return null;
@@ -167,7 +177,6 @@ class _FilterPageState extends StateMVC<FilterPage> {
                   print(_con.markets.map((e) => e.rate));
                   print("sort Value is Top Rated");
                   filterItems = _con.markets;
-
                 }else{}
 
                 if (FilterPage.sortValues.firstWhere((element) =>
@@ -238,6 +247,7 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 element == "Vegetarian Food",orElse: () {
                   return null;
                 }) == "Vegetarian Food"){
+                  print(filterItems.where((element) => element.vegetarianFood ));
                   filterItems.addAll(filterItems.where((element) => element.vegetarianFood == true));
                   print("sort Value Vegetarian Food");
                 }else{}
@@ -296,7 +306,8 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 height: 150,
                 width: 370,
 
-                child: MultiSelectItemsWidget(mainList :[{"key":"${S.of(context).top_rated}"},{"key" :"${S.of(context).nearest}"},{"key" :"${S.of(context).most_popular}"}], filterby: FilterType.sort,),
+                child: MultiSelectItemsWidget(mainList :[{"key":"${S.of(context).top_rated}","name":"Top Rated"},
+                  {"key" :"${S.of(context).nearest}","name":"Nearest"},{"key" :"${S.of(context).most_popular}","name":"Most Popular"}], filterby: FilterType.sort,),
               ),
               SizedBox(height: 20),
               Row(
@@ -311,7 +322,8 @@ class _FilterPageState extends StateMVC<FilterPage> {
                 height: 120,
                 width: 370,
 
-                child: MultiSelectItemsWidget(mainList :[{"key":"${S.of(context).order_taking}"},{"key" :"${S.of(context).same_day_delivery}"},{"key": "${S.of(context).vegetarian_food}"}],filterby: FilterType.filter),
+                child: MultiSelectItemsWidget(mainList :[{"key":"${S.of(context).order_taking}","name":"Order Taking"},
+                  {"key" :"${S.of(context).same_day_delivery}","name":"Same Day Delivery"},{"key": "${S.of(context).vegetarian_food}","name":"Vegetarian Food"}],filterby: FilterType.filter),
 
               ),
               SizedBox(height: 20),

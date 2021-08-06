@@ -80,7 +80,13 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
-
+//     if(langCode =='en')
+// {
+//   //go with market.name
+// }else{
+//
+//       //go with market.nameAr
+//     }
     return Scaffold(
       // appBar: AppBar(
       //   actions: <Widget>[

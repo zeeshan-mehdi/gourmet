@@ -27,6 +27,7 @@ Future<userModel.User> login(userModel.User user) async {
     body: json.encode(user.toMap()),
   );
   if (response.statusCode == 200) {
+
     print('response body ${response.body}');
     setCurrentUser(response.body);
     currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
@@ -44,12 +45,16 @@ Future<userModel.User> register(userModel.User user) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(user.toMap()),
   );
+  print("usammaaaa");
+  print(response.body);
   if (response.statusCode == 200) {
+    print(user.toMap());
     setCurrentUser(response.body);
     currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   } else {
     throw new Exception(response.body);
   }
+  print("current ${currentUser.value}");
   return currentUser.value;
 }
 

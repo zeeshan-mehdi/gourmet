@@ -28,7 +28,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
 
   _SearchResultWidgetState() : super(SearchController()) {
     _con = controller;
-
+//let me find
   }
 
   @override
@@ -86,6 +86,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                   onSubmitted: (text) {
                    // await _con.refreshSearch(text);
                     widget.searchTag = 0;
+                    print("hello");
                     _con.saveSearch(text);
                   },
                   autofocus: true,
@@ -395,9 +396,9 @@ class _SearchResultByFitlerWidgetState extends StateMVC<SearchResultByFitlerWidg
                 icon: Icon(Icons.close),
                 color: Theme.of(context).hintColor,
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/Pages', arguments: 0);
+                 // Navigator.of(context).pushNamed('/Pages', arguments: 0);
 
-                  // Navigator.pop(context);
+                   Navigator.pop(context);
                 },
               ),
               // leading: IconButton(
