@@ -320,10 +320,10 @@ class _Page1State extends StateMVC<Page1> {
               onSaved: (input) => _con.product.name = input,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               decoration: InputDecoration(
-                labelText: 'Name',
+                labelText: S.of(context).full_name,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My product',
+                hintText: S.of(context).My_product,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -338,10 +338,10 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Name (arabic)',
+                labelText: S.of(context).full_name,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My product',
+                hintText:  S.of(context).My_product,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -359,7 +359,7 @@ class _Page1State extends StateMVC<Page1> {
                 labelText: S.of(context).Description,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My product',
+                hintText:  S.of(context).My_product,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -378,7 +378,7 @@ class _Page1State extends StateMVC<Page1> {
                 labelText:S.of(context).Description,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
-                hintText: 'My product',
+                hintText:  S.of(context).My_product,
                 hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
 
                 border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
@@ -396,7 +396,7 @@ class _Page1State extends StateMVC<Page1> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Price',
+                labelText: S.of(context).Price,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -415,7 +415,7 @@ class _Page1State extends StateMVC<Page1> {
               onSaved: (input) => _con.product.discountPrice = double.parse(input),
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Discounted Price',
+                labelText: S.of(context).Discounted_Price,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -438,7 +438,7 @@ class _Page1State extends StateMVC<Page1> {
                   _con.product.featured = newVal;
                   setState(() { });
                 }),
-                Text('Featured')
+                Text(S.of(context).Featured)
               ],
             ),
             SizedBox(height: 0),
@@ -452,7 +452,7 @@ class _Page1State extends StateMVC<Page1> {
                   _con.product.deliverable = newVal;
                   setState(() { });
                 }),
-                Text('Deliverable Product')
+                Text(S.of(context).Deliverable_Product)
               ],
             ),
 
@@ -572,7 +572,7 @@ class _Page2State extends StateMVC<Page2> {
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               onSaved: (input) => _con.product.capacity= input,
               decoration: InputDecoration(
-                labelText: 'Capacity',
+                labelText: S.of(context).Capacity,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -589,7 +589,7 @@ class _Page2State extends StateMVC<Page2> {
               onSaved: (input) => _con.product.unit = input,
               validator: (input) => input==null||input=="" ? S.of(context).field_cannot_be_empty : null,
               decoration: InputDecoration(
-                labelText: 'Unit',
+                labelText: S.of(context).Unit,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: 'KG,',
@@ -609,7 +609,7 @@ class _Page2State extends StateMVC<Page2> {
 
               // validator: (input) => !input.contains('@') ? S.of(context).should_be_a_valid_email : null,
               decoration: InputDecoration(
-                labelText: 'Package count',
+                labelText: S.of(context).Package_count,
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
                 contentPadding: EdgeInsets.all(12),
                 hintText: '20',
@@ -624,7 +624,7 @@ class _Page2State extends StateMVC<Page2> {
 
             DropdownButton<Market>(
               isExpanded: true,
-              hint: Text('Choose Kitchen',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
+              hint: Text(S.of(context).Choose_Kitchen,style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
               value: selectedKitchen,
               items:kitchens.map((Market value) {
                 return new DropdownMenuItem<Market>(
@@ -642,7 +642,7 @@ class _Page2State extends StateMVC<Page2> {
             SizedBox(height: 30),
            DropdownButton<Category>(
              isExpanded: true,
-             hint: Text('Choose Category',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
+             hint: Text(S.of(context).Choose_Category,style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black.withOpacity(0.7)),),
              value: selectedCategory,
              items:categories.map((Category value) {
             return new DropdownMenuItem<Category>(

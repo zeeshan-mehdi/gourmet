@@ -12,6 +12,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:markets/src/elements/BlockButtonWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../generated/l10n.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../elements/BlockButtonWidget.dart';
@@ -144,7 +145,16 @@ class _LoginOptionState extends State<LoginOption> {
                       elevation: 0,
                       onPressed: () async {
                         print("Sign in with Apple");
-                          // setState(() {
+                        final credential = await SignInWithApple.getAppleIDCredential(
+                          scopes: [
+                            AppleIDAuthorizationScopes.email,
+                            AppleIDAuthorizationScopes.fullName,
+                          ],
+                        );
+
+                        print(credential);
+
+                        // setState(() {
                           //   isLoading = true;
                           // });
 

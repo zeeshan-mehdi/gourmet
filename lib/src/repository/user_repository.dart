@@ -11,7 +11,7 @@ import '../models/address.dart';
 import '../models/credit_card.dart';
 import '../models/user.dart' as userModel;
 import '../repository/user_repository.dart' as userRepo;
-
+import '../models/address.dart' as model;
 ValueNotifier<userModel.User> currentUser = new ValueNotifier(userModel.User());
 
 Future<userModel.User> login(userModel.User user) async {
@@ -130,7 +130,6 @@ Future<userModel.User> update(userModel.User user) async {
   print('update response');
   print(response.body);
 
-
   setCurrentUser(response.body);
   currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   return currentUser.value;
@@ -148,6 +147,31 @@ Future<Stream<Address>> getAddresses() async {
   return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
     return Address.fromJSON(data);
   });
+}
+
+
+Future<Address> getDefaultAddresses() async {
+  userModel.User _user = currentUser.value;
+  final String _apiToken = 'api_token=${_user.apiToken}&';
+  final String url =
+      '${GlobalConfiguration().getValue('api_base_url')}delivery_addresses?$_apiToken&search=user_id:${_user.id}&searchFields=user_id:=&orderBy=updated_at&sortedBy=desc';
+  print(url);
+  final client = new http.Client();
+  final resp = await client.get( Uri.parse(url));
+
+  final data = Helper.getData(jsonDecode(resp.body));
+  model.Address defaultAddress;
+
+  for(int i=0;i<data.length;i++){
+     model.Address address = model.Address.fromJSON(data[i]);
+     if(address.isDefault){
+       defaultAddress = address;
+     }
+  }
+
+
+  return defaultAddress;
+
 }
 
 Future<Address> addAddress(Address address) async {

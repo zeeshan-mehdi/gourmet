@@ -337,6 +337,241 @@ class S {
       desc: '',
       args: [],
     );
+  }String get Go_to_Home {
+    return Intl.message(
+      'Go to Home',
+      name: 'Go_to_Home',
+      desc: '',
+      args: [],
+    );
+  }String get My_product {
+    return Intl.message(
+      'My product',
+      name: 'My_product',
+      desc: '',
+      args: [],
+    );
+  }String get Price {
+    return Intl.message(
+      'Price',
+      name: 'Price',
+      desc: '',
+      args: [],
+    );
+  }String get Discounted_Price {
+    return Intl.message(
+      'Discounted Price',
+      name: 'Discounted_Price',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Featured {
+    return Intl.message(
+      'Featured',
+      name: 'Featured',
+      desc: '',
+      args: [],
+    );
+  } String get Capacity {
+    return Intl.message(
+      'Capacity',
+      name: 'Capacity',
+      desc: '',
+      args: [],
+    );
+  } String get Unit {
+    return Intl.message(
+      'Unit',
+      name: 'Unit',
+      desc: '',
+      args: [],
+    );
+  } String get Package_count {
+    return Intl.message(
+      'Package count',
+      name: 'Package_count',
+      desc: '',
+      args: [],
+    );
+  } String get Choose_Kitchen {
+    return Intl.message(
+      'Choose Kitchen',
+      name: 'Choose_Kitchen',
+      desc: '',
+      args: [],
+    );
+  } String get Choose_Category {
+    return Intl.message(
+      'Choose Category',
+      name: 'Choose_Category',
+      desc: '',
+      args: [],
+    );
+  } String get Enable_Your_Location {
+    return Intl.message(
+      'Enable Your Location',
+      name: 'Enable_Your_Location',
+      desc: '',
+      args: [],
+    );
+  } String get Please_allow_to_use_your_location_to_show_nearby_resturant_on_the_map {
+    return Intl.message(
+      'Please allow to use your location to\n show nearby resturant on the map',
+      name: 'Please_allow_to_use_your_location_to_show_nearby_resturant_on_the_map',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get Enable_Location {
+    return Intl.message(
+      'Enable Location',
+      name: 'Enable_Location',
+      desc: '',
+      args: [],
+    );
+  }
+    String get Use_Your_Phone_nstead {
+    return Intl.message(
+      'Use Your Phone instead?',
+      name: 'Use_Your_Phone_nstead',
+      desc: '',
+      args: [],
+    );
+  } String get Your_password_has_been_reset {
+    return Intl.message(
+      'Your password has \n been reset',
+      name: 'Your_password_has_been_reset',
+      desc: '',
+      args: [],
+    );
+  } String get Youll_shortly_receive_an_email_with_a_code_to_setup_new_password {
+    return Intl.message(
+      'You will shortly receive an email with a \n code to setup a new password',
+      name: 'Youll_shortly_receive_an_email_with_a_code_to_setup_new_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  String get Deliverable_Product {
+    return Intl.message(
+      'Deliverable Product',
+      name: 'Deliverable_Product',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Order_Something_Else {
+    return Intl.message(
+      'Order Something Else',
+      name: 'Order_Something_Else',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  String get Something_Went_Wrong_Could_not_place_order {
+    return Intl.message(
+      'Something Went Wrong, Could not place order',
+      name: 'Something_Went_Wrong_Could_not_place_order',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Order_Failed {
+    return Intl.message(
+      'Order Failed',
+      name: 'Order_Failed',
+      desc: '',
+      args: [],
+    );
+  }
+  String get You_can_track_the_delivery_in_the_Orders_section {
+    return Intl.message(
+      'You can track the delivery in the \n \"Orders\" section',
+      name: 'You_can_track_the_delivery_in_the_Orders_section',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  String get Your_order_has_been_Placed {
+    return Intl.message(
+      'Your order has \n been Placed!',
+      name: 'Your_order_has_been_Placed',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Go_to_orders {
+    return Intl.message(
+      'Go to orders',
+      name: 'Go_to_orders',
+      desc: '',
+      args: [],
+    );
+  }
+  String get Check_on_Order {
+    return Intl.message(
+      'Check on Order',
+      name: 'Check_on_Order',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Verify`
