@@ -17,6 +17,9 @@ import '../models/address.dart';
 import '../models/coupon.dart';
 import '../models/setting.dart';
 
+
+import 'user_repository.dart' as userRepo;
+
 ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 ValueNotifier<Address> deliveryAddress = new ValueNotifier(new Address());
 Coupon coupon = new Coupon.fromJSON({});
@@ -56,28 +59,47 @@ Future<int> getTime() async{
 }
 
 Future<dynamic> setCurrentLocation() async {
-  var location = new Location();
-  MapsUtil mapsUtil = new MapsUtil();
+
+  var address =  await userRepo.getDefaultAddresses();
   final whenDone = new Completer();
-  Address _address = new Address();
-  location.requestService().then((value) async {
-    location.getLocation().then((_locationData) async {
-      String _addressName = await mapsUtil.getAddressName(new LatLng(_locationData?.latitude, _locationData?.longitude), setting.value.googleMapsKey);
+  if(address==null) {
+    var location = new Location();
+    MapsUtil mapsUtil = new MapsUtil();
 
-      print('i am getting lat :${_locationData?.latitude}  and longitude ${_locationData?.longitude}');
+    Address _address = new Address();
+    location.requestService().then((value) async {
+      location.getLocation().then((_locationData) async {
+        String _addressName = await mapsUtil.getAddressName(
+            new LatLng(_locationData?.latitude, _locationData?.longitude),
+            setting.value.googleMapsKey);
 
-      _address = Address.fromJSON({'address': _addressName, 'latitude': _locationData?.latitude, 'longitude': _locationData?.longitude});
-      await changeCurrentLocation(_address);
-      whenDone.complete(_address);
-    }).timeout(Duration(seconds: 10), onTimeout: () async {
-      await changeCurrentLocation(_address);
-      whenDone.complete(_address);
-      return null;
-    }).catchError((e) {
-      whenDone.complete(_address);
+        print('i am getting lat :${_locationData
+            ?.latitude}  and longitude ${_locationData?.longitude}');
+
+        _address = Address.fromJSON({
+          'address': _addressName,
+          'latitude': _locationData?.latitude,
+          'longitude': _locationData?.longitude
+        });
+
+        print('address that i have ${_address.toMap()}');
+
+        await changeCurrentLocation(_address);
+        whenDone.complete(_address);
+      }).timeout(Duration(seconds: 10), onTimeout: () async {
+        await changeCurrentLocation(_address);
+        whenDone.complete(_address);
+        return null;
+      }).catchError((e) {
+        whenDone.complete(_address);
+      });
     });
-  });
-  return whenDone.future;
+    return whenDone.future;
+  }else{
+    await changeCurrentLocation(address);
+    whenDone.complete(address);
+    return whenDone.future;
+  }
 }
 
 Future<Address> changeCurrentLocation(Address _address) async {

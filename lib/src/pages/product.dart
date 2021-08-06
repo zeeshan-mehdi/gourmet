@@ -79,7 +79,8 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
 // List<SelectedOrderItem> selecteditems = List<SelectedOrderItem>();
   @override
   Widget build(BuildContext context) {
-    String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
+    String langCode =
+        settingRepo.setting.value.mobileLanguage.value.languageCode;
 
     return Scaffold(
       // appBar: AppBar(
@@ -88,7 +89,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
       //   ],
       // ) ,
       key: _con.scaffoldKey,
-      body: _con.market == null || _con.market?.image == null || _productController.loading
+      body: _con.market == null ||
+              _con.market?.image == null ||
+              _productController.loading
           ? CircularLoadingWidget(height: 500)
           : RefreshIndicator(
               onRefresh: _con.refreshMarket,
@@ -108,13 +111,13 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                           expandedHeight: 275,
                           elevation: 0,
                           automaticallyImplyLeading: false,
-                         // leadingWidth:  config.App(context).appWidth(400),
+                          // leadingWidth:  config.App(context).appWidth(400),
                           leading: IconButton(
-                                icon: Icon(Icons.arrow_back),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                            icon: Icon(Icons.arrow_back),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
 
                           iconTheme: IconThemeData(
                               color: Theme.of(context).primaryColor),
@@ -160,7 +163,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 2, right: 20),
                                               child: Text(
-                                                langCode=='en'? _con.market?.name??'' :_con.market?.nameAr  ?? '',
+                                                langCode == 'en'
+                                                    ? _con.market?.name ?? ''
+                                                    : _con.market?.nameAr ?? '',
                                                 overflow: TextOverflow.fade,
                                                 softWrap: false,
                                                 maxLines: 2,
@@ -261,7 +266,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                     CrossAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    S.of(context).restaurant_achievements,
+                                                    S
+                                                        .of(context)
+                                                        .restaurant_achievements,
                                                     overflow: TextOverflow.fade,
                                                     softWrap: false,
                                                     maxLines: 2,
@@ -429,7 +436,6 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                           //   ),
                           // ),
                         ),
-
                         SliverToBoxAdapter(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -462,13 +468,17 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Stack(
-                                                  alignment:langCode=='en'? AlignmentDirectional.topEnd : AlignmentDirectional.topStart,
+                                                  alignment: langCode == 'en'
+                                                      ? AlignmentDirectional
+                                                          .topEnd
+                                                      : AlignmentDirectional
+                                                          .topStart,
                                                   children: [
                                                     Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                25.0),
+                                                            BorderRadius
+                                                                .circular(25.0),
                                                         // color: Colors.greenAccent,
                                                       ),
                                                       child: CachedNetworkImage(
@@ -487,41 +497,64 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                           width: 200,
                                                           height: 120,
                                                         ),
-                                                        errorWidget:
-                                                            (context, url, error) =>
-                                                                Icon(Icons
-                                                                    .error_outline),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(Icons
+                                                                .error_outline),
                                                       ),
                                                     ),
-                                                    _con.favoriteProduct?.id != null
+                                                    _con.favoriteProduct?.id !=
+                                                            null
                                                         ? IconButton(
-                                                        onPressed: () {
-                                                          _con.removeFromFavorite(_con.favoriteProduct);
-                                                        },
-                                                        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
-                                                        //color: Theme.of(context).primaryColor,
-                                                        //shape: StadiumBorder(),
-                                                        // borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                                        icon: Icon(
-                                                          Icons.bookmark,
-                                                          color: Theme.of(context).accentColor,
-                                                        ))
+                                                            onPressed: () {
+                                                              _con.removeFromFavorite(
+                                                                  _con.favoriteProduct);
+                                                            },
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical: 0,
+                                                                    horizontal:
+                                                                        20),
+                                                            //color: Theme.of(context).primaryColor,
+                                                            //shape: StadiumBorder(),
+                                                            // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                            icon: Icon(
+                                                              Icons.bookmark,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .accentColor,
+                                                            ))
                                                         : IconButton(
-
-                                                        onPressed: () {
-                                                          if (currentUser.value.apiToken == null) {
-                                                            Navigator.of(context).pushNamed("/Login");
-                                                          } else {
-                                                            _con.addToFavorite(_con.products[index]);
-                                                          }
-                                                        },
-                                                        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
-                                                        color: Colors.transparent,
-                                                        // shape: StadiumBorder(),
-                                                        icon: Icon(
-                                                          Icons.bookmark_border_outlined,
-                                                          color: Theme.of(context).primaryColor,
-                                                        )),
+                                                            onPressed: () {
+                                                              if (currentUser
+                                                                      .value
+                                                                      .apiToken ==
+                                                                  null) {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pushNamed(
+                                                                        "/Login");
+                                                              } else {
+                                                                _con.addToFavorite(
+                                                                    _con.products[
+                                                                        index]);
+                                                              }
+                                                            },
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical: 0,
+                                                                    horizontal:
+                                                                        20),
+                                                            color: Colors
+                                                                .transparent,
+                                                            // shape: StadiumBorder(),
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .bookmark_border_outlined,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor,
+                                                            )),
                                                   ],
                                                 ),
                                                 Column(
@@ -532,9 +565,17 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                                       height: 8,
                                                     ),
                                                     Text(
-                                                        langCode=='en'?_con.products[index]
-                                                            .name??'':_con.products[index]
-                                                            .nameAr??'',
+                                                        langCode == 'en'
+                                                            ? _con
+                                                                    .products[
+                                                                        index]
+                                                                    .name ??
+                                                                ''
+                                                            : _con
+                                                                    .products[
+                                                                        index]
+                                                                    .nameAr ??
+                                                                '',
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             color: Colors.black,
@@ -597,98 +638,92 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                                               ],
                                             ),
                                             onTap: () {
-
-
                                               setState(() {
                                                 cartLoading = true;
                                               });
 
+                                              // if (!isPresent) {
+                                              print(_con.products[index].name);
+                                              setState(() {
+                                                selectedIndex = index;
+                                                //  List<Product> products = List<Product>();
+                                                products
+                                                    .add(_con.products[index]);
+                                                // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                                                products.toSet().toList();
 
-                                             // if (!isPresent) {
-                                                print(
-                                                    _con.products[index].name);
-                                                setState(() {
-                                                  selectedIndex = index;
-                                                  //  List<Product> products = List<Product>();
-                                                  products.add(
-                                                      _con.products[index]);
-                                                  // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
-                                                  products.toSet().toList();
+                                                print('index  $index');
 
-                                                  print('index  $index');
-
-                                                  if (currentUser
-                                                          .value.apiToken ==
-                                                      null) {
-                                                    setState(() {
-                                                      cartLoading = false;
-                                                    });
-                                                    Navigator.of(context)
-                                                        .pushNamed("/Login");
-                                                  } else {
-                                                    if (_productController
-                                                        .isSameMarkets(_con
-                                                                .products[
-                                                            index])) {
-
+                                                if (currentUser
+                                                        .value.apiToken ==
+                                                    null) {
+                                                  setState(() {
+                                                    cartLoading = false;
+                                                  });
+                                                  Navigator.of(context)
+                                                      .pushNamed("/Login");
+                                                } else {
+                                                  if (_productController
+                                                      .isSameMarkets(_con
+                                                          .products[index])) {
+                                                    _productController
+                                                        .addToCart(_con
+                                                            .products[index]);
+                                                    Future.delayed(
+                                                        Duration(seconds: 3),
+                                                        () {
+                                                      refreshCart();
                                                       _productController
-                                                          .addToCart(_con
-                                                          .products[
-                                                      index]);
-                                                      Future.delayed(
-                                                          Duration(seconds: 3),
-                                                              () {
-                                                            refreshCart();
-                                                            _productController.listenForCart();
-                                                            setState(() {
-                                                              cartLoading = false;
-                                                            });
-                                                          });
-
-                                                    } else {
-
-
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                        context) {
-                                                          // return object of type Dialog
-                                                          return AddToCartAlertDialogWidget(
-                                                              oldProduct:
-                                                              _productController.carts.elementAt(0)?.product,
-                                                              newProduct: _con.products[selectedIndex],
-                                                              onPressed: (product, {reset: true}) {
+                                                          .listenForCart();
+                                                      setState(() {
+                                                        cartLoading = false;
+                                                      });
+                                                    });
+                                                  } else {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        // return object of type Dialog
+                                                        return AddToCartAlertDialogWidget(
+                                                            oldProduct:
                                                                 _productController
-                                                                    .addToCart(product,
-                                                                    reset:reset);
-                                                                Future.delayed(
-                                                                    Duration(seconds: 3),
-                                                                        () {
-                                                                      refreshCart();
-                                                                      _productController.listenForCart();
+                                                                    .carts
+                                                                    .elementAt(
+                                                                        0)
+                                                                    ?.product,
+                                                            newProduct: _con
+                                                                    .products[
+                                                                selectedIndex],
+                                                            onPressed: (product,
+                                                                {reset: true}) {
+                                                              _productController
+                                                                  .addToCart(
+                                                                      product,
+                                                                      reset:
+                                                                          reset);
+                                                              Future.delayed(
+                                                                  Duration(
+                                                                      seconds:
+                                                                          3),
+                                                                  () {
+                                                                refreshCart();
+                                                                _productController
+                                                                    .listenForCart();
 
-                                                                      setState(() {
-                                                                        cartLoading = false;
-                                                                      });
-                                                                    });
-                                                                return;
-
+                                                                setState(() {
+                                                                  cartLoading =
+                                                                      false;
+                                                                });
                                                               });
-                                                        },
-                                                      );
-
-
-
-                                                    }
+                                                              return;
+                                                            });
+                                                      },
+                                                    );
                                                   }
-
-                                                });
-
-
-
-
-                                            }
-                                            );
+                                                }
+                                              });
+                                            });
                                       }),
                                 ),
 
@@ -699,28 +734,28 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
 
                                 Container(
                                     height: 600,
-                                    child:  cartLoading ? Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(25.0),
-                                          // color: Colors.greenAccent,
-                                        ),
-                                        child:Image.asset(
-                                                'assets/img/loading.gif',
-                                                fit: BoxFit.cover,
-                                                width: 400,
-                                              ) ): KitchenCartWidget(
-                                      callback: (func) {
-                                        refreshCart = func;
-                                      },
-                                      removeFromCart:(){
-                                        Future.delayed(Duration(milliseconds: 30),(){
-                                          _productController.listenForCart();
-                                          refreshCart();
-                                        });
-                                      }
-                                    )),
-
+                                    child: cartLoading
+                                        ? Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25.0),
+                                              // color: Colors.greenAccent,
+                                            ),
+                                            child: Image.asset(
+                                              'assets/img/loading.gif',
+                                              fit: BoxFit.cover,
+                                              width: 400,
+                                            ))
+                                        : KitchenCartWidget(callback: (func) {
+                                            refreshCart = func;
+                                          }, removeFromCart: () {
+                                            Future.delayed(
+                                                Duration(milliseconds: 30), () {
+                                              _productController
+                                                  .listenForCart();
+                                              refreshCart();
+                                            });
+                                          })),
 
                                 // products.isEmpty
                                 //     ? SizedBox()
@@ -1174,45 +1209,52 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                   //                     ],
                   //                   ),
                   //                   SizedBox(height: 10),
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Container(
-                                    //  color: Colors.yellow,
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                        //  color: Colors.yellow,
 
-                                      margin:  langCode =='en' ? EdgeInsets.only( left: config.App(context).appWidth(78),top: 40): EdgeInsets.only( right: config.App(context).appWidth(78),top: 40),
-                                        child:  Row(
-                                            children: <Widget>[
-                                              _con.favorite?.id != null
-                                                  ? IconButton(
-                                                  onPressed: () {
-                                                    _con.removeFromFavoriteKitchens(_con.favorite);
-                                                  },
-                                                  padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
-                                                  //color: Theme.of(context).primaryColor,
-                                                  //shape: StadiumBorder(),
-                                                 // borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                                  icon: Icon(
-                                                    Icons.bookmark,
-                                                    color: Theme.of(context).accentColor,
-                                                  ))
-                                                  : IconButton(
-
-                                                  onPressed: () {
-                                                    if (currentUser.value.apiToken == null) {
-                                                      Navigator.of(context).pushNamed("/Login");
-                                                    } else {
-                                                      _con.addToFavoriteKitchens(_con.market.id);
-                                                    }
-                                                  },
-                                                  padding: EdgeInsets.symmetric(vertical: 0,horizontal: 20),
-                                                  color: Colors.transparent,
-                                                 // shape: StadiumBorder(),
-                                                  icon: Icon(
-                                                    Icons.bookmark_border_outlined,
-                                                    color: Theme.of(context).primaryColor,
-                                                  )),
-                                            ])),
-                                  )
+                        margin: langCode == 'en'
+                            ? EdgeInsets.only(
+                                left: config.App(context).appWidth(78), top: 40)
+                            : EdgeInsets.only(
+                                right: config.App(context).appWidth(78),
+                                top: 40),
+                        child: Row(children: <Widget>[
+                          _con.favorite?.id != null
+                              ? IconButton(
+                                  onPressed: () {
+                                    _con.removeFromFavoriteKitchens(
+                                        _con.favorite);
+                                  },
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 20),
+                                  //color: Theme.of(context).primaryColor,
+                                  //shape: StadiumBorder(),
+                                  // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                  icon: Icon(
+                                    Icons.bookmark,
+                                    color: Theme.of(context).accentColor,
+                                  ))
+                              : IconButton(
+                                  onPressed: () {
+                                    if (currentUser.value.apiToken == null) {
+                                      Navigator.of(context).pushNamed("/Login");
+                                    } else {
+                                      _con.addToFavoriteKitchens(
+                                          _con.market.id);
+                                    }
+                                  },
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 20),
+                                  color: Colors.transparent,
+                                  // shape: StadiumBorder(),
+                                  icon: Icon(
+                                    Icons.bookmark_border_outlined,
+                                    color: Theme.of(context).primaryColor,
+                                  )),
+                        ])),
+                  )
                   // Spacer(),
                   // SizedBox(width: 2),
                   // Stack(

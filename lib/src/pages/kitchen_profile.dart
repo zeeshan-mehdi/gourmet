@@ -156,7 +156,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                         MaterialButton(
                           elevation: 0,
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/Login');
+                            Navigator.of(context).pushNamed('/LoginOption');
                           },
                           color: Theme.of(context).accentColor,
                           height: 40,

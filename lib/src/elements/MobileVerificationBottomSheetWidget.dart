@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../generated/l10n.dart';
@@ -49,9 +50,8 @@ class _MobileVerificationBottomSheetWidgetState
         (AuthCredential auth) { };
     final PhoneVerificationFailed _verifyFailed = (FirebaseAuthException e) {
       print('code sending falied $e');
+      Fluttertoast.showToast(msg: 'code sending failed $e');
     };
-
-
 
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.user.phone,
