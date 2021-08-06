@@ -88,11 +88,25 @@ class _MobileVerificationBottomSheetWidgetState
             padding: const EdgeInsets.only(top: 25),
             child: ListView(
               padding:
-                  EdgeInsets.only(top: 40, bottom: 15, left: 20, right: 20),
+                  EdgeInsets.only(top: 20, bottom: 15, left: 12, right: 16),
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 70),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.close,
+                        ),
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          //fToast.removeCustomToast();
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 30),
                     Text(
                       "Phone Verification",
                       style: TextStyle(
@@ -288,10 +302,9 @@ class _MobileVerificationBottomSheetWidgetState
                 Center(
                   child: InkWell(
                     onTap: () async {
-
-
-                      isCodeResend = true;
-                      confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
+                      verifyPhone();
+                      // isCodeResend = true;
+                      // confirmation = await FirebaseAuth.instance.signInWithPhoneNumber(widget.user.phone);
 
 
 
