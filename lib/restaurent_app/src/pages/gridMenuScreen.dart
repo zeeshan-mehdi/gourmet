@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+
 import 'package:markets/src/elements/CircularLoadingWidget.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/generated/l10n.dart';
 import 'package:markets/restaurent_app/src/controllers/order_controller.dart';
+import 'package:markets/src/controllers/cart_controller.dart';
+
 import 'package:markets/src/controllers/cart_controller.dart';
 import 'package:markets/src/controllers/checkout_controller.dart';
 import 'package:markets/src/controllers/market_controller.dart';
@@ -36,6 +39,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
   MarketController _con;
 
   ProductController _productController;
+
   CartController _cartController;
   List<Product> products = List<Product>();
   int cartIndex = 0;
@@ -47,14 +51,18 @@ class _GridScreenState extends StateMVC<GridScreen> {
     _con = controller;
   }
   void initState() {
+
+
     _productController = ProductController();
     _cartController = CartController();
+
 
     _productController.listenForCart();
     _con.listenForMarket(id: widget.routeArgument.param).then((value) {
       setState(() {
         _con.market = value as Market;
         print(_con.market.toMap());
+
       });
     });
 
@@ -75,11 +83,11 @@ class _GridScreenState extends StateMVC<GridScreen> {
     ScreenUtil.init(context,
         width: width, height: height, allowFontScaling: false);
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: _con.market == null ||
+        backgroundColor: Colors.white,
+        body:  _con.market == null ||
                 _con.market?.image == null ||
                 _productController.loading
-            ? CircularLoadingWidget(height: 500)
+            ? Center(child: CircularLoadingWidget(height: 500))
             : RefreshIndicator(
                 onRefresh: _con.refreshMarket,
                 child: Stack(
@@ -240,126 +248,156 @@ class _GridScreenState extends StateMVC<GridScreen> {
                               child: ConstrainedBox(
                                 constraints: BoxConstraints(
                                     minHeight:
-                                        MediaQuery.of(context).size.height *
-                                            0.9,
+                                        MediaQuery.of(context).size.height * 1,
                                     maxHeight:
-                                        MediaQuery.of(context).size.height *
-                                            0.9),
+                                        MediaQuery.of(context).size.height * 1),
                                 child: Column(
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
                                       height: ScreenUtil().setHeight(20),
                                     ),
-                                    Text(
-                                      'My Favourites',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: ScreenUtil().setSp(17)),
-                                    ),
+                                    if (_con.getKitchenFavourite()==true)
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Text(
+                                              'My Favourites',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(17)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     SizedBox(
                                       height: ScreenUtil().setHeight(5),
                                     ),
-                                    Container(
+                                    if (_con.getKitchenFavourite()==true)
+                                      Container(
                                       height: ScreenUtil.screenHeight * 0.22,
                                       width: ScreenUtil.screenWidth,
+
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: _con.products.length,
+                                        itemCount: _con.favorites.length,
                                         itemBuilder: (context, i) {
-                                          return InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                cartLoading = true;
-                                              });
+                                          print('idddss');
+                                          print(_con
+                                              .favorites[i].product.market.id);
+                                          print(_con.market.id);
 
-                                              // if (!isPresent) {
-                                              print(_con.products[i].name);
-                                              setState(() {
-                                                selectedIndex = i;
-                                                //  List<Product> products = List<Product>();
-                                                products.add(_con.products[i]);
-                                                // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
-                                                products.toSet().toList();
-
-                                                print('index  $i');
-
-                                                if (currentUser
-                                                        .value.apiToken ==
-                                                    null) {
-                                                  setState(() {
-                                                    cartLoading = false;
-                                                  });
-                                                  Navigator.of(context)
-                                                      .pushNamed("/Login");
-                                                } else {
-                                                  if (_productController
-                                                      .isSameMarkets(
-                                                          _con.products[i])) {
-                                                    _productController
-                                                        .addToCart(
-                                                            _con.products[i]);
-                                                    Future.delayed(
-                                                        Duration(seconds: 3),
-                                                        () {
-                                                      refreshCart();
-                                                      _productController
-                                                          .listenForCart();
-                                                      setState(() {
-                                                        cartLoading = false;
-                                                      });
-                                                    });
-                                                  } else {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        // return object of type Dialog
-                                                        return AddToCartAlertDialogWidget(
-                                                            oldProduct:
-                                                                _productController
-                                                                    .carts
-                                                                    .elementAt(
-                                                                        0)
-                                                                    ?.product,
-                                                            newProduct: _con
-                                                                    .products[
-                                                                selectedIndex],
-                                                            onPressed: (product,
-                                                                {reset: true}) {
-                                                              _productController
-                                                                  .addToCart(
-                                                                      product,
-                                                                      reset:
-                                                                          reset);
-                                                              Future.delayed(
-                                                                  Duration(
-                                                                      seconds:
-                                                                          3),
-                                                                  () {
-                                                                refreshCart();
-                                                                _productController
-                                                                    .listenForCart();
-
-                                                                setState(() {
-                                                                  cartLoading =
-                                                                      false;
-                                                                });
-                                                              });
-                                                              return;
-                                                            });
-                                                      },
-                                                    );
-                                                  }
-                                                }
-                                              });
-                                            },
-                                            child: CardWidget(
-                                                product: _con.products[i]),
-                                          );
+                                          if (_con.favorites[i].product.market
+                                                  .id ==
+                                              _con.market.id) {
+                                            return InkWell(
+                                                onTap: () {},
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      height: ScreenUtil
+                                                              .screenHeight *
+                                                          0.12,
+                                                      width: ScreenUtil
+                                                              .screenWidth *
+                                                          0.4,
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                              fit: BoxFit.cover,
+                                                              image: NetworkImage(
+                                                                  _con
+                                                                      .favorites[
+                                                                          i]
+                                                                      .product
+                                                                      .image
+                                                                      .url)),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(8),
+                                                          ),
+                                                          color: Colors.black
+                                                              .withOpacity(
+                                                                  0.4)),
+                                                    ),
+                                                    Container(
+                                                      height: ScreenUtil
+                                                              .screenHeight *
+                                                          0.1,
+                                                      width: ScreenUtil
+                                                              .screenWidth /
+                                                          2.2,
+                                                      color: Colors.white
+                                                          .withOpacity(0.3),
+                                                      child: Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 15),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              _con
+                                                                      .favorites[
+                                                                          i]
+                                                                      .product
+                                                                      .name ??
+                                                                  'Chicken',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      ScreenUtil()
+                                                                          .setSp(
+                                                                              16)),
+                                                            ),
+                                                            SizedBox(
+                                                              height:
+                                                                  ScreenUtil()
+                                                                      .setHeight(
+                                                                          5),
+                                                            ),
+                                                            Text(
+                                                              _con
+                                                                      .favorites[
+                                                                          i]
+                                                                      .product
+                                                                      .price
+                                                                      .toString() ??
+                                                                  '\$100.00',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      ScreenUtil()
+                                                                          .setSp(
+                                                                              16)),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: ScreenUtil()
+                                                          .setHeight(10),
+                                                    ),
+                                                  ],
+                                                ));
+                                          }
                                         },
                                       ),
                                     ),
+
                                     SizedBox(
                                       height: ScreenUtil().setHeight(5),
                                     ),
@@ -387,9 +425,168 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                       width: ScreenUtil.screenWidth,
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: 2,
+                                        itemCount: _con.products.length,
                                         itemBuilder: (context, i) {
-                                          return CardWidget();
+                                          print('menu refreshed');
+                                          print('check');
+                                          print(_con.checkFavourite(
+                                              _con.products[i].id));
+                                          return Stack(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    cartLoading = true;
+                                                  });
+
+                                                  // if (!isPresent) {
+                                                  print(_con.products[i].name);
+                                                  setState(() {
+                                                    selectedIndex = i;
+                                                    //  List<Product> products = List<Product>();
+                                                    products
+                                                        .add(_con.products[i]);
+                                                    // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                                                    products.toSet().toList();
+
+                                                    print('index  $i');
+
+                                                    if (currentUser
+                                                            .value.apiToken ==
+                                                        null) {
+                                                      setState(() {
+                                                        cartLoading = false;
+                                                      });
+                                                      Navigator.of(context)
+                                                          .pushNamed("/Login");
+                                                    } else {
+                                                      if (_productController
+                                                          .isSameMarkets(_con
+                                                              .products[i])) {
+                                                        _productController
+                                                            .addToCart(_con
+                                                                .products[i]);
+                                                        Future.delayed(
+                                                            Duration(
+                                                                seconds: 3),
+                                                            () {
+                                                          refreshCart();
+                                                          _productController
+                                                              .listenForCart();
+                                                          setState(() {
+                                                            cartLoading = false;
+                                                          });
+                                                        });
+                                                      } else {
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            // return object of type Dialog
+                                                            return AddToCartAlertDialogWidget(
+                                                                oldProduct:
+                                                                    _productController
+                                                                        .carts
+                                                                        .elementAt(
+                                                                            0)
+                                                                        ?.product,
+                                                                newProduct: _con
+                                                                        .products[
+                                                                    selectedIndex],
+                                                                onPressed: (product,
+                                                                    {reset:
+                                                                        true}) {
+                                                                  _productController
+                                                                      .addToCart(
+                                                                          product,
+                                                                          reset:
+                                                                              reset);
+                                                                  Future.delayed(
+                                                                      Duration(
+                                                                          seconds:
+                                                                              3),
+                                                                      () {
+                                                                    refreshCart();
+                                                                    _productController
+                                                                        .listenForCart();
+
+                                                                    setState(
+                                                                        () {
+                                                                      cartLoading =
+                                                                          false;
+                                                                    });
+                                                                  });
+                                                                  return;
+                                                                });
+                                                          },
+                                                        );
+                                                      }
+                                                    }
+                                                  });
+                                                },
+                                                child: CardWidget(
+                                                    product: _con.products[i]),
+                                              ),
+                                              Row(children: <Widget>[
+                                                _con.checkFavourite(
+                                                        _con.products[i].id)
+                                                    ? IconButton(
+                                                        onPressed: () {
+                                                          _con.removeFromFavorite(
+                                                              _con.getFavouriteProduct(
+                                                                  _con
+                                                                      .products[
+                                                                          i]
+                                                                      .id));
+                                                          _con.refreshMarket();
+                                                        },
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 0,
+                                                                horizontal: 20),
+                                                        //color: Theme.of(context).primaryColor,
+                                                        //shape: StadiumBorder(),
+                                                        // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                        icon: Icon(
+                                                          Icons.bookmark,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .accentColor,
+                                                        ))
+                                                    : IconButton(
+                                                        onPressed: () {
+                                                          if (currentUser.value
+                                                                  .apiToken ==
+                                                              null) {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pushNamed(
+                                                                    "/Login");
+                                                          } else {
+                                                            _con.addToFavorite(
+                                                                _con.products[
+                                                                    i]);
+
+                                                            _con.refreshMarket();
+                                                          }
+                                                        },
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 0,
+                                                                horizontal: 20),
+                                                        color:
+                                                            Colors.transparent,
+                                                        // shape: StadiumBorder(),
+                                                        icon: Icon(
+                                                          Icons
+                                                              .bookmark_border_outlined,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
+                                                        )),
+                                              ])
+                                            ],
+                                          );
                                         },
                                       ),
                                     ),
@@ -412,33 +609,36 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                     SizedBox(
                                       height: ScreenUtil().setHeight(5),
                                     ),
-                                    Container(
-                                        height: 230,
-                                        child: cartLoading
-                                            ? Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          25.0),
-                                                  // color: Colors.greenAccent,
-                                                ),
-                                                child: Image.asset(
-                                                  'assets/img/loading.gif',
-                                                  fit: BoxFit.cover,
-                                                  width: 200,
-                                                ))
-                                            : KitchenCartWidget(
-                                                callback: (func) {
-                                                refreshCart = func;
-                                              }, removeFromCart: () {
-                                                Future.delayed(
-                                                    Duration(milliseconds: 30),
-                                                    () {
-                                                  _productController
-                                                      .listenForCart();
-                                                  refreshCart();
-                                                });
-                                              })),
+                                    Expanded(
+                                      child: Container(
+                                          height: 170,
+                                          child: cartLoading
+                                              ? Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25.0),
+                                                    // color: Colors.greenAccent,
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/img/loading.gif',
+                                                    fit: BoxFit.cover,
+                                                    width: 200,
+                                                  ))
+                                              : KitchenCartWidget(
+                                                  callback: (func) {
+                                                  refreshCart = func;
+                                                }, removeFromCart: () {
+                                                  Future.delayed(
+                                                      Duration(
+                                                          milliseconds: 30),
+                                                      () {
+                                                    _productController
+                                                        .listenForCart();
+                                                    refreshCart();
+                                                  });
+                                                })),
+                                    ),
 //calender here
                                   ],
                                 ),
@@ -732,7 +932,7 @@ class Header extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Container(

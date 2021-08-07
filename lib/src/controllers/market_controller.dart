@@ -33,11 +33,51 @@ class MarketController extends ControllerMVC {
   List<Product> featuredProducts = <Product>[];
   List<Review> reviews = <Review>[];
   GlobalKey<ScaffoldState> scaffoldKey;
-
+  List<Favorite> favorites = <Favorite>[];
+  List<Favorite> kitchenFavorites = <Favorite>[];
   MarketController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
+    listenForFavorites();
+  }
+   bool getKitchenFavourite(){
+  // print('eed' + favorites.firstWhere((element) => element.product.market.id == market.id).toString());
+print(favorites.length);
+     int i =favorites.indexWhere((element) => element.product.market.id == market.id);
+    print(i.toString() + 'ffffrrrr');
+    if(i != -1){
+      print('fftt');
+
+      return true;
+
+    }else{
+      return false;
+    }
+    print('kitchen length');
+
   }
 
+  void listenForFavorites({String message}) async {
+    final Stream<Favorite> stream = await getFavorites();
+    stream.listen((Favorite _favorite) {
+      print('rrrrr');
+      print(_favorite.toMap());
+
+        favorites.add(_favorite);
+
+      print(favorites.length);
+
+    }, onError: (a) {
+      ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+        content: Text(S.of(state.context).verify_your_internet_connection),
+      ));
+    }, onDone: () {
+      if (message != null) {
+        ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+      }
+    });
+  }
   Future<dynamic> listenForMarket({String id, String message}) async {
     final whenDone = new Completer();
     final Stream<Market> stream = await getMarket(id, deliveryAddress.value);
@@ -75,6 +115,22 @@ class MarketController extends ControllerMVC {
       setState(() => reviews.add(_review));
     }, onError: (a) { print(CustomTrace(StackTrace.current, message: a.toString()).toString());}, onDone: () {});
   }
+bool checkFavourite(id){
+    int i =favorites.indexWhere((element) => element.product.id == id);
+    if(i != -1){
+      return true;
+    }else{
+      return false;
+    }
+}
+ getFavouriteProduct(id){
+    int i =favorites.indexWhere((element) => element.product.id == id);
+    if(i != -1){
+      return favorites[i];
+    }else{
+      return false;
+    }
+}
 
   void listenForProducts(String idMarket, {List<String> categoriesId}) async {
     final Stream<Product> stream = await getProductsOfMarket(idMarket, categories: categoriesId);
@@ -137,10 +193,16 @@ class MarketController extends ControllerMVC {
     galleries.clear();
     reviews.clear();
     featuredProducts.clear();
+    favorites.clear();
+    kitchenFavorites.clear();
+    listenForFavorites();
     listenForMarket(id: _id, message: S.of(state.context).market_refreshed_successfuly);
     listenForMarketReviews(id: _id);
     listenForGalleries(_id);
     listenForFeaturedProducts(_id);
+
+
+
   }
 
   void addToFavorite(Product product) async {
@@ -157,6 +219,7 @@ class MarketController extends ControllerMVC {
       setState(() {
         print(value.product.name);
         this.favoriteProduct = value;
+
       });
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
         content: Text(S.of(state.context).thisProductWasAddedToFavorite),
@@ -188,9 +251,12 @@ class MarketController extends ControllerMVC {
 
 
   void removeFromFavorite(Favorite _favorite) async {
+    print('in fvrt mrthod');
+    print(_favorite.toMap());
     removeFavoriteKitechen(_favorite).then((value) {
       setState(() {
         this.favorite = new Favorite();
+
       });
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
         content: Text(S.of(state.context).thisProductWasRemovedFromFavorites),

@@ -36,7 +36,7 @@ class CardWidget extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GridScreen(routeArgument: RouteArgument(param:
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuGridScreen(routeArgument: RouteArgument(param:
       market.id
         ),
         )));

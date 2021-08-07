@@ -1220,7 +1220,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
                             : EdgeInsets.only(
                                 right: config.App(context).appWidth(78),
                                 top: 40),
-                        child: Row(children: <Widget>[
+                        child:
+
+                        Row(children: <Widget>[
                           _con.favorite?.id != null
                               ? IconButton(
                                   onPressed: () {

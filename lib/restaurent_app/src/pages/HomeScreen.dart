@@ -28,7 +28,7 @@ import '../helpers/helper.dart';
 import '../repository/settings_repository.dart' as settingRepo;
 class HomeScreen extends StatefulWidget {
   RouteArgument routeArgument;
-   HomeScreen({this.routeArgument}) ;
+  HomeScreen({this.routeArgument}) ;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -84,59 +84,59 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
           ? CircularLoadingWidget(height: 500)
           :  RefreshIndicator(
         onRefresh: _con.refreshMarket,
-            child: Stack(
-        children: [
+        child: Stack(
+          children: [
             // Container(
             //   height: ScreenUtil.screenHeight * 0.4,
             //   width: MediaQuery.of(context).size.width,
             //   color: Colors.amber,
             // ),
-          Stack(
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    borderRadius:
-                    BorderRadius.circular(25.0),
-                    // color: Colors.greenAccent,
+            Stack(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius:
+                      BorderRadius.circular(25.0),
+                      // color: Colors.greenAccent,
+                    ),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      width:
+                      MediaQuery.of(context).size.width,
+                      imageUrl: _con.market.image.url,
+                      placeholder: (context, url) =>
+                          Image.asset(
+                            'assets/img/loading.gif',
+                            fit: BoxFit.cover,
+                            width: 400,
+                          ),
+                      errorWidget: (context, url, error) =>
+                          Icon(Icons.error_outline),
+                    )),
+                Container(
+                  height: ScreenUtil.screenHeight * 0.35,
+                  width: double.infinity,
+                  decoration: new BoxDecoration(
+                    gradient: new LinearGradient(
+                      stops: [0.2, 0.99],
+                      begin: FractionalOffset.topCenter,
+                      end: FractionalOffset.bottomCenter,
+                      tileMode: TileMode.repeated,
+                      // end: const Alignment(0.3, 0.2),
+                      // begin: const Alignment(0.5, 0.6),
+                      colors: <Color>[
+
+                        Colors.white60.withOpacity(0.3),
+                        Colors.black87,
+
+
+                      ],
+                    ),
+
                   ),
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    width:
-                    MediaQuery.of(context).size.width,
-                    imageUrl: _con.market.image.url,
-                    placeholder: (context, url) =>
-                        Image.asset(
-                          'assets/img/loading.gif',
-                          fit: BoxFit.cover,
-                          width: 400,
-                        ),
-                    errorWidget: (context, url, error) =>
-                        Icon(Icons.error_outline),
-                  )),
-              Container(
-                height: ScreenUtil.screenHeight * 0.35,
-                width: double.infinity,
-                decoration: new BoxDecoration(
-                  gradient: new LinearGradient(
-                    stops: [0.2, 0.99],
-                    begin: FractionalOffset.topCenter,
-                    end: FractionalOffset.bottomCenter,
-                    tileMode: TileMode.repeated,
-                    // end: const Alignment(0.3, 0.2),
-                    // begin: const Alignment(0.5, 0.6),
-                    colors: <Color>[
-
-                      Colors.white60.withOpacity(0.3),
-                      Colors.black87,
-
-
-                    ],
-                  ),
-
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
             Positioned(top: ScreenUtil().setHeight(30), child: Header()),
             Container(
               height: ScreenUtil.screenHeight * 0.3,
@@ -153,11 +153,11 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                       height: ScreenUtil().setHeight(70),
                       decoration: new BoxDecoration(
                           shape: BoxShape.circle, color: Colors.black
-                          // image: new DecorationImage(
-                          //   image: new ExactAssetImage('assets/4.png'),
-                          //   fit: BoxFit.cover,
-                          // ),
-                          )),
+                        // image: new DecorationImage(
+                        //   image: new ExactAssetImage('assets/4.png'),
+                        //   fit: BoxFit.cover,
+                        // ),
+                      )),
                   SizedBox(
                     height: ScreenUtil().setHeight(10),
                   ),
@@ -165,7 +165,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                  langCode=='en'? _con.market?.name??'' :_con.market?.nameAr  ?? '',
+                        langCode=='en'? _con.market?.name??'' :_con.market?.nameAr  ?? '',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -213,56 +213,377 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: ScreenUtil.screenHeight * 0.69,
-                width: ScreenUtil.screenWidth,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+            DraggableScrollableSheet(
+              initialChildSize: 0.67,
+
+// maxChildSize: 1.0,
+              minChildSize: 0.67,
+              builder: (BuildContext context,
+                  ScrollController scrollController) {
+                return Container(
+                  height: ScreenUtil.screenHeight,
+                  width: ScreenUtil.screenWidth,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 14.0, right: 14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: ScreenUtil().setHeight(20),
-                      ),
-                      Text(
-                        'Menu',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: ScreenUtil().setSp(17)),
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: _con.products.length,
-                          itemBuilder: (context, i) {
-                            return CardWidget(
-                            product:  _con.products[i]
-                            );
-                          },
-                        ),
-                      )
-                    ],
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
                   ),
-                ),
-              ),
-            )
-        ],
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    padding: EdgeInsets.all(5),
+                    child: IntrinsicHeight(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                            minHeight:
+                            MediaQuery.of(context).size.height *
+                                1,
+                            maxHeight:
+                            MediaQuery.of(context).size.height *
+                                1),
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: ScreenUtil().setHeight(20),
+                            ),
+
+                            // SizedBox(
+                            //   height: ScreenUtil().setHeight(5),
+                            // ),
+                            // Container(
+                            //   height: ScreenUtil.screenHeight * 0.22,
+                            //   width: ScreenUtil.screenWidth,
+                            //   child: ListView.builder(
+                            //     scrollDirection: Axis.horizontal,
+                            //     itemCount: _con.products.length,
+                            //     itemBuilder: (context, i) {
+                            //       return InkWell(
+                            //         onTap: () {
+                            //
+                            //           setState(() {
+                            //             cartLoading = true;
+                            //           });
+                            //
+                            //           // if (!isPresent) {
+                            //           print(_con.products[i].name);
+                            //           setState(() {
+                            //             selectedIndex = i;
+                            //             //  List<Product> products = List<Product>();
+                            //             products.add(_con.products[i]);
+                            //             // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                            //             products.toSet().toList();
+                            //
+                            //             print('index  $i');
+                            //
+                            //             if (currentUser
+                            //                 .value.apiToken ==
+                            //                 null) {
+                            //               setState(() {
+                            //                 cartLoading = false;
+                            //               });
+                            //               Navigator.of(context)
+                            //                   .pushNamed("/Login");
+                            //             } else {
+                            //               if (_productController
+                            //                   .isSameMarkets(
+                            //                   _con.products[i])) {
+                            //                 _productController
+                            //                     .addToCart(
+                            //                     _con.products[i]);
+                            //                 Future.delayed(
+                            //                     Duration(seconds: 3),
+                            //                         () {
+                            //                       refreshCart();
+                            //                       _productController
+                            //                           .listenForCart();
+                            //                       setState(() {
+                            //                         cartLoading = false;
+                            //                       });
+                            //                     });
+                            //               } else {
+                            //                 showDialog(
+                            //                   context: context,
+                            //                   builder: (BuildContext
+                            //                   context) {
+                            //                     // return object of type Dialog
+                            //                     return AddToCartAlertDialogWidget(
+                            //                         oldProduct:
+                            //                         _productController
+                            //                             .carts
+                            //                             .elementAt(
+                            //                             0)
+                            //                             ?.product,
+                            //                         newProduct: _con
+                            //                             .products[
+                            //                         selectedIndex],
+                            //                         onPressed: (product,
+                            //                             {reset: true}) {
+                            //                           _productController
+                            //                               .addToCart(
+                            //                               product,
+                            //                               reset:
+                            //                               reset);
+                            //                           Future.delayed(
+                            //                               Duration(
+                            //                                   seconds:
+                            //                                   3),
+                            //                                   () {
+                            //                                 refreshCart();
+                            //                                 _productController
+                            //                                     .listenForCart();
+                            //
+                            //                                 setState(() {
+                            //                                   cartLoading =
+                            //                                   false;
+                            //                                 });
+                            //                               });
+                            //                           return;
+                            //                         });
+                            //                   },
+                            //                 );
+                            //               }
+                            //             }
+                            //           });
+                            //         },
+                            //         child: CardWidget(
+                            //             product: _con.products[i]),
+                            //       );
+                            //     },
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: ScreenUtil().setHeight(5),
+                            // ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Menu',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:
+                                        ScreenUtil().setSp(17)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: ScreenUtil().setHeight(5),
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: _con.products.length,
+                                itemBuilder: (context, i) {
+                                  return InkWell(
+                                    onTap: (){
+
+
+                                      setState(() {
+                                        cartLoading = true;
+                                      });
+
+                                      // if (!isPresent) {
+                                      print(_con.products[i].name);
+                                      setState(() {
+                                        selectedIndex = i;
+                                        //  List<Product> products = List<Product>();
+                                        products.add(_con.products[i]);
+                                        // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                                        products.toSet().toList();
+
+                                        print('index  $i');
+
+                                        if (currentUser
+                                            .value.apiToken ==
+                                            null) {
+                                          setState(() {
+                                            cartLoading = false;
+                                          });
+                                          Navigator.of(context)
+                                              .pushNamed("/Login");
+                                        } else {
+                                          if (_productController
+                                              .isSameMarkets(
+                                              _con.products[i])) {
+                                            _productController
+                                                .addToCart(
+                                                _con.products[i]);
+                                            Future.delayed(
+                                                Duration(seconds: 3),
+                                                    () {
+                                                  refreshCart();
+                                                  _productController
+                                                      .listenForCart();
+                                                  setState(() {
+                                                    cartLoading = false;
+                                                  });
+                                                });
+                                          } else {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext
+                                              context) {
+                                                // return object of type Dialog
+                                                return AddToCartAlertDialogWidget(
+                                                    oldProduct:
+                                                    _productController
+                                                        .carts
+                                                        .elementAt(
+                                                        0)
+                                                        ?.product,
+                                                    newProduct: _con
+                                                        .products[
+                                                    selectedIndex],
+                                                    onPressed: (product,
+                                                        {reset: true}) {
+                                                      _productController
+                                                          .addToCart(
+                                                          product,
+                                                          reset:
+                                                          reset);
+                                                      Future.delayed(
+                                                          Duration(
+                                                              seconds:
+                                                              3),
+                                                              () {
+                                                            refreshCart();
+                                                            _productController
+                                                                .listenForCart();
+
+                                                            setState(() {
+                                                              cartLoading =
+                                                              false;
+                                                            });
+                                                          });
+                                                      return;
+                                                    });
+                                              },
+                                            );
+                                          }
+                                        }
+                                      });
+                                    },
+
+                                    child: CardWidget(
+                                        product:  _con.products[i]
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Cart',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:
+                                        ScreenUtil().setSp(17)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: ScreenUtil().setHeight(5),
+                            ),
+                            Expanded(
+                              child: Container(
+
+                                  height: 170,
+                                  child: cartLoading
+                                      ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                            25.0),
+                                        // color: Colors.greenAccent,
+                                      ),
+                                      child: Image.asset(
+                                        'assets/img/loading.gif',
+                                        fit: BoxFit.cover,
+                                        width: 200,
+                                      ))
+                                      : KitchenCartWidget(
+                                      callback: (func) {
+                                        refreshCart = func;
+                                      }, removeFromCart: () {
+                                    Future.delayed(
+                                        Duration(milliseconds: 30),
+                                            () {
+                                          _productController
+                                              .listenForCart();
+                                          refreshCart();
+                                        });
+                                  })),
+                            ),
+//calender here
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Container(
+            //     height: ScreenUtil.screenHeight * 0.69,
+            //     width: ScreenUtil.screenWidth,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.only(
+            //           topLeft: Radius.circular(20),
+            //           topRight: Radius.circular(20)),
+            //       color: Colors.white,
+            //     ),
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(left: 14.0, right: 14),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           SizedBox(
+            //             height: ScreenUtil().setHeight(20),
+            //           ),
+            //           Text(
+            //             'Menu',
+            //             style: TextStyle(
+            //                 fontWeight: FontWeight.bold,
+            //                 fontSize: ScreenUtil().setSp(17)),
+            //           ),
+            //           Expanded(
+            //             child: ListView.builder(
+            //               itemCount: _con.products.length,
+            //               itemBuilder: (context, i) {
+            //                 return CardWidget(
+            //                 product:  _con.products[i]
+            //                 );
+            //               },
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // )
+          ],
+        ),
       ),
-          ),
     );
   }
 }
 
 class CardWidget extends StatelessWidget {
   Product product;
-   CardWidget({
+  CardWidget({
     this.product,
     Key key,
   }) : super(key: key);
@@ -280,11 +601,11 @@ class CardWidget extends StatelessWidget {
                 Radius.circular(8),
               ),
               image: DecorationImage(
-                fit: BoxFit.cover,
-               image: NetworkImage(
-                   product
-                   .image
-                   .url)
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      product
+                          .image
+                          .url)
               ),
               color: Colors.black.withOpacity(0.4)),
           child: Container(
@@ -301,14 +622,14 @@ class CardWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                      product.name ??  'Chicken',
+                        product.name ??  'Chicken',
                         style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                       ),
                       SizedBox(
                         height: ScreenUtil().setHeight(5),
                       ),
                       Text(
-                       product.price.toString() ?? '\$100.00',
+                        product.price.toString() ?? '\$100.00',
                         style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                       )
                     ],
@@ -344,17 +665,23 @@ class Header extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              height: 40,
-              width: 40,
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(left: 8),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                  color: Colors.white.withOpacity(0.4)),
-              child: Center(child: Icon(Icons.arrow_back_ios)),
+            InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+
+              child: Container(
+                height: 40,
+                width: 40,
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(left: 8),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                    color: Colors.white.withOpacity(0.4)),
+                child: Center(child: Icon(Icons.arrow_back_ios)),
+              ),
             ),
             Container(
               height: 40,

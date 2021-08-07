@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:markets/src/controllers/market_controller.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -26,15 +27,21 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends StateMVC<HomeWidget> {
   HomeController _con;
-
+MarketController marketController;
 
   _HomeWidgetState() : super(HomeController()) {
     _con = controller;
   }
-
+@override
+  void initState() {
+    marketController = MarketController();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _con.scaffoldKey,
       appBar: AppBar(
         // leading: new IconButton(
