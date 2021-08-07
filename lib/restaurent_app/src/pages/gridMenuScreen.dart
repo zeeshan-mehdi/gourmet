@@ -84,6 +84,111 @@ class _GridScreenState extends StateMVC<GridScreen> {
         width: width, height: height, allowFontScaling: false);
     return Scaffold(
         backgroundColor: Colors.white,
+        floatingActionButton: FloatingActionButton.extended(
+
+          onPressed: () {
+
+            showModalBottomSheet(
+                context: context,
+                enableDrag: true,
+                isScrollControlled: true,
+                builder: (context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child:
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+
+                                height: 170,
+                                child: cartLoading
+                                    ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          25.0),
+                                      // color: Colors.greenAccent,
+                                    ),
+                                    child: Image.asset(
+                                      'assets/img/loading.gif',
+                                      fit: BoxFit.cover,
+                                      width: 200,
+                                    ))
+                                    : KitchenCartWidget(
+                                    callback: (func) {
+                                      refreshCart = func;
+                                    }, removeFromCart: () {
+                                  Future.delayed(
+                                      Duration(milliseconds: 30),
+                                          () {
+                                        _productController
+                                            .listenForCart();
+                                        refreshCart();
+                                      });
+                                })),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).whenComplete(() {
+              _con.refreshMarket();
+              _productController.listenForCart();
+              //do whatever you want after closing the bottom sheet
+            });
+          },
+          // icon: Icon(Icons.save),
+          label: Row(
+            children: [
+              Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
+
+              new Container(
+
+                  child: new Stack(
+
+                    children: <Widget>[
+                      new IconButton(icon: new Icon(Icons.shopping_cart,
+                        color: Colors.white,),
+                        onPressed: null,
+                      ),
+                      _productController.carts.length.toString() =='0'? new Container() :
+                      new Positioned(
+                          right: 6.0,
+                          child: new Stack(
+                            children: <Widget>[
+                              new Icon(
+                                  Icons.brightness_1,
+                                  size: 20.0, color: Colors.black),
+                              new Positioned(
+                                  top: 3.0,
+                                  right: 7.0,
+                                  child: new Center(
+                                    child: new Text(
+                                      _productController.carts.length.toString(),
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11.0,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    ),
+                                  )),
+
+
+                            ],
+                          )),
+
+                    ],
+                  )
+              ),
+
+              // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
+            ],
+          ),
+        ),
         body:  _con.market == null ||
                 _con.market?.image == null ||
                 _productController.loading
@@ -466,6 +571,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                         _productController
                                                             .addToCart(_con
                                                                 .products[i]);
+                                                        _con.refreshMarket();
                                                         Future.delayed(
                                                             Duration(
                                                                 seconds: 3),
@@ -590,55 +696,40 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                         },
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Cart',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    ScreenUtil().setSp(17)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+
                                     SizedBox(
                                       height: ScreenUtil().setHeight(5),
                                     ),
-                                    Expanded(
-                                      child: Container(
-                                          height: 170,
-                                          child: cartLoading
-                                              ? Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25.0),
-                                                    // color: Colors.greenAccent,
-                                                  ),
-                                                  child: Image.asset(
-                                                    'assets/img/loading.gif',
-                                                    fit: BoxFit.cover,
-                                                    width: 200,
-                                                  ))
-                                              : KitchenCartWidget(
-                                                  callback: (func) {
-                                                  refreshCart = func;
-                                                }, removeFromCart: () {
-                                                  Future.delayed(
-                                                      Duration(
-                                                          milliseconds: 30),
-                                                      () {
-                                                    _productController
-                                                        .listenForCart();
-                                                    refreshCart();
-                                                  });
-                                                })),
-                                    ),
+                                    // Expanded(
+                                    //   child: Container(
+                                    //       height: 170,
+                                    //       child: cartLoading
+                                    //           ? Container(
+                                    //               decoration: BoxDecoration(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         25.0),
+                                    //                 // color: Colors.greenAccent,
+                                    //               ),
+                                    //               child: Image.asset(
+                                    //                 'assets/img/loading.gif',
+                                    //                 fit: BoxFit.cover,
+                                    //                 width: 200,
+                                    //               ))
+                                    //           : KitchenCartWidget(
+                                    //               callback: (func) {
+                                    //               refreshCart = func;
+                                    //             }, removeFromCart: () {
+                                    //               Future.delayed(
+                                    //                   Duration(
+                                    //                       milliseconds: 30),
+                                    //                   () {
+                                    //                 _productController
+                                    //                     .listenForCart();
+                                    //                 refreshCart();
+                                    //               });
+                                    //             })),
+                                    // ),
 //calender here
                                   ],
                                 ),

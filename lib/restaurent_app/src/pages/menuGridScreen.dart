@@ -45,10 +45,11 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
     _con = controller;
   }
   void initState() {
-    _productController = ProductController();
-    _cartController = CartController();
 
-    _productController.listenForCart();
+    _productController = ProductController();
+
+_productController.listenForCartsCount();
+
     _con.listenForMarket(id: widget.routeArgument.param).then((value) {
       setState(() {
         _con.market = value as Market;
@@ -57,12 +58,14 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
     });
 
     _con.listenForProducts(widget.routeArgument.param);
+    _productController.listenForCart();
 
     // _con.listenForCart();
     // _con.listenForFavorite(productId: widget.routeArgument.id);
     super.initState();
   }
   int selectedIndex = null;
+
   @override
   Widget build(BuildContext context) {
     String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
@@ -72,6 +75,111 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
     ScreenUtil.init(context,
         width: width, height: height, allowFontScaling: false);
     return Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+
+          onPressed: () {
+
+            showModalBottomSheet(
+                context: context,
+                enableDrag: true,
+                isScrollControlled: true,
+                builder: (context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child:
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+
+                                height: 170,
+                                child: cartLoading
+                                    ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          25.0),
+                                      // color: Colors.greenAccent,
+                                    ),
+                                    child: Image.asset(
+                                      'assets/img/loading.gif',
+                                      fit: BoxFit.cover,
+                                      width: 200,
+                                    ))
+                                    : KitchenCartWidget(
+                                    callback: (func) {
+                                      refreshCart = func;
+                                    }, removeFromCart: () {
+                                  Future.delayed(
+                                      Duration(milliseconds: 30),
+                                          () {
+                                        _productController
+                                            .listenForCart();
+                                        refreshCart();
+                                      });
+                                })),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).whenComplete(() {
+_con.refreshMarket();
+                  _productController.listenForCart();
+              //do whatever you want after closing the bottom sheet
+            });
+          },
+         // icon: Icon(Icons.save),
+          label: Row(
+            children: [
+              Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
+
+              new Container(
+
+                  child: new Stack(
+
+                    children: <Widget>[
+                      new IconButton(icon: new Icon(Icons.shopping_cart,
+                        color: Colors.white,),
+                        onPressed: null,
+                      ),
+                      _productController.carts.length.toString() =='0'? new Container() :
+                      new Positioned(
+                          right: 6.0,
+                          child: new Stack(
+                            children: <Widget>[
+                              new Icon(
+                                  Icons.brightness_1,
+                                  size: 20.0, color: Colors.black),
+                              new Positioned(
+                                  top: 3.0,
+                                  right: 7.0,
+                                  child: new Center(
+                                    child: new Text(
+                                      _productController.carts.length.toString(),
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11.0,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    ),
+                                  )),
+
+
+                            ],
+                          )),
+
+                    ],
+                  )
+              ),
+
+             // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
+            ],
+          ),
+        ),
         backgroundColor: Colors.white,
         body: _con.market == null || _con.market?.image == null || _productController.loading
             ? CircularLoadingWidget(height: 500)
@@ -479,7 +587,7 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: ScreenUtil.screenHeight * 0.33,
+                              height: ScreenUtil.screenHeight * 0.35,
                             ),
                             Text(
                               'Menu',
@@ -498,7 +606,7 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
                                       mainAxisSpacing: 5
                                   ),
                                   itemCount: _con.products.length,
-                                  semanticChildCount: 3,
+                                  semanticChildCount: _con.products.length,
                                   itemBuilder: (BuildContext ctx, index) {
                                     return InkWell(
                                       onTap: (){
@@ -535,6 +643,7 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
                                               Future.delayed(
                                                   Duration(seconds: 3),
                                                       () {
+                                                    _con.refreshMarket();
                                                     refreshCart();
                                                     _productController
                                                         .listenForCart();
@@ -597,36 +706,7 @@ class _MenuGridScreenState extends StateMVC<MenuGridScreen> {
                             SizedBox(
                               height: ScreenUtil().setHeight(5),
                             ),
-                            Expanded(
-                              child: Container(
 
-                                  height: 170,
-                                  child: cartLoading
-                                      ? Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(
-                                            25.0),
-                                        // color: Colors.greenAccent,
-                                      ),
-                                      child: Image.asset(
-                                        'assets/img/loading.gif',
-                                        fit: BoxFit.cover,
-                                        width: 200,
-                                      ))
-                                      : KitchenCartWidget(
-                                      callback: (func) {
-                                        refreshCart = func;
-                                      }, removeFromCart: () {
-                                    Future.delayed(
-                                        Duration(milliseconds: 30),
-                                            () {
-                                          _productController
-                                              .listenForCart();
-                                          refreshCart();
-                                        });
-                                  })),
-                            ),
                           ],
                         ),
                       ),
@@ -866,4 +946,5 @@ class Header extends StatelessWidget {
       ),
     );
   }
+
 }

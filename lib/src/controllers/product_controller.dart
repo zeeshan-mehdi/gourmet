@@ -17,15 +17,33 @@ class ProductController extends ControllerMVC {
   List<Cart> carts = [];
   Favorite favorite;
   bool loadCart = false;
+  int cartCount = 0;
   int current = 0;
   GlobalKey<ScaffoldState> scaffoldKey;
 
   bool loading = false;
 
+  double subTotal=0.0;
+
   ProductController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
-
+  void listenForCartsCount({String message}) async {
+    final Stream<int> stream = await getCartCount();
+    print('message $message');
+    stream.listen((int _count) {
+      print(_count);
+      setState(() {
+        this.cartCount = _count;
+        print(_count);
+      });
+    }, onError: (a) {
+      print(a);
+      // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
+      //   content: Text(S.of(state.context).verify_your_internet_connection),
+      // ));
+    });
+  }
   void listenForProduct({String productId, String message}) async {
     final Stream<Product> stream = await getProduct(productId);
     stream.listen((Product _product) {
@@ -55,15 +73,19 @@ class ProductController extends ControllerMVC {
   }
 
   void listenForCart() async {
+    print('inCartCount');
     carts = [];
     setState(() {loading = true;});
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
+
       carts.add(_cart);
     }, onError: (a) {
       setState(() {loading = false;});
       print(CustomTrace(StackTrace.current, message: a.toString()).toString());
     }, onDone: () {
+      calculateTotal();
+      calculateSubtotal();
       setState(() {loading = false;});
       //print(CustomTrace(StackTrace.current, message: a.toString()).toString());
     });
@@ -150,7 +172,27 @@ class ProductController extends ControllerMVC {
       ));
     });
   }
+  void calculateSubtotal() async {
+    double cartPrice = 0;
+    subTotal = 0;
 
+    if(carts==null || carts.length==0) return;
+
+    carts.forEach((cart) {
+      print('inCartsEach');
+      cartPrice = cart.product.price;
+      cart.options.forEach((element) {
+        cartPrice += element.price;
+      });
+
+      cartPrice *= cart.quantity;
+      print(cartPrice.toString());
+      subTotal += cartPrice;
+      print(subTotal.toString() + 'ss');
+    });
+
+    setState(() {});
+  }
   Future<void> refreshProduct() async {
     var _id = product.id;
     product = new Product();
