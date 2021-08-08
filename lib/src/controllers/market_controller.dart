@@ -60,11 +60,12 @@ print(favorites.length);
     final Stream<Favorite> stream = await getFavorites();
     stream.listen((Favorite _favorite) {
       print('rrrrr');
-      print(_favorite.toMap());
+     // print(_favorite.toMap());
 
+      if(_favorite!=null) {
         favorites.add(_favorite);
-
-      print(favorites.length);
+        print(favorites.length);
+      }
 
     }, onError: (a) {
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(

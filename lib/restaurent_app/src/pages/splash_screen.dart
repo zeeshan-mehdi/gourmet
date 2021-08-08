@@ -33,7 +33,7 @@ class SplashScreenState extends StateMVC<SplashScreen> {
       if (progress == 100) {
         try {
           if (currentUser.value.apiToken == null) {
-            Navigator.of(context).pushReplacementNamed('/Login');
+            Navigator.of(context).pushReplacementNamed('/LoginOption');
           } else {
             Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
           }

@@ -42,7 +42,7 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NotificationsWidget()));
          // Navigator.of(context).pushNamed('/Cart', arguments: RouteArgument(param: '/Pages', id: '2'));
         } else {
-          Navigator.of(context).pushNamed('/Login');
+          Navigator.of(context).pushNamed('/LoginOption');
         }
       },
       child: Stack(

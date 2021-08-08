@@ -8,7 +8,10 @@ import 'package:markets/driver_app/src/pages/profile.dart';
 import 'package:markets/generated/l10n.dart';
 import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
 import 'package:markets/restaurent_app/src/models/route_argument.dart';
+import 'package:markets/restaurent_app/src/pages/HomeScreen.dart';
 import 'package:markets/restaurent_app/src/pages/details.dart';
+import 'package:markets/restaurent_app/src/pages/gridMenuScreen.dart';
+import 'package:markets/restaurent_app/src/pages/menuGridScreen.dart';
 import 'package:markets/restaurent_app/src/pages/new_product.dart';
 import 'package:markets/restaurent_app/src/pages/open_new_kitchen.dart';
 import 'package:markets/restaurent_app/src/pages/orders.dart' as restOrders;
@@ -31,6 +34,7 @@ import '../pages/map.dart';
 import '../pages/notifications.dart';
 import '../pages/orders.dart';
 import 'messages.dart';
+import 'package:markets/src/models/route_argument.dart' as restRouteArgument;
 
 
 enum NavPages {
@@ -64,7 +68,7 @@ class PagesWidget extends StatefulWidget {
       if (currentTab is RouteArgument) {
         routeArgument = currentTab;
 
-        int index= int.parse(currentTab.id);
+        int index = int.parse(currentTab.id);
 
         currentTab =  NavPages.values.elementAt(index);
       }
@@ -116,7 +120,10 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = KitchenProfile();
           break;
         case NavPages.RestaurantManagement:
-          widget.currentPage = ProductWidget(routeArgument: widget.routeArgument,);
+          widget.currentPage = GridScreen(routeArgument: restRouteArgument.RouteArgument(param:
+            widget.routeArgument.param
+          ));
+          //widget.currentPage = ProductWidget(routeArgument: widget.routeArgument,);
           //widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
           break;
         case NavPages.RestaurantOrders:

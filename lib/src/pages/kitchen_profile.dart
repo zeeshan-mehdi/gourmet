@@ -224,7 +224,7 @@ class _KitchenProfileState extends StateMVC<KitchenProfile> {
                                    '/Pages', arguments: 8);
                                getFirstMarket();
                              }else{
-                               Navigator.of(context).pushNamed('/Login');
+                               Navigator.of(context).pushNamed('/LoginOption');
                              }
                            },
                            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30),

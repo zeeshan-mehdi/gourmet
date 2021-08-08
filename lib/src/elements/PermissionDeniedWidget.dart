@@ -84,7 +84,7 @@ class _PermissionDeniedWidgetState extends State<PermissionDeniedWidget> {
           MaterialButton(
             elevation: 0,
             onPressed: () {
-              Navigator.of(context).pushNamed('/Login');
+              Navigator.of(context).pushNamed('/LoginOption');
             },
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 70),
             color: Theme.of(context).accentColor.withOpacity(1),

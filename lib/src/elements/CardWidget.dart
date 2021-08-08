@@ -7,7 +7,7 @@ import 'package:markets/src/pages/product_cpy.dart';
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/market.dart';
-import '../models/route_argument.dart';
+import '../../restaurent_app/src/models/route_argument.dart';
 import '../repository/settings_repository.dart' as settingRepo;
 
 // ignore: must_be_immutable
@@ -36,10 +36,12 @@ class CardWidget extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuGridScreen(routeArgument: RouteArgument(param:
-      market.id
-        ),
-        )));
+      //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuGridScreen(routeArgument: RouteArgument(param:
+      // market.id
+      //   ),
+      //   )));
+
+        Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id:'4',param: market.id));
 
       },
 

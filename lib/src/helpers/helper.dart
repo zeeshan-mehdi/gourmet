@@ -189,6 +189,15 @@ class Helper {
     return distance != null ? distance.toStringAsFixed(2) + " " + unit : "";
 
   }
+
+  static getUserNameFromEmail(String email){
+    try {
+      String username = email.substring(0, email.indexOf("@"));
+      return username;
+    }catch(e){
+      return null;
+    }
+  }
   static bool canDelivery(Market _market, {List<Cart> carts}) {
     bool _can = true;
     String _unit = setting.value.distanceUnit;

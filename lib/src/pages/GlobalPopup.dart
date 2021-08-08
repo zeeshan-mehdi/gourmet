@@ -198,7 +198,7 @@ class _GlobalPopupState extends State<GlobalPopup> {
                             switch (popupType){
                               case PopupType.forgotPassword:
                                 print("forgot password");
-                                Navigator.of(context).pushReplacementNamed('/Login');
+                                Navigator.of(context).pushReplacementNamed('/LoginOption');
                                 break;
                               case PopupType.enableLocation:
                                 print("enableLocation");
@@ -237,7 +237,7 @@ class _GlobalPopupState extends State<GlobalPopup> {
                             switch (popupType){
                               case PopupType.forgotPassword:
                                 print("forgot password");
-                                Navigator.of(context).pushReplacementNamed('/Login');
+                                Navigator.of(context).pushReplacementNamed('/LoginOption');
                                 break;
                               case PopupType.enableLocation:
                                 print("enableLocation");

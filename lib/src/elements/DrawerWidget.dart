@@ -27,7 +27,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              currentUser.value.apiToken != null ? Navigator.of(context).pushNamed('/Profile') : Navigator.of(context).pushNamed('/Login');
+              currentUser.value.apiToken != null ? Navigator.of(context).pushNamed('/Profile') : Navigator.of(context).pushNamed('/LoginOption');
             },
             child: currentUser.value.apiToken != null
                 ? UserAccountsDrawerHeader(
@@ -259,7 +259,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
               if (currentUser.value.apiToken != null) {
                 Navigator.of(context).pushNamed('/Settings');
               } else {
-                Navigator.of(context).pushReplacementNamed('/Login');
+                Navigator.of(context).pushReplacementNamed('/LoginOption');
               }
             },
             leading: Icon(
@@ -311,7 +311,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                   Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 2);
                 });
               } else {
-                Navigator.of(context).pushNamed('/Login');
+                Navigator.of(context).pushNamed('/LoginOption');
               }
             },
             leading: Icon(

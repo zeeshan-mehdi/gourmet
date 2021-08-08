@@ -176,7 +176,7 @@ class _CategoryWidgetState extends StateMVC<CategoryWidget> {
                               product: _con.products.elementAt(index),
                               onPressed: () {
                                 if (currentUser.value.apiToken == null) {
-                                  Navigator.of(context).pushNamed('/Login');
+                                  Navigator.of(context).pushNamed('/LoginOption');
                                 } else {
                                   if (_con.isSameMarkets(_con.products.elementAt(index))) {
                                     _con.addToCart(_con.products.elementAt(index));
