@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:markets/src/controllers/user_controller.dart';
 import 'package:markets/restaurent_app/src/models/market.dart';
-import 'package:markets/restaurent_app/src/models/route_argument.dart';
+import 'package:markets/src/models/route_argument.dart';
 import 'package:markets/src/pages/pages.dart';
 
 import 'package:markets/generated/l10n.dart';
@@ -27,7 +27,8 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
         children: [
 
           ListItem(color:Colors.red , title: S.of(context).manage_restaurant,onPressed: (){
-            Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4',param: widget.market.id  ) );
+
+            Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4', param: widget.market.id  ) );
           },),
 
           ListItem(color:Colors.lightBlue , title: S.of(context).restaurant_membership,onPressed: (){

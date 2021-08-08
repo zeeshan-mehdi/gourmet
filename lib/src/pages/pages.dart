@@ -49,9 +49,15 @@ enum NavPages {
   MyAccount,
   MySettings,
   BecomeKitchen,
+
   AddProduct,
   RestaurantMembership,
-  MyAddresses,  DriverProfile,DriverOrders,OrderHistory,DriverMap
+  MyAddresses,
+  DriverProfile,
+  DriverOrders,
+  OrderHistory,
+  DriverMap,
+  NewKitchen
 }
 
 
@@ -122,8 +128,8 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = KitchenProfile();
           break;
         case NavPages.RestaurantManagement:
-          widget.currentPage = GridScreen(routeArgument: widget.routeArgument,);
-          //widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
+         // widget.currentPage = HomeScreen(routeArgument: widget.routeArgument,);
+          widget.currentPage =  ProductWidget(routeArgument: widget.routeArgument,);
           break;
         case NavPages.RestaurantOrders:
           widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,market: widget?.routeArgument?.param,);
@@ -159,8 +165,9 @@ class _PagesWidgetState extends State<PagesWidget> {
         case NavPages.OrderHistory:
           widget.currentPage = OrdersHistoryWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
-        case NavPages.DriverMap:
-          widget.currentPage = DriverMapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
+        case NavPages.NewKitchen:
+          widget.currentPage = HomeScreen( routeArgument: widget.routeArgument);
+
           break;
 
 

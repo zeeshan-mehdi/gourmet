@@ -13,7 +13,7 @@ import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 import '../elements/CircularLoadingWidget.dart';
 import '../helpers/helper.dart';
-import '../models/route_argument.dart';
+import 'package:markets/src/models/route_argument.dart';
 
 // ignore: must_be_immutable
 class ProductWidget extends StatefulWidget {
@@ -267,7 +267,9 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
 
 
                                                       _con.market.isPaidKitchen ? IconButton(icon: Icon(Icons.settings,color:Colors.white,size: 20,), onPressed: (){
-                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage()));
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage(
+                                                            market:  widget.routeArgument.param,
+                                                          )));
                                                       }):Container()
 
 

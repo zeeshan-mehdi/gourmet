@@ -42,7 +42,7 @@ class CardWidget extends StatelessWidget {
       // market.id
       //   ),
       //   )));
-        Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4',param:market.id ) );
+        Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '16',param:market.id ) );
 
       },
 
