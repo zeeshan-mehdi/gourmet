@@ -20,12 +20,12 @@ import 'package:markets/src/pages/cart.dart';
 import 'package:markets/src/pages/kitchen_cart.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../helpers/app_config.dart' as config;
+import '../../restaurent_app/src/helpers/app_config.dart' as config;
 
-import '../elements/CircularLoadingWidget.dart';
-import '../helpers/helper.dart';
+import '../../restaurent_app/src/elements/CircularLoadingWidget.dart';
+import '../../restaurent_app/src/helpers/helper.dart';
 
-import '../repository/settings_repository.dart' as settingRepo;
+import 'package:markets/src/repository/settings_repository.dart' as settingRepo;
 class HomeScreen extends StatefulWidget {
   RouteArgument routeArgument;
   HomeScreen({this.routeArgument}) ;
@@ -97,6 +97,12 @@ print(_productController.subTotal.toString() );
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        Container(
+                          height: 4,
+                          width: ScreenUtil().setWidth(90),
+                          color: Colors.grey,
+                        ),
+                        SizedBox(height: 20,),
                         Expanded(
                           child: Container(
 
@@ -354,113 +360,154 @@ print(_productController.subTotal.toString() );
                               height: ScreenUtil().setHeight(20),
                             ),
 
-                            // SizedBox(
-                            //   height: ScreenUtil().setHeight(5),
-                            // ),
-                            // Container(
-                            //   height: ScreenUtil.screenHeight * 0.22,
-                            //   width: ScreenUtil.screenWidth,
-                            //   child: ListView.builder(
-                            //     scrollDirection: Axis.horizontal,
-                            //     itemCount: _con.products.length,
-                            //     itemBuilder: (context, i) {
-                            //       return InkWell(
-                            //         onTap: () {
-                            //
-                            //           setState(() {
-                            //             cartLoading = true;
-                            //           });
-                            //
-                            //           // if (!isPresent) {
-                            //           print(_con.products[i].name);
-                            //           setState(() {
-                            //             selectedIndex = i;
-                            //             //  List<Product> products = List<Product>();
-                            //             products.add(_con.products[i]);
-                            //             // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
-                            //             products.toSet().toList();
-                            //
-                            //             print('index  $i');
-                            //
-                            //             if (currentUser
-                            //                 .value.apiToken ==
-                            //                 null) {
-                            //               setState(() {
-                            //                 cartLoading = false;
-                            //               });
-                            //               Navigator.of(context)
-                            //                   .pushNamed("/Login");
-                            //             } else {
-                            //               if (_productController
-                            //                   .isSameMarkets(
-                            //                   _con.products[i])) {
-                            //                 _productController
-                            //                     .addToCart(
-                            //                     _con.products[i]);
-                            //                 Future.delayed(
-                            //                     Duration(seconds: 3),
-                            //                         () {
-                            //                       refreshCart();
-                            //                       _productController
-                            //                           .listenForCart();
-                            //                       setState(() {
-                            //                         cartLoading = false;
-                            //                       });
-                            //                     });
-                            //               } else {
-                            //                 showDialog(
-                            //                   context: context,
-                            //                   builder: (BuildContext
-                            //                   context) {
-                            //                     // return object of type Dialog
-                            //                     return AddToCartAlertDialogWidget(
-                            //                         oldProduct:
-                            //                         _productController
-                            //                             .carts
-                            //                             .elementAt(
-                            //                             0)
-                            //                             ?.product,
-                            //                         newProduct: _con
-                            //                             .products[
-                            //                         selectedIndex],
-                            //                         onPressed: (product,
-                            //                             {reset: true}) {
-                            //                           _productController
-                            //                               .addToCart(
-                            //                               product,
-                            //                               reset:
-                            //                               reset);
-                            //                           Future.delayed(
-                            //                               Duration(
-                            //                                   seconds:
-                            //                                   3),
-                            //                                   () {
-                            //                                 refreshCart();
-                            //                                 _productController
-                            //                                     .listenForCart();
-                            //
-                            //                                 setState(() {
-                            //                                   cartLoading =
-                            //                                   false;
-                            //                                 });
-                            //                               });
-                            //                           return;
-                            //                         });
-                            //                   },
-                            //                 );
-                            //               }
-                            //             }
-                            //           });
-                            //         },
-                            //         child: CardWidget(
-                            //             product: _con.products[i]),
-                            //       );
-                            //     },
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: ScreenUtil().setHeight(5),
-                            // ),
+                            if (_con.getKitchenFavourite()==true)
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      S.of(context).favorites,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize:
+                                          ScreenUtil().setSp(17)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            SizedBox(
+                              height: ScreenUtil().setHeight(5),
+                            ),
+                            if (_con.getKitchenFavourite()==true)
+                              Container(
+                                height: ScreenUtil.screenHeight * 0.22,
+                                width: ScreenUtil.screenWidth,
+
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: _con.favorites.length,
+                                  itemBuilder: (context, i) {
+                                    print('idddss');
+                                    print(_con
+                                        .favorites[i].product.market.id);
+                                    print(_con.market.id);
+
+                                    if (_con.favorites[i].product.market
+                                        .id ==
+                                        _con.market.id) {
+                                      return InkWell(
+                                          onTap: () {},
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil
+                                                    .screenHeight *
+                                                    0.12,
+                                                width: ScreenUtil
+                                                    .screenWidth *
+                                                    0.4,
+                                                alignment: Alignment
+                                                    .bottomCenter,
+                                                decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            _con
+                                                                .favorites[
+                                                            i]
+                                                                .product
+                                                                .image
+                                                                .url)),
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                      Radius.circular(8),
+                                                    ),
+                                                    color: Colors.black
+                                                        .withOpacity(
+                                                        0.4)),
+                                              ),
+                                              Container(
+                                                height: ScreenUtil
+                                                    .screenHeight *
+                                                    0.1,
+                                                width: ScreenUtil
+                                                    .screenWidth /
+                                                    2.2,
+                                                color: Colors.white
+                                                    .withOpacity(0.3),
+                                                child: Padding(
+                                                  padding: EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 15),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .center,
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .center,
+                                                    children: [
+                                                      Text(
+                                                        langCode =='en'?        _con
+                                                            .favorites[
+                                                        i]
+                                                            .product
+                                                            .name ??'': _con
+                                                            .favorites[
+                                                        i]
+                                                            .product
+                                                            .nameAr ??
+                                                            'Chicken'  ,
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                            ScreenUtil()
+                                                                .setSp(
+                                                                16)),
+                                                      ),
+                                                      SizedBox(
+                                                        height:
+                                                        ScreenUtil()
+                                                            .setHeight(
+                                                            5),
+                                                      ),
+                                                      Text(
+                                                        _con
+                                                            .favorites[
+                                                        i]
+                                                            .product
+                                                            .price
+                                                            .toString() ??
+                                                            '\$100.00',
+                                                        style: TextStyle(
+                                                            fontSize:
+                                                            ScreenUtil()
+                                                                .setSp(
+                                                                16)),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil()
+                                                    .setHeight(10),
+                                              ),
+                                            ],
+                                          ));
+                                    }
+                                  },
+                                ),
+                              ),
+
+                            SizedBox(
+                              height: ScreenUtil().setHeight(5),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -468,7 +515,7 @@ print(_productController.subTotal.toString() );
                                 MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Menu',
+                                    S.of(context).menu,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize:
@@ -576,62 +623,74 @@ print(_productController.subTotal.toString() );
                                     },
 
                                     child: CardWidget(
-                                        product:  _con.products[i]
+                                        product:  _con.products[i],
+                                      likeButton:   Row(children: <Widget>[
+
+                                        _con.checkFavourite(
+                                            _con.products[i].id)
+                                            ? IconButton(
+                                            onPressed: () {
+                                              _con.removeFromFavorite(
+                                                  _con.getFavouriteProduct(
+                                                      _con
+                                                          .products[
+                                                      i]
+                                                          .id));
+                                              _con.refreshMarket();
+                                            },
+                                            padding: EdgeInsets
+                                                .symmetric(
+                                                vertical: 0,
+                                                horizontal: 20),
+                                            //color: Theme.of(context).primaryColor,
+                                            //shape: StadiumBorder(),
+                                            // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                            icon: Icon(
+                                              Icons.favorite,
+                                              color:
+                                              Theme.of(context)
+                                                  .accentColor,
+                                            ))
+                                            : IconButton(
+                                            onPressed: () {
+                                              if (currentUser.value
+                                                  .apiToken ==
+                                                  null) {
+                                                Navigator.of(
+                                                    context)
+                                                    .pushNamed(
+                                                    "/Login");
+                                              } else {
+                                                _con.addToFavorite(
+                                                    _con.products[
+                                                    i]);
+
+                                                _con.refreshMarket();
+                                              }
+                                            },
+                                            padding: EdgeInsets
+                                                .symmetric(
+                                                vertical: 0,
+                                                horizontal: 20),
+                                            color:
+                                            Colors.transparent,
+                                            // shape: StadiumBorder(),
+                                            icon: Icon(
+                                              Icons
+                                                  .favorite_border_outlined,
+                                              color:
+                                              Theme.of(context)
+                                                  .primaryColor,
+                                            )),
+                                      ]),
+
+
                                     ),
                                   );
                                 },
                               ),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: Row(
-                            //     mainAxisAlignment:
-                            //     MainAxisAlignment.start,
-                            //     children: [
-                            //       Text(
-                            //         'Cart',
-                            //         style: TextStyle(
-                            //             fontWeight: FontWeight.bold,
-                            //             fontSize:
-                            //             ScreenUtil().setSp(17)),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: ScreenUtil().setHeight(5),
-                            // ),
-                            // Expanded(
-                            //   child: Container(
-                            //
-                            //       height: 170,
-                            //       child: cartLoading
-                            //           ? Container(
-                            //           decoration: BoxDecoration(
-                            //             borderRadius:
-                            //             BorderRadius.circular(
-                            //                 25.0),
-                            //             // color: Colors.greenAccent,
-                            //           ),
-                            //           child: Image.asset(
-                            //             'assets/img/loading.gif',
-                            //             fit: BoxFit.cover,
-                            //             width: 200,
-                            //           ))
-                            //           : KitchenCartWidget(
-                            //           callback: (func) {
-                            //             refreshCart = func;
-                            //           }, removeFromCart: () {
-                            //         Future.delayed(
-                            //             Duration(milliseconds: 30),
-                            //                 () {
-                            //               _productController
-                            //                   .listenForCart();
-                            //               refreshCart();
-                            //             });
-                            //       })),
-                            // ),
-//calender here
+
                           ],
                         ),
                       ),
@@ -640,46 +699,7 @@ print(_productController.subTotal.toString() );
                 );
               },
             ),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Container(
-            //     height: ScreenUtil.screenHeight * 0.69,
-            //     width: ScreenUtil.screenWidth,
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.only(
-            //           topLeft: Radius.circular(20),
-            //           topRight: Radius.circular(20)),
-            //       color: Colors.white,
-            //     ),
-            //     child: Padding(
-            //       padding: const EdgeInsets.only(left: 14.0, right: 14),
-            //       child: Column(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: [
-            //           SizedBox(
-            //             height: ScreenUtil().setHeight(20),
-            //           ),
-            //           Text(
-            //             'Menu',
-            //             style: TextStyle(
-            //                 fontWeight: FontWeight.bold,
-            //                 fontSize: ScreenUtil().setSp(17)),
-            //           ),
-            //           Expanded(
-            //             child: ListView.builder(
-            //               itemCount: _con.products.length,
-            //               itemBuilder: (context, i) {
-            //                 return CardWidget(
-            //                 product:  _con.products[i]
-            //                 );
-            //               },
-            //             ),
-            //           )
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // )
+
           ],
         ),
       ),
@@ -689,13 +709,17 @@ print(_productController.subTotal.toString() );
 
 class CardWidget extends StatelessWidget {
   Product product;
+  Widget likeButton;
   CardWidget({
     this.product,
+    this.likeButton,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String langCode =
+        settingRepo.setting.value.mobileLanguage.value.languageCode;
     return Column(
       children: [
         Container(
@@ -728,7 +752,9 @@ class CardWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        product.name ??  'Chicken',
+                        langCode == 'en'
+                            ? product?.name ?? ''
+                            : product?.nameAr ?? ''??  'Chicken',
                         style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                       ),
                       SizedBox(
@@ -740,10 +766,7 @@ class CardWidget extends StatelessWidget {
                       )
                     ],
                   ),
-                  IconButton(
-                    icon: Icon(Icons.favorite_outline),
-                    onPressed: () {},
-                  )
+                likeButton
                 ],
               ),
             ),

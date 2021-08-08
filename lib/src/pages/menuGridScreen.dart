@@ -20,8 +20,8 @@ import 'package:markets/src/pages/cart.dart';
 import 'package:markets/src/pages/kitchen_cart.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../helpers/app_config.dart' as config;
-import '../repository/settings_repository.dart' as settingRepo;
+import '../../restaurent_app/src/helpers/app_config.dart' as config;
+import 'package:markets/src/repository/settings_repository.dart' as settingRepo;
 class MenuGridScreen extends StatefulWidget {
   RouteArgument routeArgument;
   MenuGridScreen({this.routeArgument}) ;
@@ -92,6 +92,12 @@ _productController.listenForCartsCount();
                       child: Column(
 mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          Container(
+                            height: 4,
+                            width: ScreenUtil().setWidth(90),
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 20,),
                           Expanded(
                             child: Container(
 
@@ -146,7 +152,7 @@ _con.refreshMarket();
                         color: Colors.white,),
                         onPressed: null,
                       ),
-                      _productController.carts.length.toString() =='0'? new Container() :
+                      _productController.carts.length.toString() == '0' ? new Container() :
                       new Positioned(
                           right: 6.0,
                           child: new Stack(
@@ -572,7 +578,7 @@ _con.refreshMarket();
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: ScreenUtil.screenHeight * 0.76,
+                  height: ScreenUtil.screenHeight * 0.72,
                   width: ScreenUtil.screenWidth,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -590,7 +596,7 @@ _con.refreshMarket();
                               height: ScreenUtil.screenHeight * 0.35,
                             ),
                             Text(
-                              'Menu',
+                              S.of(context).menu,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: ScreenUtil().setSp(17)),
@@ -608,99 +614,164 @@ _con.refreshMarket();
                                   itemCount: _con.products.length,
                                   semanticChildCount: _con.products.length,
                                   itemBuilder: (BuildContext ctx, index) {
-                                    return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          cartLoading = true;
-                                        });
-
-                                        // if (!isPresent) {
-                                        print(_con.products[index].name);
-                                        setState(() {
-                                          selectedIndex = index;
-                                          //  List<Product> products = List<Product>();
-                                          products.add(_con.products[index]);
-                                          // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
-                                          products.toSet().toList();
-
-                                          print('index  $index');
-
-                                          if (currentUser
-                                              .value.apiToken ==
-                                              null) {
+                                    return
+                                      Stack(
+                                        children: [
+                                          InkWell(
+                                          onTap: (){
                                             setState(() {
-                                              cartLoading = false;
+                                              cartLoading = true;
                                             });
-                                            Navigator.of(context)
-                                                .pushNamed("/Login");
-                                          } else {
-                                            if (_productController
-                                                .isSameMarkets(
-                                                _con.products[index])) {
-                                              _productController
-                                                  .addToCart(
-                                                  _con.products[index]);
-                                              Future.delayed(
-                                                  Duration(seconds: 3),
-                                                      () {
-                                                    _con.refreshMarket();
-                                                    refreshCart();
-                                                    _productController
-                                                        .listenForCart();
-                                                    setState(() {
-                                                      cartLoading = false;
-                                                    });
-                                                  });
-                                            } else {
-                                              showDialog(
-                                                context: context,
-                                                builder: (BuildContext
-                                                context) {
-                                                  // return object of type Dialog
-                                                  return AddToCartAlertDialogWidget(
-                                                      oldProduct:
-                                                      _productController
-                                                          .carts
-                                                          .elementAt(
-                                                          0)
-                                                          ?.product,
-                                                      newProduct: _con
-                                                          .products[
-                                                      selectedIndex],
-                                                      onPressed: (product,
-                                                          {reset: true}) {
+
+                                            // if (!isPresent) {
+                                            print(_con.products[index].name);
+                                            setState(() {
+                                              selectedIndex = index;
+                                              //  List<Product> products = List<Product>();
+                                              products.add(_con.products[index]);
+                                              // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
+                                              products.toSet().toList();
+
+                                              print('index  $index');
+
+                                              if (currentUser
+                                                  .value.apiToken ==
+                                                  null) {
+                                                setState(() {
+                                                  cartLoading = false;
+                                                });
+                                                Navigator.of(context)
+                                                    .pushNamed("/Login");
+                                              } else {
+                                                if (_productController
+                                                    .isSameMarkets(
+                                                    _con.products[index])) {
+                                                  _productController
+                                                      .addToCart(
+                                                      _con.products[index]);
+                                                  Future.delayed(
+                                                      Duration(seconds: 3),
+                                                          () {
+
+                                                        refreshCart();
                                                         _productController
-                                                            .addToCart(
-                                                            product,
-                                                            reset:
-                                                            reset);
-                                                        Future.delayed(
-                                                            Duration(
-                                                                seconds:
-                                                                3),
-                                                                () {
-                                                              refreshCart();
-                                                              _productController
-                                                                  .listenForCart();
-
-                                                              setState(() {
-                                                                cartLoading =
-                                                                false;
-                                                              });
-                                                            });
-                                                        return;
+                                                            .listenForCart();
+                                                        _con.refreshMarket();
+                                                        setState(() {
+                                                          cartLoading = false;
+                                                        });
                                                       });
-                                                },
-                                              );
-                                            }
-                                          }
-                                        });
-                                      },
+                                                } else {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext
+                                                    context) {
+                                                      // return object of type Dialog
+                                                      return AddToCartAlertDialogWidget(
+                                                          oldProduct:
+                                                          _productController
+                                                              .carts
+                                                              .elementAt(
+                                                              0)
+                                                              ?.product,
+                                                          newProduct: _con
+                                                              .products[
+                                                          selectedIndex],
+                                                          onPressed: (product,
+                                                              {reset: true}) {
+                                                            _productController
+                                                                .addToCart(
+                                                                product,
+                                                                reset:
+                                                                reset);
+                                                            Future.delayed(
+                                                                Duration(
+                                                                    seconds:
+                                                                    3),
+                                                                    () {
+                                                                  refreshCart();
+                                                                  _productController
+                                                                      .listenForCart();
 
-                                      child: CardWidget(
-                                        product: _con.products[index],
-                                      ),
-                                    );
+                                                                  setState(() {
+                                                                    cartLoading =
+                                                                    false;
+                                                                  });
+                                                                });
+                                                            return;
+                                                          });
+                                                    },
+                                                  );
+                                                }
+                                              }
+                                            });
+                                          },
+
+                                          child: CardWidget(
+                                            product: _con.products[index],
+                                          ),
+                                    ),
+                                          Row(children: <Widget>[
+
+                                            _con.checkFavourite(
+                                                _con.products[index].id)
+                                                ? IconButton(
+                                                onPressed: () {
+                                                  _con.removeFromFavorite(
+                                                      _con.getFavouriteProduct(
+                                                          _con
+                                                              .products[
+                                                          index]
+                                                              .id));
+                                                  _con.refreshMarket();
+                                                },
+                                                padding: EdgeInsets
+                                                    .symmetric(
+                                                    vertical: 0,
+                                                    horizontal: 20),
+                                                //color: Theme.of(context).primaryColor,
+                                                //shape: StadiumBorder(),
+                                                // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                icon: Icon(
+                                                  Icons.bookmark,
+                                                  color:
+                                                  Theme.of(context)
+                                                      .accentColor,
+                                                ))
+                                                : IconButton(
+                                                onPressed: () {
+                                                  if (currentUser.value
+                                                      .apiToken ==
+                                                      null) {
+                                                    Navigator.of(
+                                                        context)
+                                                        .pushNamed(
+                                                        "/Login");
+                                                  } else {
+                                                    _con.addToFavorite(
+                                                        _con.products[
+                                                        index]);
+
+                                                    _con.refreshMarket();
+                                                  }
+                                                },
+                                                padding: EdgeInsets
+                                                    .symmetric(
+                                                    vertical: 0,
+                                                    horizontal: 20),
+                                                color:
+                                                Colors.transparent,
+                                                // shape: StadiumBorder(),
+                                                icon: Icon(
+                                                  Icons
+                                                      .bookmark_border_outlined,
+                                                  color:
+                                                  Theme.of(context)
+                                                      .primaryColor,
+                                                )),
+                                          ])
+                                        ],
+                                      );
                                   }),
                             ),
                             SizedBox(
@@ -716,18 +787,18 @@ _con.refreshMarket();
               ),
 
               Positioned(
-                  top: ScreenUtil.screenHeight * 0.22,
+                  top: ScreenUtil.screenHeight * 0.23,
                   right: 10,
                   left: 10,
                   child: Container(
-                    height: ScreenUtil.screenHeight * 0.367,
+                    height: ScreenUtil.screenHeight * 0.4,
                     width: ScreenUtil.screenWidth,
                     color: Colors.white,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: ScreenUtil().setHeight(60),
+                          height: ScreenUtil().setHeight(50),
                         ),
                         Text(
                           langCode=='en'? _con.market?.name??'' :_con.market?.nameAr  ?? '',
@@ -766,44 +837,151 @@ _con.refreshMarket();
                           height: ScreenUtil().setHeight(10),
                         ),
                         Text(
-                          'Resturent Achivements ',
+                          S.of(context).restaurant_achievements,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: ScreenUtil().setSp(17)),
                         ),
+                        if (_con.getKitchenFavourite()==true)
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  S.of(context).favorites,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize:
+                                      ScreenUtil().setSp(17)),
+                                ),
+                              ),
+                            ],
+                          ),
                         SizedBox(
                           height: ScreenUtil().setHeight(5),
                         ),
-                        Container(
-                          height: ScreenUtil.screenHeight * 0.135,
-                          width: ScreenUtil.screenWidth,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 6,
-                            itemBuilder: (context, i) {
-                              return Card(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: ScreenUtil.screenHeight * 0.085,
-                                      width: ScreenUtil.screenWidth * 0.25,
-                                      alignment: Alignment.bottomCenter,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(0),
+                        if (_con.getKitchenFavourite()==true)
+                          Container(
+                            height: ScreenUtil.screenHeight * 0.15,
+                            width: ScreenUtil.screenWidth,
+
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _con.favorites.length,
+                              itemBuilder: (context, i) {
+                                print('idddss');
+                                print(_con
+                                    .favorites[i].product.market.id);
+                                print(_con.market.id);
+
+                                if (_con.favorites[i].product.market
+                                    .id ==
+                                    _con.market.id) {
+                                  return InkWell(
+                                      onTap: () {},
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: ScreenUtil
+                                                .screenHeight *
+                                                0.07,
+                                            width: ScreenUtil
+                                                .screenWidth *
+                                                0.2,
+                                            alignment: Alignment
+                                                .bottomCenter,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        _con
+                                                            .favorites[
+                                                        i]
+                                                            .product
+                                                            .image
+                                                            .url)),
+                                                borderRadius:
+                                                BorderRadius.all(
+                                                  Radius.circular(8),
+                                                ),
+                                                color: Colors.black
+                                                    .withOpacity(
+                                                    0.4)),
                                           ),
-                                          color: Colors.black.withOpacity(0.4)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text('Fast food'),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
+                                          Container(
+
+
+                                            color: Colors.white
+                                                .withOpacity(0.3),
+                                            child: Padding(
+                                              padding: EdgeInsets
+                                                  .symmetric(
+                                                  horizontal: 15),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .center,
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  Text(
+                                                    langCode =='en'?        _con
+                                                        .favorites[
+                                                    i]
+                                                        .product
+                                                        .name ??'': _con
+                                                        .favorites[
+                                                    i]
+                                                        .product
+                                                        .nameAr ??
+                                                        'Chicken'  ,
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                        ScreenUtil()
+                                                            .setSp(
+                                                            16)),
+                                                  ),
+                                                  SizedBox(
+                                                    height:
+                                                    ScreenUtil()
+                                                        .setHeight(
+                                                        5),
+                                                  ),
+                                                  Text(
+                                                    _con
+                                                        .favorites[
+                                                    i]
+                                                        .product
+                                                        .price
+                                                        .toString() ??
+                                                        '\$100.00',
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                        ScreenUtil()
+                                                            .setSp(
+                                                            16)),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: ScreenUtil()
+                                                .setHeight(10),
+                                          ),
+                                        ],
+                                      ));
+                                }
+                              },
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   )),
@@ -840,6 +1018,9 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('g6');
+    String langCode =
+        settingRepo.setting.value.mobileLanguage.value.languageCode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -878,7 +1059,9 @@ class CardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  product != null ? product.name:    'Chicken',
+                  product != null ? langCode == 'en'
+                      ? product?.name ?? ''
+                      : product?.nameAr ?? '':    'Chicken',
                   style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                 ),
                 SizedBox(

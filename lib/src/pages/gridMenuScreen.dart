@@ -24,8 +24,8 @@ import 'package:markets/src/pages/cart.dart';
 import 'package:markets/src/pages/kitchen_cart.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../helpers/app_config.dart' as config;
-import '../repository/settings_repository.dart' as settingRepo;
+import '../../restaurent_app/src/helpers/app_config.dart' as config;
+import 'package:markets/src/repository/settings_repository.dart' as settingRepo;
 
 class GridScreen extends StatefulWidget {
   RouteArgument routeArgument;
@@ -101,6 +101,12 @@ class _GridScreenState extends StateMVC<GridScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          Container(
+                            height: 4,
+                            width: ScreenUtil().setWidth(90),
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 20,),
                           Expanded(
                             child: Container(
 
@@ -241,18 +247,11 @@ class _GridScreenState extends StateMVC<GridScreen> {
                         ],
                       ),
                     ),
-                    // Container(
-                    //   height: ScreenUtil.screenHeight * 0.4,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   color: Colors.amber,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //   ),
-                    // ),
+
                     Positioned(
                         top: ScreenUtil().setHeight(30), child: Header()),
                     Container(
-                      height: ScreenUtil.screenHeight * 0.33,
+                      height: ScreenUtil.screenHeight * 0.32,
                       width: ScreenUtil.screenWidth,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -317,7 +316,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                   height: ScreenUtil().setHeight(10),
                                 ),
                                 Text(
-                                  'Resturent Achivements ',
+                                  S.of(context).restaurant_achievements,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
@@ -370,7 +369,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                           Padding(
                                             padding: const EdgeInsets.all(12.0),
                                             child: Text(
-                                              'My Favourites',
+                                              S.of(context).favorites,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize:
@@ -456,12 +455,16 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              _con
+                                                      langCode =='en'?        _con
                                                                       .favorites[
                                                                           i]
                                                                       .product
-                                                                      .name ??
-                                                                  'Chicken',
+                                                                      .name ??'': _con
+                                                          .favorites[
+                                                      i]
+                                                          .product
+                                                          .nameAr ??
+                                                                  'Chicken'  ,
                                                               style: TextStyle(
                                                                   fontSize:
                                                                       ScreenUtil()
@@ -513,7 +516,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Menu',
+                                            S.of(context).menu,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize:
@@ -634,6 +637,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                     product: _con.products[i]),
                                               ),
                                               Row(children: <Widget>[
+
                                                 _con.checkFavourite(
                                                         _con.products[i].id)
                                                     ? IconButton(
@@ -947,6 +951,11 @@ class CardWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    String langCode =
+        settingRepo.setting.value.mobileLanguage.value.languageCode;
+    print('f43');
+    print(product?.nameAr);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -986,7 +995,9 @@ class CardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  product != null ? product.name : 'Chicken',
+                  product != null ?  langCode == 'en'
+                      ? product?.name ?? ''
+                      : product?.nameAr ?? '' : 'Chicken',
                   style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                 ),
                 SizedBox(

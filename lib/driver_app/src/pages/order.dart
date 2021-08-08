@@ -13,7 +13,7 @@ import '../elements/DrawerWidget.dart';
 import '../elements/ProductOrderItemWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../helpers/helper.dart';
-import 'package:markets/restaurent_app/src/models/route_argument.dart';
+import 'package:markets/src/models/route_argument.dart';
 
 class OrderWidget extends StatefulWidget {
   final RouteArgument routeArgument;

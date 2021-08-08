@@ -8,7 +8,7 @@ import '../controllers/map_controller.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../helpers/helper.dart';
 import '../models/order.dart';
-import '../../../restaurent_app/src/models/route_argument.dart';
+import '../../../src/models/route_argument.dart';
 
 class DriverMapWidget extends StatefulWidget {
   final RouteArgument routeArgument;

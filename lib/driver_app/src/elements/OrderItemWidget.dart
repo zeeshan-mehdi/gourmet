@@ -6,7 +6,7 @@ import 'package:markets/driver_app/src/pages/order.dart';
 import 'package:markets/generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/order.dart';
-import 'package:markets/restaurent_app/src/models/route_argument.dart';
+import 'package:markets/src/models/route_argument.dart';
 import 'ProductOrderItemWidget.dart';
 
 class OrderItemWidget extends StatefulWidget {
