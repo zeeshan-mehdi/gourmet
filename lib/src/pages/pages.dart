@@ -13,6 +13,7 @@ import 'package:markets/restaurent_app/src/pages/details.dart';
 
 import 'package:markets/restaurent_app/src/pages/new_product.dart';
 import 'package:markets/src/pages/HomeScreen.dart';
+import 'package:markets/src/pages/newKitchenDetailScreen.dart';
 import 'package:markets/src/pages/menuGridScreen.dart';
 import 'package:markets/src/pages/gridMenuScreen.dart';
 import 'package:markets/src/pages/tabMenuScreen.dart';
@@ -166,7 +167,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = OrdersHistoryWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.NewKitchen:
-          widget.currentPage = HomeScreen( routeArgument: widget.routeArgument);
+          widget.currentPage = NewKitchenDetailScreen(routeArgument: widget.routeArgument);
 
           break;
 

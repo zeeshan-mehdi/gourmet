@@ -26,23 +26,23 @@ class _ProfileKitchenSectionState extends State<ProfileKitchenSection> {
       child: Column(
         children: [
 
-          ListItem(color:Colors.red , title: S.of(context).manage_restaurant,onPressed: (){
+          ListItem(color:Colors.red,icon: Icon(Icons.reorder_sharp), title: S.of(context).manage_restaurant,onPressed: (){
 
             Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4', param: widget.market.id  ) );
           },),
 
-          ListItem(color:Colors.lightBlue , title: S.of(context).restaurant_membership,onPressed: (){
+          ListItem(color:Colors.lightBlue , icon: Icon(Icons.card_membership),title: S.of(context).restaurant_membership,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 10);
 
 
 
           },),
 
-          ListItem(color:Colors.indigo, title: S.of(context).restaurant_orders,onPressed: (){
+          ListItem(color:Colors.indigo,icon: Icon(Icons.book_outlined), title: S.of(context).restaurant_orders,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '5',param: widget.market) );
           },),
 
-          ListItem(color:Colors.orange , title: S.of(context).help_from_gourmet,),
+          ListItem(color:Colors.orange ,icon: Icon(Icons.help_outline), title: S.of(context).help_from_gourmet,),
 
         ],
       ),
@@ -63,19 +63,19 @@ class _UserProfileSectionState extends State<UserProfileSection> {
       child: Column(
         children: [
 
-          ListItem(color:Colors.red , title: S.of(context).my_account,onPressed: (){
+          ListItem(color:Colors.red , icon: Icon(Icons.account_box_outlined),title: S.of(context).my_account,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 6);
           },),
 
-          ListItem(color:Colors.lightBlue , title: S.of(context).my_addresses,onPressed: (){
+          ListItem(color:Colors.lightBlue ,icon: Icon(Icons.location_on_outlined), title: S.of(context).my_addresses,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 11);//my addresses
           },),
 
-          ListItem(color:Colors.indigo, title: S.of(context).orders,onPressed: (){
+          ListItem(color:Colors.indigo ,icon: Icon(Icons.reorder_sharp), title: S.of(context).orders,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 1);
           },),
 
-          ListItem(color:Colors.orange , title: S.of(context).settings,onPressed: (){
+          ListItem(color:Colors.orange ,icon: Icon(Icons.settings), title: S.of(context).settings,onPressed: (){
             Navigator.of(context).pushNamed('/Pages',arguments: 7);
           },),
 
@@ -130,8 +130,9 @@ class ListItem extends StatelessWidget {
   final title;
   final Color color;
   final onPressed;
+  final Widget icon;
 
-  const ListItem({Key key, this.title, this.color, this.onPressed}) : super(key: key);
+  const ListItem({Key key, this.title, this.color,this.icon, this.onPressed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -145,10 +146,11 @@ class ListItem extends StatelessWidget {
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                      border: Border.all(color: color),
+                      // border: Border.all(color: color),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: color
+
                   ),
+                  child: icon,
                 ),
                 SizedBox(width: 20,),
                 Text('$title',style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black,fontSize: 20),),

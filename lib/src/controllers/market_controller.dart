@@ -5,6 +5,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:markets/src/helpers/custom_trace.dart';
 import 'package:markets/src/models/favorite.dart';
 import 'package:markets/src/models/option.dart';
+import 'package:markets/src/models/route_argument.dart';
 import 'package:markets/src/models/user.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -114,6 +115,18 @@ print(favorites.length);
     stream.listen((Review _review) {
       setState(() => reviews.add(_review));
     }, onError: (a) { print(CustomTrace(StackTrace.current, message: a.toString()).toString());}, onDone: () {});
+  }
+
+
+   listenForMarketDesign({Market market,context}) async {
+   addmarketDesign(market).then((value) {
+     print('updated');
+     Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '4', param: market.id));
+     print(value);
+
+   });
+
+
   }
 bool checkFavourite(id){
     int i =favorites.indexWhere((element) => element.product.id == id);

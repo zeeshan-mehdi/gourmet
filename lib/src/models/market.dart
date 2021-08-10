@@ -106,6 +106,7 @@ class Market {
       'delivery_fee': deliveryFee,
       'distance': distance,
       'cuisine':cuisine,
+      'design_type':design_type,
       'same_day_delivery':sameDayDelivery,
       'vegetarian_food':vegetarianFood,
       'maximum_orders_per_day':maximumOrdersPerDay,

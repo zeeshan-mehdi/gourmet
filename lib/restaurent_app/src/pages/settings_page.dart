@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:markets/src/controllers/market_controller.dart';
 import 'package:markets/src/models/market.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:markets/src/pages/StaticScreens/staticGridMenuScreen.dart';
@@ -12,7 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class KitchenSettingsPage extends StatefulWidget {
   String market;
-  KitchenSettingsPage({this.market});
+  Market marketData;
+  KitchenSettingsPage({this.market,this.marketData});
   @override
   _KitchenSettingsPageState createState() => _KitchenSettingsPageState();
 }
@@ -24,20 +26,28 @@ class _KitchenSettingsPageState extends State<KitchenSettingsPage> {
   String key = 'lksdjflkjsdflkjsdflkjsdflk-sldfkjsdlfkjsljsdflkjsdfsdflkjsdf';
 
   bool edit = false;
+  MarketController marketController= MarketController();
   @override
+  var styleID ;
+
+  var loader= false;
   void initState() {
     // TODO: implement initState
+    if(widget.marketData.design_type != null ) {
+      styleID= widget.marketData.design_type ??0;
+    }
     getKey();
     super.initState();
   }
 
-  var styleID = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+
           showModalBottomSheet(
               context: context,
               enableDrag: true,
@@ -154,9 +164,20 @@ class _KitchenSettingsPageState extends State<KitchenSettingsPage> {
                           SizedBox(
                             height: 20,
                           ),
-                          FlatButton(
+                       loader? CircularProgressIndicator(backgroundColor: Colors.orange,):   FlatButton(
                               color: Colors.orange,
-                              onPressed: () {},
+                              onPressed: () {
+                                setState((){
+                                  loader= true;
+                                });
+
+                                print(styleID.toString());
+                                widget.marketData.design_type= styleID;
+                                marketController.
+                                listenForMarketDesign(market: widget.marketData,context: context);
+
+
+                              },
                               child: Text(
                                 'Save',
                                 style: TextStyle(color: Colors.white),

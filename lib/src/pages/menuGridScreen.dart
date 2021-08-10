@@ -1,4 +1,6 @@
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:markets/restaurent_app/src/pages/messages.dart';
+import 'package:markets/restaurent_app/src/pages/settings_page.dart';
 import 'package:markets/src/elements/CircularLoadingWidget.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -23,9 +25,12 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../restaurent_app/src/helpers/app_config.dart' as config;
 import 'package:markets/src/repository/settings_repository.dart' as settingRepo;
 class MenuGridScreen extends StatefulWidget {
-  RouteArgument routeArgument;
-  MenuGridScreen({this.routeArgument}) ;
 
+  RouteArgument routeArgument;
+  MenuGridScreen({this.routeArgument
+    ,
+    isSetting }): isSetting = isSetting ?? false ;
+  final isSetting;
   @override
   _MenuGridScreenState createState() => _MenuGridScreenState();
 }
@@ -75,115 +80,118 @@ _productController.listenForCartsCount();
     ScreenUtil.init(context,
         width: width, height: height, allowFontScaling: false);
     return Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
+        floatingActionButton: Align(
+          alignment: Alignment.bottomCenter,
+          child: widget.isSetting ? Container(): FloatingActionButton.extended(
 
-          onPressed: () {
+            onPressed: () {
 
-            showModalBottomSheet(
-                context: context,
-                enableDrag: true,
-                isScrollControlled: true,
-                builder: (context) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child:
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
+              showModalBottomSheet(
+                  context: context,
+                  enableDrag: true,
+                  isScrollControlled: true,
+                  builder: (context) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child:
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
 mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            height: 4,
-                            width: ScreenUtil().setWidth(90),
-                            color: Colors.grey,
-                          ),
-                          SizedBox(height: 20,),
-                          Expanded(
-                            child: Container(
+                          children: <Widget>[
+                            Container(
+                              height: 4,
+                              width: ScreenUtil().setWidth(90),
+                              color: Colors.grey,
+                            ),
+                            SizedBox(height: 20,),
+                            Expanded(
+                              child: Container(
 
-                                height: 170,
-                                child: cartLoading
-                                    ? Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(
-                                          25.0),
-                                      // color: Colors.greenAccent,
-                                    ),
-                                    child: Image.asset(
-                                      'assets/img/loading.gif',
-                                      fit: BoxFit.cover,
-                                      width: 200,
-                                    ))
-                                    : KitchenCartWidget(
-                                    callback: (func) {
-                                      refreshCart = func;
-                                    }, removeFromCart: () {
-                                  Future.delayed(
-                                      Duration(milliseconds: 30),
-                                          () {
-                                        _productController
-                                            .listenForCart();
-                                        refreshCart();
-                                      });
-                                })),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).whenComplete(() {
-_con.refreshMarket();
-                  _productController.listenForCart();
-              //do whatever you want after closing the bottom sheet
-            });
-          },
-         // icon: Icon(Icons.save),
-          label: Row(
-            children: [
-              Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
-
-              new Container(
-
-                  child: new Stack(
-
-                    children: <Widget>[
-                      new IconButton(icon: new Icon(Icons.shopping_cart,
-                        color: Colors.white,),
-                        onPressed: null,
-                      ),
-                      _productController.carts.length.toString() == '0' ? new Container() :
-                      new Positioned(
-                          right: 6.0,
-                          child: new Stack(
-                            children: <Widget>[
-                              new Icon(
-                                  Icons.brightness_1,
-                                  size: 20.0, color: Colors.black),
-                              new Positioned(
-                                  top: 3.0,
-                                  right: 7.0,
-                                  child: new Center(
-                                    child: new Text(
-                                      _productController.carts.length.toString(),
-                                      style: new TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 11.0,
-                                          fontWeight: FontWeight.w500
+                                  height: 170,
+                                  child: cartLoading
+                                      ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                            25.0),
+                                        // color: Colors.greenAccent,
                                       ),
-                                    ),
-                                  )),
+                                      child: Image.asset(
+                                        'assets/img/loading.gif',
+                                        fit: BoxFit.cover,
+                                        width: 200,
+                                      ))
+                                      : KitchenCartWidget(
+                                      callback: (func) {
+                                        refreshCart = func;
+                                      }, removeFromCart: () {
+                                    Future.delayed(
+                                        Duration(milliseconds: 30),
+                                            () {
+                                          _productController
+                                              .listenForCart();
+                                          refreshCart();
+                                        });
+                                  })),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).whenComplete(() {
+_con.refreshMarket();
+                    _productController.listenForCart();
+                //do whatever you want after closing the bottom sheet
+              });
+            },
+           // icon: Icon(Icons.save),
+            label: Row(
+              children: [
+                Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
+
+                new Container(
+
+                    child: new Stack(
+
+                      children: <Widget>[
+                        new IconButton(icon: new Icon(Icons.shopping_cart,
+                          color: Colors.white,),
+                          onPressed: null,
+                        ),
+                        _productController.carts.length.toString() == '0' ? new Container() :
+                        new Positioned(
+                            right: 6.0,
+                            child: new Stack(
+                              children: <Widget>[
+                                new Icon(
+                                    Icons.brightness_1,
+                                    size: 20.0, color: Colors.black),
+                                new Positioned(
+                                    top: 3.0,
+                                    right: 7.0,
+                                    child: new Center(
+                                      child: new Text(
+                                        _productController.carts.length.toString(),
+                                        style: new TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11.0,
+                                            fontWeight: FontWeight.w500
+                                        ),
+                                      ),
+                                    )),
 
 
-                            ],
-                          )),
+                              ],
+                            )),
 
-                    ],
-                  )
-              ),
+                      ],
+                    )
+                ),
 
-             // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
-            ],
+               // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
+              ],
+            ),
           ),
         ),
         backgroundColor: Colors.white,
@@ -237,7 +245,9 @@ _con.refreshMarket();
                   ],
                 ),
               ),
-              Positioned(top: ScreenUtil.screenHeight * 0.1, child: Header()),
+              Positioned(top: ScreenUtil.screenHeight * 0.1, child: Header(
+                isSetting:widget.isSetting
+              )),
 //           DraggableScrollableSheet(
 //             initialChildSize: 0.67,
 //
@@ -578,7 +588,7 @@ _con.refreshMarket();
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  height: ScreenUtil.screenHeight * 0.72,
+                  height: ScreenUtil.screenHeight * 0.66,
                   width: ScreenUtil.screenWidth,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -587,13 +597,13 @@ _con.refreshMarket();
                     padding: const EdgeInsets.only(left: 14.0, right: 14),
                     child: SingleChildScrollView(
                       child: Container(
-                        height: ScreenUtil.screenHeight * 0.76,
+                        height: ScreenUtil.screenHeight * 0.6,
                         width: ScreenUtil.screenWidth,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: ScreenUtil.screenHeight * 0.35,
+                              height: ScreenUtil.screenHeight * 0.37,
                             ),
                             Text(
                               S.of(context).menu,
@@ -619,6 +629,9 @@ _con.refreshMarket();
                                         children: [
                                           InkWell(
                                           onTap: (){
+                                            if(widget.isSetting == true){
+                                              return '';
+                                            }
                                             setState(() {
                                               cartLoading = true;
                                             });
@@ -791,7 +804,7 @@ _con.refreshMarket();
                   right: 10,
                   left: 10,
                   child: Container(
-                    height: ScreenUtil.screenHeight * 0.4,
+                    height: ScreenUtil.screenHeight * 0.42,
                     width: ScreenUtil.screenWidth,
                     color: Colors.white,
                     child: Column(
@@ -836,13 +849,62 @@ _con.refreshMarket();
                         SizedBox(
                           height: ScreenUtil().setHeight(10),
                         ),
-                        Text(
-                          S.of(context).restaurant_achievements,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: ScreenUtil().setSp(17)),
+                        Row(
+                          children: [
+                            Text(
+                              S.of(context).restaurant_achievements,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: ScreenUtil().setSp(17)),
+                            ),
+                            if(widget.isSetting == true)
+                              Expanded(
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(child: SizedBox()),
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Container(
+                                        height: 29,
+                                        width: 25,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius: BorderRadius.circular(6),),
+
+                                      ),
+                                    ),
+
+
+
+
+
+
+
+                                    IconButton(icon: Icon(Icons.chat_bubble,color:Colors.black,size: 20,), onPressed: (){
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MessagesWidget()));
+                                    }),
+
+
+
+                                    _con.market.isPaidKitchen ? IconButton(icon: Icon(Icons.settings,color:Colors.black,size: 20,), onPressed: (){
+
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage(
+                                        market:  widget.routeArgument.param,
+                                        marketData: _con.market,
+                                      )));
+                                    }):Container()
+
+
+                                  ],
+                                ),
+                              ),
+                          ],
                         ),
-                        if (_con.getKitchenFavourite()==true)
+                        if (_con.getKitchenFavourite()==true && widget.isSetting == false)
                           Row(
                             mainAxisAlignment:
                             MainAxisAlignment.start,
@@ -862,7 +924,7 @@ _con.refreshMarket();
                         SizedBox(
                           height: ScreenUtil().setHeight(5),
                         ),
-                        if (_con.getKitchenFavourite()==true)
+                        if (_con.getKitchenFavourite()==true && widget.isSetting == false)
                           Container(
                             height: ScreenUtil.screenHeight * 0.15,
                             width: ScreenUtil.screenWidth,
@@ -1082,8 +1144,10 @@ class CardWidget extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
+  final isSetting;
   const Header({
     Key key,
+    this.isSetting,
   }) : super(key: key);
 
   @override
@@ -1097,7 +1161,12 @@ class Header extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
-                Navigator.pop(context);
+                if(isSetting == true){
+                  Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '3' ) );
+                }else{
+                  Navigator.pop(context);
+                }
+
               },
 
               child: Container(

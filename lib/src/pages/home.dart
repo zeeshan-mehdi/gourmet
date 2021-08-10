@@ -137,174 +137,198 @@ MarketController marketController;
                     ],
                   );
                 case 'top_markets_heading':
-                  return   Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, left: 20, right: 20, bottom: 10),
-                      child :Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        S.of(context).advertising,
-                        style: Theme.of(context).textTheme.headline4,
-                        maxLines: 1,
-                        softWrap: false,
-                        overflow: TextOverflow.fade,
+                  return    Container(
+                    child: _con.slides.length >3 ?
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            S.of(context).advertising,
+                            style: Theme.of(context).textTheme.headline4,
+                            maxLines: 1,
+                            softWrap: false,
+                            overflow: TextOverflow.fade,
+                          ),
+                          Container(
+                            transform: Matrix4.translationValues(-30.0, 0.0, 0.0),
+                            // width: 400,
+                            child:  HomeSliderWidget(slides: _con.slides.reversed.toList() ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        width: 292,
-                        height: 120,
-                        margin: EdgeInsets.only(
-                            left: 8, right: 8, top: 4, bottom: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.4),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          // boxShadow: [
-                          //   BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 15, offset: Offset(0, 5)),
-                          // ],
-                        ),
-                        child: Text(""),
-                      ),
-                       Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                 Text(
-                                  // S.of(context).top_markets,
-                                  S.of(context).popular_this_month,
-                                  style: Theme.of(context).textTheme.headline4,
-                                  maxLines: 1,
-                                  softWrap: false,
-                                  overflow: TextOverflow.fade,
-                                ),
-                                Spacer(),
-                                // Text(
-                                //   "See all",
-                                //   style: TextStyle(
-                                //       color: Colors.black,
-                                //       fontWeight: FontWeight.w500),
-                                // ),
-                                // IconButton(
-                                //   icon: const Icon(
-                                //     Icons.arrow_right,
-                                //     color: Colors.black,
-                                //   ),
-                                //   onPressed: () {
-                                //     print("See all");
-                                //   },
-                                // ),
-                                // Text(
-                                //   "Adversting",
-                                // style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
-                                // //  style: Theme.of(context).textTheme.headline6.merge(colors),
-                                //   maxLines: 1,
-                                //   softWrap: false,
-                                //   overflow: TextOverflow.fade,
-                                // ),
+                    ):
 
-                                //  )
-                                // InkWell(
-                                //   onTap: () {
-                                //     if (currentUser.value.apiToken == null) {
-                                //       _con.requestForCurrentLocation(context);
-                                //     } else {
-                                //       var bottomSheetController = widget
-                                //           .parentScaffoldKey.currentState
-                                //           .showBottomSheet(
-                                //         (context) =>
-                                //             DeliveryAddressBottomSheetWidget(
-                                //                 scaffoldKey:
-                                //                     widget.parentScaffoldKey),
-                                //         shape: RoundedRectangleBorder(
-                                //           borderRadius: new BorderRadius.only(
-                                //               topLeft: Radius.circular(10),
-                                //               topRight: Radius.circular(10)),
-                                //         ),
-                                //       );
-                                //       bottomSheetController.closed.then((value) {
-                                //         _con.refreshHome();
-                                //       });
-                                //     }
-                                //   },
-                                //   child: Container(
-                                //     padding: const EdgeInsets.symmetric(
-                                //         vertical: 6, horizontal: 10),
-                                //     decoration: BoxDecoration(
-                                //       borderRadius:
-                                //           BorderRadius.all(Radius.circular(5)),
-                                //       color: settingsRepo
-                                //                   .deliveryAddress.value?.address ==
-                                //               null
-                                //           ? Theme.of(context)
-                                //               .focusColor
-                                //               .withOpacity(0.1)
-                                //           : Theme.of(context).accentColor,
-                                //     ),
-                                //     child: Text(
-                                //       S.of(context).delivery,
-                                //       style: TextStyle(
-                                //           color: settingsRepo.deliveryAddress.value
-                                //                       ?.address ==
-                                //                   null
-                                //               ? Theme.of(context).hintColor
-                                //               : Theme.of(context).primaryColor),
-                                //     ),
-                                //   ),
-                                // ),
-                                // SizedBox(width: 7),
-                                // InkWell(
-                                //   onTap: () {
-                                //     setState(() {
-                                //       settingsRepo.deliveryAddress.value?.address =
-                                //           null;
-                                //     });
-                                //   },
-                                //   child: Container(
-                                //     padding: const EdgeInsets.symmetric(
-                                //         vertical: 6, horizontal: 10),
-                                //     decoration: BoxDecoration(
-                                //       borderRadius:
-                                //           BorderRadius.all(Radius.circular(5)),
-                                //       color: settingsRepo
-                                //                   .deliveryAddress.value?.address !=
-                                //               null
-                                //           ? Theme.of(context)
-                                //               .focusColor
-                                //               .withOpacity(0.1)
-                                //           : Theme.of(context).accentColor,
-                                //     ),
-                                //     child: Text(
-                                //       S.of(context).pickup,
-                                //       style: TextStyle(
-                                //           color: settingsRepo.deliveryAddress.value
-                                //                       ?.address !=
-                                //                   null
-                                //               ? Theme.of(context).hintColor
-                                //               : Theme.of(context).primaryColor),
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                            if (settingsRepo.deliveryAddress.value?.address !=
-                                null)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: Text(
-                                  S.of(context).near_to +
-                                      " " +
-                                      (settingsRepo
-                                          .deliveryAddress.value?.address),
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 0, left: 20, right: 20, bottom: 10),
+                        child :Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          S.of(context).advertising,
+                          style: Theme.of(context).textTheme.headline4,
+                          maxLines: 1,
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                        ),
+                        Container(
+                          width: 292,
+                          height: 120,
+                          margin: EdgeInsets.only(
+                              left: 8, right: 8, top: 4, bottom: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.4),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            // boxShadow: [
+                            //   BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.1), blurRadius: 15, offset: Offset(0, 5)),
+                            // ],
+                          ),
+                          child: Text(""),
+                        ),
+                         Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                   Text(
+                                    // S.of(context).top_markets,
+                                    S.of(context).popular_this_month,
+                                    style: Theme.of(context).textTheme.headline4,
+                                    maxLines: 1,
+                                    softWrap: false,
+                                    overflow: TextOverflow.fade,
+                                  ),
+                                  Spacer(),
+                                  // Text(
+                                  //   "See all",
+                                  //   style: TextStyle(
+                                  //       color: Colors.black,
+                                  //       fontWeight: FontWeight.w500),
+                                  // ),
+                                  // IconButton(
+                                  //   icon: const Icon(
+                                  //     Icons.arrow_right,
+                                  //     color: Colors.black,
+                                  //   ),
+                                  //   onPressed: () {
+                                  //     print("See all");
+                                  //   },
+                                  // ),
+                                  // Text(
+                                  //   "Adversting",
+                                  // style: TextStyle(color: Colors.black,fontWeight: FontWeight.w500),
+                                  // //  style: Theme.of(context).textTheme.headline6.merge(colors),
+                                  //   maxLines: 1,
+                                  //   softWrap: false,
+                                  //   overflow: TextOverflow.fade,
+                                  // ),
+
+                                  //  )
+                                  // InkWell(
+                                  //   onTap: () {
+                                  //     if (currentUser.value.apiToken == null) {
+                                  //       _con.requestForCurrentLocation(context);
+                                  //     } else {
+                                  //       var bottomSheetController = widget
+                                  //           .parentScaffoldKey.currentState
+                                  //           .showBottomSheet(
+                                  //         (context) =>
+                                  //             DeliveryAddressBottomSheetWidget(
+                                  //                 scaffoldKey:
+                                  //                     widget.parentScaffoldKey),
+                                  //         shape: RoundedRectangleBorder(
+                                  //           borderRadius: new BorderRadius.only(
+                                  //               topLeft: Radius.circular(10),
+                                  //               topRight: Radius.circular(10)),
+                                  //         ),
+                                  //       );
+                                  //       bottomSheetController.closed.then((value) {
+                                  //         _con.refreshHome();
+                                  //       });
+                                  //     }
+                                  //   },
+                                  //   child: Container(
+                                  //     padding: const EdgeInsets.symmetric(
+                                  //         vertical: 6, horizontal: 10),
+                                  //     decoration: BoxDecoration(
+                                  //       borderRadius:
+                                  //           BorderRadius.all(Radius.circular(5)),
+                                  //       color: settingsRepo
+                                  //                   .deliveryAddress.value?.address ==
+                                  //               null
+                                  //           ? Theme.of(context)
+                                  //               .focusColor
+                                  //               .withOpacity(0.1)
+                                  //           : Theme.of(context).accentColor,
+                                  //     ),
+                                  //     child: Text(
+                                  //       S.of(context).delivery,
+                                  //       style: TextStyle(
+                                  //           color: settingsRepo.deliveryAddress.value
+                                  //                       ?.address ==
+                                  //                   null
+                                  //               ? Theme.of(context).hintColor
+                                  //               : Theme.of(context).primaryColor),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // SizedBox(width: 7),
+                                  // InkWell(
+                                  //   onTap: () {
+                                  //     setState(() {
+                                  //       settingsRepo.deliveryAddress.value?.address =
+                                  //           null;
+                                  //     });
+                                  //   },
+                                  //   child: Container(
+                                  //     padding: const EdgeInsets.symmetric(
+                                  //         vertical: 6, horizontal: 10),
+                                  //     decoration: BoxDecoration(
+                                  //       borderRadius:
+                                  //           BorderRadius.all(Radius.circular(5)),
+                                  //       color: settingsRepo
+                                  //                   .deliveryAddress.value?.address !=
+                                  //               null
+                                  //           ? Theme.of(context)
+                                  //               .focusColor
+                                  //               .withOpacity(0.1)
+                                  //           : Theme.of(context).accentColor,
+                                  //     ),
+                                  //     child: Text(
+                                  //       S.of(context).pickup,
+                                  //       style: TextStyle(
+                                  //           color: settingsRepo.deliveryAddress.value
+                                  //                       ?.address !=
+                                  //                   null
+                                  //               ? Theme.of(context).hintColor
+                                  //               : Theme.of(context).primaryColor),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                ],
                               ),
-                          ],
-                        ),
+                              if (settingsRepo.deliveryAddress.value?.address !=
+                                  null)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: Text(
+                                    S.of(context).near_to +
+                                        " " +
+                                        (settingsRepo
+                                            .deliveryAddress.value?.address),
+                                    style: Theme.of(context).textTheme.caption,
+                                  ),
+                                ),
+                            ],
+                          ),
 
-                    ],
-                  ));
+                      ],
+                    )),
+                  );
                 case 'top_markets':
                   return Column(
                     children: [

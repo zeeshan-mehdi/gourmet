@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:markets/restaurent_app/src/pages/messages.dart';
+import 'package:markets/restaurent_app/src/pages/settings_page.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -28,7 +30,10 @@ import '../../restaurent_app/src/helpers/helper.dart';
 import '../../src/repository/settings_repository.dart' as settingRepo;
 class TabsMenuScreen extends StatefulWidget {
   RouteArgument routeArgument;
-  TabsMenuScreen({this.routeArgument}) ;
+  TabsMenuScreen({this.routeArgument
+    ,
+    isSetting }): isSetting = isSetting ?? false ;
+  final isSetting;
 
   @override
   _TabsMenuScreenState createState() => _TabsMenuScreenState();
@@ -82,115 +87,118 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
     return Scaffold(
       backgroundColor: Colors.white,
       key: _con.scaffoldKey,
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child:  widget.isSetting ? Container():FloatingActionButton.extended(
 
-        onPressed: () {
-          print(_productController.subTotal.toString() );
-          showModalBottomSheet(
-              context: context,
-              enableDrag: true,
-              isScrollControlled: true,
-              builder: (context) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  child:
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          height: 4,
-                          width: ScreenUtil().setWidth(90),
-                          color: Colors.grey,
-                        ),
-                        SizedBox(height: 20,),
-                        Expanded(
-                          child: Container(
+          onPressed: () {
+            print(_productController.subTotal.toString() );
+            showModalBottomSheet(
+                context: context,
+                enableDrag: true,
+                isScrollControlled: true,
+                builder: (context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child:
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            height: 4,
+                            width: ScreenUtil().setWidth(90),
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 20,),
+                          Expanded(
+                            child: Container(
 
-                              height: 170,
-                              child: cartLoading
-                                  ? Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        25.0),
-                                    // color: Colors.greenAccent,
-                                  ),
-                                  child: Image.asset(
-                                    'assets/img/loading.gif',
-                                    fit: BoxFit.cover,
-                                    width: 200,
-                                  ))
-                                  : KitchenCartWidget(
-                                  callback: (func) {
-                                    refreshCart = func;
-                                  }, removeFromCart: () {
-                                Future.delayed(
-                                    Duration(milliseconds: 30),
-                                        () {
-                                      _productController
-                                          .listenForCart();
-                                      refreshCart();
-                                    });
-                              })),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }).whenComplete(() {
-            _con.refreshMarket();
-            _productController.listenForCart();
-            //do whatever you want after closing the bottom sheet
-          });
-        },
-        // icon: Icon(Icons.save),
-        label: Row(
-          children: [
-            Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
-
-            new Container(
-
-                child: new Stack(
-
-                  children: <Widget>[
-                    new IconButton(icon: new Icon(Icons.shopping_cart,
-                      color: Colors.white,),
-                      onPressed: null,
-                    ),
-                    _productController.carts.length.toString() =='0'? new Container() :
-                    new Positioned(
-                        right: 6.0,
-                        child: new Stack(
-                          children: <Widget>[
-                            new Icon(
-                                Icons.brightness_1,
-                                size: 20.0, color: Colors.black),
-                            new Positioned(
-                                top: 3.0,
-                                right: 7.0,
-                                child: new Center(
-                                  child: new Text(
-                                    _productController.carts.length.toString(),
-                                    style: new TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 11.0,
-                                        fontWeight: FontWeight.w500
+                                height: 170,
+                                child: cartLoading
+                                    ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          25.0),
+                                      // color: Colors.greenAccent,
                                     ),
-                                  ),
-                                )),
+                                    child: Image.asset(
+                                      'assets/img/loading.gif',
+                                      fit: BoxFit.cover,
+                                      width: 200,
+                                    ))
+                                    : KitchenCartWidget(
+                                    callback: (func) {
+                                      refreshCart = func;
+                                    }, removeFromCart: () {
+                                  Future.delayed(
+                                      Duration(milliseconds: 30),
+                                          () {
+                                        _productController
+                                            .listenForCart();
+                                        refreshCart();
+                                      });
+                                })),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).whenComplete(() {
+              _con.refreshMarket();
+              _productController.listenForCart();
+              //do whatever you want after closing the bottom sheet
+            });
+          },
+          // icon: Icon(Icons.save),
+          label: Row(
+            children: [
+              Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
+
+              new Container(
+
+                  child: new Stack(
+
+                    children: <Widget>[
+                      new IconButton(icon: new Icon(Icons.shopping_cart,
+                        color: Colors.white,),
+                        onPressed: null,
+                      ),
+                      _productController.carts.length.toString() =='0'? new Container() :
+                      new Positioned(
+                          right: 6.0,
+                          child: new Stack(
+                            children: <Widget>[
+                              new Icon(
+                                  Icons.brightness_1,
+                                  size: 20.0, color: Colors.black),
+                              new Positioned(
+                                  top: 3.0,
+                                  right: 7.0,
+                                  child: new Center(
+                                    child: new Text(
+                                      _productController.carts.length.toString(),
+                                      style: new TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11.0,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    ),
+                                  )),
 
 
-                          ],
-                        )),
+                            ],
+                          )),
 
-                  ],
-                )
-            ),
+                    ],
+                  )
+              ),
 
-            // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
-          ],
+              // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
+            ],
+          ),
         ),
       ),
       body: _con.market == null || _con.market?.image == null || _productController.loading
@@ -246,7 +254,9 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                 // ),
               ],
             ),
-            Positioned(top: ScreenUtil().setHeight(30), child: Header()),
+            Positioned(top: ScreenUtil().setHeight(30), child: Header(
+              isSetting: widget.isSetting,
+            )),
             Positioned(
               top:ScreenUtil.screenHeight * 0.13 ,
               child: Container(
@@ -324,13 +334,62 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                       SizedBox(
                         height: ScreenUtil().setHeight(10),
                       ),
-                      Text(
-                        S.of(context).restaurant_achievements,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).restaurant_achievements,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
 
-                            color: Colors.black,
-                            fontSize: ScreenUtil().setSp(17)),
+                                color: Colors.black,
+                                fontSize: ScreenUtil().setSp(17)),
+                          ),
+                          if(widget.isSetting == true)
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: [
+                                  Expanded(child: SizedBox()),
+                                  Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Container(
+                                      height: 29,
+                                      width: 25,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(6),),
+
+                                    ),
+                                  ),
+
+
+
+
+
+
+
+                                  IconButton(icon: Icon(Icons.chat_bubble,color:Colors.white,size: 20,), onPressed: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MessagesWidget()));
+                                  }),
+
+
+
+                                  _con.market.isPaidKitchen ? IconButton(icon: Icon(Icons.settings,color:Colors.white,size: 20,), onPressed: (){
+
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage(
+                                      market:  widget.routeArgument.param,
+                                      marketData: _con.market,
+                                    )));
+                                  }):Container()
+
+
+                                ],
+                              ),
+                            ),
+                        ],
                       ),
                       SizedBox(
                         height: ScreenUtil().setHeight(10),
@@ -422,7 +481,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                 children: [
                                   Column(
                                     children: [
-                                      if (_con.getKitchenFavourite()==true)
+                                      if (_con.getKitchenFavourite()==true && widget.isSetting== false)
                                         Row(
                                           mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -442,7 +501,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                       SizedBox(
                                         height: ScreenUtil().setHeight(5),
                                       ),
-                                      if (_con.getKitchenFavourite()==true)
+                                      if (_con.getKitchenFavourite()==true && widget.isSetting == false)
                                         Container(
                                           height: ScreenUtil.screenHeight * 0.22,
                                           width: ScreenUtil.screenWidth,
@@ -576,6 +635,9 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                           itemBuilder: (context, i) {
                                             return InkWell(
                                               onTap: (){
+                                                if(widget.isSetting == true){
+                                                  return '';
+                                                }
 
 
                                                 setState(() {
@@ -1515,7 +1577,9 @@ class CardWidget extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
+  final isSetting;
   const Header({
+    this.isSetting,
     Key key,
   }) : super(key: key);
 
@@ -1530,7 +1594,12 @@ class Header extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
-                Navigator.pop(context);
+                if(isSetting == true){
+                  Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '3' ) );
+                }else{
+                  Navigator.pop(context);
+                }
+
               },
 
               child: Container(
