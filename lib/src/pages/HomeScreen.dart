@@ -546,12 +546,12 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                                             5),
                                                       ),
                                                       Text(
-                                                        _con
-                                                            .favorites[
-                                                        i]
-                                                            .product
-                                                            .price
-                                                            .toString() ??
+                                                      '${settingRepo.currency.value}${  _con
+        .favorites[
+    i]
+        .product
+        .price
+        .toString()}' ??
                                                             '\$100.00',
                                                         style: TextStyle(
                                                             fontSize:
@@ -832,7 +832,7 @@ class CardWidget extends StatelessWidget {
                         height: ScreenUtil().setHeight(5),
                       ),
                       Text(
-                        product.price.toString() ?? '\$100.00',
+                       '${settingRepo.currency.value}${product.price.toString()}' ?? '\$100.00',
                         style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                       )
                     ],

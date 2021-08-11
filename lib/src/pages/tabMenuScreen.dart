@@ -598,12 +598,12 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                                                       5),
                                                                 ),
                                                                 Text(
-                                                                  _con
-                                                                      .favorites[
-                                                                  i]
-                                                                      .product
-                                                                      .price
-                                                                      .toString() ??
+                                                                '${settingRepo.currency.value}${  _con
+        .favorites[
+    i]
+        .product
+        .price
+        .toString() }'??
                                                                       '\$100.00',
                                                                   style: TextStyle(
                                                                       fontSize:
@@ -915,12 +915,12 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                                                       5),
                                                                 ),
                                                                 Text(
-                                                                  _con
-                                                                      .favorites[
-                                                                  i]
-                                                                      .product
-                                                                      .price
-                                                                      .toString() ??
+                                                                '${settingRepo.currency.value}${  _con
+        .favorites[
+    i]
+        .product
+        .price
+        .toString()}' ??
                                                                       '\$100.00',
                                                                   style: TextStyle(
                                                                       fontSize:
@@ -1228,12 +1228,12 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                                                       5),
                                                                 ),
                                                                 Text(
-                                                                  _con
-                                                                      .favorites[
-                                                                  i]
-                                                                      .product
-                                                                      .price
-                                                                      .toString() ??
+                                                                '${settingRepo.currency.value}${  _con
+        .favorites[
+    i]
+        .product
+        .price
+        .toString()}' ??
                                                                       '\$100.00',
                                                                   style: TextStyle(
                                                                       fontSize:
@@ -1555,7 +1555,7 @@ class CardWidget extends StatelessWidget {
                             height: ScreenUtil().setHeight(10),
                           ),
                           Text(
-                            product.price.toString() ?? '\$100.00',
+                          '${  product.price.toString()}' ?? '\$100.00',
                             style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                           )
                         ],

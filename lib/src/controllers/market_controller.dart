@@ -80,6 +80,9 @@ print(favorites.length);
     });
   }
   Future<dynamic> listenForMarket({String id, String message}) async {
+
+    print('addrssse'+ deliveryAddress.value.country);
+    print(currency.value);
     final whenDone = new Completer();
     final Stream<Market> stream = await getMarket(id, deliveryAddress.value);
     stream.listen((Market _market) {

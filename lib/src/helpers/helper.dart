@@ -116,7 +116,7 @@ class Helper {
         maxLines: 1,
         text: setting.value?.currencyRight != null && setting.value?.currencyRight == false
             ? TextSpan(
-                text: setting.value?.defaultCurrency,
+                text: currency.value,
                 style: style == null
                     ? Theme.of(context).textTheme.subtitle1.merge(
                           TextStyle(fontWeight: FontWeight.w400, fontSize: Theme.of(context).textTheme.subtitle1.fontSize - 6),
@@ -131,7 +131,7 @@ class Helper {
                 style: style ?? Theme.of(context).textTheme.subtitle1,
                 children: <TextSpan>[
                   TextSpan(
-                    text: setting.value?.defaultCurrency,
+                    text: currency.value,
                     style: style == null
                         ? Theme.of(context).textTheme.subtitle1.merge(
                               TextStyle(fontWeight: FontWeight.w400, fontSize: Theme.of(context).textTheme.subtitle1.fontSize - 6),

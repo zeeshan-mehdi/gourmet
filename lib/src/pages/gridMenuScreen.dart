@@ -537,12 +537,12 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                                           5),
                                                             ),
                                                             Text(
-                                                              _con
-                                                                      .favorites[
-                                                                          i]
-                                                                      .product
-                                                                      .price
-                                                                      .toString() ??
+                                                             '${settingRepo.currency.value} ${ _con
+                            .favorites[
+                        i]
+                            .product
+                            .price
+                            .toString()}' ??
                                                                   '\$100.00',
                                                               style: TextStyle(
                                                                   fontSize:
@@ -1066,7 +1066,7 @@ class CardWidget extends StatelessWidget {
                   height: ScreenUtil().setHeight(5),
                 ),
                 Text(
-                  product != null ? product.price.toString() : '\$100.00',
+                  product != null ? '${settingRepo.currency.value} ${product.price.toString()}' : '\$100.00',
                   style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                 )
               ],
