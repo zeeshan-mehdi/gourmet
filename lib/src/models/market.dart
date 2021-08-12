@@ -32,6 +32,8 @@ class Market {
   bool vegetarianFood = false;
   int maximumOrdersPerDay = 100;
   int autoAccept;
+  int design_type;
+
 
   Market();
 
@@ -57,6 +59,7 @@ class Market {
       longitude = jsonMap['longitude'];
       closed = jsonMap['closed'] ?? false;
       autoAccept = jsonMap['auto_accept'] ?? 0;
+      design_type = jsonMap['design_type'] ?? 0;
       isPaidKitchen = jsonMap['is_paid']==1 ?? false;
       availableForDelivery = jsonMap['available_for_delivery'] ?? false;
       vegetarianFood = jsonMap['vegetarian_food']==1 ?? false;
@@ -86,6 +89,7 @@ class Market {
       distance = 0.0;
       isPaidKitchen = false;
       autoAccept = 0;
+      design_type=0;
       users = [];
       print(CustomTrace(StackTrace.current, message: e.toString()).toString());
     }
@@ -96,11 +100,13 @@ class Market {
       'id': id,
       'name': name,
       'latitude': latitude,
+      'design_type': design_type,
       'auto_accept':autoAccept,
       'longitude': longitude,
       'delivery_fee': deliveryFee,
       'distance': distance,
       'cuisine':cuisine,
+      'design_type':design_type,
       'same_day_delivery':sameDayDelivery,
       'vegetarian_food':vegetarianFood,
       'maximum_orders_per_day':maximumOrdersPerDay,

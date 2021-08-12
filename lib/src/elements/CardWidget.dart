@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:markets/restaurent_app/src/pages/HomeScreen.dart';
-import 'package:markets/restaurent_app/src/pages/gridMenuScreen.dart';
-import 'package:markets/restaurent_app/src/pages/menuGridScreen.dart';
+import 'file:///G:/GitHub/gourmet/lib/src/pages/HomeScreen.dart';
+
+import 'file:///G:/GitHub/gourmet/lib/src/pages/gridMenuScreen.dart';
+import 'file:///G:/GitHub/gourmet/lib/src/pages/menuGridScreen.dart';
 import 'package:markets/src/pages/product_cpy.dart';
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/market.dart';
+import '../pages/tabMenuScreen.dart';
 import '../models/route_argument.dart';
 import '../repository/settings_repository.dart' as settingRepo;
 
@@ -36,10 +38,11 @@ class CardWidget extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GridScreen(routeArgument: RouteArgument(param:
-      market.id
-        ),
-        )));
+      //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuGridScreen(routeArgument: RouteArgument(param:
+      // market.id
+      //   ),
+      //   )));
+        Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '16',param:market.id ) );
 
       },
 

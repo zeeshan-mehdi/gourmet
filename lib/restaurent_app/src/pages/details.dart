@@ -18,7 +18,7 @@ import '../elements/GalleryCarouselWidget.dart';
 import '../elements/ProductItemWidget.dart';
 import '../elements/ReviewsListWidget.dart';
 import '../helpers/helper.dart';
-import '../models/route_argument.dart';
+import 'package:markets/src/models/route_argument.dart';
 
 import 'package:path/path.dart' as p;
 

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:global_configuration/global_configuration.dart';
 import 'package:http/http.dart' as http;
+import 'package:markets/src/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/custom_trace.dart';
@@ -11,7 +12,7 @@ import '../models/address.dart';
 import '../models/filter.dart';
 import '../models/market.dart';
 import '../models/review.dart';
-import '../repository/user_repository.dart';
+import '../repository/user_repository.dart' as userRepo;
 import '../repository/settings_repository.dart' as settingRepo;
 
 Future<Stream<Market>> getNearMarkets(Address myLocation, Address areaLocation) async {
@@ -166,7 +167,7 @@ Future<Stream<Review>> getRecentReviews() async {
 Future<Review> addMarketReview(Review review, Market market) async {
   final String url = '${GlobalConfiguration().getValue('api_base_url')}market_reviews';
   final client = new http.Client();
-  review.user = currentUser.value;
+  review.user = userRepo.currentUser.value;
   try {
     final response = await client.post(
       url,
@@ -182,5 +183,32 @@ Future<Review> addMarketReview(Review review, Market market) async {
   } catch (e) {
     print(CustomTrace(StackTrace.current, message: url).toString());
     return Review.fromJSON({});
+  }
+}
+Future addmarketDesign( Market market) async {
+  User _user = userRepo.currentUser.value;
+  final String _apiToken = 'api_token=${_user.apiToken}';
+  final String url = '${GlobalConfiguration().getValue('api_base_url')}markets/${market.id}?$_apiToken';
+  //market.design_type=2;
+  print('tyyu');
+  print(url);
+  final client = new http.Client();
+  //review.user = userRepo.currentUser.value;
+  print(market.toMap());
+  try {
+    final response = await client.put(
+      url,
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+      body: json.encode(market.toMap()),
+    );
+    if (response.statusCode == 200) {
+      return Market.fromJSON(json.decode(response.body)['data']);
+    } else {
+      print(CustomTrace(StackTrace.current, message: response.body).toString());
+      return Market.fromJSON({});
+    }
+  } catch (e) {
+    print(CustomTrace(StackTrace.current, message: url).toString());
+    return Market.fromJSON({});
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:markets/restaurent_app/src/pages/messages.dart';
+import 'package:markets/restaurent_app/src/pages/settings_page.dart';
+
 import 'package:markets/src/elements/CircularLoadingWidget.dart';
 import 'package:markets/src/models/route_argument.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -9,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markets/generated/l10n.dart';
 import 'package:markets/restaurent_app/src/controllers/order_controller.dart';
+import 'package:markets/src/controllers/cart_controller.dart';
+
 import 'package:markets/src/controllers/cart_controller.dart';
 import 'package:markets/src/controllers/checkout_controller.dart';
 import 'package:markets/src/controllers/market_controller.dart';
@@ -21,12 +26,13 @@ import 'package:markets/src/pages/cart.dart';
 import 'package:markets/src/pages/kitchen_cart.dart';
 import 'package:markets/src/repository/user_repository.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import '../helpers/app_config.dart' as config;
-import '../repository/settings_repository.dart' as settingRepo;
+import '../../restaurent_app/src/helpers/app_config.dart' as config;
+import 'package:markets/src/repository/settings_repository.dart' as settingRepo;
 
 class GridScreen extends StatefulWidget {
   RouteArgument routeArgument;
-  GridScreen({this.routeArgument});
+  GridScreen({this.routeArgument, isSetting}) : isSetting = isSetting ?? false;
+  final isSetting;
 
   @override
   _GridScreenState createState() => _GridScreenState();
@@ -36,6 +42,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
   MarketController _con;
 
   ProductController _productController;
+
   CartController _cartController;
   List<Product> products = List<Product>();
   int cartIndex = 0;
@@ -75,11 +82,124 @@ class _GridScreenState extends StateMVC<GridScreen> {
     ScreenUtil.init(context,
         width: width, height: height, allowFontScaling: false);
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        floatingActionButton: Align(
+          alignment: Alignment.bottomCenter,
+          child: widget.isSetting
+              ? Container()
+              : FloatingActionButton.extended(
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        enableDrag: true,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height * 0.8,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    height: 4,
+                                    width: ScreenUtil().setWidth(90),
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                        height: 170,
+                                        child: cartLoading
+                                            ? Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.0),
+                                                  // color: Colors.greenAccent,
+                                                ),
+                                                child: Image.asset(
+                                                  'assets/img/loading.gif',
+                                                  fit: BoxFit.cover,
+                                                  width: 200,
+                                                ))
+                                            : KitchenCartWidget(
+                                                callback: (func) {
+                                                refreshCart = func;
+                                              }, removeFromCart: () {
+                                                Future.delayed(
+                                                    Duration(milliseconds: 30),
+                                                    () {
+                                                  _productController
+                                                      .listenForCart();
+                                                  refreshCart();
+                                                });
+                                              })),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).whenComplete(() {
+                      _con.refreshMarket();
+                      _productController.listenForCart();
+                      //do whatever you want after closing the bottom sheet
+                    });
+                  },
+                  // icon: Icon(Icons.save),
+                  label: Row(
+                    children: [
+                      Text(_productController.subTotal.toString() != '0.0'
+                          ? '\$${_productController.subTotal.toString()}'
+                          : 'Empty Cart' ?? "Empty cart"),
+
+                      new Container(
+                          child: new Stack(
+                        children: <Widget>[
+                          new IconButton(
+                            icon: new Icon(
+                              Icons.shopping_cart,
+                              color: Colors.white,
+                            ),
+                            onPressed: null,
+                          ),
+                          _productController.carts.length.toString() == '0'
+                              ? new Container()
+                              : new Positioned(
+                                  right: 6.0,
+                                  child: new Stack(
+                                    children: <Widget>[
+                                      new Icon(Icons.brightness_1,
+                                          size: 20.0, color: Colors.black),
+                                      new Positioned(
+                                          top: 3.0,
+                                          right: 7.0,
+                                          child: new Center(
+                                            child: new Text(
+                                              _productController.carts.length
+                                                  .toString(),
+                                              style: new TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 11.0,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          )),
+                                    ],
+                                  )),
+                        ],
+                      )),
+
+                      // Text(_productController.quantity.toString() != '0.0' ?_productController.quantity.round().toString() : 'Empty Cart' ?? "Empty cart"),
+                    ],
+                  ),
+                ),
+        ),
         body: _con.market == null ||
                 _con.market?.image == null ||
                 _productController.loading
-            ? CircularLoadingWidget(height: 500)
+            ? Center(child: CircularLoadingWidget(height: 500))
             : RefreshIndicator(
                 onRefresh: _con.refreshMarket,
                 child: Stack(
@@ -128,18 +248,12 @@ class _GridScreenState extends StateMVC<GridScreen> {
                         ],
                       ),
                     ),
-                    // Container(
-                    //   height: ScreenUtil.screenHeight * 0.4,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   color: Colors.amber,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.all(8.0),
-                    //   ),
-                    // ),
+
                     Positioned(
-                        top: ScreenUtil().setHeight(30), child: Header()),
+                        top: ScreenUtil().setHeight(30),
+                        child: Header(isSetting: widget.isSetting)),
                     Container(
-                      height: ScreenUtil.screenHeight * 0.33,
+                      height: ScreenUtil.screenHeight * 0.32,
                       width: ScreenUtil.screenWidth,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -203,12 +317,72 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(10),
                                 ),
-                                Text(
-                                  'Resturent Achivements ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: ScreenUtil().setSp(17)),
+                                Row(
+                                  children: [
+                                    Text(
+                                      S.of(context).restaurant_achievements,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: ScreenUtil().setSp(17)),
+                                    ),
+                                    if (widget.isSetting == true)
+                                      Expanded(
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Expanded(child: SizedBox()),
+                                            Padding(
+                                              padding: EdgeInsets.all(8),
+                                              child: Container(
+                                                height: 29,
+                                                width: 25,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                ),
+                                              ),
+                                            ),
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.chat_bubble,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MessagesWidget()));
+                                                }),
+                                            _con.market.isPaidKitchen
+                                                ? IconButton(
+                                                    icon: Icon(
+                                                      Icons.settings,
+                                                      color: Colors.white,
+                                                      size: 20,
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  KitchenSettingsPage(
+                                                                    market: widget
+                                                                        .routeArgument
+                                                                        .param,
+                                                                    marketData:
+                                                                        _con.market,
+                                                                  )));
+                                                    })
+                                                : Container()
+                                          ],
+                                        ),
+                                      ),
+                                  ],
                                 ),
                               ],
                             )
@@ -240,22 +414,182 @@ class _GridScreenState extends StateMVC<GridScreen> {
                               child: ConstrainedBox(
                                 constraints: BoxConstraints(
                                     minHeight:
-                                        MediaQuery.of(context).size.height *
-                                            1,
+                                        MediaQuery.of(context).size.height * 1,
                                     maxHeight:
-                                        MediaQuery.of(context).size.height *
-                                            1),
+                                        MediaQuery.of(context).size.height * 1),
                                 child: Column(
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
                                       height: ScreenUtil().setHeight(20),
                                     ),
-                                    Text(
-                                      'My Favourites',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: ScreenUtil().setSp(17)),
+                                    if (_con.getKitchenFavourite() == true &&
+                                        widget.isSetting == false)
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Text(
+                                              S.of(context).favorites,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(17)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    SizedBox(
+                                      height: ScreenUtil().setHeight(5),
+                                    ),
+                                    if (_con.getKitchenFavourite() == true &&
+                                        widget.isSetting == false)
+                                      Container(
+                                        height: ScreenUtil.screenHeight * 0.22,
+                                        width: ScreenUtil.screenWidth,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: _con.favorites.length,
+                                          itemBuilder: (context, i) {
+                                            print('idddss');
+                                            print(_con.favorites[i].product
+                                                .market.id);
+                                            print(_con.market.id);
+
+                                            if (_con.favorites[i].product.market
+                                                    .id ==
+                                                _con.market.id) {
+                                              return InkWell(
+                                                  onTap: () {},
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        height: ScreenUtil
+                                                                .screenHeight *
+                                                            0.12,
+                                                        width: ScreenUtil
+                                                                .screenWidth *
+                                                            0.4,
+                                                        alignment: Alignment
+                                                            .bottomCenter,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    image: NetworkImage(_con
+                                                                        .favorites[
+                                                                            i]
+                                                                        .product
+                                                                        .image
+                                                                        .url)),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          8),
+                                                                ),
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.4)),
+                                                      ),
+                                                      Container(
+                                                        height: ScreenUtil
+                                                                .screenHeight *
+                                                            0.1,
+                                                        width: ScreenUtil
+                                                                .screenWidth /
+                                                            2.2,
+                                                        color: Colors.white
+                                                            .withOpacity(0.3),
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      15),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                langCode == 'en'
+                                                                    ? _con
+                                                                            .favorites[
+                                                                                i]
+                                                                            .product
+                                                                            .name ??
+                                                                        ''
+                                                                    : _con
+                                                                            .favorites[i]
+                                                                            .product
+                                                                            .nameAr ??
+                                                                        'Chicken',
+                                                                style: TextStyle(
+                                                                    fontSize: ScreenUtil()
+                                                                        .setSp(
+                                                                            16)),
+                                                              ),
+                                                              SizedBox(
+                                                                height:
+                                                                    ScreenUtil()
+                                                                        .setHeight(
+                                                                            5),
+                                                              ),
+                                                              Text(
+                                                                '${settingRepo.currency.value} ${_con.favorites[i].product.price.toString()}' ??
+                                                                    '\$100.00',
+                                                                style: TextStyle(
+                                                                    fontSize: ScreenUtil()
+                                                                        .setSp(
+                                                                            16)),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: ScreenUtil()
+                                                            .setHeight(10),
+                                                      ),
+                                                    ],
+                                                  ));
+                                            }
+                                          },
+                                        ),
+                                      ),
+
+                                    SizedBox(
+                                      height: ScreenUtil().setHeight(5),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            S.of(context).menu,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    ScreenUtil().setSp(17)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(
                                       height: ScreenUtil().setHeight(5),
@@ -267,49 +601,18 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                         scrollDirection: Axis.horizontal,
                                         itemCount: _con.products.length,
                                         itemBuilder: (context, i) {
-                                          return InkWell(
-                                            onTap: () {
-
-                                            },
-                                            child: CardWidget(
-                                               ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(5),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Menu',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    ScreenUtil().setSp(17)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(5),
-                                    ),
-                                    Container(
-                                      height: ScreenUtil.screenHeight * 0.22,
-                                      width: ScreenUtil.screenWidth,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount:  _con.products.length,
-                                        itemBuilder: (context, i) {
+                                          print('menu refreshed');
+                                          print('check');
+                                          print(_con.checkFavourite(
+                                              _con.products[i].id));
                                           return Stack(
                                             children: [
                                               InkWell(
-                                                onTap: (){
+                                                onTap: () {
+                                                  if (widget.isSetting ==
+                                                      true) {
+                                                    return '';
+                                                  }
                                                   setState(() {
                                                     cartLoading = true;
                                                   });
@@ -319,14 +622,15 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                   setState(() {
                                                     selectedIndex = i;
                                                     //  List<Product> products = List<Product>();
-                                                    products.add(_con.products[i]);
+                                                    products
+                                                        .add(_con.products[i]);
                                                     // products.add(SelectedOrderItem(id: _con.products[index].id,name:  _con.products[index].name,imageUrl:  _con.products[index].image.url,price:_con.products[index].price ));
                                                     products.toSet().toList();
 
                                                     print('index  $i');
 
                                                     if (currentUser
-                                                        .value.apiToken ==
+                                                            .value.apiToken ==
                                                         null) {
                                                       setState(() {
                                                         cartLoading = false;
@@ -335,58 +639,62 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                           .pushNamed("/Login");
                                                     } else {
                                                       if (_productController
-                                                          .isSameMarkets(
-                                                          _con.products[i])) {
+                                                          .isSameMarkets(_con
+                                                              .products[i])) {
                                                         _productController
-                                                            .addToCart(
-                                                            _con.products[i]);
+                                                            .addToCart(_con
+                                                                .products[i]);
+                                                        _con.refreshMarket();
                                                         Future.delayed(
-                                                            Duration(seconds: 3),
-                                                                () {
-                                                              refreshCart();
-                                                              _productController
-                                                                  .listenForCart();
-                                                              setState(() {
-                                                                cartLoading = false;
-                                                              });
-                                                            });
+                                                            Duration(
+                                                                seconds: 3),
+                                                            () {
+                                                          refreshCart();
+                                                          _productController
+                                                              .listenForCart();
+                                                          setState(() {
+                                                            cartLoading = false;
+                                                          });
+                                                        });
                                                       } else {
                                                         showDialog(
                                                           context: context,
                                                           builder: (BuildContext
-                                                          context) {
+                                                              context) {
                                                             // return object of type Dialog
                                                             return AddToCartAlertDialogWidget(
                                                                 oldProduct:
-                                                                _productController
-                                                                    .carts
-                                                                    .elementAt(
-                                                                    0)
-                                                                    ?.product,
+                                                                    _productController
+                                                                        .carts
+                                                                        .elementAt(
+                                                                            0)
+                                                                        ?.product,
                                                                 newProduct: _con
-                                                                    .products[
-                                                                selectedIndex],
+                                                                        .products[
+                                                                    selectedIndex],
                                                                 onPressed: (product,
-                                                                    {reset: true}) {
+                                                                    {reset:
+                                                                        true}) {
                                                                   _productController
                                                                       .addToCart(
-                                                                      product,
-                                                                      reset:
-                                                                      reset);
+                                                                          product,
+                                                                          reset:
+                                                                              reset);
                                                                   Future.delayed(
                                                                       Duration(
                                                                           seconds:
-                                                                          3),
-                                                                          () {
-                                                                        refreshCart();
-                                                                        _productController
-                                                                            .listenForCart();
+                                                                              3),
+                                                                      () {
+                                                                    refreshCart();
+                                                                    _productController
+                                                                        .listenForCart();
 
-                                                                        setState(() {
-                                                                          cartLoading =
+                                                                    setState(
+                                                                        () {
+                                                                      cartLoading =
                                                                           false;
-                                                                        });
-                                                                      });
+                                                                    });
+                                                                  });
                                                                   return;
                                                                 });
                                                           },
@@ -395,99 +703,106 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                                     }
                                                   });
                                                 },
-
                                                 child: CardWidget(
-                                                    product: _con.products[i]
-                                                ),
+                                                    product: _con.products[i]),
                                               ),
                                               Row(children: <Widget>[
-                                                _con.products[i].isFavourite.toString() != '{}'
+                                                _con.checkFavourite(
+                                                        _con.products[i].id)
                                                     ? IconButton(
-                                                    onPressed: () {
-                                                      _con.removeFromFavoriteKitchens(
-                                                          _con.favorite);
-                                                    },
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 0, horizontal: 20),
-                                                    //color: Theme.of(context).primaryColor,
-                                                    //shape: StadiumBorder(),
-                                                    // borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                                    icon: Icon(
-                                                      Icons.bookmark,
-                                                      color: Theme.of(context).accentColor,
-                                                    ))
+                                                        onPressed: () {
+                                                          _con.removeFromFavorite(
+                                                              _con.getFavouriteProduct(
+                                                                  _con
+                                                                      .products[
+                                                                          i]
+                                                                      .id));
+                                                          _con.refreshMarket();
+                                                        },
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 0,
+                                                                horizontal: 20),
+                                                        //color: Theme.of(context).primaryColor,
+                                                        //shape: StadiumBorder(),
+                                                        // borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                                        icon: Icon(
+                                                          Icons.bookmark,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .accentColor,
+                                                        ))
                                                     : IconButton(
-                                                    onPressed: () {
-                                                      if (currentUser.value.apiToken == null) {
-                                                        Navigator.of(context).pushNamed("/Login");
-                                                      } else {
-                                                        _con.addToFavorite(
-                                                            _con.products[i]);
-                                                      }
-                                                    },
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 0, horizontal: 20),
-                                                    color: Colors.transparent,
-                                                    // shape: StadiumBorder(),
-                                                    icon: Icon(
-                                                      Icons.bookmark_border_outlined,
-                                                      color: Theme.of(context).primaryColor,
-                                                    )),
+                                                        onPressed: () {
+                                                          if (currentUser.value
+                                                                  .apiToken ==
+                                                              null) {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pushNamed(
+                                                                    "/Login");
+                                                          } else {
+                                                            _con.addToFavorite(
+                                                                _con.products[
+                                                                    i]);
+
+                                                            _con.refreshMarket();
+                                                          }
+                                                        },
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 0,
+                                                                horizontal: 20),
+                                                        color:
+                                                            Colors.transparent,
+                                                        // shape: StadiumBorder(),
+                                                        icon: Icon(
+                                                          Icons
+                                                              .bookmark_border_outlined,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
+                                                        )),
                                               ])
                                             ],
                                           );
                                         },
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Cart',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:
-                                                    ScreenUtil().setSp(17)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+
                                     SizedBox(
                                       height: ScreenUtil().setHeight(5),
                                     ),
-                                    Expanded(
-                                      child: Container(
-
-                                          height: 170,
-                                          child: cartLoading
-                                              ? Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25.0),
-                                                    // color: Colors.greenAccent,
-                                                  ),
-                                                  child: Image.asset(
-                                                    'assets/img/loading.gif',
-                                                    fit: BoxFit.cover,
-                                                    width: 200,
-                                                  ))
-                                              : KitchenCartWidget(
-                                                  callback: (func) {
-                                                  refreshCart = func;
-                                                }, removeFromCart: () {
-                                                  Future.delayed(
-                                                      Duration(milliseconds: 30),
-                                                      () {
-                                                    _productController
-                                                        .listenForCart();
-                                                    refreshCart();
-                                                  });
-                                                })),
-                                    ),
+                                    // Expanded(
+                                    //   child: Container(
+                                    //       height: 170,
+                                    //       child: cartLoading
+                                    //           ? Container(
+                                    //               decoration: BoxDecoration(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         25.0),
+                                    //                 // color: Colors.greenAccent,
+                                    //               ),
+                                    //               child: Image.asset(
+                                    //                 'assets/img/loading.gif',
+                                    //                 fit: BoxFit.cover,
+                                    //                 width: 200,
+                                    //               ))
+                                    //           : KitchenCartWidget(
+                                    //               callback: (func) {
+                                    //               refreshCart = func;
+                                    //             }, removeFromCart: () {
+                                    //               Future.delayed(
+                                    //                   Duration(
+                                    //                       milliseconds: 30),
+                                    //                   () {
+                                    //                 _productController
+                                    //                     .listenForCart();
+                                    //                 refreshCart();
+                                    //               });
+                                    //             })),
+                                    // ),
 //calender here
                                   ],
                                 ),
@@ -705,6 +1020,11 @@ class CardWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    String langCode =
+        settingRepo.setting.value.mobileLanguage.value.languageCode;
+    print('f43');
+    print(product?.nameAr);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -744,14 +1064,20 @@ class CardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  product != null ? product.name : 'Chicken',
+                  product != null
+                      ? langCode == 'en'
+                          ? product?.name ?? ''
+                          : product?.nameAr ?? ''
+                      : 'Chicken',
                   style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                 ),
                 SizedBox(
                   height: ScreenUtil().setHeight(5),
                 ),
                 Text(
-                  product != null ? product.price.toString() : '\$100.00',
+                  product != null
+                      ? '${settingRepo.currency.value} ${product.price.toString()}'
+                      : '\$100.00',
                   style: TextStyle(fontSize: ScreenUtil().setSp(16)),
                 )
               ],
@@ -767,7 +1093,9 @@ class CardWidget extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
+  final isSetting;
   const Header({
+    this.isSetting,
     Key key,
   }) : super(key: key);
 
@@ -781,8 +1109,13 @@ class Header extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: (){
-                Navigator.pop(context);
+              onTap: () {
+                if (isSetting == true) {
+                  Navigator.of(context)
+                      .pushNamed('/Pages', arguments: RouteArgument(id: '3'));
+                } else {
+                  Navigator.pop(context);
+                }
               },
               child: Container(
                 height: 40,

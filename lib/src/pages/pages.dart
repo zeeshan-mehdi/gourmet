@@ -7,9 +7,16 @@ import 'package:markets/driver_app/src/pages/orders_history.dart';
 import 'package:markets/driver_app/src/pages/profile.dart';
 import 'package:markets/generated/l10n.dart';
 import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
-import 'package:markets/restaurent_app/src/models/route_argument.dart';
+import '../models/route_argument.dart';
 import 'package:markets/restaurent_app/src/pages/details.dart';
+
+
 import 'package:markets/restaurent_app/src/pages/new_product.dart';
+import 'package:markets/src/pages/HomeScreen.dart';
+import 'package:markets/src/pages/newKitchenDetailScreen.dart';
+import 'package:markets/src/pages/menuGridScreen.dart';
+import 'package:markets/src/pages/gridMenuScreen.dart';
+import 'package:markets/src/pages/tabMenuScreen.dart';
 import 'package:markets/restaurent_app/src/pages/open_new_kitchen.dart';
 import 'package:markets/restaurent_app/src/pages/orders.dart' as restOrders;
 import 'package:markets/restaurent_app/src/pages/product.dart';
@@ -43,9 +50,15 @@ enum NavPages {
   MyAccount,
   MySettings,
   BecomeKitchen,
+
   AddProduct,
   RestaurantMembership,
-  MyAddresses,  DriverProfile,DriverOrders,OrderHistory,DriverMap
+  MyAddresses,
+  DriverProfile,
+  DriverOrders,
+  OrderHistory,
+  DriverMap,
+  NewKitchen
 }
 
 
@@ -116,8 +129,8 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = KitchenProfile();
           break;
         case NavPages.RestaurantManagement:
-          widget.currentPage = ProductWidget(routeArgument: widget.routeArgument,);
-          //widget.currentPage =  DetailsWidget(routeArgument: RouteArgument(param: null),);
+         // widget.currentPage = HomeScreen(routeArgument: widget.routeArgument,);
+          widget.currentPage =  ProductWidget(routeArgument: widget.routeArgument,);
           break;
         case NavPages.RestaurantOrders:
           widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,market: widget?.routeArgument?.param,);
@@ -153,8 +166,9 @@ class _PagesWidgetState extends State<PagesWidget> {
         case NavPages.OrderHistory:
           widget.currentPage = OrdersHistoryWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
-        case NavPages.DriverMap:
-          widget.currentPage = DriverMapWidget(parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
+        case NavPages.NewKitchen:
+          widget.currentPage = NewKitchenDetailScreen(routeArgument: widget.routeArgument);
+
           break;
 
 

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import  'package:markets/generated/l10n.dart';
-import '../controllers/product_controller.dart';
+import 'package:markets/src/controllers/market_controller.dart';
+import 'package:markets/src/controllers/product_controller.dart';
 import '../elements/AddToCartAlertDialog.dart';
 import '../elements/CircularLoadingWidget.dart';
 import '../elements/OptionItemWidget.dart';

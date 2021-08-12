@@ -7,13 +7,18 @@ import 'package:markets/restaurent_app/src/pages/settings.dart';
 import 'package:markets/restaurent_app/src/pages/settings_page.dart';
 import 'package:markets/src/controllers/market_controller.dart';
 import 'package:markets/src/models/market.dart';
+import 'package:markets/src/pages/HomeScreen.dart';
+import 'package:markets/src/pages/tabMenuScreen.dart';
+import 'package:markets/src/pages/gridMenuScreen.dart';
+import 'package:markets/src/pages/menuGridScreen.dart';
+
 import 'package:markets/src/pages/cart.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 import '../elements/CircularLoadingWidget.dart';
 import '../helpers/helper.dart';
-import '../models/route_argument.dart';
+import 'package:markets/src/models/route_argument.dart';
 
 // ignore: must_be_immutable
 class ProductWidget extends StatefulWidget {
@@ -57,7 +62,17 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
       key: _con.scaffoldKey,
       body: _con.market == null || _con.market?.image == null
           ? CircularLoadingWidget(height: 500)
-          : RefreshIndicator(
+          :  _con.market.design_type == 1 ? HomeScreen(routeArgument:  RouteArgument(param: _con.market.id, ),isSetting: true,)
+          :  _con.market.design_type == 2 ? MenuGridScreen(routeArgument:  RouteArgument(param: _con.market.id ),isSetting: true)
+          :  _con.market.design_type == 3 ? GridScreen(routeArgument:  RouteArgument(param: _con.market.id ),isSetting: true)
+          :  _con.market.design_type == 4 ? TabsMenuScreen(routeArgument:  RouteArgument(param: _con.market.id ),isSetting: true)
+          :
+
+
+
+
+
+      RefreshIndicator(
               onRefresh: _con.refreshMarket,
               child: Stack(
                 fit: StackFit.expand,
@@ -267,7 +282,11 @@ class _ProductWidgetState extends StateMVC<ProductWidget> {
 
 
                                                       _con.market.isPaidKitchen ? IconButton(icon: Icon(Icons.settings,color:Colors.white,size: 20,), onPressed: (){
-                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage()));
+
+                                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>KitchenSettingsPage(
+                                                            market:  widget.routeArgument.param,
+                                                            marketData: _con.market,
+                                                          )));
                                                       }):Container()
 
 

@@ -22,6 +22,7 @@ import 'user_repository.dart' as userRepo;
 
 ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 ValueNotifier<Address> deliveryAddress = new ValueNotifier(new Address());
+ValueNotifier<String> currency = new ValueNotifier('');
 Coupon coupon = new Coupon.fromJSON({});
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -107,6 +108,13 @@ Future<Address> changeCurrentLocation(Address _address) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('delivery_address', json.encode(_address.toMap()));
   }
+  if(_address.country =='KW'){
+    currency.value ='kWD';
+  }else if(_address.country  == 'SA'){
+    currency.value ='SR';
+  }else{
+    currency.value=setting.value.defaultCurrency;
+  }
   return _address;
 }
 
@@ -115,9 +123,23 @@ Future<Address> getCurrentLocation() async {
   //await prefs.clear();
   if (prefs.containsKey('delivery_address')) {
     deliveryAddress.value = Address.fromJSON(json.decode(prefs.getString('delivery_address')));
+    if(deliveryAddress.value.country =='KW'){
+      currency.value ='kWD';
+    }else if(deliveryAddress.value.country == 'SA'){
+      currency.value ='SR';
+    }else{
+      currency.value=setting.value.defaultCurrency;
+    }
     return deliveryAddress.value;
   } else {
     deliveryAddress.value = Address.fromJSON({});
+    if(deliveryAddress.value.country =='KW'){
+      currency.value ='kWD';
+    }else if(deliveryAddress.value.country == 'SA'){
+      currency.value ='SR';
+    }else{
+      currency.value=setting.value.defaultCurrency;
+    }
     return Address.fromJSON({});
   }
 }

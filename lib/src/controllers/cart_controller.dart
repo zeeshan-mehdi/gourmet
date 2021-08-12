@@ -22,9 +22,11 @@ class CartController extends ControllerMVC {
 
   CartController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
+    listenForCarts();
   }
 
   void listenForCarts({String message}) async {
+    print('vartsss');
     carts.clear();
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
@@ -40,6 +42,7 @@ class CartController extends ControllerMVC {
         content: Text(S.of(state.context).verify_your_internet_connection),
       ));
     }, onDone: () {
+      print('vdvdvsd' + carts.length.toString());
       if (carts.isNotEmpty) {
         calculateSubtotal();
       }
@@ -102,6 +105,7 @@ class CartController extends ControllerMVC {
       });
       cartPrice *= cart.quantity;
       subTotal += cartPrice;
+      print(subTotal.toString() + 'ss');
     });
     if (Helper.canDelivery(carts[0].product.market, carts: carts)) {
       deliveryFee = carts[0].product.market.deliveryFee;
