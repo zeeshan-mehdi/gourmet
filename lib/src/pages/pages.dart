@@ -10,7 +10,6 @@ import 'package:markets/restaurent_app/src/controllers/market_controller.dart';
 import '../models/route_argument.dart';
 import 'package:markets/restaurent_app/src/pages/details.dart';
 
-
 import 'package:markets/restaurent_app/src/pages/new_product.dart';
 import 'package:markets/src/pages/HomeScreen.dart';
 import 'package:markets/src/pages/newKitchenDetailScreen.dart';
@@ -38,7 +37,7 @@ import '../pages/map.dart';
 import '../pages/notifications.dart';
 import '../pages/orders.dart';
 import 'messages.dart';
-
+import 'package:markets/src/models/route_argument.dart' as restRouteArgument;
 
 enum NavPages {
   Home,
@@ -61,7 +60,6 @@ enum NavPages {
   NewKitchen
 }
 
-
 // ignore: must_be_immutable
 class PagesWidget extends StatefulWidget {
   dynamic currentTab;
@@ -77,9 +75,9 @@ class PagesWidget extends StatefulWidget {
       if (currentTab is RouteArgument) {
         routeArgument = currentTab;
 
-        int index= int.parse(currentTab.id);
+        int index = int.parse(currentTab.id);
 
-        currentTab =  NavPages.values.elementAt(index);
+        currentTab = NavPages.values.elementAt(index);
       }
     } else {
       currentTab = NavPages.Home;
@@ -93,8 +91,6 @@ class PagesWidget extends StatefulWidget {
 }
 
 class _PagesWidgetState extends State<PagesWidget> {
-
-
   initState() {
     super.initState();
     _selectTab(widget.currentTab);
@@ -107,86 +103,94 @@ class _PagesWidgetState extends State<PagesWidget> {
   }
 
   void _selectTab(tabItem) {
-
-    if(tabItem is int){
+    if (tabItem is int) {
       tabItem = NavPages.values.elementAt(tabItem);
     }
-
 
     setState(() {
       widget.currentTab = tabItem;
       switch (tabItem) {
         case NavPages.Home:
-          widget.currentPage = HomeWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage =
+              HomeWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.MyOrders:
-          widget.currentPage = OrdersWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage =
+              OrdersWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.Favorites:
-          widget.currentPage = FavoritesWidget(); //FavoritesWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage =
+              FavoritesWidget(); //FavoritesWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.Profile:
           widget.currentPage = KitchenProfile();
           break;
         case NavPages.RestaurantManagement:
-         // widget.currentPage = HomeScreen(routeArgument: widget.routeArgument,);
-          widget.currentPage =  ProductWidget(routeArgument: widget.routeArgument,);
+          // widget.currentPage = HomeScreen(routeArgument: widget.routeArgument,);
+          widget.currentPage = ProductWidget(
+            routeArgument: widget.routeArgument,
+          );
           break;
         case NavPages.RestaurantOrders:
-          widget.currentPage = restOrders.OrdersWidget(parentScaffoldKey: widget.scaffoldKey,market: widget?.routeArgument?.param,);
+          widget.currentPage = restOrders.OrdersWidget(
+            parentScaffoldKey: widget.scaffoldKey,
+            market: widget?.routeArgument?.param,
+          );
           break;
 
         case NavPages.MyAccount:
-          widget.currentPage =  ProfileWidget();
+          widget.currentPage = ProfileWidget();
           break;
         case NavPages.MySettings:
-          widget.currentPage =  SettingsWidget();
+          widget.currentPage = SettingsWidget();
           break;
 
         case NavPages.BecomeKitchen:
-          widget.currentPage =  OpenNewKitchenPage();
+          widget.currentPage = OpenNewKitchenPage();
           break;
 
         case NavPages.AddProduct:
-          widget.currentPage =  NewProductPage();
+          widget.currentPage = NewProductPage();
           break;
 
         case NavPages.RestaurantMembership:
           widget.currentPage = RestaurantsMemberShip();
           break;
-        case NavPages.MyAddresses :
+        case NavPages.MyAddresses:
           widget.currentPage = DeliveryAddressesWidget();
           break;
         case NavPages.DriverProfile:
-          widget.currentPage = DriverProfileWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage =
+              DriverProfileWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.DriverOrders:
-          widget.currentPage = DriverOrdersWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage =
+              DriverOrdersWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.OrderHistory:
-          widget.currentPage = OrdersHistoryWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage =
+              OrdersHistoryWidget(parentScaffoldKey: widget.scaffoldKey);
           break;
         case NavPages.NewKitchen:
-          widget.currentPage = NewKitchenDetailScreen(routeArgument: widget.routeArgument);
+          widget.currentPage =
+              NewKitchenDetailScreen(routeArgument: widget.routeArgument);
 
           break;
-
-
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if(mounted)
-      _selectTab(widget.currentTab);
+    if (mounted) _selectTab(widget.currentTab);
     return WillPopScope(
       onWillPop: Helper.of(context).onWillPop,
       child: Scaffold(
         key: widget.scaffoldKey,
         drawer: DrawerWidget(),
         endDrawer: FilterWidget(onFilter: (filter) {
-          Navigator.of(context).pushReplacementNamed('/Pages', arguments: widget.currentTab);
+          Navigator.of(context)
+              .pushReplacementNamed('/Pages', arguments: widget.currentTab);
         }),
         body: widget.currentPage,
         bottomNavigationBar: BottomNavigationBar(
@@ -199,20 +203,30 @@ class _PagesWidgetState extends State<PagesWidget> {
           backgroundColor: Colors.transparent,
           selectedIconTheme: IconThemeData(size: 22),
           unselectedItemColor: Theme.of(context).focusColor.withOpacity(1),
-          currentIndex: NavPages.values.indexOf( widget.currentTab)>=4? 3 : NavPages.values.indexOf( widget.currentTab),
+          currentIndex: NavPages.values.indexOf(widget.currentTab) >= 4
+              ? 3
+              : NavPages.values.indexOf(widget.currentTab),
           onTap: (int i) {
             this._selectTab(i);
           },
           // this will be set when a new tab is tapped
           items: [
-
             BottomNavigationBarItem(
               label: '',
               icon: Column(
                 children: [
                   new Icon(FontAwesomeIcons.compass),
-                  SizedBox(height: 3,),
-                  Text(S.of(context).explore,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.Home? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    S.of(context).explore,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 12,
+                        color: widget.currentTab == NavPages.Home
+                            ? Theme.of(context).accentColor
+                            : Colors.black.withOpacity(0.5)),
+                  ),
                 ],
               ),
             ),
@@ -221,9 +235,19 @@ class _PagesWidgetState extends State<PagesWidget> {
                 children: [
                   Transform(
                       alignment: Alignment.center,
-                      transform: Matrix4.rotationX(pi),child: new Icon(FontAwesomeIcons.file)),
-                  SizedBox(height: 3,),
-                  Text(S.of(context).orders,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color: widget.currentTab==NavPages.MyOrders? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                      transform: Matrix4.rotationX(pi),
+                      child: new Icon(FontAwesomeIcons.file)),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    S.of(context).orders,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 12,
+                        color: widget.currentTab == NavPages.MyOrders
+                            ? Theme.of(context).accentColor
+                            : Colors.black.withOpacity(0.5)),
+                  ),
                 ],
               ),
               label: '',
@@ -232,20 +256,36 @@ class _PagesWidgetState extends State<PagesWidget> {
               icon: Column(
                 children: [
                   Icon(FontAwesomeIcons.bookmark),
-                  SizedBox(height: 3,),
-                  Text(S.of(context).favorites,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12,color:widget.currentTab==NavPages.Favorites? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    S.of(context).favorites,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 12,
+                        color: widget.currentTab == NavPages.Favorites
+                            ? Theme.of(context).accentColor
+                            : Colors.black.withOpacity(0.5)),
+                  ),
                 ],
               ),
               label: '',
             ),
-
-
             BottomNavigationBarItem(
               icon: Column(
                 children: [
                   new Icon(FontAwesomeIcons.addressBook),
-                  SizedBox(height: 3,),
-                  Text(S.of(context).profile,style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12, color:widget.currentTab==NavPages.Profile? Theme.of(context).accentColor:Colors.black.withOpacity(0.5) ),),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    S.of(context).profile,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 12,
+                        color: widget.currentTab == NavPages.Profile
+                            ? Theme.of(context).accentColor
+                            : Colors.black.withOpacity(0.5)),
+                  ),
                 ],
               ),
               label: '',

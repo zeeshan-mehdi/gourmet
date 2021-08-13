@@ -29,6 +29,11 @@ Future<userModel.User> login(userModel.User user) async {
   if (response.statusCode == 200) {
 
     print('response body ${response.body}');
+    try{
+      var decode = json.decode(response.body);
+    }catch (e){
+      throw new Exception(response.body);
+    }
     setCurrentUser(response.body);
     currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   } else {
@@ -38,6 +43,11 @@ Future<userModel.User> login(userModel.User user) async {
 }
 
 Future<userModel.User> register(userModel.User user) async {
+
+  print('paramaters for registration ${user}');
+  //print(user.toMap());
+  print('url ${GlobalConfiguration().getValue('api_base_url')}manager/register');
+
   final String url = '${GlobalConfiguration().getValue('api_base_url')}manager/register';
   final client = new http.Client();
   final response = await client.post(
@@ -45,10 +55,16 @@ Future<userModel.User> register(userModel.User user) async {
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: json.encode(user.toMap()),
   );
-  print("usammaaaa");
+  print("reponse of registration");
   print(response.body);
   if (response.statusCode == 200) {
-    print(user.toMap());
+
+    try{
+      var decode = json.decode(response.body);
+    }catch (e){
+      throw new Exception(response.body);
+    }
+
     setCurrentUser(response.body);
     currentUser.value = userModel.User.fromJSON(json.decode(response.body)['data']);
   } else {

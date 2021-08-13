@@ -256,7 +256,7 @@ class UserController extends ControllerMVC {
             action: SnackBarAction(
               label: S.of(state.context).login,
               onPressed: () {
-                Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Login');
+                Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/LoginOption');
               },
             ),
             duration: Duration(seconds: 10),

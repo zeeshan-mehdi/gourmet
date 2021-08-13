@@ -20,32 +20,34 @@ class CardWidget extends StatelessWidget {
   CardWidget({Key key, this.market, this.heroTag}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
-    String langCode = settingRepo.setting.value.mobileLanguage.value.languageCode;
+    String langCode =
+        settingRepo.setting.value.mobileLanguage.value.languageCode;
     print('lang code $langCode');
 
-    String name ;
+    String name;
     String address;
-    address = market?.address.length > 25 ? market?.address.substring(0,25)+'...' : market?.address;
-    if(langCode=='en'){
-      name = market.name.length > 20 ? market?.name.substring(0,20)+'...' : market?.name;
-
-    }else{
-      name = market.nameAr.length > 20 ? market?.nameAr.substring(0,20)+'...' : market?.nameAr;
+    address = market?.address.length > 25
+        ? market?.address.substring(0, 25) + '...'
+        : market?.address;
+    if (langCode == 'en') {
+      name = market.name.length > 20
+          ? market?.name.substring(0, 20) + '...'
+          : market?.name;
+    } else {
+      name = market.nameAr.length > 20
+          ? market?.nameAr.substring(0, 20) + '...'
+          : market?.nameAr;
     }
 
-
-
     return InkWell(
-      onTap: (){
-      //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuGridScreen(routeArgument: RouteArgument(param:
-      // market.id
-      //   ),
-      //   )));
-        Navigator.of(context).pushNamed('/Pages',arguments: RouteArgument(id: '16',param:market.id ) );
-
+      onTap: () {
+        //   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MenuGridScreen(routeArgument: RouteArgument(param:
+        // market.id
+        //   ),
+        //   )));
+        Navigator.of(context).pushNamed('/Pages',
+            arguments: RouteArgument(id: '16', param: market.id));
       },
-
       child: Container(
         width: 292,
         height: 100,
@@ -58,7 +60,7 @@ class CardWidget extends StatelessWidget {
           // ],
         ),
         child: Padding(
-          padding: EdgeInsets.only(left: 12,right: 12,top: 0,bottom: 0),
+          padding: EdgeInsets.only(left: 12, right: 12, top: 0, bottom: 0),
           child: Column(
             children: [
               Row(
@@ -67,11 +69,17 @@ class CardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   // Image of the card
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Hero(
                     tag: this.heroTag + market.id,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
                       child: CachedNetworkImage(
                         height: 60,
                         width: 80,
@@ -83,7 +91,8 @@ class CardWidget extends StatelessWidget {
                           width: double.infinity,
                           height: 60,
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                        errorWidget: (context, url, error) =>
+                            Icon(Icons.error_outline),
                       ),
                     ),
                   ),
@@ -121,7 +130,8 @@ class CardWidget extends StatelessWidget {
                   //   ],
                   // ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -133,17 +143,17 @@ class CardWidget extends StatelessWidget {
                         ),
                         Text(
                           address,
-                         // Helper.skipHtml(market?.address??''),
+                          // Helper.skipHtml(market?.address??''),
                           overflow: TextOverflow.ellipsis,
 
                           //overflow: TextOverflow.fade,
                           softWrap: false,
                           style: Theme.of(context).textTheme.caption,
                         ),
-
                         SizedBox(height: 5),
                         Row(
-                          children: Helper.getStarsList(double.parse(market.rate)),
+                          children:
+                              Helper.getStarsList(double.parse(market.rate)),
                         ),
                       ],
                     ),
@@ -151,13 +161,16 @@ class CardWidget extends StatelessWidget {
                   // )
                 ],
               ),
-              SizedBox(height: 12,),
-              Divider(color: Colors.black.withOpacity(0.2),
-              indent: 0,endIndent: 0,)
+              SizedBox(
+                height: 12,
+              ),
+              Divider(
+                color: Colors.black.withOpacity(0.2),
+                indent: 0,
+                endIndent: 0,
+              )
             ],
           ),
-
-
         ),
       ),
     );

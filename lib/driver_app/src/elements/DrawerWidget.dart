@@ -166,7 +166,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
                 ListTile(
                   onTap: () {
                     logout().then((value) {
-                      Navigator.of(context).pushNamedAndRemoveUntil('/Login', (Route<dynamic> route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil('/LoginOption', (Route<dynamic> route) => false);
                     });
                   },
                   leading: Icon(

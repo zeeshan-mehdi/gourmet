@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:markets/src/pages/pages.dart';
 import 'package:markets/src/repository/user_repository.dart';
 
@@ -55,7 +56,8 @@ class LoginOption extends StatefulWidget {
 class _LoginOptionState extends State<LoginOption> {
   // LanguagesList languagesList;
   ValueNotifier<userModel.User> currentUser = new ValueNotifier(userModel.User());
-
+  FirebaseService service = new FirebaseService();
+  bool load = false;
   @override
   void initState() {
     //  languagesList = new LanguagesList();
@@ -113,7 +115,7 @@ class _LoginOptionState extends State<LoginOption> {
                       height: config.App(context).appHeight(10),
                     ),
 
-                    BlockButtonWidget(
+                    load ? Center(child:CircularProgressIndicator()) : BlockButtonWidget(
 
                       text: Text(
                         S.of(context).login,
@@ -132,7 +134,7 @@ class _LoginOptionState extends State<LoginOption> {
                     SizedBox(
                       height: config.App(context).appHeight(1.2),
                     ),
-                  Container(
+                    load ? Container():Container(
                       //padding: EdgeInsets.symmetric(horizontal: 30, vertical: 14),
                     decoration: BoxDecoration(
                       // boxShadow: [
@@ -145,15 +147,10 @@ class _LoginOptionState extends State<LoginOption> {
                       elevation: 0,
                       onPressed: () async {
                         print("Sign in with Apple");
-                        final credential = await SignInWithApple.getAppleIDCredential(
-                          scopes: [
-                            AppleIDAuthorizationScopes.email,
-                            AppleIDAuthorizationScopes.fullName,
-                          ],
-                        );
 
-                        print(credential);
-
+                        setState(() {
+                          load = true;
+                        });
                         // setState(() {
                           //   isLoading = true;
                           // });
@@ -161,6 +158,15 @@ class _LoginOptionState extends State<LoginOption> {
                           // setState(() {
                           //   isLoading = false;
                           // });
+                        try {
+                          await service.signInWithApple(context);
+                        }catch(e){
+                          print(e);
+                        }
+
+                        setState(() {
+                          load = false;
+                        });
                       },
                       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12),
                       color: Colors.white,
@@ -185,7 +191,7 @@ class _LoginOptionState extends State<LoginOption> {
                     SizedBox(
                       height: config.App(context).appHeight(1.2),
                     ),
-                    Container(
+                    load ? Container():Container(
                       //padding: EdgeInsets.symmetric(horizontal: 0, vertical: 14),
                       decoration: BoxDecoration(
                         // boxShadow: [
@@ -199,10 +205,20 @@ class _LoginOptionState extends State<LoginOption> {
                           onPressed: () async{
                             print("Connect with google");
 
-                            FirebaseService service = new FirebaseService();
                             try {
+                              setState(() {
+                                load = true;
+                              });
                               //await service.signInwithGoogle();
-                              await service.signInWithGoogle(context);
+
+                              try {
+                                await service.signInWithGoogle(context);
+                              }catch(e){
+                                print(e);
+                              }
+                              setState(() {
+                                load = false;
+                              });
 
                               // Navigator.pushNamedAndRemoveUntil(context, Constants.homeNavigate, (route) => false);
                             } catch(e){
@@ -212,17 +228,19 @@ class _LoginOptionState extends State<LoginOption> {
                             }
                           },
                           padding: EdgeInsets.symmetric(horizontal: 0, vertical: 12),
-                          color: Colors.blueAccent,
+                          color: Colors.redAccent,
                           shape: StadiumBorder(),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/img/facebookLogo.png',
-                                height: 22,
-                                width: 40,
-                              ),
+                              Icon(FontAwesomeIcons.google,color: Colors.white,),
+                              SizedBox(width: 5,),
+                              // Image.asset(
+                              //   'assets/img/googleLogo.png',
+                              //   height: 22,
+                              //   width: 40,
+                              // ),
                               Text(
                                 S.of(context).sign_in_with_google,
                                // "Sign in with Google",
@@ -321,6 +339,45 @@ class FirebaseService {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+
+  signInWithApple(BuildContext context) async{
+
+    final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(clientId: 'com.service.gourmetapp', redirectUri: Uri.parse ('https://chip-hip-browser.glitch.me/callbacks/sign_in_with_apple'))
+    );
+
+    print(credential.authorizationCode);
+    print(credential.identityToken);
+
+    final AuthCredential credential1 = OAuthProvider('apple.com').credential(
+      accessToken: credential.authorizationCode,
+      idToken: credential.identityToken,
+    );
+
+    final authResult = await FirebaseAuth.instance.signInWithCredential(credential1);
+    // final firebaseUser = authResult.user;
+    // if (scopes.contains(credential.Scope.fullName)) {
+    //   final displayName =
+    //       '${appleIdCredential.fullName.givenName} ${appleIdCredential.fullName.familyName}';
+    //   await firebaseUser.updateProfile(displayName: displayName);
+    // }
+
+    print(authResult);
+    print(authResult.user);
+
+    await login(authResult.user.email,authResult.user.uid,context,authResult.user);
+
+  }
+
+
+
+
+
+
   Future<void> signOutFromGoogle() async{
     await _googleSignIn.signOut();
     await _auth.signOut();
@@ -336,7 +393,7 @@ class FirebaseService {
     );
   }
 
-  void login(String email,String pass,BuildContext context,GoogleSignInAccount userDetial) async {
+  void login(String email,String pass,BuildContext context, userDetial) async {
     //loader = Helper.overlayLoader(state.context);
    // FocusScope.of(state.context).unfocus();
      // loginFormKey.currentState.save();
@@ -347,7 +404,7 @@ class FirebaseService {
     user.email = email;
     user.password= pass.toString();
 
-      repository.login(user).then((value) {
+      await repository.login(user).then((value) {
         print("user emai is ${value.apiToken}");
         print("user emai is ${value.email}");
         print(user.email);
@@ -360,14 +417,15 @@ class FirebaseService {
 
           print(value.email);
         }
-      }).catchError((e) {
+      }).catchError((e) async{
         print("this_account_not_exist");
 
+        print(e);
       //  _showToast(context,"This account not exist");
        // register(userDetial,context);
         model.User user = new model.User();
         print(userDetial.email);
-        print(userDetial.id);
+
        // user.email = userDetial.email;
         // user.name = userDetial.displayName;
         // user.password = userDetial.id.toString();
@@ -375,8 +433,8 @@ class FirebaseService {
         // user.deviceToken = "eIgcV8ESCU8_iqBjMzN8aL:APA91bFcyGCYlHc22cFooalmHdwziU2Czc-obP6NMb_hobPFxTvMoHRhUQ69XnOqyozDqm68UYm8ge9-JZ5iwAnVIZus_yqVqfonRWJ78NwKJjKbl_LRphspKvyY-tilWUZpISDhYR29";
         // user.address = "Islamabad";
         // print("karachi");
-        print(user.toMap());
-        register(userDetial, context);
+        //print(user.toMap());
+        await register(userDetial, context);
        // loader.remove();
        //  ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
        //    content: Text(S.of(state.context).this_account_not_exist),
@@ -410,28 +468,33 @@ class FirebaseService {
     return currentUser.value;
   }
 
-  void register(GoogleSignInAccount userDetial,BuildContext context) async {
+  void register(userDetial,BuildContext context) async {
     print("token is ${"abc"}");
   //  loader = Helper.overlayLoader(state.context);
   ///  FocusScope.of(state.context).unfocus();
    // Overlay.of(state.context).insert(loader);
     model.User user = new model.User();
     print(userDetial.email);
-    print(userDetial.id);
     user.email = userDetial.email;
-    user.name = userDetial.displayName;
-    user.password = userDetial.id.toString();
-    user.phone = "";
-    user.deviceToken = "eIgcV8ESCU8_iqBjMzN8aL:APA91bFcyGCYlHc22cFooalmHdwziU2Czc-obP6NMb_hobPFxTvMoHRhUQ69XnOqyozDqm68UYm8ge9-JZ5iwAnVIZus_yqVqfonRWJ78NwKJjKbl_LRphspKvyY-tilWUZpISDhYR29";
-    user.address = "Islamabad";
-   // user.image = userDetial.photoUrl
-    //user = userDetial.displayName;
+    user.name = userDetial.displayName?? Helper.getUserNameFromEmail(userDetial.email)??"Unknown";
 
-    repository.register(user).then((value) {
-      print("token is ${user.name}");
+
+    if(userDetial is User) {
+      user.password =  userDetial.uid;
+    }else{
+      user.password = userDetial.id.toString();
+    }
+    //user.phone = "+934766118810";
+   // user.deviceToken = "eIgcV8ESCU8_iqBjMzN8aL:APA91bFcyGCYlHc22cFooalmHdwziU2Czc-obP6NMb_hobPFxTvMoHRhUQ69XnOqyozDqm68UYm8ge9-JZ5iwAnVIZus_yqVqfonRWJ78NwKJjKbl_LRphspKvyY-tilWUZpISDhYR29";
+    user.address = "";
+   // user.image = userDetial.photoUrl
+   // user = userDetial.displayName;
+
+    await repository.register(user).then((value) {
+      print("value is $value");
       print("token 2 is ${user.name}");
       if (value != null && value.apiToken != null) {
-        Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
+        Navigator.of(context).pushReplacementNamed('/Pages', arguments: 0);
       } else {
         print("wrong_email_or_password");
         // ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
@@ -439,8 +502,15 @@ class FirebaseService {
         // ));
       }
     }).catchError((e) {
-      print("this_email_account_exists");
-      Navigator.of(context).push( MaterialPageRoute(builder: (_) => PagesWidget(currentTab: 0)));
+
+      print("register error");
+      print(e);
+
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+         content: Text('User already exists with this email but used other method to sign up,try different login method'),
+       ));
+
+      //Navigator.of(context).push( MaterialPageRoute(builder: (_) => PagesWidget(currentTab: 0)));
 
      // Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 0);
 

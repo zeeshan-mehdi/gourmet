@@ -352,11 +352,11 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                       onTap: () {
                         if (currentUser.value.apiToken != null) {
                           logout().then((value) {
-                            Navigator.of(context).pushNamed('/Login');
+                            Navigator.of(context).pushNamed('/LoginOption');
                             //Navigator.of(context).pushNamedAndRemoveUntil('/Pages', (Route<dynamic> route) => false, arguments: 0);
                           });
                         } else {
-                          Navigator.of(context).pushNamed('/Login');
+                          Navigator.of(context).pushNamed('/LoginOption');
                         }
                       },
                       leading: Icon(
