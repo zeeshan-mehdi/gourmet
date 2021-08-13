@@ -154,7 +154,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
           // icon: Icon(Icons.save),
           label: Row(
             children: [
-              Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
+              Text(_productController.subTotal.toString() != '0.0' ?'${settingRepo.currency.value}${_productController.subTotal.toString()}': 'Empty Cart' ?? "Empty cart"),
 
               new Container(
 
@@ -312,7 +312,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                 .ellipsis,
                             maxLines: 2,
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
+
                               fontSize: ScreenUtil().setSp(17),
                               color: Colors.white,
                             ),
@@ -323,6 +323,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                         height: ScreenUtil().setHeight(10),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             S.of(context).restaurant_achievements,
@@ -331,6 +332,20 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
 
                                 color: Colors.white,
                                 fontSize: ScreenUtil().setSp(17)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Container(
+                              height: 29,
+                              width: 25,
+                              decoration: BoxDecoration(
+
+                                image: DecorationImage(image: AssetImage(
+                                    'assets/achive.jpeg'
+                                )),
+                                borderRadius: BorderRadius.circular(6),),
+
+                            ),
                           ),
                           if(widget.isSetting == true)
                             Expanded(
@@ -341,27 +356,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
                                 MainAxisAlignment.center,
                                 children: [
                                   Expanded(child: SizedBox()),
-                                  Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Container(
-                                      height: 29,
-                                      width: 25,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(6),),
 
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Container(
-                                      height: 29,
-                                      width: 25,
-                                      decoration: BoxDecoration(
-                                        color: Colors.lightGreen,
-                                        borderRadius: BorderRadius.circular(6),),
-                                    ),
-                                  ),
 
 
 
@@ -554,6 +549,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> {
         .toString()}' ??
                                                             '\$100.00',
                                                         style: TextStyle(
+                                                          color: Colors.grey,
                                                             fontSize:
                                                             ScreenUtil()
                                                                 .setSp(
@@ -750,8 +746,7 @@ if(widget.isSetting == true){
                                               Icons
                                                   .favorite_border_outlined,
                                               color:
-                                              Theme.of(context)
-                                                  .primaryColor,
+                                             Colors.black,
                                             )),
                                       ]),
 
@@ -794,7 +789,7 @@ class CardWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: ScreenUtil.screenHeight * 0.33,
+          height: ScreenUtil.screenHeight * 0.27,
           width: ScreenUtil.screenWidth,
           alignment: Alignment.bottomCenter,
           decoration: BoxDecoration(
@@ -810,7 +805,7 @@ class CardWidget extends StatelessWidget {
               ),
               color: Colors.black.withOpacity(0.4)),
           child: Container(
-            height: ScreenUtil.screenHeight * 0.13,
+            height: ScreenUtil.screenHeight * 0.12,
             width: ScreenUtil.screenWidth,
             color: Colors.white.withOpacity(0.3),
             child: Padding(
@@ -833,7 +828,9 @@ class CardWidget extends StatelessWidget {
                       ),
                       Text(
                        '${settingRepo.currency.value}${product.price.toString()}' ?? '\$100.00',
-                        style: TextStyle(fontSize: ScreenUtil().setSp(16)),
+                        style: TextStyle(
+
+                            fontSize: ScreenUtil().setSp(16)),
                       )
                     ],
                   ),

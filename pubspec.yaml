@@ -103,6 +103,7 @@ flutter:
     - assets/2.png
     - assets/3.png
     - assets/4.png
+    - assets/achive.jpeg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

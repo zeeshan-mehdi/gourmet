@@ -155,7 +155,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
           // icon: Icon(Icons.save),
           label: Row(
             children: [
-              Text(_productController.subTotal.toString() != '0.0' ?'\$${_productController.subTotal.toString() }': 'Empty Cart' ?? "Empty cart"),
+              Text(_productController.subTotal.toString() != '0.0' ?'${settingRepo.currency.value}${_productController.subTotal.toString()}': 'Empty Cart' ?? "Empty cart"),
 
               new Container(
 
@@ -295,7 +295,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                       ? _con.market?.name ?? ''
                                       : _con.market?.nameAr ?? '',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w800,
                                       color: Colors.black,
                                       fontSize: ScreenUtil().setSp(20)),
                                 ),
@@ -319,7 +319,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                         .ellipsis,
                                     maxLines: 2,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(17),
                                       color: Colors.black,
                                     ),
@@ -344,6 +344,20 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                 color: Colors.black,
                                 fontSize: ScreenUtil().setSp(17)),
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Container(
+                              height: 29,
+                              width: 25,
+                              decoration: BoxDecoration(
+
+                                image: DecorationImage(image: AssetImage(
+                                  'assets/achive.jpeg'
+                                )),
+                                borderRadius: BorderRadius.circular(6),),
+
+                            ),
+                          ),
                           if(widget.isSetting == true)
                             Expanded(
                               child: Row(
@@ -353,17 +367,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                 MainAxisAlignment.center,
                                 children: [
                                   Expanded(child: SizedBox()),
-                                  Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Container(
-                                      height: 29,
-                                      width: 25,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(6),),
 
-                                    ),
-                                  ),
 
 
 
@@ -444,7 +448,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                                   Text(
                                     S.of(context).menu,
                                     style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w700,
                                         fontSize:
                                         ScreenUtil().setSp(17)),
                                   ),
@@ -456,11 +460,19 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
                               height: ScreenUtil().setHeight(5),
                             ),
                             TabBar(
-                              unselectedLabelColor: Colors.black,
+                              unselectedLabelColor: Colors.grey,
                               indicator: BoxDecoration(
                                 color: Colors.black
                               ),
                               labelColor: Colors.white,
+                              unselectedLabelStyle: TextStyle(
+                                color: Colors.grey
+                              ),
+
+                              labelStyle: TextStyle(
+                                fontSize: ScreenUtil().setSp(17),
+                                    fontWeight: FontWeight.bold
+                              ),
                               tabs: [
                                 Tab(
                                  text: 'Fast Food',
@@ -606,6 +618,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
         .toString() }'??
                                                                       '\$100.00',
                                                                   style: TextStyle(
+                                                                      color: Colors.grey,
                                                                       fontSize:
                                                                       ScreenUtil()
                                                                           .setSp(
@@ -923,6 +936,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
         .toString()}' ??
                                                                       '\$100.00',
                                                                   style: TextStyle(
+                                                                      color: Colors.grey,
                                                                       fontSize:
                                                                       ScreenUtil()
                                                                           .setSp(
@@ -1236,6 +1250,7 @@ class _TabsMenuScreenState extends StateMVC<TabsMenuScreen> with SingleTickerPro
         .toString()}' ??
                                                                       '\$100.00',
                                                                   style: TextStyle(
+                                                                      color: Colors.grey,
                                                                       fontSize:
                                                                       ScreenUtil()
                                                                           .setSp(
@@ -1506,72 +1521,76 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String langCode =
         settingRepo.setting.value.mobileLanguage.value.languageCode;
-    return Column(
-      children: [
-        Container(
-          height: ScreenUtil.screenHeight * 0.13,
-          width: ScreenUtil.screenWidth,
-          child: Row(
-            children: [
-              Container(
-                height: ScreenUtil.screenHeight * 0.15,
-                width: ScreenUtil.screenWidth * 0.3,
-                alignment: Alignment.bottomCenter,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            product
-                                .image
-                                .url)
-                    ),
-                    color: Colors.black.withOpacity(0.4)),
-
-              ),
-              Container(
-                height: ScreenUtil.screenHeight * 0.12,
-                width: ScreenUtil.screenWidth * 0.67,
-                color: Colors.white.withOpacity(0.3),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            langCode == 'en'
-                                ? product?.name ?? ''
-                                : product?.nameAr ?? '' ??  'Chicken',
-                            style: TextStyle(fontSize: ScreenUtil().setSp(16)),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(10),
-                          ),
-                          Text(
-                          '${  product.price.toString()}' ?? '\$100.00',
-                            style: TextStyle(fontSize: ScreenUtil().setSp(16)),
-                          )
-                        ],
+    return Card(
+      child: Column(
+        children: [
+          Container(
+            height: ScreenUtil.screenHeight * 0.13,
+            width: ScreenUtil.screenWidth,
+            child: Row(
+              children: [
+                Container(
+                  height: ScreenUtil.screenHeight * 0.15,
+                  width: ScreenUtil.screenWidth * 0.3,
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
                       ),
-                     likeButton
-                    ],
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              product
+                                  .image
+                                  .url)
+                      ),
+                      color: Colors.black.withOpacity(0.4)),
+
+                ),
+                Container(
+                  height: ScreenUtil.screenHeight * 0.12,
+                  width: ScreenUtil.screenWidth * 0.65,
+                  color: Colors.white.withOpacity(0.3),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              langCode == 'en'
+                                  ? product?.name ?? ''
+                                  : product?.nameAr ?? '' ??  'Chicken',
+                              style: TextStyle(fontSize: ScreenUtil().setSp(16)),
+                            ),
+                            SizedBox(
+                              height: ScreenUtil().setHeight(10),
+                            ),
+                            Text(
+                              '${settingRepo.currency.value}${product.price.toString()}' ?? '\$100.00',
+                              style: TextStyle(fontSize: ScreenUtil().setSp(16),
+                              color: Colors.grey
+                              ),
+                            )
+                          ],
+                        ),
+                       likeButton
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: ScreenUtil().setHeight(10),
-        ),
-      ],
+          SizedBox(
+            height: ScreenUtil().setHeight(10),
+          ),
+        ],
+      ),
     );
   }
 }

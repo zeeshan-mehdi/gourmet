@@ -315,7 +315,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                       style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+
                                         fontSize: ScreenUtil().setSp(17),
                                         color: Colors.white,
                                       ),
@@ -334,6 +334,20 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                           color: Colors.white,
                                           fontSize: ScreenUtil().setSp(17)),
                                     ),
+                                    Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Container(
+                                        height: 29,
+                                        width: 25,
+                                        decoration: BoxDecoration(
+
+                                          image: DecorationImage(image: AssetImage(
+                                              'assets/achive.jpeg'
+                                          )),
+                                          borderRadius: BorderRadius.circular(6),),
+
+                                      ),
+                                    ),
                                     if(widget.isSetting == true)
                                       Expanded(
                                         child: Row(
@@ -343,17 +357,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                                           MainAxisAlignment.center,
                                           children: [
                                             Expanded(child: SizedBox()),
-                                            Padding(
-                                              padding: EdgeInsets.all(8),
-                                              child: Container(
-                                                height: 29,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.red,
-                                                  borderRadius: BorderRadius.circular(6),),
 
-                                              ),
-                                            ),
 
 
 
@@ -545,6 +549,7 @@ class _GridScreenState extends StateMVC<GridScreen> {
                             .toString()}' ??
                                                                   '\$100.00',
                                                               style: TextStyle(
+                                                                color: Colors.grey,
                                                                   fontSize:
                                                                       ScreenUtil()
                                                                           .setSp(
@@ -1067,7 +1072,9 @@ class CardWidget extends StatelessWidget {
                 ),
                 Text(
                   product != null ? '${settingRepo.currency.value} ${product.price.toString()}' : '\$100.00',
-                  style: TextStyle(fontSize: ScreenUtil().setSp(16)),
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: ScreenUtil().setSp(16)),
                 )
               ],
             ),

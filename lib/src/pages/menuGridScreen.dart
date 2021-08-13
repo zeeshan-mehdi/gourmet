@@ -839,7 +839,7 @@ _con.refreshMarket();
                                   .ellipsis,
                               maxLines: 2,
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
+
                                 fontSize: ScreenUtil().setSp(17),
                                 color: Colors.black,
                               ),
@@ -857,6 +857,20 @@ _con.refreshMarket();
                                   fontWeight: FontWeight.bold,
                                   fontSize: ScreenUtil().setSp(17)),
                             ),
+                            Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Container(
+                                height: 29,
+                                width: 25,
+                                decoration: BoxDecoration(
+
+                                  image: DecorationImage(image: AssetImage(
+                                      'assets/achive.jpeg'
+                                  )),
+                                  borderRadius: BorderRadius.circular(6),),
+
+                              ),
+                            ),
                             if(widget.isSetting == true)
                               Expanded(
                                 child: Row(
@@ -866,17 +880,7 @@ _con.refreshMarket();
                                   MainAxisAlignment.center,
                                   children: [
                                     Expanded(child: SizedBox()),
-                                    Padding(
-                                      padding: EdgeInsets.all(8),
-                                      child: Container(
-                                        height: 29,
-                                        width: 25,
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius: BorderRadius.circular(6),),
 
-                                      ),
-                                    ),
 
 
 
@@ -1025,6 +1029,7 @@ _con.refreshMarket();
         .toString()}' ??
                                                         '\$100.00',
                                                     style: TextStyle(
+                                                      color: Colors.grey,
                                                         fontSize:
                                                         ScreenUtil()
                                                             .setSp(
