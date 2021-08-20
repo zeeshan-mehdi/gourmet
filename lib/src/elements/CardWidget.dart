@@ -1,9 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'file:///G:/GitHub/gourmet/lib/src/pages/HomeScreen.dart';
-
-import 'file:///G:/GitHub/gourmet/lib/src/pages/gridMenuScreen.dart';
-import 'file:///G:/GitHub/gourmet/lib/src/pages/menuGridScreen.dart';
 import 'package:markets/src/pages/product_cpy.dart';
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';

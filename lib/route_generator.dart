@@ -1,12 +1,13 @@
-
-import 'file:///G:/GitHub/gourmet/lib/src/pages/HomeScreen.dart';
+import 'package:markets/restaurent_app/src/pages/HomeScreen.dart';
 import 'package:markets/restaurent_app/src/pages/markets.dart';
+import 'package:markets/restaurent_app/src/pages/menuGridScreen.dart';
 import 'package:markets/restaurent_app/src/pages/notifications.dart';
 import 'package:markets/restaurent_app/src/pages/order_edit.dart';
 import 'package:markets/restaurent_app/src/pages/pages.dart';
 import 'package:markets/src/pages/LoginOption.dart';
 import 'package:markets/src/pages/MemberShip.dart';
 import 'package:markets/src/pages/SplashForNewUser.dart';
+import 'package:markets/src/pages/gridMenuScreen.dart';
 import 'package:markets/src/pages/kitchen_profile.dart';
 import 'package:markets/src/pages/my_fatoorah.dart';
 import 'package:markets/src/pages/qr_code_scanner.dart';
@@ -93,9 +94,9 @@ class RouteGenerator {
       case '/HomeScreen':
         return MaterialPageRoute(builder: (_) => HomeScreen(routeArgument: args as RouteArgument));
       case '/menuGrid':
-        return MaterialPageRoute(builder: (_) => HomeScreen(routeArgument: args as RouteArgument));
+        return MaterialPageRoute(builder: (_) => MenuGridScreen(routeArgument: args as RouteArgument));
       case '/GridMenu':
-        return MaterialPageRoute(builder: (_) => HomeScreen(routeArgument: args as RouteArgument));
+        return MaterialPageRoute(builder: (_) => GridScreen(routeArgument: args as RouteArgument));
       case '/Category':
         return MaterialPageRoute(builder: (_) => CategoryWidget(routeArgument: args as RouteArgument));
       case '/Cart':
