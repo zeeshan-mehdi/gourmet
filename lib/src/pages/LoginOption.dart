@@ -484,7 +484,7 @@ class FirebaseService {
     }else{
       user.password = userDetial.id.toString();
     }
-    //user.phone = "+934766118810";
+    user.phone = "+934766118810";
    // user.deviceToken = "eIgcV8ESCU8_iqBjMzN8aL:APA91bFcyGCYlHc22cFooalmHdwziU2Czc-obP6NMb_hobPFxTvMoHRhUQ69XnOqyozDqm68UYm8ge9-JZ5iwAnVIZus_yqVqfonRWJ78NwKJjKbl_LRphspKvyY-tilWUZpISDhYR29";
     user.address = "";
    // user.image = userDetial.photoUrl
